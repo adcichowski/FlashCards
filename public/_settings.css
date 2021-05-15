@@ -1,0 +1,27 @@
+:root {
+  --font-color-primary: #fafafa;
+  --bg-color-input: #bf2413;
+  --bg-article-primary: #221f63;
+  --color--underscore: #a31934;
+  --button--background: #a31934;
+  --button--shadow: #680b1d;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 10px;
+  color: var(--font-color-primary);
+}
+body {
+  margin: auto 0;
+  min-height: 100vh;
+  font-size: 1.6rem;
+}
+a {
+  text-decoration: none;
+  color: var(--font-color-primary);
+}

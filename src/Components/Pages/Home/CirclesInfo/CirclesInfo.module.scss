@@ -1,0 +1,27 @@
+.circles {
+  display: grid;
+  grid-template-columns: 1.2fr 1vw 1fr;
+  grid-template-areas: "svg . text";
+  justify-content: center;
+  height: 65rem;
+  @media screen and (max-width: 850px) {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}
+.circlesSvg {
+  justify-self: flex-start;
+  min-width: 80%;
+  margin-top: -10rem;
+  grid-area: svg;
+}
+.circlesText {
+  min-width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-end;
+  grid-area: text;
+  background: url("../../../../Assets/IconsTechnology/CirclesAside.svg")
+    no-repeat right / contain;
+}

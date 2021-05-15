@@ -1,0 +1,23 @@
+.header__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.nav {
+  padding: 5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
+}
+.navList {
+  display: flex;
+  list-style: none;
+  gap: calc(1rem + 3.2vw);
+  font-size: calc(2vh + 1.2rem);
+}
+.navItem {
+  font-weight: 600;
+}
