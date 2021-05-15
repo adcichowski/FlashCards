@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Logo from "../Logo/Logo.js";
 import styles from "./Navigation.module.scss";
+
 export default function Navigation() {
   return (
     <nav className={styles.nav}>
