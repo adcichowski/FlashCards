@@ -2,10 +2,25 @@
 import React from "react";
 import styles from "./Button.module.scss";
 
-export default function Button({ text, onClickAction }) {
+export default function Button({
+  text,
+  onClickAction,
+  width,
+  height,
+  fontSize,
+}) {
   return (
-    <button onClick={onClickAction} className={styles.button}>
-      <p className={styles.front}>{text}</p>
+    <button
+      style={{
+        width: `${width}`,
+        height: `${height}`,
+      }}
+      onClick={onClickAction}
+      className={styles.button}
+    >
+      <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
+        {text}
+      </p>
     </button>
   );
 }

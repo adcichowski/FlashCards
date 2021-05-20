@@ -17,6 +17,7 @@ html {
   color: var(--font-color-primary);
 }
 body {
+  background-color: var(--bg-article-primary);
   margin: auto 0;
   min-height: 100vh;
   font-size: 1.6rem;
@@ -24,4 +25,7 @@ body {
 a {
   text-decoration: none;
   color: var(--font-color-primary);
+}
+ul {
+  list-style: none;
 }

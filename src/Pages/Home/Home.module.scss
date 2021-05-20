@@ -8,7 +8,7 @@
   justify-content: center;
 }
 .heroBackground {
-  background: url("../../Assets/Instructions/hero__background.png") no-repeat
+  background: url("../../Assets/Pages/Home/hero__background.png") no-repeat
     center / cover;
   height: 100vh;
   max-height: 1980px;
@@ -66,7 +66,7 @@
     content: "";
     width: 100%;
     height: 140vw;
-    min-height: 120rem;
+    max-height: 150%;
     background-image: url("../../Assets/shoe.jpg");
     background-size: cover;
     background-position: center;
@@ -74,5 +74,41 @@
     top: 0;
     opacity: 0.5;
     z-index: -1;
+    @media screen and (max-width: 850px) {
+      min-height: 180vh;
+      background-position: right;
+    }
   }
+}
+.bigQuestion {
+  width: 100%;
+  height: 60vh;
+  margin-bottom: 10rem;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: "";
+    background: url("../../Assets/Pages/Home/bigQuestionBg.svg") no-repeat
+      center/contain;
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    z-index: -1;
+    opacity: 0.27;
+    transform: rotate(10deg);
+  }
+}
+.bigQuestionIcon {
+  background: url("../../Assets/Pages/Home/crown-color.svg") no-repeat
+    center/contain;
+  width: 15rem;
+  height: 15rem;
+  margin-bottom: -2.2rem;
+}
+.bigQuestionTitle {
+  font-size: calc(1.6rem + 5vw);
+  margin-bottom: 5rem;
 }

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
 
@@ -14,7 +14,8 @@ const typeBoxes = {
 export default function useAnimationTechnologies() {
   const getBoxes = useRef(null);
   useEffect(() => {
-    const allBoxes = document.querySelectorAll(
+    const [elements] = getBoxes.current.children;
+    const allBoxes = elements.querySelectorAll(
       Object.keys(typeBoxes).map((_, id) => `[id="Box-${id + 1}"]`)
     );
     gsap.registerPlugin(ScrollTrigger);
@@ -35,5 +36,5 @@ export default function useAnimationTechnologies() {
       });
     }
   });
-  return getBoxes;
+  return { getBoxes };
 }

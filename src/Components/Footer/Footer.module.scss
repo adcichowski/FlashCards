@@ -1,0 +1,127 @@
+.footer {
+  background-color: var(--button--background);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-row: auto;
+  align-items: center;
+  justify-items: center;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    right: -50%;
+    top: 0;
+    background: url("../../Assets/Pages/Home/Path\ 120.svg") no-repeat right /
+      cover;
+    @media screen and (max-width: 400px) {
+      background: none;
+    }
+  }
+}
+.footerForm {
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 1rem;
+  margin: 3rem 0;
+  @media screen and (max-width: 900px) {
+    grid-row: 1/2;
+  }
+}
+.formTitle {
+  font-size: calc(2rem + 2vw);
+}
+.formInput {
+  padding: 0.5rem 1rem;
+}
+.formTextarea {
+  padding: 1rem;
+  height: 5rem;
+  resize: none;
+}
+.formTextarea,
+.formInput {
+  color: var(--font-color-primary);
+  background-color: transparent;
+  width: 20rem;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-weight: 700;
+}
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: var(--font-color-primary);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.footerArticle {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.articleSection {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  gap: 2rem;
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
+}
+.link {
+  margin-top: 0.6rem;
+}
+.listSocial {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 3rem;
+}
+.articleAside {
+  height: 80%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-self: flex-end;
+}
+.asideTitle {
+  align-self: flex-start;
+  font-size: calc(1rem + 2vw);
+}
+.asideRights {
+  display: flex;
+  gap: 1rem;
+  flex-flow: row wrap;
+}
+.right {
+  align-self: flex-end;
+}
+.instagram,
+.twitter,
+.facebook {
+  width: 3rem;
+  height: 3rem;
+}
+.instagram {
+  background: url("../../Assets/SocialIcons/instagram.svg") no-repeat
+    center/contain;
+}
+.twitter {
+  width: 3.5rem;
+  height: 3.5rem;
+  background: url("../../Assets/SocialIcons/twitter.svg") no-repeat
+    center/contain;
+}
+.facebook {
+  background: url("../../Assets/SocialIcons/facebook.svg") no-repeat
+    center/contain;
+}

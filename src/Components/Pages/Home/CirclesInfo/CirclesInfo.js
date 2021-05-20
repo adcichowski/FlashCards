@@ -8,10 +8,11 @@ export default function CirclesInfo() {
         <Circles />
       </div>
       <div className={styles.circlesText}>
-        <div>
-          <h3>Find flexible, easily technology</h3>
-          <p>Choose from many technologies to improve your experience</p>
-        </div>
+        <h3 className={styles.circlesTitle}>This Graph Show You</h3>
+        <p className={styles.circlesParagraph}>
+          As you can see this website, have awesome community to help you in
+          this hard world. This
+        </p>
       </div>
     </section>
   );

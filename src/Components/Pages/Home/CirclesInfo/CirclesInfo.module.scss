@@ -3,7 +3,7 @@
   grid-template-columns: 1.2fr 1vw 1fr;
   grid-template-areas: "svg . text";
   justify-content: center;
-  height: 65rem;
+  height: 85rem;
   @media screen and (max-width: 850px) {
     display: flex;
     flex-flow: row wrap;
@@ -11,17 +11,28 @@
 }
 .circlesSvg {
   justify-self: flex-start;
-  min-width: 80%;
-  margin-top: -10rem;
+  min-width: 87%;
+  margin-top: -2rem;
   grid-area: svg;
 }
 .circlesText {
-  min-width: 100%;
+  text-align: center;
+  max-width: 100vw;
   display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: flex-end;
+  flex-flow: column;
+  align-items: flex-end;
+  justify-content: center;
   grid-area: text;
   background: url("../../../../Assets/IconsTechnology/CirclesAside.svg")
     no-repeat right / contain;
+  @media screen and (max-width: 850px) {
+    background-color: var(--button--background);
+    align-items: center;
+  }
+}
+.circlesTitle {
+  font-size: calc(2rem + 1vw);
+}
+.circlesParagraph {
+  max-width: 60%;
 }
