@@ -8,7 +8,8 @@
     content: "";
     top: -1px;
     position: absolute;
-    background: url("../../../../Assets/Pages/Home/wave.png") no-repeat;
+    background: url("../../../../Assets/Pages/Home/wave.png") center/cover
+      no-repeat;
     width: 100%;
     z-index: -1;
     min-height: 190%;
@@ -68,9 +69,7 @@
   background: url("../../../../Assets/three__cards__about.svg") no-repeat 1rem /
     cover;
   @media screen and (max-width: 1050px) {
-    background: url("../../../../Assets/three__cards__about.svg") no-repeat
-      center/ contain;
-    width: 90%;
-    height: 90%;
+    background: url("../../../../Assets/three__cards__about.svg") no-repeat top/
+      contain;
   }
 }
