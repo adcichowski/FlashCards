@@ -25,8 +25,8 @@ export default function Home() {
         <article className={styles.first__side}>
           <Instruction />
           <ListTechnologies />
+          <CirclesInfo />
         </article>
-        <CirclesInfo />
         <section className={styles.bigQuestion}>
           <div className={styles.bigQuestionIcon}></div>
           <h3 className={styles.bigQuestionTitle}>Do You Wanna TRY ??</h3>

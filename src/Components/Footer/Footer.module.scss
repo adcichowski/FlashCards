@@ -28,7 +28,6 @@
   z-index: 2;
   display: flex;
   flex-flow: column wrap;
-  gap: 1rem;
   margin: 3rem 0;
   @media screen and (max-width: 900px) {
     grid-row: 1/2;
@@ -38,9 +37,11 @@
   font-size: calc(2rem + 2vw);
 }
 .formInput {
+  margin: 0.5rem 0;
   padding: 0.5rem 1rem;
 }
 .formTextarea {
+  margin: 0.5rem 0;
   padding: 1rem;
   height: 5rem;
   resize: none;
@@ -95,7 +96,7 @@
 }
 .asideTitle {
   align-self: flex-start;
-  font-size: calc(1rem + 2vw);
+  font-size: calc(1rem + 2.2vw);
 }
 .asideRights {
   display: flex;

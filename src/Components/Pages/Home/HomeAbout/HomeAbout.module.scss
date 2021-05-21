@@ -1,96 +1,76 @@
-.article__about {
-  min-height: 100vh;
-  max-height: 84rem;
-  max-width: 1980px;
-  background-color: var(--bg-article-primary);
+.articleAbout {
+  min-height: 110rem;
 }
-.article__about__background {
+.articleAboutBackground {
   position: relative;
   z-index: 3;
   &::before {
     content: "";
-    top: -0.5px;
-    left: 0;
+    top: -1px;
     position: absolute;
-    background: url("../../../../Assets/about__wave.svg") no-repeat;
+    background: url("../../../../Assets/Pages/Home/wave.png") no-repeat;
     width: 100%;
     z-index: -1;
-    min-height: 200%;
+    min-height: 190%;
   }
 }
 .about {
+  padding: 6rem 0 0rem 0;
   display: grid;
   grid-template-columns: 1fr calc(15rem + 40vw);
   justify-content: center;
   align-items: center;
   height: 100vh;
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 1050px) {
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
   }
-
-  &__title {
-    font-size: calc(3rem + 2vw);
-    align-self: flex-start;
+}
+.aboutText {
+  align-self: flex-start;
+  margin: 5rem 0 0 0;
+  padding: 3rem;
+  font-size: calc(1.6rem + 0.3vw);
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  gap: 2rem;
+}
+.aboutTitle {
+  align-self: flex-start;
+  font-size: 7rem;
+}
+.aboutForm {
+  align-self: flex-start;
+  display: flex;
+}
+.aboutFormInput {
+  border: 1px solid white;
+  color: var(--font-color-primary);
+  background-color: var(--bg-color-input);
+  padding: 0.2rem 0.4rem;
+  height: clamp(2rem, 20vw, 2.4rem);
+  &::placeholder {
+    color: var(--font-color-primary);
   }
-  &__text {
-    align-self: flex-start;
-    margin: 5rem 0 0 0;
-    padding: 0 0 0 3rem;
-    font-size: 1.6rem;
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    font-weight: 400;
-  }
-  &__form {
-    align-self: flex-start;
-    display: flex;
-
-    font-size: 2rem;
-    &__input {
-      border: 1px solid white;
-      color: var(--font-color-primary);
-      background-color: var(--bg-color-input);
-      padding: 0.2rem 0.4rem;
-      height: clamp(2rem, 20vw, 2.4rem);
-      &::placeholder {
-        color: var(--font-color-primary);
-      }
-    }
-    &__submit {
-      border: 1px solid white;
-      color: var(--font-color-primary);
-      background-color: var(--bg-color-input);
-      padding: 0.2rem 1.5rem;
-      height: clamp(2rem, 20vw, 3rem);
-    }
-  }
-  &__img {
-    margin-top: 5rem;
-    width: 100%;
-    min-height: 90%;
-    background: url("../../../../Assets/three__cards__about.svg") no-repeat 1rem /
-      cover;
-    margin-bottom: 10rem;
-    @media screen and (max-width: 850px) {
-      background: url("../../../../Assets/three__cards__about.svg") no-repeat
-        center/ contain;
-      width: 80%;
-      height: 80%;
-      margin: -10rem 0 2rem 16rem;
-    }
-    @media screen and (max-width: 550px) {
-      width: 100%;
-      height: 100%;
-    }
-    @media screen and (max-width: 350px) {
-      width: 100%;
-      height: 100%;
-    }
+}
+.aboutFormSubmit {
+  border: 1px solid white;
+  color: var(--font-color-primary);
+  background-color: var(--bg-color-input);
+  padding: 0.2rem 1.5rem;
+  height: clamp(2rem, 20vw, 3rem);
+  -webkit-appearance: none;
+}
+.aboutImg {
+  width: 100%;
+  height: 100%;
+  background: url("../../../../Assets/three__cards__about.svg") no-repeat 1rem /
+    cover;
+  @media screen and (max-width: 1050px) {
+    background: url("../../../../Assets/three__cards__about.svg") no-repeat
+      center/ contain;
+    width: 90%;
+    height: 90%;
   }
 }

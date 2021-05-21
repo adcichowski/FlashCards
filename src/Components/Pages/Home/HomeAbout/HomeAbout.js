@@ -4,37 +4,33 @@ import Logo from "../../../Logo/Logo";
 export default function HomeAbout() {
   return (
     <>
-      <article className={styles.article__about}>
-        <div className={styles.article__about__background}>
+      <article className={styles.articleAbout}>
+        <div className={styles.articleAboutBackground}>
           <section className={styles.about}>
-            <div className={styles.about__text}>
-              <Logo className={styles.about__logo} />
-              <h2 className={styles.about__title}>About This Page</h2>
-              <p className={styles.about__paragraph}>
+            <div className={styles.aboutText}>
+              <Logo />
+              <h2 className={styles.aboutTitle}>About This Page</h2>
+              <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Commodi dolorum distinctio reprehenderit officia autem, at
                 numquam ipsa accusamus. Est eveniet accusamus eligendi! Fuga
                 quos magnam mollitia neque quasi, doloribus quas?
               </p>
-              <form className={styles.about__form}>
-                <div>
-                  <span>
-                    <input
-                      placeholder="Write Your Email"
-                      type="text"
-                      className={styles.about__form__input}
-                    />
+              <form className={styles.aboutForm}>
+                <input
+                  placeholder="Write Your Email"
+                  type="text"
+                  className={styles.aboutFormInput}
+                />
 
-                    <input
-                      type="submit"
-                      className={styles.about__form__submit}
-                      value="Send"
-                    />
-                  </span>
-                </div>
+                <input
+                  type="submit"
+                  className={styles.aboutFormSubmit}
+                  value="Send"
+                />
               </form>
             </div>
-            <div className={styles.about__img}></div>
+            <div className={styles.aboutImg}></div>
           </section>
         </div>
       </article>

@@ -15,7 +15,7 @@
       <g id="Type_Language" data-name="Type Language" transform="translate(61.366 55.8)">
         <text id="JavaScript" transform="translate(174.708 72.058)" fill="#151515" font-size="39" font-family="Kanit-Bold, Kanit" font-weight="700"><tspan x="0" y="0">JavaScript</tspan></text>
         <g id="Icon_JavaScript" data-name="Icon JavaScript" transform="translate(0 0)">
-          <g id="javascript-programming-language" transform="translate(0 0)">
+          <g data-name="javascript icon" transform="translate(0 0)">
             <g transform="matrix(0.87, -0.5, 0.5, 0.87, -675.09, 208.73)" filter="url(#Path_78)">
               <path id="Path_78-2" data-name="Path 78" d="M0,0,122.733-.016l-.016,122.86L-.016,122.86Z" transform="matrix(0.87, 0.5, -0.5, 0.87, 689.01, 156.78)" fill="#f7df1e" fill-rule="evenodd"/>
             </g>

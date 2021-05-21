@@ -1,6 +1,6 @@
 import React from "react";
-import { ReactComponent as FrontCard } from "../../Assets/Instructions/FrontCard.svg";
-import { ReactComponent as BackCard } from "../../Assets/Instructions/BackCard.svg";
+import { ReactComponent as FrontCard } from "../../Assets/Pages/Home/CardInstruction/FrontCard.svg";
+import { ReactComponent as BackCard } from "../../Assets/Pages/Home/CardInstruction/BackCard.svg";
 import Button from "../Button/Button";
 import useInstruction from "./Hook";
 import styles from "./Instruction.module.scss";
