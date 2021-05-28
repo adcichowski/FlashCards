@@ -1,9 +1,9 @@
 .card {
+  margin: 3rem 0;
   width: 50%;
   height: 50%;
 }
 .introduce {
-  padding-top: 5rem;
   position: relative;
   z-index: 3;
   display: flex;
@@ -12,11 +12,6 @@
   &__title {
     font-size: clamp(2.4rem, 4vw, 7rem);
     text-align: center;
-  }
-  &__img {
-    margin: 2rem 0;
-    width: 60%;
-    height: 60%;
   }
 }
 @media screen and (max-width: 950px) {

@@ -1,5 +1,8 @@
 .articleAbout {
   min-height: 110rem;
+  @media screen and (max-width: 850px) {
+    min-height: 100rem;
+  }
 }
 .articleAboutBackground {
   position: relative;
@@ -12,7 +15,8 @@
       no-repeat;
     width: 100%;
     z-index: -1;
-    min-height: 190%;
+    height: 170%;
+    max-height: 350rem;
   }
 }
 .about {

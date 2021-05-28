@@ -8,7 +8,7 @@ import styles from "./Instruction.module.scss";
 export default function Instruction() {
   const { getElements, isFlip, flipCard } = useInstruction();
   return (
-    <div className={styles.introduce}>
+    <section className={styles.introduce}>
       <h2 className={`${styles.introduce__title} underline`}>
         {!isFlip ? "Front Card Side" : "Back Side Card"}
       </h2>
@@ -16,6 +16,6 @@ export default function Instruction() {
         {!isFlip ? <FrontCard /> : <BackCard />}
       </div>
       <Button onClickAction={() => flipCard(!isFlip)} text="Flip Card" />
-    </div>
+    </section>
   );
 }

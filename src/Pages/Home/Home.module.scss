@@ -1,29 +1,25 @@
-.homePage {
-  display: grid;
-}
 .hero {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
 }
 .heroBackground {
   background: url("../../Assets/Pages/Home/hero__background.png") no-repeat
     center / cover;
   height: 100vh;
   max-height: 1980px;
-  @media screen and (max-width: 850px) {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-  }
   @media screen and (min-width: 1200px) {
     background-position: center -1rem;
+  }
+  @media screen and (max-width: 850px) {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
 .heroTitle {
-  font-size: clamp(7.5rem, 12vw, 30rem);
+  font-size: clamp(7.5rem, calc(12vw + 3rem), 30rem);
   font-weight: 700;
 }
 .heroSubtitle {
@@ -75,7 +71,7 @@
     opacity: 0.5;
     z-index: -1;
     @media screen and (max-width: 850px) {
-      min-height: 130vh;
+      min-height: 185vh;
       background-position: center;
     }
   }

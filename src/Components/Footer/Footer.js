@@ -11,7 +11,9 @@ export default function Footer() {
           <nav>
             <ul className={styles.listLinks}>
               {["Home", "About", "Game"].map((linkName) => (
-                <li className={styles.link}>{linkName}</li>
+                <li key={linkName} className={styles.link}>
+                  {linkName}
+                </li>
               ))}
             </ul>
             <ul className={styles.listSocial}>
