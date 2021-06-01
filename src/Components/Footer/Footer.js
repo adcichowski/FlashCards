@@ -21,17 +21,19 @@ export default function Footer() {
                 <li key={socialName} className={`${styles[socialName]}`}></li>
               ))}
             </ul>
-            <small>&copy; 2021 FlashCards, All rights is us</small>
           </nav>
         </div>
         <div className={styles.articleAside}>
           <p className={styles.asideTitle}>
             A modern platform to get knowledge
           </p>
-          <div className={styles.asideRights}>
+          <div>
             <small className={styles.right}>Term of Service</small>
             <small className={styles.right}>Privacy Policy</small>
           </div>
+          <small className={styles.copyright}>
+            &copy; 2021 FlashCards, All rights is us
+          </small>
         </div>
       </div>
       <form className={styles.footerForm}>

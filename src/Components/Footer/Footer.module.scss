@@ -1,5 +1,6 @@
 .footer {
-  padding: 2rem;
+  overflow: hidden;
+  padding: 1rem;
   background-color: var(--button--background);
   position: relative;
   display: grid;
@@ -27,17 +28,20 @@
   display: flex;
   flex-flow: column wrap;
   margin: 3rem 0;
+  @media screen and (max-width: 900px) {
+    grid-row: 1/2;
+  }
 }
 .formTitle {
   font-size: clamp(2.5rem, calc(2.5rem + 2vw), 8rem);
 }
 .formInput {
   margin: 0.5rem 0;
-  padding: 1.5rem 1rem;
+  padding: 1.2rem 0.5rem;
 }
 .formTextarea {
   margin: 1rem 0;
-  padding: 1.5rem;
+  padding: 1.5rem 0.5rem;
   height: 8rem;
   resize: none;
 }
@@ -85,18 +89,20 @@
   margin-top: 2rem;
 }
 .articleAside {
-  display: flex;
-  flex-flow: column wrap;
+  display: grid;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
 }
 .asideTitle {
   align-self: flex-start;
-  font-size: clamp(3rem, calc(2vw + 1.2rem), 4.5rem);
-}
-.asideRights {
-  margin: 0 auto;
+  font-size: clamp(2rem, calc(2vw + 1.5rem), 6rem);
 }
 .right {
-  margin: 0 0.5rem;
+  margin: 5px 10px;
+}
+.copyrigght {
+  align-self: flex-end;
 }
 .instagram,
 .twitter,
