@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import Logo from "../Logo/Logo.js";
 import styles from "./Navigation.module.scss";
-
+import { Link } from "react-router-dom";
 export default function Navigation() {
   const [isOpen, openMenu] = useState(false);
   if (isOpen) {
     return (
-      <nav>
-        <div className={styles.bodyMenu}>
+      <div className={styles.nav}>
+        <nav className={styles.bodyMenu}>
           <button
             onClick={() => openMenu(!isOpen)}
             className={styles.hamburgerOpen}
@@ -20,41 +20,30 @@ export default function Navigation() {
             </span>
           </button>
           <Logo />
-          <ul className={styles.navList}>
-            <li>
-              <a className={styles.navItem} href="#home">
-                Home
-              </a>
-            </li>
-            <li>
-              <a className={styles.navItem} href="#about">
-                About
-              </a>
-            </li>
-            <li>
-              <a className={styles.navItem} href="#game">
-                Game
-              </a>
-            </li>
-            <li>
-              <a className={styles.navItem} href="#contact">
-                Contact
-              </a>
-            </li>
+          <ul className={styles.menuList}>
+            {["Home", "About", "Game", "Contact"].map((element) => (
+              <li>
+                {" "}
+                <Link
+                  className={styles.menuItem}
+                  onClick={() => openMenu(!isOpen)}
+                  to={`/${element}`}
+                >
+                  {element}
+                </Link>
+              </li>
+            ))}
           </ul>
-          <ul>
-            <li>
-              <a>Facebook</a>
-            </li>
-            <li>
-              <a>Twitter</a>
-            </li>
-            <li>
-              <a>Instagram</a>
-            </li>
+          <ul className={styles.menuSocial}>
+            {["facebook", "twitter", "instagram"].map((socialName) => (
+              <li
+                key={socialName}
+                className={`${styles[socialName]} ${styles.social}`}
+              ></li>
+            ))}
           </ul>
-        </div>
-      </nav>
+        </nav>
+      </div>
     );
   }
   return (
@@ -69,37 +58,26 @@ export default function Navigation() {
       <div className={styles.hideNav}>
         <Logo />
         <ul className={styles.navList}>
-          <li>
-            <a className={styles.navItem} href="#home">
-              Home
-            </a>
-          </li>
-          <li>
-            <a className={styles.navItem} href="#about">
-              About
-            </a>
-          </li>
-          <li>
-            <a className={styles.navItem} href="#game">
-              Game
-            </a>
-          </li>
-          <li>
-            <a className={styles.navItem} href="#contact">
-              Contact
-            </a>
-          </li>
+          {["Home", "About", "Game", "Contact"].map((element) => (
+            <li>
+              {" "}
+              <Link className={styles.navItem} to={`/${element.toLowerCase()}`}>
+                {element}
+              </Link>
+            </li>
+          ))}
         </ul>
-        <ul>
-          <li>
-            <a>Facebook</a>
-          </li>
-          <li>
-            <a>Twitter</a>
-          </li>
-          <li>
-            <a>Instagram</a>
-          </li>
+        <ul className={styles.menuSocial}>
+          {["facebook", "twitter", "instagram"].map((socialName) => (
+            <li>
+              <a>
+                <div
+                  key={socialName}
+                  className={`${styles[socialName]} ${styles.social}`}
+                ></div>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>

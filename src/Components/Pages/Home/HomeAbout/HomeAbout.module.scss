@@ -1,32 +1,26 @@
 .articleAbout {
-  min-height: 110rem;
-  @media screen and (max-width: 850px) {
-    min-height: 100rem;
-  }
+  max-height: 130rem;
 }
 .articleAboutBackground {
   position: relative;
   z-index: 3;
   &::before {
     content: "";
-    top: -1px;
     position: absolute;
     background: url("../../../../Assets/Pages/Home/wave.png") center/cover
       no-repeat;
     width: 100%;
     z-index: -1;
-    height: 170%;
-    max-height: 350rem;
+    height: 176%;
+    max-height: 170rem;
+    top: -4px;
   }
 }
 .about {
-  padding: 6rem 0 0rem 0;
+  overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr calc(15rem + 40vw);
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  @media screen and (max-width: 1050px) {
+  grid-template-columns: minmax(40rem, 80rem) 1fr;
+  @media screen and (max-width: 1350px) {
     display: flex;
     flex-flow: row wrap;
   }
@@ -34,7 +28,7 @@
 .aboutText {
   align-self: flex-start;
   margin: 5rem 0 0 0;
-  padding: 3rem;
+  padding: 5rem;
   font-size: calc(1.6rem + 0.3vw);
   display: flex;
   flex-flow: column wrap;
@@ -43,7 +37,10 @@
 }
 .aboutTitle {
   align-self: flex-start;
-  font-size: 7rem;
+  font-size: clamp(5rem, calc(7rem + 1vw), 7rem);
+}
+.aboutParaghraph {
+  font-size: clamp(2rem, calc(2rem + 2vw), 2.2rem);
 }
 .aboutForm {
   align-self: flex-start;
@@ -53,8 +50,8 @@
   border: 1px solid white;
   color: var(--font-color-primary);
   background-color: var(--bg-color-input);
-  padding: 0.2rem 0.4rem;
-  height: clamp(2rem, 20vw, 2.4rem);
+  padding: 1.5rem 1rem;
+  font-size: clamp(1.6rem, calc(1rem + 0.5vw), 1.9rem);
   &::placeholder {
     color: var(--font-color-primary);
   }
@@ -63,16 +60,19 @@
   border: 1px solid white;
   color: var(--font-color-primary);
   background-color: var(--bg-color-input);
-  padding: 0.2rem 1.5rem;
-  height: clamp(2rem, 20vw, 3rem);
   -webkit-appearance: none;
+  cursor: pointer;
+  padding: 1.5rem 1rem;
+  font-size: clamp(1.6rem, calc(1rem + 0.5vw), 1.9rem);
 }
 .aboutImg {
+  margin: 3rem 0 -2rem 0;
   width: 100%;
-  height: 100%;
-  background: url("../../../../Assets/three__cards__about.svg") no-repeat 1rem /
+  height: 90rem;
+  background: url("../../../../Assets/three__cards__about.svg") no-repeat left /
     cover;
-  @media screen and (max-width: 1050px) {
+  @media screen and (max-width: 1350px) {
+    width: 80%;
     background: url("../../../../Assets/three__cards__about.svg") no-repeat top/
       contain;
   }
