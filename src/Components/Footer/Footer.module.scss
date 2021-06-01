@@ -1,12 +1,14 @@
 .footer {
-  overflow: hidden;
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: var(--button--background);
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   align-items: center;
   justify-items: center;
+  position: relative;
+  overflow: hidden;
+
   &::after {
     content: "";
     position: absolute;
@@ -16,8 +18,8 @@
     right: -50%;
     background: url("../../Assets/Pages/Home/Path\ 120.svg") no-repeat right /
       cover;
-    @media screen and (max-width: 500px) {
-      background: none;
+    @media screen and (max-width: 900px) {
+      display: none;
     }
   }
 }

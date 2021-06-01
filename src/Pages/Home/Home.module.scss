@@ -1,6 +1,7 @@
 .hero {
   display: grid;
   justify-items: center;
+  align-items: center;
 }
 .heroBackground {
   background: url("../../Assets/Pages/Home/hero__background.png") no-repeat
@@ -19,7 +20,7 @@
 }
 
 .heroTitle {
-  font-size: clamp(7.5rem, calc(12vw + 3rem), calc(27rem - 1vw));
+  font-size: clamp(5rem, calc(10vw + 3rem), calc(27rem - 1vw));
   font-weight: 700;
 }
 .heroSubtitle {

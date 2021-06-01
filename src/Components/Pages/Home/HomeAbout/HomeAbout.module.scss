@@ -37,7 +37,7 @@
 }
 .aboutTitle {
   align-self: flex-start;
-  font-size: clamp(5rem, calc(7rem + 1vw), 7rem);
+  font-size: clamp(5rem, calc(7rem + 2vw), 6.2rem);
 }
 .aboutParaghraph {
   font-size: clamp(2rem, calc(2rem + 2vw), 2.2rem);
@@ -54,6 +54,9 @@
   font-size: clamp(1.6rem, calc(1rem + 0.5vw), 1.9rem);
   &::placeholder {
     color: var(--font-color-primary);
+  }
+  &:focus {
+    background: var(--focus--input);
   }
 }
 .aboutFormSubmit {

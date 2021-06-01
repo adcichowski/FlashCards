@@ -7,6 +7,7 @@
   --button--shadow: #680b1d;
   --hamburger--front: #05ff6d;
   --hamburger--back: #c93434;
+  --focus--input: #7b0019;
 }
 *,
 *::before,
@@ -18,6 +19,11 @@ html {
   font-size: 10px;
   color: var(--font-color-primary);
 }
+input:hover,
+textarea:hover {
+  background-color: var(--focus--input);
+}
+
 body {
   max-width: 1920px;
   overflow-x: hidden;
