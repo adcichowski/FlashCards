@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Home from "./Pages/Home/Home.js";
+import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HomeAbout from "./Components/Pages/Home/HomeAbout/HomeAbout.js";
-import Game from "./Pages/Game/Game.js";
+import HomeAbout from "./Components/Pages/Home/HomeAbout/HomeAbout";
+import Game from "./Pages/Game/Game";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -12,9 +12,7 @@ ReactDOM.render(
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/home" exact>
-            <Home />
-          </Route>
+          <Route path="/home" exact></Route>
           <Route path="/about">
             <HomeAbout />
           </Route>

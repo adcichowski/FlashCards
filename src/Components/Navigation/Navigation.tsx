@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import Logo from "../Logo/Logo.js";
+import Logo from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
 export default function Navigation() {
@@ -22,7 +21,7 @@ export default function Navigation() {
           <Logo />
           <ul className={styles.menuList}>
             {["Home", "About", "Game", "Contact"].map((element) => (
-              <li>
+              <li key={`${element}`}>
                 {" "}
                 <Link
                   className={styles.menuItem}
@@ -59,7 +58,7 @@ export default function Navigation() {
         <Logo />
         <ul className={styles.navList}>
           {["Home", "About", "Game", "Contact"].map((element) => (
-            <li>
+            <li key={`${element}`}>
               {" "}
               <Link className={styles.navItem} to={`/${element.toLowerCase()}`}>
                 {element}
@@ -69,12 +68,9 @@ export default function Navigation() {
         </ul>
         <ul className={styles.menuSocial}>
           {["facebook", "twitter", "instagram"].map((socialName) => (
-            <li>
-              <a>
-                <div
-                  key={socialName}
-                  className={`${styles[socialName]} ${styles.social}`}
-                ></div>
+            <li key={socialName}>
+              <a href={`${socialName}.com`}>
+                <div className={`${styles[socialName]} ${styles.social}`}></div>
               </a>
             </li>
           ))}

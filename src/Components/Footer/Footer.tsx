@@ -49,10 +49,9 @@ export default function Footer() {
         </label>
         <label>
           <textarea
-            maxLength="255"
+            maxLength={255}
             placeholder="Your idea..."
             name="Your idea"
-            type="text"
             className={styles.formTextarea}
           />
         </label>
