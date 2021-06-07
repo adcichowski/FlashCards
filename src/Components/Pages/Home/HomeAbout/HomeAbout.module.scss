@@ -1,5 +1,5 @@
 .articleAbout {
-  max-height: 130rem;
+  max-height: 160rem;
 }
 .articleAboutBackground {
   position: relative;
@@ -13,7 +13,7 @@
     z-index: -1;
     height: 176%;
     max-height: 170rem;
-    top: -4px;
+    top: -2px;
   }
 }
 .about {
@@ -29,20 +29,21 @@
   align-self: flex-start;
   margin: 5rem 0 0 0;
   padding: 5rem;
-  font-size: calc(1.6rem + 0.3vw);
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  gap: 2rem;
 }
 .aboutTitle {
+  margin: 0.5rem 0;
   align-self: flex-start;
-  font-size: clamp(5rem, calc(7rem + 2vw), 6.2rem);
+  font-size: clamp(4rem, calc(7rem + 2vw), 6.2rem);
 }
 .aboutParaghraph {
+  margin: 0.5rem 0;
   font-size: clamp(2rem, calc(2rem + 2vw), 2.2rem);
 }
 .aboutForm {
+  margin: 0.5rem 0;
   align-self: flex-start;
   display: flex;
 }
@@ -69,14 +70,13 @@
   font-size: clamp(1.6rem, calc(1rem + 0.5vw), 1.9rem);
 }
 .aboutImg {
-  margin: 3rem 0 -2rem 0;
+  margin: 2rem 0;
   width: 100%;
   height: 90rem;
   background: url("../../../../Assets/three__cards__about.svg") no-repeat left /
     cover;
   @media screen and (max-width: 1350px) {
-    width: 80%;
-    background: url("../../../../Assets/three__cards__about.svg") no-repeat top/
-      contain;
+    background: url("../../../../Assets/three__cards__about.svg") no-repeat
+      center/ contain;
   }
 }

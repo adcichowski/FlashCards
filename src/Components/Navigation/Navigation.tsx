@@ -9,6 +9,8 @@ export default function Navigation() {
       <div className={styles.nav}>
         <nav className={styles.bodyMenu}>
           <button
+            aria-label="navigation"
+            name="button"
             onClick={() => openMenu(!isOpen)}
             className={styles.hamburgerOpen}
           >
@@ -20,13 +22,21 @@ export default function Navigation() {
           </button>
           <Logo />
           <ul className={styles.menuList}>
-            {["Home", "About", "Game", "Contact"].map((element) => (
+            <li>
+              <Link
+                className={styles.menuItem}
+                onClick={() => openMenu(!isOpen)}
+                to={`/`}
+              >
+                Home
+              </Link>
+            </li>
+            {["About", "Game", "Contact"].map((element) => (
               <li key={`${element}`}>
-                {" "}
                 <Link
                   className={styles.menuItem}
                   onClick={() => openMenu(!isOpen)}
-                  to={`/${element}`}
+                  to={`/${element.toLocaleLowerCase()}`}
                 >
                   {element}
                 </Link>
@@ -47,7 +57,12 @@ export default function Navigation() {
   }
   return (
     <nav className={styles.nav}>
-      <button onClick={() => openMenu(!isOpen)} className={styles.hamburger}>
+      <button
+        aria-label="navigation"
+        name="button"
+        onClick={() => openMenu(!isOpen)}
+        className={styles.hamburger}
+      >
         <span className={styles.Boxhamburger}>
           <div className={styles.lineHamburger}></div>
           <div className={styles.lineHamburger}></div>
@@ -57,7 +72,12 @@ export default function Navigation() {
       <div className={styles.hideNav}>
         <Logo />
         <ul className={styles.navList}>
-          {["Home", "About", "Game", "Contact"].map((element) => (
+          <li>
+            <Link className={styles.navItem} to={`/`}>
+              Home
+            </Link>
+          </li>
+          {["About", "Game", "Contact"].map((element) => (
             <li key={`${element}`}>
               {" "}
               <Link className={styles.navItem} to={`/${element.toLowerCase()}`}>
@@ -69,7 +89,7 @@ export default function Navigation() {
         <ul className={styles.menuSocial}>
           {["facebook", "twitter", "instagram"].map((socialName) => (
             <li key={socialName}>
-              <a href={`${socialName}.com`}>
+              <a href={`https://${socialName}.com`}>
                 <div className={`${styles[socialName]} ${styles.social}`}></div>
               </a>
             </li>

@@ -2,6 +2,10 @@
   margin: 3rem 0;
   width: 50%;
   height: 50%;
+  @media screen and (max-width: 1350px) {
+    width: 70%;
+    height: 70%;
+  }
 }
 .introduce {
   position: relative;
