@@ -1,5 +1,5 @@
 .footer {
-  padding: 0.5rem;
+  padding: 0.3rem;
   background-color: var(--button--background);
   position: relative;
   display: grid;
@@ -8,6 +8,10 @@
   justify-items: center;
   position: relative;
   overflow: hidden;
+
+  @media screen and (max-width: 850px) {
+    background-color: transparent;
+  }
 
   &::after {
     content: "";
@@ -92,7 +96,7 @@
 
 .asideTitle {
   align-self: flex-start;
-  font-size: clamp(2rem, calc(2vw + 1.8rem), 6rem);
+  font-size: clamp(1.8rem, calc(2.7vw + 0.6rem), 6rem);
 }
 .right {
   margin: 5px 10px;

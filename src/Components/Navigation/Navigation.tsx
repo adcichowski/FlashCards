@@ -79,7 +79,6 @@ export default function Navigation() {
           </li>
           {["About", "Game", "Contact"].map((element) => (
             <li key={`${element}`}>
-              {" "}
               <Link className={styles.navItem} to={`/${element.toLowerCase()}`}>
                 {element}
               </Link>

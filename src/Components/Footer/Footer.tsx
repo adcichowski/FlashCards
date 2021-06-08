@@ -17,7 +17,7 @@ export default function Footer() {
             </ul>
             <ul className={styles.listSocial}>
               {["facebook", "twitter", "instagram"].map((socialName) => (
-                <a key={socialName} href={`www.${socialName}.com`}>
+                <a key={socialName} href={`https://${socialName}.com`}>
                   <li className={`${styles[socialName]}`}></li>
                 </a>
               ))}
