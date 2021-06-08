@@ -1,14 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
-// enum TypeBox {
-//   javascript = "#F7DF1E",
-//   vue = "#398361",
-//   html5 = "#F73802",
-//   css3 = "#12629B",
-//   typescript = "#265F9E",
-//   react = "#459CB4",
-// }
+
 interface TypeBoxes {
   [key: string]: string;
 }
@@ -31,22 +24,23 @@ export default function useAnimationTechnologies() {
       gsap.registerPlugin(ScrollTrigger);
       let tl = gsap.timeline({
         scrollTrigger: allBoxes[0] as HTMLDivElement,
-        delay: 0.25,
+        delay: 0.2,
       });
       tl.from(allBoxes, {
         duration: 1,
         stagger: 0.1,
-        scale: 0.01,
+        opacity: 0,
+        scale: 0.3,
         ease: "bounce",
       });
       for (let box of allBoxes) {
         if (box) {
           box.addEventListener("mouseenter", (e) => {
-            const getIcon = String(box?.children[1].id);
-            console.log(box?.children[1]);
+            const getIconID = String(box?.children[1].id);
             gsap.to(e.target, {
               duration: 0.5,
-              fill: typeBoxes[getIcon],
+              backgroundColor: "transpaernt",
+              fill: typeBoxes[getIconID],
             });
           });
         }

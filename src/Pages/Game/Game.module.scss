@@ -1,8 +1,6 @@
 .game {
   width: 100vw;
   height: 100vh;
-  background: url("../../Assets/Pages/Register/registerBackground.png")
-    no-repeat bottom/cover;
   z-index: -1;
 }
 .game::after {
@@ -12,6 +10,7 @@
   z-index: -2;
   width: 100%;
   height: 100%;
-  background-color: var(--bg-article-primary);
-  opacity: 0.5;
+  background: url("../../Assets/Pages/Register/registerBackground.png")
+    no-repeat bottom/cover;
+  opacity: 0.35;
 }

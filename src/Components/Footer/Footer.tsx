@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import styles from "./Footer.module.scss";
@@ -18,7 +17,9 @@ export default function Footer() {
             </ul>
             <ul className={styles.listSocial}>
               {["facebook", "twitter", "instagram"].map((socialName) => (
-                <li key={socialName} className={`${styles[socialName]}`}></li>
+                <a key={socialName} href={`www.${socialName}.com`}>
+                  <li className={`${styles[socialName]}`}></li>
+                </a>
               ))}
             </ul>
           </nav>
