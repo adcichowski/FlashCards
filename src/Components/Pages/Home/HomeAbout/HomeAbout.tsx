@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./HomeAbout.module.scss";
 import Logo from "../../../Logo/Logo";
 export default function HomeAbout() {
@@ -20,9 +19,6 @@ export default function HomeAbout() {
               </p>
 
               <div className={styles.aboutForm}>
-                <small>
-                  Send if you wanna get more information and updates.
-                </small>
                 <form>
                   <label>
                     <input
@@ -38,6 +34,7 @@ export default function HomeAbout() {
                     value="Send"
                   />
                 </form>
+                <small>Send if you wanna get more information.</small>
               </div>
             </div>
             <div className={styles.aboutImg}></div>

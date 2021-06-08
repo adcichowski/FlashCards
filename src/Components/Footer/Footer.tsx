@@ -24,38 +24,39 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <div className={styles.articleAside}>
-          <p className={styles.asideTitle}>
-            A modern platform to get knowledge
-          </p>
-          <div>
-            <small className={styles.right}>Term of Service</small>
-            <small className={styles.right}>Privacy Policy</small>
-          </div>
-          <small className={styles.copyright}>
-            &copy; 2021 FlashCards, All rights is us
-          </small>
+
+        <p className={styles.asideTitle}>A modern platform to get knowledge</p>
+        <div>
+          <small className={styles.right}>Term of Service</small>
+          <small className={styles.right}>Privacy Policy</small>
         </div>
+        <small className={styles.copyright}>
+          &copy; 2021 FlashCards, All rights is us
+        </small>
       </div>
       <form className={styles.footerForm}>
         <h3 className={styles.formTitle}>Send Us</h3>
         <p className={styles.formSubtitle}>We love got ideas</p>
-        <label>
-          <input
-            name="Email"
-            placeholder="Email..."
-            type="text"
-            className={styles.formInput}
-          />
+        <label className="sr-only" htmlFor="email">
+          Email
         </label>
-        <label>
-          <textarea
-            maxLength={255}
-            placeholder="Your idea..."
-            name="Your idea"
-            className={styles.formTextarea}
-          />
+        <input
+          id="email"
+          name="Email"
+          placeholder="Email"
+          type="text"
+          className={styles.formInput}
+        />
+        <label className="sr-only" htmlFor="idea">
+          Your idea
         </label>
+        <textarea
+          id="idea"
+          maxLength={255}
+          placeholder="Your idea"
+          name="Your idea"
+          className={styles.formTextarea}
+        />
         <Button text="Send ideas" />
       </form>
     </footer>
