@@ -1,43 +1,50 @@
 import { MouseEventHandler } from "react";
 import styles from "./Button.module.scss";
+
 interface button {
   text: string;
-  onClickAction?: MouseEventHandler<HTMLButtonElement> | undefined;
+  onClickAction?: MouseEventHandler<HTMLButtonElement>;
   width?: string;
   height?: string;
   fontSize?: string;
-  to?: string;
+  link?: string;
 }
 export default function Button({
-  to,
+  link,
   text,
   onClickAction,
   width,
   height,
   fontSize,
 }: button) {
+  if (link?.length === 0) {
+    return (
+      <button
+        style={{
+          width: `${width}`,
+          height: `${height}`,
+        }}
+        onClick={onClickAction}
+        className={styles.button}
+      >
+        <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
+          {text}
+        </p>
+      </button>
+    );
+  }
   return (
-    <button
+    <a
+      href={`/${link}`}
       style={{
         width: `${width}`,
         height: `${height}`,
       }}
-      onClick={onClickAction}
       className={styles.button}
     >
-      {to ? (
-        <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
-          {text}
-        </p>
-      ) : (
-        <a
-          href={to}
-          style={{ fontSize: `${fontSize}` }}
-          className={styles.front}
-        >
-          {text}
-        </a>
-      )}
-    </button>
+      <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
+        {text}
+      </p>
+    </a>
   );
 }

@@ -78,11 +78,7 @@ export default function Navigation() {
         <ul className={styles.navList}>
           {navigationLinks.map((element) => (
             <li key={element.name}>
-              <Link
-                className={styles.navItem}
-                onClick={handleClick}
-                to={element.path}
-              >
+              <Link className={styles.navItem} to={element.path}>
                 {element.name}
               </Link>
             </li>

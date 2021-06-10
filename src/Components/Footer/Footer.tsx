@@ -3,6 +3,11 @@ import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import styles from "./Footer.module.scss";
 export default function Footer() {
+  let navigationLinks = [
+    { name: "Home", path: "/" },
+    { name: "Game", path: "/game" },
+    { name: "Ranking", path: "/ranking" },
+  ];
   return (
     <footer className={styles.footer}>
       <div className={styles.footerArticle}>
@@ -10,12 +15,11 @@ export default function Footer() {
           <Logo />
           <nav>
             <ul className={styles.listLinks}>
-              <li className={styles.link}>
-                <Link to={`/`}>Home</Link>
-              </li>
-              {["About", "Game"].map((linkName) => (
-                <li key={linkName} className={styles.link}>
-                  <Link to={`/${linkName.toLowerCase()}`}>{linkName}</Link>
+              {navigationLinks.map((element) => (
+                <li key={element.name}>
+                  <Link className={styles.link} to={element.path}>
+                    {element.name}
+                  </Link>
                 </li>
               ))}
             </ul>
