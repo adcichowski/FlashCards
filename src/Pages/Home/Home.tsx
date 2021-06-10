@@ -17,7 +17,7 @@ export default function Home() {
           <p className={styles.heroSubtitle}>
             Easy way to improve your skill...
           </p>
-          <Button text="Click For Play" />
+          <Button to="/game" text="Click For Play" />
         </section>
       </header>
       <main>

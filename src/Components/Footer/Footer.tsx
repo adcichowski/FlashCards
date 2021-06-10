@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import styles from "./Footer.module.scss";
@@ -9,9 +10,12 @@ export default function Footer() {
           <Logo />
           <nav>
             <ul className={styles.listLinks}>
-              {["Home", "About", "Game"].map((linkName) => (
+              <li className={styles.link}>
+                <Link to={`/`}>Home</Link>
+              </li>
+              {["About", "Game"].map((linkName) => (
                 <li key={linkName} className={styles.link}>
-                  {linkName}
+                  <Link to={`/${linkName.toLowerCase()}`}>{linkName}</Link>
                 </li>
               ))}
             </ul>

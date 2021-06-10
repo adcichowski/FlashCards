@@ -19,16 +19,18 @@ html {
   font-size: 10px;
   color: var(--font-color-primary);
 }
+input:auto
+}
 input:hover,
 textarea:hover {
   background-color: var(--focus--input);
 }
 
 body {
+  margin: 0 auto;
   max-width: 1920px;
   overflow-x: hidden;
   background-color: var(--bg-article-primary);
-  margin: 0 auto;
   font-size: 1.6rem;
 }
 a {

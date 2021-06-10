@@ -1,58 +1,62 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
+
 export default function Navigation() {
-  const [isOpen, openMenu] = useState(false);
+  let navigationLinks = [
+    { name: "Home", path: "/" },
+    { name: "Game", path: "/game" },
+    { name: "Ranking", path: "/ranking" },
+    { name: "Contact", path: "/contact" },
+  ];
+  const [isOpen, setOpen] = useState(false);
+  const handleClick = () => setOpen(!isOpen);
+  useEffect(() => {
+    if (isOpen) {
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 850) setOpen(false);
+      });
+    }
+  });
   if (isOpen) {
     return (
-      <div className={styles.nav}>
-        <nav className={styles.bodyMenu}>
-          <button
-            aria-label="navigation"
-            name="button"
-            onClick={() => openMenu(!isOpen)}
-            className={styles.hamburgerOpen}
-          >
-            <span className={styles.Boxhamburger}>
-              <div className={styles.lineHamburger}></div>
-              <div className={styles.lineHamburger}></div>
-              <div className={styles.lineHamburger}></div>
-            </span>
-          </button>
-          <Logo />
-          <ul className={styles.menuList}>
-            <li>
+      <nav className={styles.bodyMenu} onClick={handleClick}>
+        <button
+          aria-label="navigation"
+          name="button"
+          onClick={handleClick}
+          className={styles.hamburger}
+        >
+          <span className={styles.Boxhamburger}>
+            <div className={styles.lineHamburger}></div>
+            <div className={styles.lineHamburger}></div>
+            <div className={styles.lineHamburger}></div>
+          </span>
+        </button>
+        <Logo />
+        <ul className={styles.menuList}>
+          {navigationLinks.map((element) => (
+            <li key={element.name}>
               <Link
                 className={styles.menuItem}
-                onClick={() => openMenu(!isOpen)}
-                to={`/`}
+                onClick={handleClick}
+                to={element.path}
               >
-                Home
+                {element.name}
               </Link>
             </li>
-            {["About", "Game", "Contact"].map((element) => (
-              <li key={`${element}`}>
-                <Link
-                  className={styles.menuItem}
-                  onClick={() => openMenu(!isOpen)}
-                  to={`/${element.toLocaleLowerCase()}`}
-                >
-                  {element}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <ul className={styles.menuSocial}>
-            {["facebook", "twitter", "instagram"].map((socialName) => (
-              <li
-                key={socialName}
-                className={`${styles[socialName]} ${styles.social}`}
-              ></li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+          ))}
+        </ul>
+        <ul className={styles.menuSocial}>
+          {["facebook", "twitter", "instagram"].map((socialName) => (
+            <li
+              key={socialName}
+              className={`${styles[socialName]} ${styles.social}`}
+            ></li>
+          ))}
+        </ul>
+      </nav>
     );
   }
   return (
@@ -60,7 +64,7 @@ export default function Navigation() {
       <button
         aria-label="navigation"
         name="button"
-        onClick={() => openMenu(!isOpen)}
+        onClick={handleClick}
         className={styles.hamburger}
       >
         <span className={styles.Boxhamburger}>
@@ -72,15 +76,14 @@ export default function Navigation() {
       <div className={styles.hideNav}>
         <Logo />
         <ul className={styles.navList}>
-          <li>
-            <Link className={styles.navItem} to={`/`}>
-              Home
-            </Link>
-          </li>
-          {["About", "Game", "Contact"].map((element) => (
-            <li key={`${element}`}>
-              <Link className={styles.navItem} to={`/${element.toLowerCase()}`}>
-                {element}
+          {navigationLinks.map((element) => (
+            <li key={element.name}>
+              <Link
+                className={styles.navItem}
+                onClick={handleClick}
+                to={element.path}
+              >
+                {element.name}
               </Link>
             </li>
           ))}

@@ -6,8 +6,10 @@ interface button {
   width?: string;
   height?: string;
   fontSize?: string;
+  to?: string;
 }
 export default function Button({
+  to,
   text,
   onClickAction,
   width,
@@ -23,9 +25,19 @@ export default function Button({
       onClick={onClickAction}
       className={styles.button}
     >
-      <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
-        {text}
-      </p>
+      {to ? (
+        <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
+          {text}
+        </p>
+      ) : (
+        <a
+          href={to}
+          style={{ fontSize: `${fontSize}` }}
+          className={styles.front}
+        >
+          {text}
+        </a>
+      )}
     </button>
   );
 }
