@@ -17,17 +17,17 @@ export default function Button({
   height,
   fontSize,
 }: button) {
-  if (link?.length === 0) {
+  if (link) {
     return (
       <button
         style={{
-          width: `${width}`,
-          height: `${height}`,
+          width,
+          height,
         }}
         onClick={onClickAction}
         className={styles.button}
       >
-        <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
+        <p style={{ fontSize }} className={styles.front}>
           {text}
         </p>
       </button>
@@ -37,12 +37,12 @@ export default function Button({
     <a
       href={`/${link}`}
       style={{
-        width: `${width}`,
-        height: `${height}`,
+        width,
+        height,
       }}
       className={styles.button}
     >
-      <p style={{ fontSize: `${fontSize}` }} className={styles.front}>
+      <p style={{ fontSize }} className={styles.front}>
         {text}
       </p>
     </a>
