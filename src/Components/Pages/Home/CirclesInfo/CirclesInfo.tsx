@@ -11,7 +11,7 @@ export default function CirclesInfo() {
         <p className={styles.circlesParagraph}>
           This graph always show you what we have on the website, we can help
           themselves day after day. Stay with us, and send more information in
-          cards, together we can stand to
+          cards.
         </p>
       </div>
     </section>

@@ -10,7 +10,7 @@
     </filter>
   </defs>
   <g id="Card_SVG" data-name="Card SVG" transform="translate(-53.583 -7.614)">
-    <g id="Card" opacity=0 transform="translate(338.021 339.593) rotate(-30)">
+    <g id="Card" opacity='1' transform="translate(338.021 339.593) rotate(-30)">
       <path id="Card__Body" d="M23.366,0H480.18c12.9,0,23.366,10.975,23.366,24.514V694.959c0,13.539-10.462,24.514-23.366,24.514H23.366C10.462,719.472,0,708.5,0,694.959V24.514C0,10.975,10.462,0,23.366,0Z" transform="translate(0)" fill="#fff"/>
       <path id="Card__Wave" d="M499.731,630.876C473.395,790.181,358.024,525.126,97.751,451.791c-211.006-59.454-17.325-309.921,0-417.233C107.4-25.231,362.971-18,447.067,141.131,524.709,288.054,428.529,583.609,499.731,630.876Z" transform="translate(1.95 26.858)" fill="#f8e22e"/>
       <g id="Type_Language" data-name="Type Language" transform="translate(0)">
@@ -63,24 +63,24 @@
       </g>
     </g>
     <g id="Button_Show" data-name="Button Show" transform="translate(170.694 883.027)">
-      <g  class='frame__border' opacity=0 data-name="Group 79">
+      <g  class='frame__border' opacity='1' data-name="Group 79">
         <g id="Rectangle_44"  data-name="Rectangle 44" transform="translate(-0.112 0.226)" fill="none" stroke="#a21934" stroke-width="8">
           <rect width="400"  height="130" rx="20" stroke="none"/>
           <rect x="4" y="4"  width="392" height="122" rx="16" fill="none"/>
         </g>
         <text id="Buttons-2"  data-name="Buttons" transform="translate(199.888 83.226)" fill="#fff" font-size="51" font-family="Kanit-Regular, Kanit"><tspan x="-90.525" y="0">Buttons</tspan></text>
       </g>
-      <g id="Group_99" class='frame__arrow' opacity=0 data-name="Group 99" transform="translate(395.201 -30.806)">
+      <g id="Group_99" class='frame__arrow' opacity='1' data-name="Group 99" transform="translate(395.201 -30.806)">
         <path id="Path_73" data-name="Path 73" d="M4266.192,258.118c118.845-19.043,203.277-99.93,227.841-117.2" transform="translate(-4266.961 -116.086)" fill="none" stroke="#a21934" stroke-width="8"/>
         <path id="chevron-right" d="M0,59.758,29.879,29.879,0,0" transform="translate(187.043 21.128) rotate(-45)" fill="none" stroke="#a41934" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
       </g>
     </g>
     <g id="Number_Card_Show" data-name="Number Card Show" transform="translate(125.96 24.869)">
-      <g class='frame__arrow' opacity=0>
+      <g class='frame__arrow' opacity='1'>
         <path id="Path_73-2" data-name="Path 73" d="M0,118.2C139.317,99.158,237.392,17.267,266.188,0" transform="translate(928.636 815.057) rotate(-135)" fill="none" stroke="#a41934" stroke-width="8"/>
         <path id="chevron-right-2" data-name="chevron-right" d="M5.147,64.9,35.026,35.026,0,0" transform="translate(770.972 662.637) rotate(180)" fill="none" stroke="#a41934" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
       </g>
-      <g  class='frame__border' opacity=0 data-name="Group 79" transform="translate(997.657 724.155)">
+      <g  class='frame__border' opacity='1' data-name="Group 79" transform="translate(997.657 724.155)">
         <text id="Number_Card-2" data-name="Number Card" transform="translate(199.926 83.098)" fill="#fff" font-size="51" font-family="Kanit-Regular, Kanit"><tspan x="-149.787" y="0">Number Card</tspan></text>
         <g id="Rectangle_44-2" data-name="Rectangle 44" transform="translate(-0.074 0.098)" fill="none" stroke="#a41934" stroke-width="10">
           <rect width="400" height="130" rx="20" stroke="none"/>
@@ -89,24 +89,24 @@
       </g>
     </g>
     <g id="Question_Show"  data-name="Question Show" transform="translate(1112.973 347.929)">
-      <g id="Group_102"  class='frame__border' opacity=0 data-name="Group 102" transform="translate(-121 -167)">
+      <g id="Group_102"  class='frame__border' opacity='1' data-name="Group 102" transform="translate(-121 -167)">
         <g id="Rectangle_44-3"  data-name="Rectangle 44" transform="translate(-0.39 0.324)" fill="none" stroke="#a41934" stroke-width="10">
           <rect width="400" height="130" rx="20" stroke="none"/>
           <rect x="5" y="5"  width="390" height="120" rx="15" fill="none"/>
         </g>
         <text id="Queston" transform="translate(199.61 83.324)" fill="#fff" font-size="51" font-family="Kanit-Regular, Kanit"><tspan x="-96.237" y="0">Answer</tspan></text>
       </g>
-      <g class='frame__arrow' opacity=0 data-name="arrow__show" transform="translate(-52.59 -92.388) rotate(142)">
+      <g class='frame__arrow' opacity='1' data-name="arrow__show" transform="translate(-52.59 -92.388) rotate(142)">
         <path id="Path_73-3" data-name="Path 73" d="M0,62.754C114.156,52.914,196.374,8.922,219.97,0" transform="translate(0 26.107)" fill="none" stroke="#a41934" stroke-width="8"/>
         <path id="chevron-right-3" data-name="chevron-right" d="M0,57.31,28.655,28.655,0,0" transform="translate(180.632 14.328) rotate(-30)" fill="none" stroke="#a41934" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
       </g>
     </g>
     <g id="Type_Language_Show" data-name="Type Language Show">
-      <g class='frame__arrow' opacity=0 data-name="arrow__show">
+      <g class='frame__arrow' opacity='1' data-name="arrow__show">
         <path id="Path_73-4" data-name="Path 73" d="M0,123.739C124.413,103.8,212,18.076,237.711,0" transform="matrix(0.574, 0.819, -0.819, 0.574, 551.076, 10.009)" fill="none" stroke="#a41934" stroke-width="8"/>
         <path id="chevron-right-4" data-name="chevron-right" d="M0,61.094,30.547,30.547,0,0" transform="translate(667.053 169.033) rotate(10)" fill="none" stroke="#a41934" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
       </g>
-      <g  class='frame__border' opacity=0 data-name="Type Language" transform="translate(53 10.183)">
+      <g  class='frame__border' opacity='1' data-name="Type Language" transform="translate(53 10.183)">
         <g id="Rectangle_44-4" data-name="Rectangle 44" transform="translate(0.583 0.069)" fill="none" stroke="#a41934" stroke-width="10">
           <rect width="400" height="130" rx="20" stroke="none"/>
           <rect x="5" y="5" width="390" height="120" rx="15" fill="none"/>

@@ -17,7 +17,7 @@ export default function Button({
   height,
   fontSize,
 }: button) {
-  if (link) {
+  if (!link) {
     return (
       <button
         style={{

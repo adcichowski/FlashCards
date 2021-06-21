@@ -1,17 +1,16 @@
-import React from "react";
 import styles from "./Home.module.scss";
 import Navigation from "../../Components/Navigation/Navigation";
 import CirclesInfo from "../../Components/Pages/Home/CirclesInfo/CirclesInfo";
-import Instruction from "../../Components/Instruction/Instruction";
-import ListTechnologies from "../../Components/ListTechnologies/ListTechnologies";
+import Instruction from "../../Components/Pages/Home/Instruction/Instruction";
+import ListTechnologies from "../../Components/Pages/Home/ListTechnologies/ListTechnologies";
 import Button from "../../Components/Button/Button";
 import HomeAbout from "../../Components/Pages/Home/HomeAbout/HomeAbout";
 import Footer from "../../Components/Footer/Footer";
 export default function Home() {
   return (
     <div className={styles.homePage}>
+      <Navigation />
       <header className={styles.heroBackground}>
-        <Navigation />
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
           <p className={styles.heroSubtitle}>
