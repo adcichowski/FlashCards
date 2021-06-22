@@ -28,9 +28,9 @@ export default function useAnimationTechnologies() {
       });
       tl.from(allBoxes, {
         duration: 1,
-        stagger: 0.1,
+        stagger: 0.25,
         opacity: 0,
-        scale: 0.3,
+        scale: 0.4,
         ease: "bounce",
       });
       for (let box of allBoxes) {

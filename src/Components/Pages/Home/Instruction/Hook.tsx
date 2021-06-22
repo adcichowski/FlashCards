@@ -16,21 +16,21 @@ export default function useInstruction() {
     const card = elements.querySelector("#Card");
 
     let tl = gsap.timeline({ scrollTrigger: card, delay: 0.5 });
-    tl.from(card, {
-      opacity: 0,
+    tl.to(card, {
+      opacity: 1,
       duration: 1,
       ease: "power1",
     })
-      .from(frameBorder, {
-        opacity: 0,
+      .to(frameBorder, {
+        opacity: 1,
         duration: 0.5,
         ease: "power2",
       })
-      .from([...frameArrow].reverse(), {
+      .to(frameArrow.reverse(), {
         stroke: 20,
         duration: 3,
         stagger: 0.35,
-        opacity: 0,
+        opacity: 1,
         ease: "back",
       });
   });
