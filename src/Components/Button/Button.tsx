@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 import styles from "./Button.module.scss";
 
-interface button {
+interface ButtonInt {
   text: string;
   onClickAction?: MouseEventHandler<HTMLButtonElement>;
   width?: string;
@@ -16,35 +16,35 @@ export default function Button({
   width,
   height,
   fontSize,
-}: button) {
-  if (!link) {
+}: ButtonInt) {
+  if (link) {
     return (
-      <button
+      <a
+        href={`/${link}`}
         style={{
           width,
           height,
         }}
-        onClick={onClickAction}
         className={styles.button}
       >
-        <p style={{ fontSize }} className={styles.front}>
+        <span style={{ fontSize }} className={styles.front}>
           {text}
-        </p>
-      </button>
+        </span>
+      </a>
     );
   }
   return (
-    <a
-      href={`/${link}`}
+    <button
       style={{
         width,
         height,
       }}
+      onClick={onClickAction}
       className={styles.button}
     >
-      <p style={{ fontSize }} className={styles.front}>
+      <span style={{ fontSize }} className={styles.front}>
         {text}
-      </p>
-    </a>
+      </span>
+    </button>
   );
 }
