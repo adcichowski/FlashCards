@@ -2,8 +2,17 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import styles from "./Footer.module.scss";
+import { useForm } from "react-hook-form";
+import { inputValidation } from "../../Utils/Utils";
 export default function Footer() {
-  let navigationLinks = [
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: JSON) => console.log(data);
+
+  const navigationLinks = [
     { name: "Home", path: "/" },
     { name: "Game", path: "/game" },
     { name: "Ranking", path: "/ranking" },
@@ -42,29 +51,29 @@ export default function Footer() {
           &copy; 2021 FlashCards, All rights is us
         </small>
       </div>
-      <form className={styles.footerForm}>
+      <form className={styles.footerForm} onSubmit={handleSubmit(onSubmit)}>
         <h3 className={styles.formTitle}>Send Us</h3>
         <p className={styles.formSubtitle}>We love got ideas</p>
-        <label className="sr-only" htmlFor="email">
-          Email
+        <label>
+          <span className="sr-only">Email</span>
+          <input
+            id="email"
+            {...register("email", inputValidation.email)}
+            placeholder="Email"
+            type="text"
+            className={styles.formInput}
+          />
         </label>
-        <input
-          id="email"
-          name="Email"
-          placeholder="Email"
-          type="text"
-          className={styles.formInput}
-        />
-        <label className="sr-only" htmlFor="idea">
-          Your idea
+        <span>{errors?.email?.message}</span>
+        <label>
+          <span className="sr-only"> Your idea</span>
+          <textarea
+            {...register("textarea")}
+            maxLength={255}
+            placeholder="Your idea"
+            className={styles.formTextarea}
+          />
         </label>
-        <textarea
-          id="idea"
-          maxLength={255}
-          placeholder="Your idea"
-          name="Your idea"
-          className={styles.formTextarea}
-        />
         <Button text="Send ideas" />
       </form>
     </footer>

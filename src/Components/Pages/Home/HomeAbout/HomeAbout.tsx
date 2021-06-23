@@ -1,6 +1,14 @@
 import styles from "./HomeAbout.module.scss";
 import Logo from "../../../Logo/Logo";
+import { useForm } from "react-hook-form";
+import { inputValidation } from "../../../../Utils/Utils";
 export default function HomeAbout() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: JSON) => console.log(data);
   return (
     <>
       <article className={styles.articleAbout}>
@@ -19,22 +27,26 @@ export default function HomeAbout() {
               </p>
 
               <div className={styles.aboutForm}>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <small>Send if you wanna get more information.</small>
                   <label>
+                    <span className="sr-only">Email</span>
                     <input
+                      {...register("email", inputValidation.email)}
                       placeholder="Write Your Email"
-                      type="text"
                       className={styles.aboutFormInput}
                     />
                   </label>
-
-                  <input
-                    type="submit"
-                    className={styles.aboutFormSubmit}
-                    value="Send"
-                  />
+                  <label>
+                    <span className="sr-only">Save for news</span>
+                    <input
+                      type="submit"
+                      className={styles.aboutFormSubmit}
+                      value="Send"
+                    />
+                  </label>
                 </form>
-                <small>Send if you wanna get more information.</small>
+                <span>{errors?.email?.message}</span>
               </div>
             </div>
             <div className={styles.aboutImg}></div>
