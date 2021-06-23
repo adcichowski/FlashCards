@@ -37,7 +37,7 @@ export default function Home() {
           <Button
             width="calc(13rem + 6vw)"
             height="calc(3rem + 3vw)"
-            fontSize="clamp(2.2rem,calc(1rem + 1vw),6rem)"
+            fontSize="clamp(2rem,calc(1rem + 1vw),6rem)"
             text="Create Account"
             maxWidth="50rem"
             maxHeight="16rem"

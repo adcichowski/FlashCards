@@ -1,12 +1,10 @@
 .footer {
-  padding: 0.3rem;
   background-color: var(--button--background);
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   align-items: center;
   justify-items: center;
-  position: relative;
   overflow: hidden;
 
   @media screen and (max-width: 850px) {
@@ -29,6 +27,7 @@
   }
 }
 .footerForm {
+  width: 50%;
   position: relative;
   z-index: 2;
   display: flex;
@@ -42,7 +41,6 @@
   font-size: clamp(2.5rem, calc(2.5rem + 2vw), 8rem);
 }
 .formInput {
-  margin: 0.5rem 0;
   padding: 1.2rem 0.5rem;
 }
 .formTextarea {
@@ -63,6 +61,9 @@
 .formInput::placeholder,
 .formTextarea::placeholder {
   color: var(--font-color-primary);
+}
+.formError {
+  width: 90%;
 }
 .footerArticle {
   display: grid;

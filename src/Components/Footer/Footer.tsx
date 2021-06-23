@@ -64,7 +64,7 @@ export default function Footer() {
             className={styles.formInput}
           />
         </label>
-        <span>{errors?.email?.message}</span>
+        <span className={styles.formError}>{errors?.email?.message}</span>
         <label>
           <span className="sr-only"> Your idea</span>
           <textarea
