@@ -19,7 +19,7 @@ export default function Home() {
           <Button
             link="game"
             text="Click For Play"
-            width="calc(6rem + 6vw)"
+            width="calc(7rem + 6vw)"
             height="calc(2rem + 3vw)"
           />
         </section>

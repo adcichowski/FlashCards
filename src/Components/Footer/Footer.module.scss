@@ -11,6 +11,7 @@
 
   @media screen and (max-width: 850px) {
     background-color: transparent;
+    grid-template-columns: 1fr;
   }
 
   &::after {
