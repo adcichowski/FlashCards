@@ -16,7 +16,12 @@ export default function Home() {
           <p className={styles.heroSubtitle}>
             Easy way to improve your skill...
           </p>
-          <Button link="game" text="Click For Play" />
+          <Button
+            link="game"
+            text="Click For Play"
+            width="calc(6rem + 6vw)"
+            height="calc(2rem + 3vw)"
+          />
         </section>
       </header>
       <main>
@@ -30,10 +35,12 @@ export default function Home() {
           <div className={styles.bigQuestionIcon}></div>
           <h3 className={styles.bigQuestionTitle}>Do You Wanna TRY ??</h3>
           <Button
-            width={"calc(12rem + 6vw)"}
-            height={"calc(2rem + 3vw)"}
-            fontSize={"calc(1.2rem + 1vw)"}
+            width="calc(13rem + 6vw)"
+            height="calc(3rem + 3vw)"
+            fontSize="clamp(2.2rem,calc(1rem + 1vw),6rem)"
             text="Create Account"
+            maxWidth="50rem"
+            maxHeight="16rem"
           />
         </section>
       </main>

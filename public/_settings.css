@@ -19,7 +19,7 @@ html {
   font-size: 10px;
   color: var(--font-color-primary);
 }
-input:auto input:hover,
+input:hover,
 textarea:hover {
   background-color: var(--focus--input);
 }

@@ -8,6 +8,8 @@ interface ButtonInt {
   height?: string;
   fontSize?: string;
   link?: string;
+  maxWidth?: string;
+  maxHeight?: string;
 }
 export default function Button({
   link,
@@ -16,6 +18,8 @@ export default function Button({
   width,
   height,
   fontSize,
+  maxWidth = "20rem",
+  maxHeight = "10rem",
 }: ButtonInt) {
   if (link) {
     return (
@@ -24,6 +28,8 @@ export default function Button({
         style={{
           width,
           height,
+          maxWidth,
+          maxHeight,
         }}
         className={styles.button}
       >
@@ -38,6 +44,8 @@ export default function Button({
       style={{
         width,
         height,
+        maxWidth,
+        maxHeight,
       }}
       onClick={onClickAction}
       className={styles.button}

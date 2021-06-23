@@ -42,7 +42,7 @@ export default function Register({ handleClick }: RegisterInt) {
         <span className={styles.errorInfo}>{errors?.password?.message}</span>
 
         <div className={styles.formButtons}>
-          <Button text="Login" onClickAction={handleClick} />
+          <Button text="Register" onClickAction={handleClick} />
         </div>
         <Link to="/">
           <Logo />
