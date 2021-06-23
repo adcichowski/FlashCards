@@ -1,10 +1,14 @@
+import useAnimationCircles from "./Hook";
+
 import styles from "./CirclesInfo.module.scss";
-import { ReactComponent as Circles } from "../../../../Assets/IconsTechnology/Group 124.svg";
+import { ReactComponent as CirclesSVG } from "../../../../Assets/Pages/Home/CirclesAside.svg";
 export default function CirclesInfo() {
+  let { getElements } = useAnimationCircles();
+
   return (
     <section className={styles.circles}>
-      <div className={styles.circlesSvg}>
-        <Circles />
+      <div ref={getElements} className={styles.circlesSvg}>
+        <CirclesSVG />
       </div>
       <div className={styles.circlesText}>
         <h3 className={styles.circlesTitle}>Look at this...</h3>

@@ -7,7 +7,6 @@ export default function useInstruction() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const elements = getElements.current;
-    console.log(elements);
     if (!elements) {
       return;
     }
