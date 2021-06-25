@@ -33,8 +33,8 @@
 }
 .aboutText {
   align-self: flex-start;
-  margin: 5rem 0 0 0;
-  padding: 5rem;
+  margin: 8rem 0 0 0;
+  padding: 1rem;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
@@ -42,7 +42,7 @@
 .aboutTitle {
   margin: 0.5rem 0;
   align-self: flex-start;
-  font-size: clamp(2.4rem, calc(3rem + 2vw), 6.2rem);
+  font-size: clamp(2rem, calc(3rem + 2vw), 6.2rem);
 }
 .aboutParaghraph {
   font-size: clamp(1.6rem, calc(0.5rem + 2vw), 2.2rem);
@@ -57,7 +57,6 @@
   border: 1px solid white;
   color: var(--font-color-primary);
   background-color: var(--bg-color-input);
-  width: 60%;
   padding: 0.8rem 0.5rem;
   font-size: clamp(1.6rem, calc(1rem + 0.5vw), 1.9rem);
   &::placeholder {

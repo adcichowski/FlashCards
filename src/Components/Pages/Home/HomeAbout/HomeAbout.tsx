@@ -29,22 +29,24 @@ export default function HomeAbout() {
               <div className={styles.aboutForm}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <small>Send if you wanna get more information.</small>
-                  <label>
-                    <span className="sr-only">Email</span>
-                    <input
-                      {...register("email", inputValidation.email)}
-                      placeholder="Write Your Email"
-                      className={styles.aboutFormInput}
-                    />
-                  </label>
-                  <label>
-                    <span className="sr-only">Save for news</span>
-                    <input
-                      type="submit"
-                      className={styles.aboutFormSubmit}
-                      value="Send"
-                    />
-                  </label>
+                  <div>
+                    <label>
+                      <span className="sr-only">Email</span>
+                      <input
+                        {...register("email", inputValidation.email)}
+                        placeholder="Write Your Email"
+                        className={styles.aboutFormInput}
+                      />
+                    </label>
+                    <label>
+                      <span className="sr-only">Save for news</span>
+                      <input
+                        type="submit"
+                        className={styles.aboutFormSubmit}
+                        value="Send"
+                      />
+                    </label>
+                  </div>
                 </form>
                 <span>{errors?.email?.message}</span>
               </div>

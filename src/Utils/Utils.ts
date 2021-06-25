@@ -1,6 +1,7 @@
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+export const PASSWORD_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 export function getRandomMinMax(min: number, max: number) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -17,7 +18,7 @@ export const inputValidation = {
     pattern: {
       value: PASSWORD_REGEX,
       message:
-        "Password must contain an uppercase letter, a number and must be at least 8 characters long.",
+        "Password must have minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
     },
   },
 };

@@ -1,20 +1,31 @@
 import Button from "../../../Button/Button";
+import { UserData } from "../../../../Types/index";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../../../Utils/Utils";
 import { MouseEventHandler } from "react";
 import Logo from "../../../Logo/Logo";
+import { auth } from "../../../../lib/firebase/index";
+import { useMainContext } from "../../../../Context/MainContext";
 interface RegisterInt {
   handleClick: MouseEventHandler;
 }
 export default function Register({ handleClick }: RegisterInt) {
+  const { isLoading, setLoading, setModal } = useMainContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: JSON) => console.log(data);
+  const onSubmit = async ({ email, password }: UserData) => {
+    try {
+      setLoading(true);
+      await auth.createUserWithEmailAndPassword(email, password);
+    } catch (e) {
+      setModal({ isOpen: true, type: "error", message: e?.message });
+    }
+  };
   return (
     <div className={styles.formLog}>
       <h1 className={styles.formTitle}>Register In</h1>
@@ -42,7 +53,7 @@ export default function Register({ handleClick }: RegisterInt) {
         <span className={styles.errorInfo}>{errors?.password?.message}</span>
 
         <div className={styles.formButtons}>
-          <Button text="Register" onClickAction={handleClick} />
+          <Button text="Register" />
         </div>
         <Link to="/">
           <Logo />

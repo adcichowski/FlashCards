@@ -1,0 +1,30 @@
+.wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 11;
+  display: grid;
+  align-items: center;
+}
+.modal {
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30%;
+  min-width: 40rem;
+  height: 80%;
+  padding: 10px;
+  border-radius: 5%;
+  background: linear-gradient(
+    228deg,
+    rgba(43, 51, 97, 1) 9%,
+    rgba(42, 27, 43, 1) 159%
+  );
+}
+.modalTitle {
+  font-size: clamp(2.5rem, calc(3rem + 2vw), 7rem);
+}
+.modalText {
+  text-align: center;
+  font-size: clamp(2rem, calc(3rem + 2vw), 2.5rem);
+}
