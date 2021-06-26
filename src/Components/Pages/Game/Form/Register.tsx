@@ -4,26 +4,36 @@ import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../../../Utils/Utils";
-import { MouseEventHandler } from "react";
 import Logo from "../../../Logo/Logo";
 import { auth } from "../../../../lib/firebase/index";
 import { useMainContext } from "../../../../Context/MainContext";
+import { MouseEventHandler } from "react";
+import { useGameContext } from "../../../../Context/GameContext";
 interface RegisterInt {
-  handleClick: MouseEventHandler;
+  handleClickRegister: MouseEventHandler;
 }
-export default function Register({ handleClick }: RegisterInt) {
-  const { isLoading, setLoading, setModal } = useMainContext();
+export default function Register({ handleClickRegister }: RegisterInt) {
+  const { setLoading, setModal } = useMainContext();
+  const { setLogin } = useGameContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = async ({ email, password }: UserData) => {
+    setLoading(true);
     try {
-      setLoading(true);
       await auth.createUserWithEmailAndPassword(email, password);
+      setModal({
+        isOpen: true,
+        type: "success",
+        message: "Now, just login in and play!",
+      });
+      setLogin(true);
     } catch (e) {
       setModal({ isOpen: true, type: "error", message: e?.message });
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -39,6 +49,7 @@ export default function Register({ handleClick }: RegisterInt) {
             autoComplete="off"
           />
         </label>
+        <span className={styles.errorInfo}>{errors?.email?.message}</span>
         <label>
           <span className="sr-only">Password</span>
           <input
@@ -49,7 +60,6 @@ export default function Register({ handleClick }: RegisterInt) {
             autoComplete="current-password"
           />
         </label>
-        <span className={styles.errorInfo}>{errors?.email?.message}</span>
         <span className={styles.errorInfo}>{errors?.password?.message}</span>
 
         <div className={styles.formButtons}>

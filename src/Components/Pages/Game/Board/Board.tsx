@@ -1,7 +1,7 @@
 export default function Board() {
   return (
     <div>
-      <h1>Zalogowany</h1>
+      <h1>Zalogowano</h1>
     </div>
   );
 }

@@ -13,10 +13,10 @@ interface Modal {
   message: string;
 }
 interface ContextType {
-  isLoading: boolean;
-  setLoading: Dispatch<SetStateAction<boolean>>;
   modal: Modal;
+  isLoading: boolean;
   setModal: Dispatch<SetStateAction<Modal>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 const MainContext = createContext<ContextType>({
   isLoading: false,
@@ -39,7 +39,7 @@ export const useMainContext = () => {
 export default function MainProvider({ children }: { children: ReactNode }) {
   const [isLoading, setLoading] = useState(false);
   const [modal, setModal] = useState<Modal>({
-    isOpen: true,
+    isOpen: false,
     type: "success" as const,
     message: "",
   });

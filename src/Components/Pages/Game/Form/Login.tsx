@@ -1,5 +1,5 @@
-import Button from "../../../Button/Button";
-import { Link } from "react-router-dom";
+import Button from "../../../../Components/Button/Button";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../../../Utils/Utils";
@@ -10,21 +10,24 @@ import { auth } from "../../../../lib/firebase/index";
 import { UserData } from "../../../../Types/index";
 import { useMainContext } from "../../../../Context/MainContext";
 interface LoginInt {
-  handleClick: MouseEventHandler;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  handleClickRegister: MouseEventHandler;
 }
-export default function Login({ handleClick, setLoading }: LoginInt) {
+export default function Login({ handleClickRegister }: LoginInt) {
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-  const { setModal } = useMainContext();
+  const { setModal, setLoading } = useMainContext();
   const onSubmit = async ({ email, password }: UserData) => {
     setLoading(true);
     try {
       await auth.signInWithEmailAndPassword(email, password);
       setLoading(false);
+      reset();
+      history.push("/board");
     } catch (e) {
       setModal({ isOpen: true, type: "error", message: e?.message });
     } finally {
@@ -61,7 +64,7 @@ export default function Login({ handleClick, setLoading }: LoginInt) {
 
           <div className={styles.formButtons}>
             <Button text="Login" />
-            <Button text="Create Account" onClickAction={handleClick} />
+            <Button text="Create Account" onClickAction={handleClickRegister} />
           </div>
           <Link to="/">
             <Logo />

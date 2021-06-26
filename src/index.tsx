@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeAbout from "./Components/Pages/Home/HomeAbout/HomeAbout";
 import Game from "./Pages/Game/Game";
 import MainProvider from "./Context/MainContext";
+import { GameProvider } from "./Context/GameContext";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -18,8 +19,11 @@ ReactDOM.render(
               <HomeAbout />
             </Route>
             <Route path="/game">
-              <Game />
+              <GameProvider>
+                <Game />
+              </GameProvider>
             </Route>
+            <Route path="/game/board"></Route>
           </Switch>
         </div>
       </MainProvider>

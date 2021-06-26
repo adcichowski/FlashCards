@@ -3,7 +3,6 @@ import Button from "../Button/Button";
 import styles from "./Modal.module.scss";
 import { ReactComponent as Alert } from "../../Assets/Modal/alert-circle.svg";
 import { ReactComponent as Check } from "../../Assets/Modal/check-circle.svg";
-import { useRef } from "react";
 export default function Modal() {
   const {
     modal,
@@ -22,8 +21,10 @@ export default function Modal() {
         <h3 className={styles.modalTitle}>
           {type === "error" ? "Error" : "Success"}
         </h3>
-        <div>{type === "error" ? <Alert /> : <Check />}</div>
-        <p className={styles.modalText}>halo tu losowy text {message}</p>
+        <div className={styles.modalIcon}>
+          {type === "error" ? <Alert /> : <Check />}
+        </div>
+        <p className={styles.modalText}>{message}</p>
         <Button text="Close" onClickAction={handleClose} />
       </div>
     </div>
