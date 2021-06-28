@@ -5,12 +5,10 @@ import { useForm } from "react-hook-form";
 import { inputValidation } from "../../../../Utils/Utils";
 import { MouseEventHandler } from "react";
 import Logo from "../../../Logo/Logo";
-
 import { auth } from "../../../../lib/firebase/index";
 import { UserData } from "../../../../Types/index";
 import { useMainContext } from "../../../../Context/MainContext";
 import { useGameContext } from "../../../../Context/GameContext";
-import { useSendData } from "../../../../lib/firebase/Hooks";
 interface LoginInt {
   handleClickRegister: MouseEventHandler;
 }
@@ -21,18 +19,19 @@ export default function Login({ handleClickRegister }: LoginInt) {
     formState: { errors },
     reset,
   } = useForm();
-  const { sendData } = useSendData();
   const { setModal, setLoading } = useMainContext();
-  const { setUser, currentUser } = useGameContext();
+  const { setUser } = useGameContext();
   const onSubmit = async ({ email, password }: UserData) => {
     setLoading(true);
     try {
       await auth.signInWithEmailAndPassword(email, password);
+      if (!auth?.currentUser?.uid) {
+        throw Error("This account not exist!");
+      }
       setUser({
         isLogin: true,
         idUser: auth?.currentUser?.uid,
       });
-      console.log(currentUser);
       setModal({
         isOpen: true,
         type: "success",

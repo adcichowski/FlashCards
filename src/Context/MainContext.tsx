@@ -18,16 +18,7 @@ interface ContextType {
   setModal: Dispatch<SetStateAction<Modal>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
-const MainContext = createContext<ContextType>({
-  isLoading: false,
-  setLoading: () => {},
-  modal: {
-    isOpen: false,
-    type: "success",
-    message: "",
-  },
-  setModal: () => {},
-});
+const MainContext = createContext<ContextType | undefined>(undefined);
 export const useMainContext = () => {
   const context = useContext(MainContext);
   if (!context) {

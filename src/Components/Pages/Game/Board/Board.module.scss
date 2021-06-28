@@ -1,0 +1,25 @@
+.board {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.boardButton {
+  max-width: 1920px;
+  margin: 4rem 0;
+  text-align: center;
+  width: 100vw;
+  background-color: #9f18357e;
+  border: none;
+  cursor: pointer;
+  height: 15rem;
+  font-size: clamp(4rem, calc(2rem + 1vw), 6rem);
+  font-weight: 600;
+  color: var(--font-color-primary);
+}
+.boardButton:hover {
+  background-color: #9f1835e1;
+  transform: background 2s;
+}

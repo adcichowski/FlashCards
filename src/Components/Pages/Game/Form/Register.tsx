@@ -7,30 +7,32 @@ import { inputValidation } from "../../../../Utils/Utils";
 import Logo from "../../../Logo/Logo";
 import { auth } from "../../../../lib/firebase/index";
 import { useMainContext } from "../../../../Context/MainContext";
-import { MouseEventHandler } from "react";
 import { useGameContext } from "../../../../Context/GameContext";
-import { useSendData } from "../../../../lib/firebase/Hooks";
-interface RegisterInt {
-  handleClickRegister: MouseEventHandler;
-}
-export default function Register({ handleClickRegister }: RegisterInt) {
+
+export default function Register() {
   const { setLoading, setModal } = useMainContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { setUser } = useGameContext();
   const onSubmit = async ({ email, password }: UserData) => {
     setLoading(true);
     try {
       await auth.createUserWithEmailAndPassword(email, password);
+      if (!auth?.currentUser?.uid) {
+        throw Error("This account not exist!");
+      }
+      setUser({
+        isLogin: true,
+        idUser: auth?.currentUser?.uid,
+      });
       setModal({
         isOpen: true,
         type: "success",
         message: "Now, just login in and play!",
       });
-      //@ts-ignore
-      console.log(currentUser);
     } catch (e) {
       setModal({ isOpen: true, type: "error", message: e?.message });
     } finally {

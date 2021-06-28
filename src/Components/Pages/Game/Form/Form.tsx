@@ -8,6 +8,6 @@ export default function Form() {
   return isRegister ? (
     <Login handleClickRegister={handleClickRegister} />
   ) : (
-    <Register handleClickRegister={handleClickRegister} />
+    <Register />
   );
 }
