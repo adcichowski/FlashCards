@@ -6,7 +6,9 @@ import Modal from "../../Components/Modal/Modal";
 import { useGameContext } from "../../Context/GameContext";
 export default function Game() {
   auth.signOut();
-  const { isLogin } = useGameContext();
+  const {
+    currentUser: { isLogin },
+  } = useGameContext();
   return (
     <>
       <Modal />

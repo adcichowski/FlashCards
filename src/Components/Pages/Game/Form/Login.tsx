@@ -1,5 +1,5 @@
 import Button from "../../../../Components/Button/Button";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../../../Utils/Utils";
@@ -9,25 +9,37 @@ import Logo from "../../../Logo/Logo";
 import { auth } from "../../../../lib/firebase/index";
 import { UserData } from "../../../../Types/index";
 import { useMainContext } from "../../../../Context/MainContext";
+import { useGameContext } from "../../../../Context/GameContext";
+import { useSendData } from "../../../../lib/firebase/Hooks";
 interface LoginInt {
   handleClickRegister: MouseEventHandler;
 }
 export default function Login({ handleClickRegister }: LoginInt) {
-  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  const { sendData } = useSendData();
   const { setModal, setLoading } = useMainContext();
+  const { setUser, currentUser } = useGameContext();
   const onSubmit = async ({ email, password }: UserData) => {
     setLoading(true);
     try {
       await auth.signInWithEmailAndPassword(email, password);
+      setUser({
+        isLogin: true,
+        idUser: auth?.currentUser?.uid,
+      });
+      console.log(currentUser);
+      setModal({
+        isOpen: true,
+        type: "success",
+        message: "Now, just login in and play!",
+      });
       setLoading(false);
       reset();
-      history.push("/board");
     } catch (e) {
       setModal({ isOpen: true, type: "error", message: e?.message });
     } finally {

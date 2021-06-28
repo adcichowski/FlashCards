@@ -9,12 +9,12 @@ import { auth } from "../../../../lib/firebase/index";
 import { useMainContext } from "../../../../Context/MainContext";
 import { MouseEventHandler } from "react";
 import { useGameContext } from "../../../../Context/GameContext";
+import { useSendData } from "../../../../lib/firebase/Hooks";
 interface RegisterInt {
   handleClickRegister: MouseEventHandler;
 }
 export default function Register({ handleClickRegister }: RegisterInt) {
   const { setLoading, setModal } = useMainContext();
-  const { setLogin } = useGameContext();
   const {
     register,
     handleSubmit,
@@ -29,7 +29,8 @@ export default function Register({ handleClickRegister }: RegisterInt) {
         type: "success",
         message: "Now, just login in and play!",
       });
-      setLogin(true);
+      //@ts-ignore
+      console.log(currentUser);
     } catch (e) {
       setModal({ isOpen: true, type: "error", message: e?.message });
     } finally {

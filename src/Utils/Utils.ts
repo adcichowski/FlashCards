@@ -21,4 +21,10 @@ export const inputValidation = {
         "Password must have minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
     },
   },
+  answer: {
+    required: { value: true, message: "Answer is empty." },
+  },
+  question: {
+    required: { value: true, message: "Answer is empty." },
+  },
 };
