@@ -1,5 +1,4 @@
 .footer {
-  padding-bottom: 0.6rem;
   background-color: var(--button--background);
   position: relative;
   display: grid;
@@ -7,10 +6,12 @@
   align-items: center;
   justify-items: center;
   overflow: hidden;
+  padding-bottom: 1rem;
 
   @media screen and (max-width: 850px) {
     background-color: transparent;
     grid-template-columns: 1fr;
+    padding-bottom: 2rem;
   }
 
   &::after {
