@@ -18,6 +18,7 @@
   font-size: clamp(4rem, calc(2rem + 1vw), 6rem);
   font-weight: 600;
   color: var(--font-color-primary);
+  z-index: 11;
 }
 .boardButton:hover {
   background-color: #9f1835e1;

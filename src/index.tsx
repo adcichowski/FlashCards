@@ -6,11 +6,13 @@ import HomeAbout from "./Components/Pages/Home/HomeAbout/HomeAbout";
 import Game from "./Pages/Game/Game";
 import MainProvider from "./Context/MainContext";
 import { GameProvider } from "./Context/GameContext";
+import Board from "./Components/Pages/Game/Board/Board";
+import Form from "./Pages/Login/Form";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <MainProvider>
-        <div>
+        <GameProvider>
           <Switch>
             <Route path="/" exact>
               <Home />
@@ -19,13 +21,17 @@ ReactDOM.render(
               <HomeAbout />
             </Route>
             <Route path="/game">
-              <GameProvider>
-                <Game />
-              </GameProvider>
+              <Game>
+                <Board />
+              </Game>
             </Route>
-            <Route path="/game/board"></Route>
+            <Route path="/login">
+              <Game>
+                <Form />
+              </Game>
+            </Route>
           </Switch>
-        </div>
+        </GameProvider>
       </MainProvider>
     </Router>
   </React.StrictMode>,

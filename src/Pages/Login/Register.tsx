@@ -1,15 +1,16 @@
-import Button from "../../../Button/Button";
-import { UserData } from "../../../../Types/index";
-import { Link } from "react-router-dom";
+import Button from "../../Components/Button/Button";
+import { UserData } from "../../Types/index";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
-import { inputValidation } from "../../../../Utils/Utils";
-import Logo from "../../../Logo/Logo";
-import { auth } from "../../../../lib/firebase/index";
-import { useMainContext } from "../../../../Context/MainContext";
-import { useGameContext } from "../../../../Context/GameContext";
+import { inputValidation } from "../../Utils/Utils";
+import Logo from "../../Components/Logo/Logo";
+import { auth } from "../../lib/firebase/index";
+import { useMainContext } from "../../Context/MainContext";
+import { useGameContext } from "../../Context/GameContext";
 
 export default function Register() {
+  const history = useHistory();
   const { setLoading, setModal } = useMainContext();
   const {
     register,
@@ -33,6 +34,7 @@ export default function Register() {
         type: "success",
         message: "Now, just login in and play!",
       });
+      history.push("/game");
     } catch (e) {
       setModal({ isOpen: true, type: "error", message: e?.message });
     } finally {

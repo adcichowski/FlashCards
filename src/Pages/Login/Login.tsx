@@ -1,14 +1,14 @@
-import Button from "../../../../Components/Button/Button";
-import { Link } from "react-router-dom";
+import Button from "../../Components/Button/Button";
+import { Link, useHistory } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
-import { inputValidation } from "../../../../Utils/Utils";
+import { inputValidation } from "../../Utils/Utils";
 import { MouseEventHandler } from "react";
-import Logo from "../../../Logo/Logo";
-import { auth } from "../../../../lib/firebase/index";
-import { UserData } from "../../../../Types/index";
-import { useMainContext } from "../../../../Context/MainContext";
-import { useGameContext } from "../../../../Context/GameContext";
+import Logo from "../../Components/Logo/Logo";
+import { auth } from "../../lib/firebase/index";
+import { UserData } from "../../Types/index";
+import { useMainContext } from "../../Context/MainContext";
+import { useGameContext } from "../../Context/GameContext";
 interface LoginInt {
   handleClickRegister: MouseEventHandler;
 }
@@ -19,6 +19,7 @@ export default function Login({ handleClickRegister }: LoginInt) {
     formState: { errors },
     reset,
   } = useForm();
+  const history = useHistory();
   const { setModal, setLoading } = useMainContext();
   const { setUser } = useGameContext();
   const onSubmit = async ({ email, password }: UserData) => {
@@ -37,6 +38,7 @@ export default function Login({ handleClickRegister }: LoginInt) {
         type: "success",
         message: "Now, just login in and play!",
       });
+      history.push("/game");
       setLoading(false);
       reset();
     } catch (e) {
