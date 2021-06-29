@@ -19,7 +19,7 @@ export default function Board() {
     setBoard(board);
   };
   useEffect(() => {
-    if (!isLogin) history.push("/login");
+    if (!isLogin) history.replace("/login");
   });
   switch (nameBoard) {
     case "Personal":
