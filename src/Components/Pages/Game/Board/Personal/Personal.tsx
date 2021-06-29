@@ -8,12 +8,7 @@ import { inputValidation } from "../../../../../Utils/Utils";
 export default function Personal() {
   const { setLoading, setModal } = useMainContext();
   const { currentUser } = useGameContext();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   console.log(currentUser);
   const { sendData } = useSendData();
   const onSubmit = ({ technology, question, answer }: any) => {

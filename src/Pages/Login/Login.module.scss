@@ -7,7 +7,7 @@
   justify-content: space-around;
   width: 70%;
   max-width: 45rem;
-  height: 70%;
+  height: 75%;
   max-height: 65rem;
   padding: 1rem;
   background-color: #2b3361c9;
@@ -19,9 +19,17 @@
     background-color: #a31934;
     content: "";
     position: absolute;
-    top: 16rem;
+    top: 17.5rem;
     left: 0;
   }
+}
+.backButton {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  left: 6%;
+  top: 5%;
+  background: url("../../Assets/Icons/first-arrow.svg") no-repeat center;
 }
 .formTitle {
   font-size: clamp(6rem, calc(2.5rem + 4vw), 8rem);

@@ -43,6 +43,7 @@ export default function Register() {
   };
   return (
     <div className={styles.formLog}>
+      <Link to="/" className={styles.backButton} />
       <h1 className={styles.formTitle}>Register In</h1>
       <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
         <label>

@@ -24,3 +24,8 @@
   background-color: #9f1835e1;
   transform: background 2s;
 }
+
+.boardButton:nth-child(1),
+.boardButton:nth-child(1):hover {
+  background-color: rgba(128, 128, 128, 0.503);
+}

@@ -51,6 +51,7 @@ export default function Login({ handleClickRegister }: LoginInt) {
   return (
     <>
       <div className={styles.formLog}>
+        <Link to="/" className={styles.backButton} />
         <h1 className={styles.formTitle}>Login In </h1>
         <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
           <label>
