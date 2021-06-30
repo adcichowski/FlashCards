@@ -69,7 +69,7 @@ export default function Register() {
         <span className={styles.errorInfo}>{errors?.password?.message}</span>
 
         <div className={styles.formButtons}>
-          <Button text="Register" />
+          <Button>Register</Button>
         </div>
         <Link to="/">
           <Logo />

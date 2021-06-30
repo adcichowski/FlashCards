@@ -25,7 +25,7 @@ export default function Modal() {
           {type === "error" ? <Alert /> : <Check />}
         </div>
         <p className={styles.modalText}>{message}</p>
-        <Button text="Close" onClickAction={handleClose} />
+        <Button onClick={handleClose}>Close</Button>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import useAnimationCircles from "./Hook";
 import styles from "./CirclesInfo.module.scss";
 import { ReactComponent as CirclesSVG } from "../../../../Assets/Pages/Home/CirclesAside.svg";
 export default function CirclesInfo() {
-  let { getElements } = useAnimationCircles();
+  const { getElements } = useAnimationCircles();
 
   return (
     <section className={styles.circles}>

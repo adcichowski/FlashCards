@@ -74,7 +74,7 @@ export default function Footer() {
             className={styles.formTextarea}
           />
         </label>
-        <Button text="Send ideas" />
+        <Button>Send ideas</Button>
       </form>
     </footer>
   );

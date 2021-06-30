@@ -18,10 +18,11 @@ export default function Home() {
           </p>
           <Button
             link="game"
-            text="Click For Play"
             width="calc(7rem + 6vw)"
             height="calc(2rem + 3vw)"
-          />
+          >
+            Click For Play
+          </Button>
         </section>
       </header>
       <main>
@@ -38,10 +39,11 @@ export default function Home() {
             width="calc(13rem + 6vw)"
             height="calc(3rem + 3vw)"
             fontSize="clamp(2rem,calc(1rem + 1vw),6rem)"
-            text="Create Account"
             maxWidth="50rem"
             maxHeight="16rem"
-          />
+          >
+            Create Account
+          </Button>
         </section>
       </main>
       <Footer />

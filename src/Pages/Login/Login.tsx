@@ -77,8 +77,8 @@ export default function Login({ handleClickRegister }: LoginInt) {
           <span className={styles.errorInfo}>{errors?.password?.message}</span>
 
           <div className={styles.formButtons}>
-            <Button text="Login" />
-            <Button text="Create Account" onClickAction={handleClickRegister} />
+            <Button>Login</Button>
+            <Button onClick={handleClickRegister}>"Create Account</Button>
           </div>
           <Link to="/">
             <Logo />

@@ -43,7 +43,7 @@ export default function Board() {
             >
               General Cards
             </button>
-            <Button text="Log Out" onClickAction={() => logOut()} />
+            <Button onClick={() => logOut()}>Log Out</Button>
           </div>
         </>
       );

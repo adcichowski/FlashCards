@@ -14,7 +14,7 @@ export default function Instruction() {
       <div ref={getElements} className={styles.card}>
         {!isFlip ? <FrontCard /> : <BackCard />}
       </div>
-      <Button onClickAction={() => flipCard(!isFlip)} text="Flip Card" />
+      <Button onClick={() => flipCard(!isFlip)}>Flip Card</Button>
     </section>
   );
 }
