@@ -11,7 +11,7 @@ import { useGameContext } from "../../Context/GameContext";
 
 export default function Register() {
   const history = useHistory();
-  const { setLoading, setModal } = useMainContext();
+  const { dispatch } = useMainContext();
   const {
     register,
     handleSubmit,
@@ -19,7 +19,6 @@ export default function Register() {
   } = useForm();
   const { setUser } = useGameContext();
   const onSubmit = async ({ email, password }: UserData) => {
-    setLoading(true);
     try {
       await auth.createUserWithEmailAndPassword(email, password);
       if (!auth?.currentUser?.uid) {
@@ -29,16 +28,22 @@ export default function Register() {
         isLogin: true,
         idUser: auth?.currentUser?.uid,
       });
-      setModal({
-        isOpen: true,
-        type: "success",
-        message: "Now, just login in and play!",
+      dispatch({
+        type: "openModal",
+        setModal: {
+          type: "success",
+          message: "Your are register in webiste!",
+        },
       });
       history.push("/game");
     } catch (e) {
-      setModal({ isOpen: true, type: "error", message: e?.message });
-    } finally {
-      setLoading(false);
+      dispatch({
+        type: "openModal",
+        setModal: {
+          type: "error",
+          message: e.message,
+        },
+      });
     }
   };
   return (

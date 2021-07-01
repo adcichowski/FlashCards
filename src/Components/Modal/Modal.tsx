@@ -4,27 +4,23 @@ import styles from "./Modal.module.scss";
 import { ReactComponent as Alert } from "../../Assets/Modal/alert-circle.svg";
 import { ReactComponent as Check } from "../../Assets/Modal/check-circle.svg";
 export default function Modal() {
-  const {
-    modal,
-    modal: { isOpen, type, message },
-    setModal,
-  } = useMainContext();
+  const { dispatch, state } = useMainContext();
   const handleClose = () => {
-    setModal({ ...modal, isOpen: false });
+    dispatch({ type: "closeModal" });
   };
-  if (!isOpen) {
+  if (!state.isOpen) {
     return null;
   }
   return (
     <div className={styles.wrapper}>
       <div className={styles.modal}>
         <h3 className={styles.modalTitle}>
-          {type === "error" ? "Error" : "Success"}
+          {state.type === "error" ? "Error" : "Success"}
         </h3>
         <div className={styles.modalIcon}>
-          {type === "error" ? <Alert /> : <Check />}
+          {state.type === "error" ? <Alert /> : <Check />}
         </div>
-        <p className={styles.modalText}>{message}</p>
+        <p className={styles.modalText}>{state.message}</p>
         <Button onClick={handleClose}>Close</Button>
       </div>
     </div>

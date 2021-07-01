@@ -1,24 +1,42 @@
-import { ReactNode } from "react";
-import {
-  createContext,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useContext,
-} from "react";
-
-interface Modal {
+import { ReactNode, useReducer } from "react";
+import { createContext, useContext } from "react";
+interface Action {
+  type: "openModal" | "closeModal";
+  setModal?: Omit<ModalInterface, "isOpen">;
+}
+interface Dispatch {
+  (action: Action): void;
+}
+interface ModalInterface {
   isOpen: boolean;
   type: "error" | "success";
   message: string;
 }
-interface ContextType {
-  modal: Modal;
-  isLoading: boolean;
-  setModal: Dispatch<SetStateAction<Modal>>;
-  setLoading: Dispatch<SetStateAction<boolean>>;
+const MainContext = createContext<
+  undefined | { state: ModalInterface; dispatch: Dispatch }
+>(undefined);
+function modalMainReducer(
+  state: ModalInterface,
+  action: Action
+): ModalInterface {
+  switch (action.type) {
+    case "openModal":
+      return {
+        ...state,
+        ...action.setModal,
+        isOpen: true,
+      };
+    case "closeModal":
+      return {
+        ...state,
+        ...action.setModal,
+        isOpen: false,
+      };
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`);
+    }
+  }
 }
-const MainContext = createContext<ContextType | undefined>(undefined);
 export const useMainContext = () => {
   const context = useContext(MainContext);
   if (!context) {
@@ -28,15 +46,12 @@ export const useMainContext = () => {
   return context;
 };
 export default function MainProvider({ children }: { children: ReactNode }) {
-  const [isLoading, setLoading] = useState(false);
-  const [modal, setModal] = useState<Modal>({
+  const Modal: ModalInterface = {
     isOpen: false,
-    type: "success" as const,
+    type: "success",
     message: "",
-  });
-  return (
-    <MainContext.Provider value={{ isLoading, setLoading, modal, setModal }}>
-      {children}
-    </MainContext.Provider>
-  );
+  };
+  const [state, dispatch] = useReducer(modalMainReducer, Modal);
+  const value = { state, dispatch };
+  return <MainContext.Provider value={value}>{children}</MainContext.Provider>;
 }

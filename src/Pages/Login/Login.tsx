@@ -20,10 +20,9 @@ export default function Login({ handleClickRegister }: LoginInt) {
     reset,
   } = useForm();
   const history = useHistory();
-  const { setModal, setLoading } = useMainContext();
+  const { dispatch } = useMainContext();
   const { setUser } = useGameContext();
   const onSubmit = async ({ email, password }: UserData) => {
-    setLoading(true);
     try {
       await auth.signInWithEmailAndPassword(email, password);
       if (!auth?.currentUser?.uid) {
@@ -33,18 +32,23 @@ export default function Login({ handleClickRegister }: LoginInt) {
         isLogin: true,
         idUser: auth?.currentUser?.uid,
       });
-      setModal({
-        isOpen: true,
-        type: "success",
-        message: "Now, just login in and play!",
+      dispatch({
+        type: "openModal",
+        setModal: {
+          type: "success",
+          message: "You are login in webiste!",
+        },
       });
       history.push("/game");
-      setLoading(false);
       reset();
     } catch (e) {
-      setModal({ isOpen: true, type: "error", message: e?.message });
-    } finally {
-      setLoading(false);
+      dispatch({
+        type: "openModal",
+        setModal: {
+          type: "error",
+          message: e.message,
+        },
+      });
     }
   };
 
@@ -78,7 +82,7 @@ export default function Login({ handleClickRegister }: LoginInt) {
 
           <div className={styles.formButtons}>
             <Button>Login</Button>
-            <Button onClick={handleClickRegister}>"Create Account</Button>
+            <Button onClick={handleClickRegister}>Create Account</Button>
           </div>
           <Link to="/">
             <Logo />
