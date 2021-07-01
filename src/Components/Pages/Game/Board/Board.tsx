@@ -10,15 +10,13 @@ import { useHistory } from "react-router";
 
 export default function Board() {
   const history = useHistory();
-  const {
-    currentUser: { isLogin },
-  } = useGameContext();
+  const { state } = useGameContext();
   const [nameBoard, setBoard] = useState<string>("");
   const { logOut } = useFuncAuthFirebase();
   const handleClick = (board: string) => {
     setBoard(board);
   };
-  if (!isLogin) history.replace("/login");
+  if (!state.isLogin) history.replace("/login");
   switch (nameBoard) {
     case "Personal":
       return <Personal />;

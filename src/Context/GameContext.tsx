@@ -1,17 +1,30 @@
 import { Dispatch } from "react";
-import { SetStateAction } from "react";
-import { createContext, ReactNode, useState } from "react";
+import { useReducer } from "react";
+import { createContext, ReactNode } from "react";
 import { useContext } from "react";
+interface Action {
+  type: "logIn" | "logOut";
+  setUser?: Omit<CurrentUser, "isLogin">;
+}
 interface CurrentUser {
   idUser: string;
   isLogin: boolean;
 }
-interface ContextType {
-  currentUser: CurrentUser;
-  setUser: Dispatch<SetStateAction<CurrentUser>>;
+function userReducer(state: CurrentUser, action: Action): CurrentUser {
+  switch (action.type) {
+    case "logIn":
+      return { ...state, isLogin: true, ...action.setUser };
+    case "logOut":
+      return { ...state, isLogin: false, idUser: "" };
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`);
+    }
+  }
 }
 
-const GameContext = createContext<ContextType | undefined>(undefined);
+const GameContext = createContext<
+  { state: CurrentUser; dispatch: Dispatch<Action> } | undefined
+>(undefined);
 export const useGameContext = () => {
   const context = useContext(GameContext);
   if (!context) {
@@ -20,14 +33,12 @@ export const useGameContext = () => {
   return context;
 };
 export const GameProvider = ({ children }: { children: ReactNode }) => {
-  const [currentUser, setUser] = useState<CurrentUser>({
+  const currentUser: CurrentUser = {
     isLogin: false,
     idUser: "",
-  });
+  };
+  const [state, dispatch] = useReducer(userReducer, currentUser);
+  const value = { state, dispatch };
 
-  return (
-    <GameContext.Provider value={{ currentUser, setUser }}>
-      {children}
-    </GameContext.Provider>
-  );
+  return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 };

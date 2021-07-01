@@ -1,12 +1,11 @@
 import { useGameContext } from "../../Context/GameContext";
 import { db, auth } from "./index";
 export function useFuncAuthFirebase() {
-  const { setUser } = useGameContext();
+  const { dispatch } = useGameContext();
   function logOut() {
     auth.signOut();
-    setUser({
-      isLogin: false,
-      idUser: "",
+    dispatch({
+      type: "logOut",
     });
   }
   return { logOut };

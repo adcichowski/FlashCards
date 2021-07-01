@@ -6,13 +6,12 @@ import { inputValidation } from "../../../../../Utils/Utils";
 
 export default function Personal() {
   const { dispatch } = useMainContext();
-  const { currentUser } = useGameContext();
+  const { state } = useGameContext();
   const { register, handleSubmit, reset } = useForm();
-  console.log(currentUser);
   const { sendData } = useSendData();
   const onSubmit = ({ technology, question, answer }: any) => {
     try {
-      sendData(currentUser.idUser, technology, question, answer);
+      sendData(state.idUser, technology, question, answer);
       dispatch({
         type: "openModal",
         setModal: {

@@ -17,16 +17,18 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { setUser } = useGameContext();
+  const { dispatch: gameDispatch } = useGameContext();
   const onSubmit = async ({ email, password }: UserData) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password);
       if (!auth?.currentUser?.uid) {
         throw Error("This account not exist!");
       }
-      setUser({
-        isLogin: true,
-        idUser: auth?.currentUser?.uid,
+      gameDispatch({
+        type: "logIn",
+        setUser: {
+          idUser: auth?.currentUser?.uid,
+        },
       });
       dispatch({
         type: "openModal",
