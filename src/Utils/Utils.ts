@@ -25,6 +25,6 @@ export const inputValidation = {
     required: { value: true, message: "Answer is empty." },
   },
   question: {
-    required: { value: true, message: "Answer is empty." },
+    required: { value: true, message: "Question is empty." },
   },
 };

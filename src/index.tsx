@@ -2,36 +2,35 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HomeAbout from "./Components/Pages/Home/HomeAbout/HomeAbout";
 import Game from "./Pages/Game/Game";
 import MainProvider from "./Context/MainContext";
-import { GameProvider } from "./Context/GameContext";
+import { AuthProvider } from "./Context/AuthContext";
 import Board from "./Components/Pages/Game/Board/Board";
 import Form from "./Pages/Login/Form";
+import Personal from "./Components/Pages/Game/Board/Personal/Personal";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <MainProvider>
-        <GameProvider>
+        <AuthProvider>
           <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/about">
-              <HomeAbout />
-            </Route>
-            <Route path="/game">
-              <Game>
+            <Route path="/" exact component={Home} />
+            <Game>
+              <Route exact path="/game">
                 <Board />
-              </Game>
-            </Route>
-            <Route path="/login">
-              <Game>
+              </Route>
+              <Route path="/game/personal-cards">
+                <Personal />
+              </Route>
+              <Route path="/game/general-cards">
+                <Personal />
+              </Route>
+              <Route exact path="/login">
                 <Form />
-              </Game>
-            </Route>
+              </Route>
+            </Game>
           </Switch>
-        </GameProvider>
+        </AuthProvider>
       </MainProvider>
     </Router>
   </React.StrictMode>,

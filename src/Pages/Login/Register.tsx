@@ -7,7 +7,7 @@ import { inputValidation } from "../../Utils/Utils";
 import Logo from "../../Components/Logo/Logo";
 import { auth } from "../../lib/firebase/index";
 import { useMainContext } from "../../Context/MainContext";
-import { useGameContext } from "../../Context/GameContext";
+import { useAuthContext } from "../../Context/AuthContext";
 
 export default function Register() {
   const history = useHistory();
@@ -17,14 +17,14 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { dispatch: gameDispatch } = useGameContext();
+  const { dispatch: AuthDispatch } = useAuthContext();
   const onSubmit = async ({ email, password }: UserData) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password);
       if (!auth?.currentUser?.uid) {
         throw Error("This account not exist!");
       }
-      gameDispatch({
+      AuthDispatch({
         type: "logIn",
         setUser: {
           idUser: auth?.currentUser?.uid,
@@ -37,7 +37,7 @@ export default function Register() {
           message: "Your are register in webiste!",
         },
       });
-      history.push("/game");
+      history.push("/Auth");
     } catch (e) {
       dispatch({
         type: "openModal",

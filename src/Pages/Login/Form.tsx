@@ -5,6 +5,7 @@ import Register from "./Register";
 export default function Form() {
   const [isRegister, setRegister] = useState(true);
   const handleClickRegister = () => setRegister(!isRegister);
+
   return isRegister ? (
     <Login handleClickRegister={handleClickRegister} />
   ) : (

@@ -4,15 +4,17 @@ import Personal from "./Personal/Personal";
 import styles from "./Board.module.scss";
 import Button from "../../../Button/Button";
 import { useState } from "react";
-import { useFuncAuthFirebase } from "../../../../lib/firebase/Hooks";
-import { useGameContext } from "../../../../Context/GameContext";
+
+import { useAuthContext } from "../../../../Context/AuthContext";
 import { useHistory } from "react-router";
 
 export default function Board() {
   const history = useHistory();
-  const { state } = useGameContext();
+  const { state, dispatch } = useAuthContext();
   const [nameBoard, setBoard] = useState<string>("");
-  const { logOut } = useFuncAuthFirebase();
+  const handleClickLogOut = () => {
+    dispatch({ type: "logOut" });
+  };
   const handleClick = (board: string) => {
     setBoard(board);
   };
@@ -28,7 +30,6 @@ export default function Board() {
           <Navigation />
           <div className={styles.board}>
             <button
-              disabled
               className={styles.boardButton}
               type="button"
               onClick={() => handleClick("Personal")}
@@ -41,7 +42,7 @@ export default function Board() {
             >
               General Cards
             </button>
-            <Button onClick={() => logOut()}>Log Out</Button>
+            <Button onClick={handleClickLogOut}>Log Out</Button>
           </div>
         </>
       );

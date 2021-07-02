@@ -2,20 +2,22 @@ import { Dispatch } from "react";
 import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
+
 interface Action {
-  type: "logIn" | "logOut";
-  setUser?: Omit<CurrentUser, "isLogin">;
+  type: "setData" | "sendData";
+  setData: UserData;
 }
-interface CurrentUser {
-  idUser: string;
-  isLogin: boolean;
+interface UserData {
+  personalCards: object[];
+  generalCards?: object[];
 }
-function userReducer(state: CurrentUser, action: Action): CurrentUser {
+function userReducer(state: UserData, action: Action): UserData {
   switch (action.type) {
-    case "logIn":
-      return { ...state, isLogin: true, ...action.setUser };
-    case "logOut":
-      return { ...state, isLogin: false, idUser: "" };
+    case "setData":
+      return {
+        ...state,
+        ...action.setData,
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -23,7 +25,7 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
 }
 
 const GameContext = createContext<
-  { state: CurrentUser; dispatch: Dispatch<Action> } | undefined
+  { state: UserData; dispatch: Dispatch<Action> } | undefined
 >(undefined);
 export const useGameContext = () => {
   const context = useContext(GameContext);
@@ -33,11 +35,11 @@ export const useGameContext = () => {
   return context;
 };
 export const GameProvider = ({ children }: { children: ReactNode }) => {
-  const currentUser: CurrentUser = {
-    isLogin: false,
-    idUser: "",
+  const userData: UserData = {
+    personalCards: [],
+    generalCards: [],
   };
-  const [state, dispatch] = useReducer(userReducer, currentUser);
+  const [state, dispatch] = useReducer(userReducer, userData);
   const value = { state, dispatch };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

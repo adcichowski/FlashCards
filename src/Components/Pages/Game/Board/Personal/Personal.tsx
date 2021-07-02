@@ -1,22 +1,50 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useAuthContext } from "../../../../../Context/AuthContext";
 import { useGameContext } from "../../../../../Context/GameContext";
 import { useMainContext } from "../../../../../Context/MainContext";
-import { useSendData } from "../../../../../lib/firebase/Hooks";
+import { dataFirestore } from "../../../../../lib/firebase/Utils";
 import { inputValidation } from "../../../../../Utils/Utils";
 
 export default function Personal() {
   const { dispatch } = useMainContext();
-  const { state } = useGameContext();
+  const {
+    dispatch: gameDispatch,
+    state: { personalCards },
+  } = useGameContext();
+  const { state } = useAuthContext();
   const { register, handleSubmit, reset } = useForm();
-  const { sendData } = useSendData();
+  const { sendData, getData } = dataFirestore(state.idUser);
+  useEffect(() => {
+    try {
+      getData().then((data) => {
+        console.log(data, "data");
+        gameDispatch({
+          type: "setData",
+          setData: {
+            personalCards: data,
+          },
+        });
+      });
+    } catch (e) {
+      dispatch({
+        type: "openModal",
+        setModal: {
+          type: "error",
+          message: e.message,
+        },
+      });
+    }
+    console.log("hi");
+  }, []);
   const onSubmit = ({ technology, question, answer }: any) => {
     try {
-      sendData(state.idUser, technology, question, answer);
+      sendData(technology, question, answer, false);
       dispatch({
         type: "openModal",
         setModal: {
           type: "success",
-          message: "Great Work!",
+          message: "You are send a flashcard!",
         },
       });
       reset();
@@ -26,7 +54,7 @@ export default function Personal() {
   };
   return (
     <div>
-      <h1>Zalogowano</h1>
+      <button>Create Card</button>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register("technology")} />
         <input
@@ -36,6 +64,11 @@ export default function Personal() {
         <input {...register("answer", inputValidation.question)} type="text" />
         <button>Click to send</button>
       </form>
+      {personalCards.map((card: any) => (
+        <div key={card.Technology}>
+          <h1>{card?.Technology}</h1>
+        </div>
+      ))}
     </div>
   );
 }

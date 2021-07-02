@@ -8,7 +8,7 @@ import Logo from "../../Components/Logo/Logo";
 import { auth } from "../../lib/firebase/index";
 import { UserData } from "../../Types/index";
 import { useMainContext } from "../../Context/MainContext";
-import { useGameContext } from "../../Context/GameContext";
+import { useAuthContext } from "../../Context/AuthContext";
 interface LoginInt {
   handleClickRegister: MouseEventHandler;
 }
@@ -21,14 +21,14 @@ export default function Login({ handleClickRegister }: LoginInt) {
   } = useForm();
   const history = useHistory();
   const { dispatch } = useMainContext();
-  const { dispatch: gameDispatch } = useGameContext();
+  const { dispatch: AuthDispatch } = useAuthContext();
   const onSubmit = async ({ email, password }: UserData) => {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       if (!auth?.currentUser?.uid) {
         throw Error("This account not exist!");
       }
-      gameDispatch({
+      AuthDispatch({
         type: "logIn",
         setUser: { idUser: auth?.currentUser?.uid },
       });
