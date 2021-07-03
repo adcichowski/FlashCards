@@ -2,14 +2,15 @@ import { Dispatch } from "react";
 import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
+import { Card } from "../Types";
 
 interface Action {
   type: "setData" | "sendData";
   setData: UserData;
 }
 interface UserData {
-  personalCards: object[];
-  generalCards?: object[];
+  personalCards: Card[];
+  generalCards?: Card[];
 }
 function userReducer(state: UserData, action: Action): UserData {
   switch (action.type) {

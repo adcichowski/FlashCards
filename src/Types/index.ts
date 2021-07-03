@@ -6,7 +6,8 @@ export interface ModalInterface {
   text: string;
   isLoading: boolean;
 }
-export interface GeneralCard {
+export interface Card {
+  technology: string;
   language: string;
   answer: string;
   question: string;

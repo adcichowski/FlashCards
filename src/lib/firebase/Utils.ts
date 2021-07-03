@@ -1,3 +1,4 @@
+import { Card } from "../../Types";
 import { db, auth } from "./index";
 export function funcAuthFirebase() {
   function logOut() {
@@ -6,26 +7,19 @@ export function funcAuthFirebase() {
   return { logOut };
 }
 export function dataFirestore(nameDatabase: string) {
-  function sendData(
-    Technology: string,
-    Question: string,
-    Answer: string,
-    isFavorite: boolean
-  ) {
-    db.collection(nameDatabase).add({
-      Technology,
-      Question,
-      Answer,
-      isFavorite,
-    });
+  function sendData(card: Card) {
+    db.collection(nameDatabase).add(card);
   }
   async function getData() {
-    let personalCards: object[] = [];
+    let personalCards: Card[] = [];
     await db
       .collection(nameDatabase)
       .get()
       .then((data) =>
-        data.forEach((cards) => personalCards.push(cards.data()))
+        data.forEach((cards) => {
+          const cardData = cards.data() as Card;
+          personalCards.push(cardData);
+        })
       );
     return personalCards;
   }

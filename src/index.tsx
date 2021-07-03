@@ -7,7 +7,10 @@ import MainProvider from "./Context/MainContext";
 import { AuthProvider } from "./Context/AuthContext";
 import Board from "./Components/Pages/Game/Board/Board";
 import Form from "./Pages/Login/Form";
-import Personal from "./Components/Pages/Game/Board/Personal/Personal";
+import PersonalCards from "./Pages/Game/PersonalCards/PersonalCards";
+import GeneralCards from "./Pages/Game/GeneralCards/GeneralCards";
+import PrivateRoute from "./Routes/PrivateRoute";
+import Modal from "./Components/Modal/Modal";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -15,21 +18,21 @@ ReactDOM.render(
         <AuthProvider>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/login" component={Form} />
             <Game>
-              <Route exact path="/game">
-                <Board />
-              </Route>
-              <Route path="/game/personal-cards">
-                <Personal />
-              </Route>
-              <Route path="/game/general-cards">
-                <Personal />
-              </Route>
-              <Route exact path="/login">
-                <Form />
+              <PrivateRoute path="/game" exact component={Board} />
+              <PrivateRoute
+                path="/game/personal-cards"
+                exact
+                component={PersonalCards}
+              />
+
+              <Route exact path="/game/general-cards">
+                <GeneralCards />
               </Route>
             </Game>
           </Switch>
+          <Modal />
         </AuthProvider>
       </MainProvider>
     </Router>

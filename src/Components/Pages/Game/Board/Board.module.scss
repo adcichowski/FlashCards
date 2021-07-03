@@ -7,12 +7,13 @@
   width: 100vw;
 }
 .boardButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 1920px;
-  margin: 4rem 0;
-  text-align: center;
+  margin: 3rem 0;
   width: 100vw;
   background-color: #9f18357e;
-  border: none;
   cursor: pointer;
   height: 15rem;
   font-size: clamp(2.5rem, calc(2rem + 1vw), 6rem);
