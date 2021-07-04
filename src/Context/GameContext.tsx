@@ -10,7 +10,7 @@ interface Action {
 }
 interface UserData {
   personalCards: Card[];
-  generalCards?: Card[];
+  generalCards: Card[];
 }
 function userReducer(state: UserData, action: Action): UserData {
   switch (action.type) {

@@ -1,15 +1,10 @@
-import { useAuthContext } from "../../../Context/AuthContext";
 import { useGameContext } from "../../../Context/GameContext";
 import { Card } from "../../../Types";
-import { useGetData } from "../Hook/useGetData";
 import styles from "./Personal.module.scss";
 export default function PersonalCards() {
-  const { state } = useAuthContext();
-  useGetData(state.idUser);
   const {
     state: { personalCards },
   } = useGameContext();
-
   return (
     <div className={styles.personalBoard}>
       <h3 className={styles.personalTitle}>Personal Cards</h3>
@@ -25,8 +20,8 @@ export default function PersonalCards() {
         ))}
       </div>
       <div>
-        <button>Favorite Card</button>
-        <button>Create Card</button>
+        <button className={styles.favoriteButton}>Favorite Card</button>
+        <button className={styles.createButton}>Create Card</button>
       </div>
     </div>
   );

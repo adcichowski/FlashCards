@@ -6,22 +6,32 @@ export function funcAuthFirebase() {
   }
   return { logOut };
 }
-export function dataFirestore(nameDatabase: string) {
-  function sendData(card: Card) {
-    db.collection(nameDatabase).add(card);
-  }
-  async function getData() {
-    let personalCards: Card[] = [];
+function sendData(nameDatabase: string, card: Card) {
+  db.collection(nameDatabase).add(card);
+}
+function getData(nameDatabase: string) {
+  let personalCards: Card[] = [];
+  let generalCards: Card[] = [];
+  async function getDataFromFirestore() {
     await db
       .collection(nameDatabase)
       .get()
       .then((data) =>
         data.forEach((cards) => {
-          const cardData = cards.data() as Card;
-          personalCards.push(cardData);
+          personalCards.push(cards.data() as Card);
         })
       );
-    return personalCards;
+    await db
+      .collection("GeneralCards")
+      .get()
+      .then((data) =>
+        data.forEach((cards) => {
+          generalCards.push(cards.data() as Card);
+        })
+      );
   }
-  return { sendData, getData };
+  getDataFromFirestore();
+
+  return [personalCards, generalCards];
 }
+export { sendData, getData };

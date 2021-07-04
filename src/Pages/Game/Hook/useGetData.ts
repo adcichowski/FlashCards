@@ -1,31 +1,23 @@
 import { useEffect } from "react";
+import { useAuthContext } from "../../../Context/AuthContext";
 import { useGameContext } from "../../../Context/GameContext";
 import { useMainContext } from "../../../Context/MainContext";
-import { dataFirestore } from "../../../lib/firebase/Utils";
-import { Card } from "../../../Types";
+import { getData } from "../../../lib/firebase/Utils";
 
-export function useGetData(nameCollection: string) {
-  const { getData } = dataFirestore(nameCollection);
-  const { state: gameState, dispatch: gameDispatch } = useGameContext();
+export function useGetData() {
+  const {
+    state: { idUser },
+  } = useAuthContext();
+  const { dispatch: gameDispatch } = useGameContext();
   const { dispatch } = useMainContext();
   useEffect(() => {
-    try {
-      getData().then((cards: Card[]) => {
-        gameDispatch({
-          type: "setData",
-          setData: {
-            personalCards: cards,
-          },
-        });
-      });
-    } catch (e) {
-      dispatch({
-        type: "openModal",
-        setModal: {
-          type: "error",
-          message: e.message,
-        },
-      });
-    }
-  }, [gameState.personalCards, dispatch, gameDispatch, getData]);
+    const [personalCards, generalCards] = getData(idUser);
+    gameDispatch({
+      type: "setData",
+      setData: {
+        personalCards,
+        generalCards,
+      },
+    });
+  }, [dispatch, gameDispatch, idUser]);
 }
