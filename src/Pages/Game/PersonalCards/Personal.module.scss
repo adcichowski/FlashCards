@@ -1,12 +1,12 @@
 .personalBoard {
-  margin: auto;
   height: 100%;
   display: flex;
   flex-flow: column wrap;
+  align-items: center;
   justify-content: space-around;
 }
 .personalTitle {
-  font-size: clamp(3rem, calc(4rem+2vw), 5rem);
+  font-size: clamp(3rem, calc(5rem+5vw), 6rem);
 }
 .personalTechnology {
   display: flex;
@@ -19,4 +19,23 @@
   border: none;
   width: 60px;
   height: 60px;
+}
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.outsideButton {
+  font-weight: 600;
+  font-size: clamp(3rem, calc(2rem+4vw), 6rem);
+  display: grid;
+  justify-items: center;
+}
+.button {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 20px;
+  padding: 2rem;
+  background-color: #a31935db;
+  border: none;
 }

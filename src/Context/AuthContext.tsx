@@ -38,8 +38,8 @@ export const useAuthContext = () => {
 };
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const currentUser: CurrentUser = {
-    isLogin: false,
-    idUser: "",
+    isLogin: true,
+    idUser: "ezEKvGyJRoVQfZnbBOdRBlizFFp1",
   };
   const [state, dispatch] = useReducer(userReducer, currentUser);
   const value = { state, dispatch };

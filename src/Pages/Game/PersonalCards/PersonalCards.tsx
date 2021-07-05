@@ -1,5 +1,7 @@
 import { useGameContext } from "../../../Context/GameContext";
 import { Card } from "../../../Types";
+import { ReactComponent as Heart } from "../../../Assets/Icons/heart.svg";
+import { ReactComponent as Plus } from "../../../Assets/Icons/plus.svg";
 import styles from "./Personal.module.scss";
 export default function PersonalCards() {
   const {
@@ -19,9 +21,19 @@ export default function PersonalCards() {
           ></button>
         ))}
       </div>
-      <div>
-        <button className={styles.favoriteButton}>Favorite Card</button>
-        <button className={styles.createButton}>Create Card</button>
+      <div className={styles.buttons}>
+        <div className={styles.outsideButton}>
+          Favorite Cards
+          <button className={styles.button}>
+            <Heart />
+          </button>
+        </div>
+        <div className={styles.outsideButton}>
+          Create Card
+          <button className={styles.button}>
+            <Plus />
+          </button>
+        </div>
       </div>
     </div>
   );
