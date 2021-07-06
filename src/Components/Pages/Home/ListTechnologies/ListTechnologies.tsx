@@ -5,9 +5,9 @@ import { ReactComponent as Technologies4 } from "../../../../Assets/Pages/Home/L
 import styles from "./ListTechnologies.module.scss";
 import { getRandomMinMax } from "../../../../Utils/Utils";
 import { useAnimationGSAP } from "../../../Hooks/useAnimationGSAP";
-
+import { BounceBoxes } from "../../../../lib/gsap/BounceBoxes";
 export default function ListTechnologies() {
-  const { getElements } = useAnimationGSAP("BounceBoxes");
+  const { getElements } = useAnimationGSAP(BounceBoxes);
   const listSVG = [Technologies1, Technologies2, Technologies3, Technologies4];
   const RenderRandomSVG = listSVG[getRandomMinMax(1, listSVG.length)];
   return (

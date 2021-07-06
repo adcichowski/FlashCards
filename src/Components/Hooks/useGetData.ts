@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useAuthContext } from "../../../Context/AuthContext";
-import { useGameContext } from "../../../Context/GameContext";
-import { useMainContext } from "../../../Context/MainContext";
-import { getData } from "../../../lib/firebase/Utils";
+import { useAuthContext } from "../../Context/AuthContext";
+import { useGameContext } from "../../Context/GameContext";
+import { useMainContext } from "../../Context/MainContext";
+import { getData } from "../../lib/firebase/Utils";
 
 export function useGetData() {
   const {

@@ -36,6 +36,29 @@
   height: 12rem;
   border-radius: 20px;
   padding: 2rem;
-  background-color: #a31935db;
+  background-color: #a31935af;
   border: none;
+  cursor: pointer;
+}
+.button:hover {
+  transform: background-color scale 1s;
+  background-color: #a31935;
+}
+.listIcons {
+  width: 60vw;
+  height: 20vw;
+  display: flex;
+  background-color: #a31935bd;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+}
+.icon {
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  background-color: purple;
+  background-position: center;
+  background-size: contain;
 }

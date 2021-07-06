@@ -5,10 +5,8 @@ import { inputValidation } from "../../../../Utils/Utils";
 export default function HomeAbout() {
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: JSON) => console.log(data);
   return (
     <>
       <article className={styles.articleAbout}>
@@ -27,7 +25,7 @@ export default function HomeAbout() {
               </p>
 
               <div className={styles.aboutForm}>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form>
                   <small>Send if you wanna get more information.</small>
                   <div>
                     <label>

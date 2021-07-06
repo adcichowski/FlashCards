@@ -3,7 +3,7 @@ import styles from "./Board.module.scss";
 import Button from "../../../Button/Button";
 import { useAuthContext } from "../../../../Context/AuthContext";
 import { Link } from "react-router-dom";
-import { useGetData } from "../../../../Pages/Game/Hook/useGetData";
+import { useGetData } from "../../../Hooks/useGetData";
 
 export default function Board() {
   useGetData();

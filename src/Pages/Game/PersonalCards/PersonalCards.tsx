@@ -11,15 +11,18 @@ export default function PersonalCards() {
     <div className={styles.personalBoard}>
       <h3 className={styles.personalTitle}>Personal Cards</h3>
       <div className={styles.personalTechnology}>
-        {personalCards.map((card: Card) => (
-          <button
-            className={styles.iconTechnology}
-            key={card.technology}
-            style={{
-              backgroundImage: `url("/Icons/${card.technology.toLowerCase()}.svg")`,
-            }}
-          ></button>
-        ))}
+        <ul className={styles.listIcons}>
+          {personalCards.map((card: Card) => (
+            <li key={card.technology}>
+              <button
+                className={`${styles.icon} ${styles.active}`}
+                style={{
+                  backgroundImage: `url("/Icons/${card.technology.toLowerCase()}.svg")`,
+                }}
+              ></button>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className={styles.buttons}>
         <div className={styles.outsideButton}>
