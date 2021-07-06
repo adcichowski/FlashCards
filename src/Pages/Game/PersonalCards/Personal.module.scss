@@ -32,8 +32,8 @@
   justify-items: center;
 }
 .button {
-  width: 12rem;
-  height: 12rem;
+  width: 9rem;
+  height: 9rem;
   border-radius: 20px;
   padding: 2rem;
   background-color: #a31935af;
@@ -50,15 +50,16 @@
   display: flex;
   background-color: #a31935bd;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   border-radius: 40px;
 }
 .icon {
+  background-color: transparent;
   border: none;
-  width: 2rem;
-  height: 2rem;
   cursor: pointer;
-  background-color: purple;
+  background-repeat: no-repeat;
   background-position: center;
+  width: 6rem;
+  height: 6rem;
   background-size: contain;
 }

@@ -1,27 +1,15 @@
-import { useGameContext } from "../../../Context/GameContext";
-import { Card } from "../../../Types";
 import { ReactComponent as Heart } from "../../../Assets/Icons/heart.svg";
 import { ReactComponent as Plus } from "../../../Assets/Icons/plus.svg";
 import styles from "./Personal.module.scss";
+// import IconTech from "../../../Components/Pages/Game/IconsTech/IconsTech";
 export default function PersonalCards() {
-  const {
-    state: { personalCards },
-  } = useGameContext();
   return (
     <div className={styles.personalBoard}>
       <h3 className={styles.personalTitle}>Personal Cards</h3>
       <div className={styles.personalTechnology}>
         <ul className={styles.listIcons}>
-          {personalCards.map((card: Card) => (
-            <li key={card.technology}>
-              <button
-                className={`${styles.icon} ${styles.active}`}
-                style={{
-                  backgroundImage: `url("/Icons/${card.technology.toLowerCase()}.svg")`,
-                }}
-              ></button>
-            </li>
-          ))}
+          {/* <IconTech /> */}
+          {/* Working on add some function to render this elements. (Maybe refactor to be better clearly and readable ) */}
         </ul>
       </div>
       <div className={styles.buttons}>
