@@ -31,35 +31,16 @@
   display: grid;
   justify-items: center;
 }
-.button {
-  width: 9rem;
-  height: 9rem;
+.link {
+  width: 7rem;
+  height: 7rem;
   border-radius: 20px;
   padding: 2rem;
   background-color: #a31935af;
   border: none;
   cursor: pointer;
 }
-.button:hover {
+.link:hover {
   transform: background-color scale 1s;
   background-color: #a31935;
-}
-.listIcons {
-  width: 60vw;
-  height: 20vw;
-  display: flex;
-  background-color: #a31935bd;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 40px;
-}
-.icon {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 6rem;
-  height: 6rem;
-  background-size: contain;
 }

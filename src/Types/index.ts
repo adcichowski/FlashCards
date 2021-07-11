@@ -13,3 +13,11 @@ export interface Card {
   question: string;
   isFavorite: boolean;
 }
+export interface AvaibleTechnologiesProperty {
+  [key: string]: TechnologyProperty;
+}
+export interface TechnologyProperty {
+  name: string;
+  render: React.ComponentType;
+  fill: string;
+}

@@ -1,0 +1,25 @@
+.listIcon {
+  width: 80vw;
+  max-width: 90rem;
+  height: 30vw;
+  max-height: 30rem;
+  display: flex;
+  background-color: #a31935ac;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 40px;
+}
+.icon {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: clamp(2rem, calc(3rem + 3vw), 9rem);
+  height: clamp(2rem, calc(3rem + 3vw), 9rem);
+}
+.linkDisabled {
+  opacity: 0.15;
+  pointer-events: none;
+}

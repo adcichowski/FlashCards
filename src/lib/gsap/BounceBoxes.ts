@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { ColorizeIcon } from "./ColorizeIcon";
 function BounceBoxes(htmlElements: HTMLElement) {
   interface TypeBoxes {
     [key: string]: string;
@@ -35,11 +36,7 @@ function BounceBoxes(htmlElements: HTMLElement) {
   }
   const mouseEnterChangeColor = (e: Event, box: Element) => {
     const getIconID = String(box.children[1].id);
-    gsap.to(box, {
-      duration: 0.5,
-      backgroundColor: "transpaernt",
-      fill: typeBoxes[getIconID],
-    });
+    ColorizeIcon(box, typeBoxes[getIconID]);
   };
 
   return null;
