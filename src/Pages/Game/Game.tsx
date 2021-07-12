@@ -1,5 +1,6 @@
 import styles from "./Game.module.scss";
 import Modal from "../../Components/Modal/Modal";
+
 export default function Game({
   children,
 }: {

@@ -1,9 +1,9 @@
-import { ReactComponent as HtmlIcon } from "../../../../Assets/Icons/IconsTechnology/html5.svg";
-import { ReactComponent as ReactIcon } from "../../../../Assets/Icons/IconsTechnology/react.svg";
-import { ReactComponent as VueIcon } from "../../../../Assets/Icons/IconsTechnology/vue.svg";
-import { ReactComponent as Css3Icon } from "../../../../Assets/Icons/IconsTechnology/css3.svg";
-import { ReactComponent as JavascriptIcon } from "../../../../Assets/Icons/IconsTechnology/javascript.svg";
-import { AvaibleTechnologiesProperty } from "../../../../Types";
+import { ReactComponent as HtmlIcon } from "../../../Assets/Icons/IconsTechnology/html5.svg";
+import { ReactComponent as ReactIcon } from "../../../Assets/Icons/IconsTechnology/react.svg";
+import { ReactComponent as VueIcon } from "../../../Assets/Icons/IconsTechnology/vue.svg";
+import { ReactComponent as Css3Icon } from "../../../Assets/Icons/IconsTechnology/css3.svg";
+import { ReactComponent as JavascriptIcon } from "../../../Assets/Icons/IconsTechnology/javascript.svg";
+import { AvaibleTechnologiesProperty } from "../../../Types";
 
 export function useAvaibleTechnologies() {
   const avaibleTechnologies: AvaibleTechnologiesProperty = {

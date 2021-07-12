@@ -2,7 +2,7 @@ import styles from "./IconsTech.module.scss";
 
 import { Link } from "react-router-dom";
 import { Card, TechnologyProperty } from "../../../../Types";
-import { useAvaibleTechnologies } from "../AvaibleTechnologies/useAvaibleTechnologies";
+import { useAvaibleTechnologies } from "../useAvaibleTechnologies";
 export default function IconTech({ arrayCard }: { arrayCard: Card[] }) {
   const { arrayTechnologies, isActiveTechnology } = useAvaibleTechnologies();
   const allDataTechnologies = [...arrayCard].map(

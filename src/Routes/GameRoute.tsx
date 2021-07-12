@@ -1,23 +1,25 @@
-import { useAvaibleTechnologies } from "../Components/Pages/Game/AvaibleTechnologies/useAvaibleTechnologies";
+import { useAvaibleTechnologies } from "../Components/Pages/Game/useAvaibleTechnologies";
 import Board from "../Components/Pages/Game/Board/Board";
 import Game from "../Pages/Game/Game";
-import GeneralCards from "../Pages/Game/GeneralCards/GeneralCards";
-import PersonalCards from "../Pages/Game/PersonalCards/PersonalCards";
 import PrivateRoute from "./PrivateRoute";
 import { Route } from "react-router-dom";
 import Some from "./Some";
+import { useGameContext } from "../Context/GameContext";
+import GenerateBoard from "../Pages/Game/GenerateBoard/GenerateBoard";
 export default function GameRoute() {
   const { arrayTechnologies } = useAvaibleTechnologies();
-
+  const {
+    state: { personalCards, generalCards },
+  } = useGameContext();
   return (
     <Game>
       <PrivateRoute path="/game" exact component={Board} />
-      <PrivateRoute
-        path="/game/personal-cards"
-        exact
-        component={PersonalCards}
-      />
-      <PrivateRoute exact path="/game/general-cards" component={GeneralCards} />
+      <Route path="/game/personal-cards" exact>
+        <GenerateBoard arrayCard={personalCards} title={"Personal Cards"} />
+      </Route>
+      <Route exact path="/game/general-cards">
+        <GenerateBoard arrayCard={generalCards} title={"General Cards"} />
+      </Route>
 
       {arrayTechnologies.map(({ name }: { name: string }) => {
         return (

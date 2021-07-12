@@ -1,18 +1,21 @@
 import { ReactComponent as Heart } from "../../../Assets/Icons/heart.svg";
 import { ReactComponent as Plus } from "../../../Assets/Icons/plus.svg";
-import styles from "./Personal.module.scss";
+import styles from "./GenerateBoard.module.scss";
 import IconTech from "../../../Components/Pages/Game/IconsTech/IconTech";
 import { Link } from "react-router-dom";
-import { useGameContext } from "../../../Context/GameContext";
-export default function PersonalCards() {
-  const {
-    state: { personalCards },
-  } = useGameContext();
+import { Card } from "../../../Types";
+export default function GenerateBoard({
+  arrayCard,
+  title,
+}: {
+  arrayCard: Card[];
+  title: string;
+}) {
   return (
-    <div className={styles.personalBoard}>
-      <h3 className={styles.personalTitle}>Personal Cards</h3>
-      <div className={styles.personalTechnology}>
-        <IconTech arrayCard={personalCards} />
+    <div className={styles.board}>
+      <h3 className={styles.title}>{title}</h3>
+      <div className={styles.technology}>
+        <IconTech arrayCard={arrayCard} />
       </div>
       <div className={styles.buttons}>
         <div className={styles.outsideButton}>
