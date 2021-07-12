@@ -2,6 +2,7 @@ import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import styles from "./Login.module.scss";
+import Modal from "../../Components/Modal/Modal";
 export default function Form() {
   const [isRegister, setRegister] = useState(true);
   const handleClickRegister = () => setRegister(!isRegister);
@@ -13,6 +14,7 @@ export default function Form() {
       ) : (
         <Register />
       )}
+      <Modal />
     </div>
   );
 }

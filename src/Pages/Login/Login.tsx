@@ -42,6 +42,7 @@ export default function Login({ handleClickRegister }: LoginInt) {
       history.push("/game");
       reset();
     } catch (e) {
+      console.log(e.message);
       dispatch({
         type: "openModal",
         setModal: {
