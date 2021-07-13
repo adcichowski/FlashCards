@@ -5,32 +5,34 @@ import IconTech from "../../../Components/Pages/Game/IconsTech/IconTech";
 import { Link } from "react-router-dom";
 import { Card } from "../../../Types";
 export default function GenerateBoard({
-  arrayCard,
+  cardsFromData,
   title,
 }: {
-  arrayCard: Card[];
+  cardsFromData: Card[];
   title: string;
 }) {
   return (
-    <div className={styles.board}>
-      <h3 className={styles.title}>{title}</h3>
-      <div className={styles.technology}>
-        <IconTech arrayCard={arrayCard} />
-      </div>
-      <div className={styles.buttons}>
-        <div className={styles.outsideButton}>
-          Favorite Cards
-          <Link to="/game/personal-cards/favorite" className={styles.link}>
-            <Heart />
-          </Link>
+    <>
+      <div className={styles.board}>
+        <h3 className={styles.title}>{title}</h3>
+        <div className={styles.technology}>
+          <IconTech arrayCardData={cardsFromData} />
         </div>
-        <div className={styles.outsideButton}>
-          Create Card
-          <Link to="/game/personal-cards/add" className={styles.link}>
-            <Plus />
-          </Link>
+        <div className={styles.buttons}>
+          <div className={styles.outsideButton}>
+            Favorite Cards
+            <Link to="/game/personal-cards/favorite" className={styles.link}>
+              <Heart />
+            </Link>
+          </div>
+          <div className={styles.outsideButton}>
+            Create Card
+            <Link to="/game/personal-cards/add" className={styles.link}>
+              <Plus />
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

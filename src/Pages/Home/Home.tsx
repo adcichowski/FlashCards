@@ -9,8 +9,8 @@ import Footer from "../../Components/Footer/Footer";
 export default function Home() {
   return (
     <div className={styles.homePage}>
-      <Navigation />
       <header className={styles.heroBackground}>
+        <Navigation />
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
           <p className={styles.heroSubtitle}>

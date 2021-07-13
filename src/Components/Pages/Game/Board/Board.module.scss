@@ -1,10 +1,9 @@
 .board {
   display: flex;
+  margin: 0;
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
 }
 .boardButton {
   display: flex;
@@ -15,7 +14,7 @@
   width: 100vw;
   background-color: #9f18357e;
   cursor: pointer;
-  height: 15rem;
+  height: 14rem;
   font-size: clamp(2.5rem, calc(2rem + 1vw), 6rem);
   font-weight: 600;
   color: var(--font-color-primary);

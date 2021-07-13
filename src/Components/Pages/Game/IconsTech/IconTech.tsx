@@ -1,14 +1,12 @@
-import styles from "./IconsTech.module.scss";
-
+import styles from "./IconTech.module.scss";
 import { Link } from "react-router-dom";
 import { Card, TechnologyProperty } from "../../../../Types";
 import { useAvaibleTechnologies } from "../useAvaibleTechnologies";
-export default function IconTech({ arrayCard }: { arrayCard: Card[] }) {
+export default function IconTech({ arrayCardData }: { arrayCardData: Card[] }) {
   const { arrayTechnologies, isActiveTechnology } = useAvaibleTechnologies();
-  const allDataTechnologies = [...arrayCard].map(
+  const allDataTechnologies = [...arrayCardData].map(
     ({ technology }) => technology
   );
-  console.log(arrayCard, arrayTechnologies, "to");
   return (
     <ul className={styles.listIcon}>
       {arrayTechnologies.map(

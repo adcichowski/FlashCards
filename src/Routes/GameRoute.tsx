@@ -15,10 +15,10 @@ export default function GameRoute() {
     <Game>
       <PrivateRoute path="/game" exact component={Board} />
       <Route path="/game/personal-cards" exact>
-        <GenerateBoard arrayCard={personalCards} title={"Personal Cards"} />
+        <GenerateBoard cardsFromData={personalCards} title={"Personal Cards"} />
       </Route>
       <Route exact path="/game/general-cards">
-        <GenerateBoard arrayCard={generalCards} title={"General Cards"} />
+        <GenerateBoard cardsFromData={generalCards} title={"General Cards"} />
       </Route>
 
       {arrayTechnologies.map(({ name }: { name: string }) => {

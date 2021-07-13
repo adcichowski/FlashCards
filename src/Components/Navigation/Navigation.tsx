@@ -17,6 +17,9 @@ export default function Navigation() {
       window.addEventListener("resize", () => {
         if (window.innerWidth > 850) setOpen(false);
       });
+      return window.removeEventListener("resize", () => {
+        if (window.innerWidth > 850) setOpen(false);
+      });
     }
   });
   if (isOpen) {
