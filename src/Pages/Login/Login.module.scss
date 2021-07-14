@@ -7,24 +7,22 @@
   max-width: 1920px;
   height: 100vh;
   z-index: -1;
-}
-.game::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -2;
-  width: 100%;
-  height: 100%;
-  background: url("../../Assets/Pages/Register/registerBackground.png")
-    no-repeat bottom/cover;
-  opacity: 0.35;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    background: url("../../Assets/Pages/Game/registerBackground.png") no-repeat
+      bottom/cover;
+    opacity: 0.35;
+  }
 }
 
 .formLog {
-  padding: 0.5rem;
-  margin: auto 0;
-  align-self: center;
+  margin: auto;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
@@ -33,19 +31,9 @@
   max-width: 45rem;
   height: 75%;
   max-height: 55rem;
-  padding: 1rem;
   background-color: #2b3361c9;
   border-radius: 20px;
   position: relative;
-  &::after {
-    width: 100%;
-    height: 5px;
-    background-color: #a31934;
-    content: "";
-    position: absolute;
-    top: 15.5rem;
-    left: 0;
-  }
 }
 .backButton {
   position: absolute;
@@ -56,14 +44,22 @@
   background: url("../../Assets/Icons/first-arrow.svg") no-repeat center;
 }
 .formTitle {
-  font-size: clamp(3.8rem, calc(2.5rem + 4vw), 8rem);
+  font-size: clamp(3.5rem, calc(2.5rem + 3vw), 7rem);
+  &::after {
+    content: "";
+    display: block;
+    width: 174%;
+    position: relative;
+    left: -37%;
+    height: 7px;
+    background-color: #a31934;
+  }
 }
 .gameForm {
   display: flex;
   flex-flow: column;
-  width: 100%;
-  position: relative;
   align-items: center;
+  width: 100%;
 }
 
 .inputPassword,
@@ -75,7 +71,6 @@
   border: 2px solid white;
   border-radius: 5px;
   padding: 0.5rem;
-  width: 100%;
   font-weight: 700;
 }
 .inputPassword::placeholder,
