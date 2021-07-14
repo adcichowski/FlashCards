@@ -9,7 +9,11 @@ import { auth } from "../../lib/firebase/index";
 import { useMainContext } from "../../Context/MainContext";
 import { useAuthContext } from "../../Context/AuthContext";
 
-export default function Register() {
+export default function Register({
+  handleClickRegister,
+}: {
+  handleClickRegister: () => void;
+}) {
   const history = useHistory();
   const { dispatch } = useMainContext();
   const {
@@ -77,6 +81,7 @@ export default function Register() {
 
         <div className={styles.formButtons}>
           <Button>Register</Button>
+          <Button onClick={handleClickRegister}>Back to Login</Button>
         </div>
         <Link to="/">
           <Logo />

@@ -12,7 +12,7 @@ export default function Form() {
       {isRegister ? (
         <Login handleClickRegister={handleClickRegister} />
       ) : (
-        <Register />
+        <Register handleClickRegister={handleClickRegister} />
       )}
       <Modal />
     </div>
