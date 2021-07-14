@@ -10,7 +10,9 @@ export default function Home() {
   return (
     <div className={styles.homePage}>
       <header className={styles.heroBackground}>
-        <Navigation />
+        <div className={styles.heroNavigation}>
+          <Navigation />
+        </div>
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
           <p className={styles.heroSubtitle}>
