@@ -31,6 +31,7 @@
   max-width: 45rem;
   height: 75%;
   max-height: 55rem;
+  min-height: 30rem;
   background-color: #2b3361c9;
   border-radius: 20px;
   position: relative;
@@ -52,6 +53,7 @@
     display: block;
     width: 100%;
     position: relative;
+    top: 20%;
     height: 7px;
     background-color: #a31934;
   }
