@@ -13,7 +13,7 @@ export function useAvaibleTechnologies() {
     vue: { name: "vue", render: VueIcon, fill: "#398361" },
     css3: { name: "css3", render: Css3Icon, fill: "#12629B" },
     javascript: { name: "javascript", render: JavascriptIcon, fill: "#F7DF1E" },
-    typescript: { name: "typescript", render: TypescriptIcon, fill: "#F7DF1E" },
+    typescript: { name: "typescript", render: TypescriptIcon, fill: "#265F9E" },
   };
   const arrayTechnologies = Object.values(avaibleTechnologies);
 
