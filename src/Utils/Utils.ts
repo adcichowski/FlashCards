@@ -2,9 +2,6 @@ export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 export const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-export function getRandomMinMax(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
 export const inputValidation = {
   email: {
     required: { value: true, message: "Email is empty." },
@@ -28,3 +25,7 @@ export const inputValidation = {
     required: { value: true, message: "Question is empty." },
   },
 };
+
+export function getRandomMinMax(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}

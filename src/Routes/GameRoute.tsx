@@ -3,9 +3,9 @@ import Board from "../Components/Pages/Game/Board/Board";
 import Game from "../Pages/Game/Game";
 import PrivateRoute from "./PrivateRoute";
 import { Route } from "react-router-dom";
-import Some from "./Some";
 import { useGameContext } from "../Context/GameContext";
 import GenerateBoard from "../Pages/Game/GenerateBoard/GenerateBoard";
+import QuestionBoard from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBoard";
 export default function GameRoute() {
   const { arrayTechnologies } = useAvaibleTechnologies();
   const {
@@ -21,13 +21,15 @@ export default function GameRoute() {
         <GenerateBoard cardsFromData={generalCards} title={"General Cards"} />
       </Route>
 
-      {arrayTechnologies.map(({ name }: { name: string }) => {
-        return (
-          <Route key={name} exact path={`/game/personal-cards/${name}`}>
-            <Some text={name} />
-          </Route>
-        );
-      })}
+      {arrayTechnologies.map(
+        ({ name, fill }: { name: string; fill: string }) => {
+          return (
+            <Route key={name} exact path={`/game/personal-cards/${name}`}>
+              <QuestionBoard blooperColors={fill} />
+            </Route>
+          );
+        }
+      )}
     </Game>
   );
 }

@@ -1,16 +1,15 @@
 .board {
+  height: 100%;
   display: flex;
-  margin: 0;
   flex-flow: column wrap;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 .boardButton {
+  margin: 1rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 1920px;
-  margin: 3rem 0;
   width: 100vw;
   background-color: #9f18357e;
   cursor: pointer;

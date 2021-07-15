@@ -1,10 +1,8 @@
 .game {
   display: flex;
   flex-flow: column;
-  margin: auto 0;
+  margin: auto;
   overflow-x: hidden;
-  width: 100vw;
-  max-width: 1920px;
   height: 100vh;
   z-index: -1;
   &::after {
@@ -53,7 +51,7 @@
     display: block;
     width: 100%;
     position: relative;
-    top: 20%;
+    top: 3rem;
     height: 7px;
     background-color: #a31934;
   }
@@ -67,7 +65,8 @@
 
 .inputPassword,
 .inputEmail {
-  margin: 0.6rem 0;
+  width: 90%;
+  margin: 0.4rem 0.2rem;
   font-size: clamp(1.6rem, calc(0.5rem + 1vw), 1.9rem);
   color: var(--font-color-primary);
   background-color: transparent;

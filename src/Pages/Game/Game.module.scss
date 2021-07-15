@@ -20,30 +20,3 @@
     bottom/cover;
   opacity: 0.35;
 }
-.board {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-}
-.boardButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 1920px;
-  margin: 3rem 0;
-  width: 100vw;
-  background-color: #9f18357e;
-  cursor: pointer;
-  height: 15rem;
-  font-size: clamp(2.5rem, calc(2rem + 1vw), 6rem);
-  font-weight: 600;
-  color: var(--font-color-primary);
-  z-index: 10;
-}
-.boardButton:hover {
-  background-color: #9f1835e1;
-  transform: background 2s;
-}
