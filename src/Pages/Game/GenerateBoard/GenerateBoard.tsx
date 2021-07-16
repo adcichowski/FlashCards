@@ -5,10 +5,10 @@ import IconTech from "../../../Components/Pages/Game/IconsTech/IconTech";
 import { Link } from "react-router-dom";
 import { Card } from "../../../Types";
 export default function GenerateBoard({
-  cardsFromData,
+  cardsData,
   title,
 }: {
-  cardsFromData: Card[];
+  cardsData: Card[];
   title: string;
 }) {
   return (
@@ -16,7 +16,7 @@ export default function GenerateBoard({
       <div className={styles.board}>
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.technology}>
-          <IconTech arrayCardData={cardsFromData} />
+          <IconTech arrayCardData={cardsData} />
         </div>
         <div className={styles.buttons}>
           <div className={styles.outsideButton}>

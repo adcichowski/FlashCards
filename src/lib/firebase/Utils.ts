@@ -26,12 +26,12 @@ function getData(nameDatabase: string) {
       .get()
       .then((data) =>
         data.forEach((cards) => {
+          console.log(cards.data());
           generalCards.push(cards.data() as Card);
         })
       );
   }
   getDataFromFirestore();
-
   return [personalCards, generalCards];
 }
 export { sendData, getData };
