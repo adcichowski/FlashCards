@@ -2,12 +2,13 @@ import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
 interface Action {
   type: "showCard" | "hideCard" | "flipCard" | "setDataCard";
-  setCard?: Omit<CardInterface, "isShow" | "isFlip">;
+  setCard?: Omit<CardInterface, "isShow">;
 }
 interface Dispatch {
   (action: Action): void;
 }
 interface CardInterface {
+  technology: string;
   isShow: boolean;
   isFlip: boolean;
   question: string;
@@ -19,10 +20,18 @@ const CardContext = createContext<
 function modalMainReducer(state: CardInterface, action: Action): CardInterface {
   switch (action.type) {
     case "showCard":
+      if (state.isShow) {
+        return {
+          ...state,
+          ...action.setCard,
+          isFlip: false,
+        };
+      }
       return {
         ...state,
         ...action.setCard,
-        isShow: true,
+        isFlip: false,
+        isShow: !state.isShow,
       };
     case "hideCard":
       return {
@@ -33,11 +42,6 @@ function modalMainReducer(state: CardInterface, action: Action): CardInterface {
       return {
         ...state,
         isFlip: !state.isFlip,
-      };
-    case "setDataCard":
-      return {
-        ...state,
-        ...action.setCard,
       };
 
     default: {
@@ -55,6 +59,7 @@ export const useCardContext = () => {
 };
 export default function CardProvider({ children }: { children: ReactNode }) {
   const Card: CardInterface = {
+    technology: "",
     isShow: false,
     isFlip: false,
     question: "",

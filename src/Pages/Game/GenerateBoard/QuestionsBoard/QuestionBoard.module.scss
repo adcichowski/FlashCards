@@ -24,7 +24,6 @@
   font-weight: 600;
 }
 .questionCardInner {
-  width: 100%;
   padding: 1rem;
   display: flex;
   flex-flow: column wrap;
@@ -59,4 +58,9 @@
 .questionTitle {
   font-size: clamp(2rem, calc(2.2rem + 2vw), 3rem);
   font-weight: 600;
+}
+.cardBoard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,6 +1,6 @@
 import { useCardContext } from "../../../../Context/CardContext";
 import { Card } from "../../../../Types";
-import CardComponent from "../../Card/Card";
+import CardComponent from "../../Card/CardByContext";
 import BlooperSVG from "./BlooperSVG/BlooperSVG";
 import styles from "./QuestionBoard.module.scss";
 export default function QuestionBoard({
@@ -26,17 +26,20 @@ export default function QuestionBoard({
           <ul className={styles.listQuestion}>
             {cardsData.map((card: Card, id) =>
               card.technology === technologyBoardName ? (
-                <li className={styles.questionCard}>
-                  <button
+                <li key={id} className={styles.questionCard}>
+                  <div
                     onClick={() => {
-                      dispatch({ type: "showCard", setCard: card });
+                      dispatch({
+                        type: "showCard",
+                        setCard: { ...card, isFlip: false },
+                      });
                     }}
                     className={styles.questionCardInner}
                   >
                     <button className={styles.questionDots}></button>
                     <p className={styles.question}>{card.question}</p>
                     <div className={styles.questionId}>00{id}</div>
-                  </button>
+                  </div>
                 </li>
               ) : undefined
             )}

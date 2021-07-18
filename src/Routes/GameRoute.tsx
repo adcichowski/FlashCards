@@ -25,8 +25,8 @@ export default function GameRoute() {
       {arrayTechnologies.map(
         ({ name, fill }: { name: string; fill: string }) => {
           return (
-            <CardProvider>
-              <Route key={name} exact path={`/game/personal-cards/${name}`}>
+            <CardProvider key={name}>
+              <Route exact path={`/game/personal-cards/${name}`}>
                 <QuestionBoard
                   technologyBoardName={name}
                   cardsData={personalCards}
