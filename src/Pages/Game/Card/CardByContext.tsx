@@ -2,7 +2,7 @@ import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibl
 import { useCardContext } from "../../../Context/CardContext";
 import { capitalize } from "../../../Utils/Utils";
 import styles from "./CardByContext.module.scss";
-
+import CardWave from "./CardWave";
 export default function CardByContext() {
   const { state, dispatch } = useCardContext();
   const { avaibleTechnologies } = useAvaibleTechnologies();
@@ -12,6 +12,9 @@ export default function CardByContext() {
     <div className={styles.cardWrapper}>
       <p>{state.rating}</p>
       <div className={styles.card}>
+        <div className={styles.wave}>
+          <CardWave />
+        </div>
         <div className={styles.cardTop}>
           <div className={`${styles[state.technology]} ${styles.icon}`}>
             <CardIcon />
