@@ -7,11 +7,12 @@ export interface ModalInterface {
   isLoading: boolean;
 }
 export interface Card {
+  id: number;
   technology: string;
-  language: string;
   answer: string;
   question: string;
   isFavorite: boolean;
+  rating: number;
 }
 export interface AvaibleTechnologiesProperty {
   [key: string]: TechnologyProperty;

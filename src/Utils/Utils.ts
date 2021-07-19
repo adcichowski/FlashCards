@@ -29,3 +29,6 @@ export const inputValidation = {
 export function getRandomMinMax(min: number, max: number) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
+export function capitalize(txt: string) {
+  return txt.charAt(0).toUpperCase() + txt.slice(1);
+}

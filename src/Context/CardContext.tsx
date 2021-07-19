@@ -1,5 +1,6 @@
 import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
+import { Card } from "../Types";
 interface Action {
   type: "showCard" | "hideCard" | "flipCard" | "setDataCard";
   setCard?: Omit<CardInterface, "isShow">;
@@ -7,12 +8,9 @@ interface Action {
 interface Dispatch {
   (action: Action): void;
 }
-interface CardInterface {
-  technology: string;
+interface CardInterface extends Card {
   isShow: boolean;
   isFlip: boolean;
-  question: string;
-  answer: string;
 }
 const CardContext = createContext<
   undefined | { state: CardInterface; dispatch: Dispatch }
@@ -59,9 +57,12 @@ export const useCardContext = () => {
 };
 export default function CardProvider({ children }: { children: ReactNode }) {
   const Card: CardInterface = {
+    id: 0,
     technology: "",
-    isShow: false,
     isFlip: false,
+    isShow: false,
+    rating: 0,
+    isFavorite: false,
     question: "",
     answer: "",
   };

@@ -13,6 +13,12 @@ export default function QuestionBoard({
   technologyBoardName: string;
 }) {
   const { dispatch } = useCardContext();
+  const handleClickShowCard = (card: Card) => {
+    dispatch({
+      type: "showCard",
+      setCard: { ...card, isFlip: false },
+    });
+  };
   return (
     <>
       <BlooperSVG fill={blooperColors} />
@@ -27,12 +33,10 @@ export default function QuestionBoard({
             {cardsData.map((card: Card, id) =>
               card.technology === technologyBoardName ? (
                 <li key={id} className={styles.questionCard}>
+                  {console.log(card)}
                   <div
                     onClick={() => {
-                      dispatch({
-                        type: "showCard",
-                        setCard: { ...card, isFlip: false },
-                      });
+                      handleClickShowCard(card);
                     }}
                     className={styles.questionCardInner}
                   >

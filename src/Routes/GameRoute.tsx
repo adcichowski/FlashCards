@@ -1,5 +1,5 @@
 import { useAvaibleTechnologies } from "../Components/Pages/Game/useAvaibleTechnologies";
-import Board from "../Components/Pages/Game/Board/Board";
+import MainBoard from "../Components/Pages/Game/MainBoard/MainBoard";
 import Game from "../Pages/Game/Game";
 import PrivateRoute from "./PrivateRoute";
 import { Route } from "react-router-dom";
@@ -14,7 +14,7 @@ export default function GameRoute() {
   } = useGameContext();
   return (
     <Game>
-      <PrivateRoute path="/game" exact component={Board} />
+      <PrivateRoute path="/game" exact component={MainBoard} />
       <Route path="/game/personal-cards" exact>
         <GenerateBoard cardsData={personalCards} title={"Personal Cards"} />
       </Route>
