@@ -8,16 +8,19 @@ export default function CardByContext() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   if (!state.isShow) return null;
   const CardIcon = avaibleTechnologies[state.technology].render;
-  const colorWaveCard = avaibleTechnologies[state.technology].fill;
+  const colorTechnology = avaibleTechnologies[state.technology].fill;
   return (
     <div className={styles.cardWrapper}>
       <p>{state.rating}</p>
       <div className={styles.card}>
         <div className={styles.wave}>
-          <CardWave color={colorWaveCard} />
+          <CardWave color={colorTechnology} />
         </div>
         <div className={styles.cardTop}>
-          <div className={`${styles[state.technology]} ${styles.icon}`}>
+          <div
+            style={{ fill: colorTechnology }}
+            className={`${styles[state.technology]} ${styles.icon}`}
+          >
             <CardIcon />
           </div>
           <span className={styles.iconText}>

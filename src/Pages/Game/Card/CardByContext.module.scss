@@ -6,9 +6,9 @@
 .card {
   color: rgb(27, 27, 27);
   // width: clamp(35rem, calc(15rem + 50vw), 40rem);
-  // height: clamp(47rem, calc(20rem + 50vh), 60rem);
-  width: 35rem;
-  height: 50rem;
+  // height: clamp(50rem, calc(20rem + 50vh), 60rem);
+  width: 32rem;
+  height: 45rem;
   display: flex;
   flex-flow: column wrap;
   background-color: rgb(230, 224, 224);
@@ -25,7 +25,7 @@
 .cardTop {
   position: relative;
   z-index: 2;
-  width: 70%;
+  width: 80%;
   height: 25%;
   display: flex;
   justify-content: space-around;
@@ -82,10 +82,10 @@
   height: 6.5rem;
 }
 .iconText {
-  font-size: clamp(2.5rem, calc(1rem+5vw), 3.6rem);
+  font-size: clamp(2.6rem, calc(1rem+5vw), 3.6rem);
 }
 .react {
-  fill: #459cb4;
+  fill: rgb(31, 136, 165);
 }
 .question {
   font-size: 2.5rem;

@@ -28,6 +28,7 @@ export default function CardWave({ color }: { color: string }) {
   const RandomWaveRender = arraySVG[state.randomSvgCard];
   const styleWave = {
     fill: `${color}`,
+    opacity: 0.8,
     position: "absolute",
     overflow: "hidden",
   } as React.CSSProperties;
