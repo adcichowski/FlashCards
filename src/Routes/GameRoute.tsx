@@ -22,21 +22,18 @@ export default function GameRoute() {
         <GenerateBoard cardsData={generalCards} title={"General Cards"} />
       </Route>
 
-      {arrayTechnologies.map(
-        ({ name, fill }: { name: string; fill: string }) => {
-          return (
-            <CardProvider key={name}>
-              <Route exact path={`/game/personal-cards/${name}`}>
-                <QuestionBoard
-                  technologyBoardName={name}
-                  cardsData={personalCards}
-                  blooperColors={fill}
-                />
-              </Route>
-            </CardProvider>
-          );
-        }
-      )}
+      {arrayTechnologies.map(({ name }: { name: string }) => {
+        return (
+          <CardProvider key={name}>
+            <Route exact path={`/game/personal-cards/${name}`}>
+              <QuestionBoard
+                technologyBoardName={name}
+                cardsData={personalCards}
+              />
+            </Route>
+          </CardProvider>
+        );
+      })}
     </Game>
   );
 }

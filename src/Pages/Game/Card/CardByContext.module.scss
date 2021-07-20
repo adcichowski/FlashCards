@@ -5,11 +5,13 @@
 }
 .card {
   color: rgb(27, 27, 27);
-  width: clamp(40rem, calc(15rem + 1vw), 50rem);
-  height: clamp(52rem, calc(20rem + 2vw), 70rem);
+  // width: clamp(35rem, calc(15rem + 50vw), 40rem);
+  // height: clamp(47rem, calc(20rem + 50vh), 60rem);
+  width: 35rem;
+  height: 50rem;
   display: flex;
   flex-flow: column wrap;
-  background-color: rgb(247, 243, 243);
+  background-color: rgb(230, 224, 224);
   border-radius: 20px;
   font-weight: 600;
   overflow: hidden;
@@ -32,7 +34,7 @@
 .cardCenterTop {
   position: relative;
   z-index: 2;
-  height: 52%;
+  height: 45%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,8 +44,8 @@
 .cardCenterBottom {
   position: relative;
   z-index: 2;
-  height: 10%;
-  font-size: 3rem;
+  height: 17%;
+  font-size: 5rem;
   text-align: center;
 }
 .cardButtons {
@@ -55,6 +57,9 @@
   grid-template-columns: 0.2fr 0.6fr 0.2fr;
 }
 .button {
+  position: relative;
+  z-index: 2;
+  background-color: rgb(230, 224, 224);
   border: none;
   cursor: pointer;
   &:first-child {
@@ -71,11 +76,13 @@
   }
 }
 .icon {
+  position: relative;
+  z-index: 2;
   width: 6.5rem;
   height: 6.5rem;
 }
 .iconText {
-  font-size: clamp(2.5rem, calc(1rem+2vw), 3rem);
+  font-size: clamp(2.5rem, calc(1rem+5vw), 3.6rem);
 }
 .react {
   fill: #459cb4;

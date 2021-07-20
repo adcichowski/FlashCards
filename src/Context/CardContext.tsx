@@ -1,35 +1,34 @@
 import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
 import { Card } from "../Types";
+import { getRandomMinMax } from "../Utils/Utils";
 interface Action {
   type: "showCard" | "hideCard" | "flipCard" | "setDataCard";
-  setCard?: Omit<CardInterface, "isShow">;
+  setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
 interface Dispatch {
   (action: Action): void;
 }
-interface CardInterface extends Card {
+interface CardContextInterface extends Card {
   isShow: boolean;
   isFlip: boolean;
+  randomSvgCard: number;
 }
 const CardContext = createContext<
-  undefined | { state: CardInterface; dispatch: Dispatch }
+  undefined | { state: CardContextInterface; dispatch: Dispatch }
 >(undefined);
-function modalMainReducer(state: CardInterface, action: Action): CardInterface {
+function modalMainReducer(
+  state: CardContextInterface,
+  action: Action
+): CardContextInterface {
   switch (action.type) {
     case "showCard":
-      if (state.isShow) {
-        return {
-          ...state,
-          ...action.setCard,
-          isFlip: false,
-        };
-      }
       return {
         ...state,
         ...action.setCard,
+        randomSvgCard: getRandomMinMax(0, 10),
         isFlip: false,
-        isShow: !state.isShow,
+        isShow: true,
       };
     case "hideCard":
       return {
@@ -56,7 +55,7 @@ export const useCardContext = () => {
   return context;
 };
 export default function CardProvider({ children }: { children: ReactNode }) {
-  const Card: CardInterface = {
+  const Card: CardContextInterface = {
     id: 0,
     technology: "",
     isFlip: false,
@@ -65,6 +64,7 @@ export default function CardProvider({ children }: { children: ReactNode }) {
     isFavorite: false,
     question: "",
     answer: "",
+    randomSvgCard: 0,
   };
   const [state, dispatch] = useReducer(modalMainReducer, Card);
   const value = { state, dispatch };
