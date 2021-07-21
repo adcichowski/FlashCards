@@ -34,7 +34,7 @@ export default function QuestionBoard({
                   >
                     <button className={styles.questionDots}></button>
                     <p className={styles.question}>{card.question}</p>
-                    <div className={styles.questionId}>00{id}</div>
+                    <div className={styles.questionId}>0{card.id}</div>
                   </div>
                 </li>
               ) : undefined

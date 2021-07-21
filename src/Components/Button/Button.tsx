@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import { Link } from "react-router-dom";
 import styles from "./Button.module.scss";
 
 interface ButtonProps {
@@ -23,20 +24,20 @@ export default function Button({
 }: ButtonProps) {
   if (link) {
     return (
-      <a
-        href={`/${link}`}
+      <Link
+        to={`/${link}`}
+        className={styles.button}
         style={{
           width,
           height,
           maxWidth,
           maxHeight,
         }}
-        className={styles.button}
       >
         <span style={{ fontSize }} className={styles.front}>
           {children}
         </span>
-      </a>
+      </Link>
     );
   }
   return (

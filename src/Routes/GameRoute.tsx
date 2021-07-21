@@ -7,6 +7,7 @@ import { useGameContext } from "../Context/GameContext";
 import GenerateBoard from "../Pages/Game/GenerateBoard/GenerateBoard";
 import QuestionBoard from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBoard";
 import CardProvider from "../Context/CardContext";
+import AddCard from "../Pages/Game/GenerateBoard/AddCard/AddCard";
 export default function GameRoute() {
   const { arrayTechnologies } = useAvaibleTechnologies();
   const {
@@ -21,6 +22,11 @@ export default function GameRoute() {
       <Route exact path="/game/general-cards">
         <GenerateBoard cardsData={generalCards} title={"General Cards"} />
       </Route>
+      <CardProvider>
+        <Route exact path={"/game/personal-cards/add"}>
+          <AddCard />
+        </Route>
+      </CardProvider>
 
       {arrayTechnologies.map(({ name }: { name: string }) => {
         return (
