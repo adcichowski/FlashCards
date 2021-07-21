@@ -9,6 +9,7 @@ import { auth } from "../../lib/firebase/index";
 import { UserData } from "../../Types/index";
 import { useMainContext } from "../../Context/MainContext";
 import { useAuthContext } from "../../Context/AuthContext";
+import BackButton from "../../Components/Button/BackButton/BackButton";
 interface LoginInt {
   handleClickRegister: MouseEventHandler;
 }
@@ -56,7 +57,7 @@ export default function Login({ handleClickRegister }: LoginInt) {
   return (
     <>
       <div className={styles.formLog}>
-        <Link to="/" className={styles.backButton} />
+        <BackButton />
         <h4 className={styles.formTitle}>Login In </h4>
         <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
           <label>

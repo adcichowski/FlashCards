@@ -34,14 +34,7 @@
   border-radius: 20px;
   position: relative;
 }
-.backButton {
-  position: absolute;
-  width: 4rem;
-  height: 4rem;
-  left: 6%;
-  top: 5%;
-  background: url("../../Assets/Icons/first-arrow.svg") no-repeat center;
-}
+
 .formTitle {
   font-size: clamp(3.5rem, calc(2.5rem + 3vw), 7rem);
   width: 100%;
