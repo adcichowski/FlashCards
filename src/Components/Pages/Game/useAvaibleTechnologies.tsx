@@ -23,9 +23,9 @@ export function useAvaibleTechnologies() {
     return arrayTech.includes(nameTech);
   };
   const arrayIconComponent = () =>
-    Object.values(avaibleTechnologies).map(({ render: Component }) => (
-      <Component />
-    ));
+    Object.values(avaibleTechnologies).map(
+      ({ render: Component }) => Component
+    );
   return {
     avaibleTechnologies,
     isActiveTechnology,
