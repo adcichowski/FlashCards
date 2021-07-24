@@ -15,7 +15,6 @@ export function useAvaibleTechnologies() {
     javascript: { name: "javascript", render: JavascriptIcon, fill: "#F7DF1E" },
     typescript: { name: "typescript", render: TypescriptIcon, fill: "#265F9E" },
   };
-  const arrayTechnologies = Object.values(avaibleTechnologies);
 
   const isActiveTechnology = (
     arrayTech: string[],
@@ -23,6 +22,13 @@ export function useAvaibleTechnologies() {
   ): boolean => {
     return arrayTech.includes(nameTech);
   };
-
-  return { avaibleTechnologies, arrayTechnologies, isActiveTechnology };
+  const arrayIconComponent = () =>
+    Object.values(avaibleTechnologies).map(({ render: Component }) => (
+      <Component />
+    ));
+  return {
+    avaibleTechnologies,
+    isActiveTechnology,
+    arrayIconComponent,
+  };
 }

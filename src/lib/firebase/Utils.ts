@@ -1,24 +1,6 @@
 import { Card } from "../../Types";
-import { db, auth } from "./index";
-export function funcAuthFirebase() {
-  function typeAuth(
-    type: "login" | "register",
-    email: string,
-    password: string
-  ) {
-    switch (type) {
-      case "login":
-        auth.signInWithEmailAndPassword(email, password);
-        break;
-      case "register":
-        auth.createUserWithEmailAndPassword(email, password);
-        break;
-      default:
-        throw Error("Didnt write good type of auth action");
-    }
-  }
-  return { typeAuth };
-}
+import { db } from "./index";
+
 function sendData(nameDatabase: string, card: Card) {
   db.collection(nameDatabase).add(card);
 }

@@ -9,7 +9,7 @@ import QuestionBoard from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBo
 import CardProvider from "../Context/CardContext";
 import AddCard from "../Pages/Game/GenerateBoard/AddCard/AddCard";
 export default function GameRoute() {
-  const { arrayTechnologies } = useAvaibleTechnologies();
+  const { avaibleTechnologies } = useAvaibleTechnologies();
   const {
     state: { personalCards, generalCards },
   } = useGameContext();
@@ -28,7 +28,7 @@ export default function GameRoute() {
         </Route>
       </CardProvider>
 
-      {arrayTechnologies.map(({ name }: { name: string }) => {
+      {Object.values(avaibleTechnologies).map(({ name }: { name: string }) => {
         return (
           <CardProvider key={name}>
             <Route exact path={`/game/personal-cards/${name}`}>

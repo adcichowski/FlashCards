@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./Button.module.scss";
 
 interface ButtonProps {
+  type?: "submit" | "button";
   children: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   width?: string;
@@ -13,6 +14,7 @@ interface ButtonProps {
   maxHeight?: string;
 }
 export default function Button({
+  type,
   link,
   children,
   onClick,
@@ -42,6 +44,7 @@ export default function Button({
   }
   return (
     <button
+      type={type}
       style={{
         width,
         height,

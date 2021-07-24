@@ -2,15 +2,14 @@ import { useAvaibleTechnologies } from "../../Components/Pages/Game/useAvaibleTe
 import { ColorizeIcon } from "./ColorizeIcon";
 import gsap from "gsap";
 export function AnimateIconTech(elements: HTMLDivElement) {
-  const { arrayTechnologies } = useAvaibleTechnologies();
+  const { avaibleTechnologies } = useAvaibleTechnologies();
   const allIcon = elements.querySelectorAll("svg");
-  const arrayNameColor = arrayTechnologies.reduce<Record<string, string>>(
-    (prevValue, arrayObj) => {
-      prevValue[arrayObj.name] = arrayObj.fill;
-      return prevValue;
-    },
-    {}
-  );
+  const arrayNameColor = Object.values(avaibleTechnologies).reduce<
+    Record<string, string>
+  >((prevValue, arrayObj) => {
+    prevValue[arrayObj.name] = arrayObj.fill;
+    return prevValue;
+  }, {});
   for (let icon of allIcon) {
     const getIconID = String(icon.children[0].id);
     gsap.to(icon.children[0], {

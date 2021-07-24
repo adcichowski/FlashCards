@@ -12,7 +12,7 @@ export default function Form() {
     handleSubmit,
     register,
     errors,
-    isRegisterAction,
+    isRegister,
     handleClickRegister,
   } = useFormLoginRegister();
   return (
@@ -21,7 +21,7 @@ export default function Form() {
         <div className={styles.formLog}>
           <BackButton />
           <h4 className={styles.formTitle}>
-            {isRegisterAction ? "Log In" : "Register In"}
+            {isRegister ? "Register In" : "Log In"}
           </h4>
           <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
             <label>
@@ -49,9 +49,9 @@ export default function Form() {
             </span>
 
             <div className={styles.formButtons}>
-              <Button>{isRegisterAction ? "Login" : "Register"}</Button>
-              <Button onClick={handleClickRegister}>
-                {isRegisterAction ? "Create account" : "Back to login"}
+              <Button type="submit">{isRegister ? "Register" : "Login"}</Button>
+              <Button type="button" onClick={handleClickRegister}>
+                {isRegister ? "Back to login" : "Create account"}
               </Button>
             </div>
             <Link to="/">

@@ -5,7 +5,7 @@ import { useAvaibleTechnologies } from "../useAvaibleTechnologies";
 import { useAnimationGSAP } from "../../../Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../../lib/gsap/AnimateIconTech";
 export default function IconTech({ arrayCardData }: { arrayCardData: Card[] }) {
-  const { arrayTechnologies, isActiveTechnology } = useAvaibleTechnologies();
+  const { avaibleTechnologies, isActiveTechnology } = useAvaibleTechnologies();
   const allDataTechnologies = [...arrayCardData].map(
     ({ technology }) => technology
   );
@@ -14,7 +14,7 @@ export default function IconTech({ arrayCardData }: { arrayCardData: Card[] }) {
     <>
       <div ref={getElements}>
         <ul className={styles.listIcon}>
-          {arrayTechnologies.map(
+          {Object.values(avaibleTechnologies).map(
             ({ render: Component, name }: TechnologyProperty) => (
               <li key={name}>
                 <Link
