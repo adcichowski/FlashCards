@@ -1,57 +1,16 @@
 import Button from "../../Components/Button/Button";
-import { UserData } from "../../Types/index";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.scss";
-import { useForm } from "react-hook-form";
 import { inputValidation } from "../../Utils/Utils";
 import Logo from "../../Components/Logo/Logo";
-import { auth } from "../../lib/firebase/index";
-import { useMainContext } from "../../Context/MainContext";
-import { useAuthContext } from "../../Context/AuthContext";
+import useRegister from "./useRegister";
 
 export default function Register({
   handleClickRegister,
 }: {
   handleClickRegister: () => void;
 }) {
-  const history = useHistory();
-  const { dispatch } = useMainContext();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const { dispatch: AuthDispatch } = useAuthContext();
-  const onSubmit = async ({ email, password }: UserData) => {
-    try {
-      await auth.createUserWithEmailAndPassword(email, password);
-      if (!auth?.currentUser?.uid) {
-        throw Error("This account not exist!");
-      }
-      AuthDispatch({
-        type: "logIn",
-        setUser: {
-          idUser: auth?.currentUser?.uid,
-        },
-      });
-      dispatch({
-        type: "openModal",
-        setModal: {
-          type: "success",
-          message: "Your are register in webiste!",
-        },
-      });
-      history.push("/Auth");
-    } catch (e) {
-      dispatch({
-        type: "openModal",
-        setModal: {
-          type: "error",
-          message: e.message,
-        },
-      });
-    }
-  };
+  const { onSubmit, register, errors, handleSubmit } = useRegister();
   return (
     <div className={styles.formLog}>
       <Link to="/" className={styles.backButton} />
