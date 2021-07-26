@@ -27,11 +27,11 @@
 }
 
 .heroTitle {
-  font-size: clamp(4rem, calc(10vw + 3rem), calc(27rem - 1vw));
+  font-size: clamp(4rem, calc(10vw + 3rem), 20rem);
   font-weight: 700;
 }
 .heroSubtitle {
-  font-size: clamp(2rem, 2vw, calc(8rem - 0.3vw));
+  font-size: clamp(2rem, calc(3vw + 0.5rem), 4rem);
   align-self: center;
   font-weight: 300;
   margin-bottom: 3rem;
