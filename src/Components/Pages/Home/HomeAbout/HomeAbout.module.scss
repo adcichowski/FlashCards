@@ -10,8 +10,8 @@
   &::before {
     content: "";
     position: absolute;
-    background: url("../../../../Assets/Pages/Home/About/Wave.png") center/cover
-      no-repeat;
+    background: url("../../../../Assets/Pages/Home/About/Wave.webp")
+      center/cover no-repeat;
     width: 100%;
     z-index: -1;
     height: 176%;
@@ -79,11 +79,11 @@
   margin: 2rem 0;
   width: 100%;
   height: 90rem;
-  background: url("../../../../Assets/Pages/Home/About/ThreeCards.png")
+  background: url("../../../../Assets/Pages/Home/About/ThreeCards.webp")
     no-repeat left / cover;
   @media screen and (max-width: 1350px) {
-    background: url("../../../../Assets/Pages/Home/About/ThreeCards.png")
-      no-repeat center/ contain;
+    background-position: center;
+    background-size: contain;
     max-height: 60rem;
   }
   @media screen and (max-width: 550px) {
