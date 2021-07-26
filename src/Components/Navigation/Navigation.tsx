@@ -2,14 +2,9 @@ import { useState, useEffect } from "react";
 import Logo from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
+import { socialLinks, navigationLinks } from "../../Constants/Constants";
 
 export default function Navigation() {
-  let navigationLinks = [
-    { name: "Home", path: "/" },
-    { name: "Game", path: "/game" },
-    { name: "Ranking", path: "/ranking" },
-    { name: "Contact", path: "/contact" },
-  ];
   const [isOpen, setOpen] = useState(false);
   const handleClick = () => setOpen(!isOpen);
   useEffect(() => {
@@ -52,7 +47,7 @@ export default function Navigation() {
           ))}
         </ul>
         <ul className={styles.menuSocial}>
-          {["facebook", "twitter", "instagram"].map((socialName) => (
+          {socialLinks.map((socialName) => (
             <li
               key={socialName}
               className={`${styles[socialName]} ${styles.social}`}
@@ -88,7 +83,7 @@ export default function Navigation() {
           ))}
         </ul>
         <ul className={styles.menuSocial}>
-          {["facebook", "twitter", "instagram"].map((socialName) => (
+          {socialLinks.map((socialName) => (
             <li key={socialName}>
               <a href={`https://${socialName}.com`}>
                 <div className={`${styles[socialName]} ${styles.social}`}></div>

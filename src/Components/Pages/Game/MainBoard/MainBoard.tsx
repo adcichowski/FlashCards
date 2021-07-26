@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import { useGetData } from "../../../Hooks/useGetData";
 import { ReactComponent as Plus } from "../../../../Assets/Icons/plus.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
+import { useCallback } from "react";
 export default function MainBoard() {
   useGetData();
   const { dispatch } = useAuthContext();
-  const handleClickLogOut = () => {
+  const handleClickLogOut = useCallback(() => {
     dispatch({ type: "logOut" });
-  };
+  }, [dispatch]);
   return (
     <>
       <Navigation />

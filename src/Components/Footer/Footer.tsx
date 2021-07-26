@@ -4,6 +4,7 @@ import Logo from "../Logo/Logo";
 import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../Utils/Utils";
+import { socialLinks, navigationLinks } from "../../Constants/Constants";
 export default function Footer() {
   const {
     register,
@@ -11,12 +12,6 @@ export default function Footer() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data: JSON) => console.log(data);
-
-  const navigationLinks = [
-    { name: "Home", path: "/" },
-    { name: "Game", path: "/game" },
-    { name: "Ranking", path: "/ranking" },
-  ];
   return (
     <footer className={styles.footer}>
       <div className={styles.footerArticle}>
@@ -33,9 +28,11 @@ export default function Footer() {
               ))}
             </ul>
             <ul className={styles.listSocial}>
-              {["facebook", "twitter", "instagram"].map((socialName) => (
+              {socialLinks.map((socialName) => (
                 <a key={socialName} href={`https://${socialName}.com`}>
-                  <li className={`${styles[socialName]}`}></li>
+                  <li className={`${styles[socialName]}`}>
+                    <span className="sr-only">{socialName}</span>
+                  </li>
                 </a>
               ))}
             </ul>

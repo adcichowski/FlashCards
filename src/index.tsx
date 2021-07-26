@@ -17,6 +17,7 @@ ReactDOM.render(
           <AuthProvider>
             <Switch>
               <Route path="/" exact component={Home} />
+
               <Route path="/login" component={Form} />
               <GameProvider>
                 <GameRoute />

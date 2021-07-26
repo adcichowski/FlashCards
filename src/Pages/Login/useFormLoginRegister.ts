@@ -22,37 +22,38 @@ export default function useFormLoginRegister() {
   const { dispatch } = useMainContext();
   const { dispatch: authDispatch } = useAuthContext();
   const typeOfAction = isRegister ? "register" : "login";
-  const onSubmit = async ({ email, password }: UserData) => {
-    console.log(typeOfAction);
-    try {
-      console.log(typeOfAction, email, password);
-      if (!isRegister) await auth.signInWithEmailAndPassword(email, password);
-      if (isRegister)
-        await auth.createUserWithEmailAndPassword(email, password);
-      if (!auth?.currentUser?.uid) {
-        throw Error("This account not exist!");
+  const onSubmit = React.useCallback(
+    async ({ email, password }: UserData) => {
+      try {
+        if (!isRegister) await auth.signInWithEmailAndPassword(email, password);
+        if (isRegister)
+          await auth.createUserWithEmailAndPassword(email, password);
+        if (!auth?.currentUser?.uid) {
+          throw Error("This account not exist!");
+        }
+        authDispatch({
+          type: "logIn",
+          setUser: { idUser: auth?.currentUser?.uid },
+        });
+        dispatch({
+          type: "successModal",
+          setModal: {
+            message: `You are ${typeOfAction} in website`,
+          },
+        });
+        history.push("/game");
+      } catch (e) {
+        console.log(e);
+        dispatch({
+          type: "errorModal",
+          setModal: {
+            message: e.message,
+          },
+        });
       }
-      authDispatch({
-        type: "logIn",
-        setUser: { idUser: auth?.currentUser?.uid },
-      });
-      dispatch({
-        type: "successModal",
-        setModal: {
-          message: `You are ${typeOfAction} in website`,
-        },
-      });
-      history.push("/game");
-    } catch (e) {
-      console.log(e);
-      dispatch({
-        type: "errorModal",
-        setModal: {
-          message: e.message,
-        },
-      });
-    }
-  };
+    },
+    [authDispatch, dispatch, isRegister, history, typeOfAction]
+  );
 
   return {
     onSubmit,

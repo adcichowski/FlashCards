@@ -21,4 +21,6 @@ export interface TechnologyProperty {
   name: string;
   render: React.ComponentType;
   fill: string;
+  personalCards: Card[];
+  generalCards: Card[];
 }

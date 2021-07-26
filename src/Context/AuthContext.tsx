@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
+import { auth } from "../lib/firebase";
 interface Action {
   type: "logIn" | "logOut";
   setUser?: Omit<CurrentUser, "isLogin">;
@@ -19,6 +20,7 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
         isLogin: true,
       };
     case "logOut":
+      auth.signOut();
       return { ...state, isLogin: false, idUser: "" };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

@@ -1,4 +1,4 @@
-import logo from "../../Assets/logo.png";
+import logo from "../../Assets/logo.webp";
 import styles from "./Logo.module.scss";
 export default function Logo() {
   return (
