@@ -1,7 +1,7 @@
 import styles from "./GenerateBoard.module.scss";
-import IconTech from "../../../Components/Pages/Game/IconsTech/IconTech";
 import { Card } from "../../../Types";
 import BackButton from "../../../Components/Button/BackButton/BackButton";
+import GenerateIconsTechnologies from "../../../Components/Pages/Game/GenerateIconsTechnologies/GenerateIconsTechnologies";
 export default function GenerateBoard({
   cardsData,
   title,
@@ -15,7 +15,7 @@ export default function GenerateBoard({
       <div className={styles.board}>
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.technology}>
-          <IconTech arrayCardData={cardsData} />
+          <GenerateIconsTechnologies arrayCardsData={cardsData} />
         </div>
       </div>
     </>

@@ -19,8 +19,8 @@ export interface AvaibleTechnologiesProperty {
 }
 export interface TechnologyProperty {
   name: string;
+  type: string;
+  description: string;
   render: React.ComponentType;
   fill: string;
-  personalCards: Card[];
-  generalCards: Card[];
 }
