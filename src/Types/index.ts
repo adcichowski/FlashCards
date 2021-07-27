@@ -17,6 +17,7 @@ export interface Card {
 export interface AvaibleTechnologiesProperty {
   [key: string]: TechnologyProperty;
 }
+
 export interface TechnologyProperty {
   name: string;
   type: string;

@@ -15,7 +15,9 @@ export function useGetData() {
     gameDispatch({
       type: "setData",
       setData: {
+        //@ts-ignore
         personalCards,
+        //@ts-ignore
         generalCards,
       },
     });

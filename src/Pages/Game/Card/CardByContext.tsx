@@ -1,11 +1,21 @@
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
-import { useCardContext } from "../../../Context/CardContext";
+import { Card } from "../../../Types";
 import { capitalize } from "../../../Utils/Utils";
 import styles from "./CardByContext.module.scss";
 import CardWave from "./CardWave";
-export default function CardByContext() {
-  const { state, dispatch } = useCardContext();
+import useCardByContext from "./useCardByContext";
+export default function CardByContext({
+  saveAllDataCards,
+}: {
+  saveAllDataCards: Card[];
+}) {
   const { avaibleTechnologies } = useAvaibleTechnologies();
+  const {
+    state,
+    handleClickPrevCard,
+    handleClickNextCard,
+    handleClickFlipCard,
+  } = useCardByContext(saveAllDataCards);
   if (!state.isShow) return null;
   const CardIcon = avaibleTechnologies[state.technology].render;
   const colorTechnology = avaibleTechnologies[state.technology].fill;
@@ -36,14 +46,15 @@ export default function CardByContext() {
         </div>
         <div className={styles.cardCenterBottom}>0{state.id}</div>
         <div className={styles.cardButtons}>
-          <button className={styles.button}>Prev Card</button>
-          <button
-            className={styles.button}
-            onClick={() => dispatch({ type: "flipCard" })}
-          >
+          <button onClick={handleClickPrevCard} className={styles.button}>
+            Prev Card
+          </button>
+          <button className={styles.button} onClick={handleClickFlipCard}>
             {state.isFlip ? "Show Question" : "Show Answer"}
           </button>
-          <button className={styles.button}>Next Card</button>
+          <button onClick={handleClickNextCard} className={styles.button}>
+            Next Card
+          </button>
         </div>
       </div>
       <p>

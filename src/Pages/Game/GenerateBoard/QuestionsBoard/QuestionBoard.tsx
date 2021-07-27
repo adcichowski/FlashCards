@@ -10,6 +10,9 @@ export default function QuestionBoard({
   cardsData: Card[];
   technologyBoardName: string;
 }) {
+  const sortedCardsByTech = cardsData.filter(
+    (card) => card.technology === technologyBoardName
+  );
   const { handleClickShowCard, colorTechnology } =
     useQuestionBoard(technologyBoardName);
   return (
@@ -18,27 +21,25 @@ export default function QuestionBoard({
       <div className={styles.board}>
         <h1 className={styles.someFeature}>Some Feature</h1>
         <div className={styles.cardBoard}>
-          <CardByContext />
+          <CardByContext saveAllDataCards={sortedCardsByTech} />
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.questionTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {cardsData.map((card: Card, id) =>
-              card.technology === technologyBoardName ? (
-                <li key={id} className={styles.questionCard}>
-                  <div
-                    onClick={() => {
-                      handleClickShowCard(card);
-                    }}
-                    className={styles.questionCardInner}
-                  >
-                    <button className={styles.questionDots}></button>
-                    <p className={styles.question}>{card.question}</p>
-                    <div className={styles.questionId}>0{card.id}</div>
-                  </div>
-                </li>
-              ) : undefined
-            )}
+            {sortedCardsByTech.map((card: Card, id) => (
+              <li key={id} className={styles.questionCard}>
+                <div
+                  onClick={() => {
+                    handleClickShowCard(card);
+                  }}
+                  className={styles.questionCardInner}
+                >
+                  <button className={styles.questionDots}></button>
+                  <p className={styles.question}>{card.question}</p>
+                  <div className={styles.questionId}>0{card.id}</div>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

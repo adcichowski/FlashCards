@@ -7,7 +7,7 @@ export function useQuestionBoard(nameTechnology: string) {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { dispatch, state } = useCardContext();
   const handleClickShowCard = useCallback(
-    (card: Card) => () => {
+    (card: Card) => {
       dispatch({
         type: "showCard",
         setCard: { ...card, isFlip: false },

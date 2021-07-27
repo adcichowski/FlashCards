@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 import { Card } from "../Types";
 import { getRandomMinMax } from "../Utils/Utils";
 interface Action {
-  type: "showCard" | "hideCard" | "flipCard" | "setDataCard";
+  type: "showCard" | "hideCard" | "flipCard" | "setDataCard" | "nextCard";
   setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
 interface Dispatch {
@@ -40,7 +40,14 @@ function modalMainReducer(
         ...state,
         isFlip: !state.isFlip,
       };
-
+    case "nextCard":
+      return {
+        ...state,
+        ...action.setCard,
+        randomSvgCard: getRandomMinMax(0, 10),
+        isFlip: false,
+        isShow: true,
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
