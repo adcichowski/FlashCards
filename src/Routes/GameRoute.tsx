@@ -10,17 +10,18 @@ import CardProvider from "../Context/CardContext";
 import AddCard from "../Pages/Game/GenerateBoard/AddCard/AddCard";
 export default function GameRoute() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
-  const {
-    state: { personalCards, generalCards },
-  } = useGameContext();
+  const { state } = useGameContext();
   return (
     <Game>
       <PrivateRoute path="/game" exact component={MainBoard} />
       <Route path="/game/personal-cards" exact>
-        <GenerateBoard cardsData={personalCards} title={"Personal Cards"} />
+        <GenerateBoard
+          cardsData={state.personalCards}
+          title={"Personal Cards"}
+        />
       </Route>
       <Route exact path="/game/general-cards">
-        <GenerateBoard cardsData={generalCards} title={"General Cards"} />
+        <GenerateBoard cardsData={state.generalCards} title={"General Cards"} />
       </Route>
       <CardProvider>
         <Route exact path={"/game/personal-cards/add"}>
@@ -34,7 +35,7 @@ export default function GameRoute() {
             <Route exact path={`/game/personal-cards/${name}`}>
               <QuestionBoard
                 technologyBoardName={name}
-                cardsData={personalCards}
+                cardsData={state.personalCards}
               />
             </Route>
           </CardProvider>

@@ -1,36 +1,31 @@
-import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
 import { Card } from "../../../Types";
 import { capitalize } from "../../../Utils/Utils";
 import styles from "./CardByContext.module.scss";
 import CardWave from "./CardWave";
 import useCardByContext from "./useCardByContext";
 export default function CardByContext({
-  saveAllDataCards,
+  allSortedDataCards,
 }: {
-  saveAllDataCards: Card[];
+  allSortedDataCards: Card[];
 }) {
-  const { avaibleTechnologies } = useAvaibleTechnologies();
   const {
     state,
-    handleClickPrevCard,
-    handleClickNextCard,
+    handleClickNextOrPrevCard,
     handleClickFlipCard,
-  } = useCardByContext(saveAllDataCards);
+    getIconWithColor,
+  } = useCardByContext(allSortedDataCards);
+  const { CardIcon, colorIcon } = getIconWithColor();
   if (!state.isShow) return null;
-  const CardIcon = avaibleTechnologies[state.technology].render;
-  const colorTechnology = avaibleTechnologies[state.technology].fill;
+
   return (
     <div className={styles.cardWrapper}>
       <p>{state.rating}</p>
       <div className={styles.card}>
         <div className={styles.wave}>
-          <CardWave color={colorTechnology} />
+          <CardWave color={colorIcon} />
         </div>
         <div className={styles.cardTop}>
-          <div
-            style={{ fill: colorTechnology }}
-            className={`${styles[state.technology]} ${styles.icon}`}
-          >
+          <div style={{ fill: colorIcon }} className={styles.icon}>
             <CardIcon />
           </div>
           <span className={styles.iconText}>
@@ -46,13 +41,19 @@ export default function CardByContext({
         </div>
         <div className={styles.cardCenterBottom}>0{state.id}</div>
         <div className={styles.cardButtons}>
-          <button onClick={handleClickPrevCard} className={styles.button}>
+          <button
+            onClick={handleClickNextOrPrevCard(-1)}
+            className={styles.button}
+          >
             Prev Card
           </button>
           <button className={styles.button} onClick={handleClickFlipCard}>
             {state.isFlip ? "Show Question" : "Show Answer"}
           </button>
-          <button onClick={handleClickNextCard} className={styles.button}>
+          <button
+            onClick={handleClickNextOrPrevCard(1)}
+            className={styles.button}
+          >
             Next Card
           </button>
         </div>

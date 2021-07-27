@@ -8,7 +8,6 @@ interface Action {
   type: "setData" | "sendData";
   setData: UserData;
 }
-
 interface UserData {
   personalCards: Card[];
   generalCards: Card[];

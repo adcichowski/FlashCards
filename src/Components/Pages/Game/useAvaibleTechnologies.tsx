@@ -5,7 +5,6 @@ import { ReactComponent as Css3Icon } from "../../../Assets/Icons/IconsTechnolog
 import { ReactComponent as JavascriptIcon } from "../../../Assets/Icons/IconsTechnology/javascript.svg";
 import { ReactComponent as TypescriptIcon } from "../../../Assets/Icons/IconsTechnology/typescript.svg";
 import { AvaibleTechnologiesProperty } from "../../../Types";
-
 export function useAvaibleTechnologies() {
   const avaibleTechnologies: AvaibleTechnologiesProperty = {
     html5: {

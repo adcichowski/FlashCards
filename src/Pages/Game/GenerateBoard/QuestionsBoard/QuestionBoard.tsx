@@ -13,6 +13,7 @@ export default function QuestionBoard({
   const sortedCardsByTech = cardsData.filter(
     (card) => card.technology === technologyBoardName
   );
+  console.log(sortedCardsByTech);
   const { handleClickShowCard, colorTechnology } =
     useQuestionBoard(technologyBoardName);
   return (
@@ -21,7 +22,7 @@ export default function QuestionBoard({
       <div className={styles.board}>
         <h1 className={styles.someFeature}>Some Feature</h1>
         <div className={styles.cardBoard}>
-          <CardByContext saveAllDataCards={sortedCardsByTech} />
+          <CardByContext allSortedDataCards={sortedCardsByTech} />
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.questionTitle}>Questions</p>
