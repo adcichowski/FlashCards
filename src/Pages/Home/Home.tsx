@@ -1,11 +1,16 @@
 import styles from "./Home.module.scss";
 import Navigation from "../../Components/Navigation/Navigation";
 import CirclesInfo from "../../Components/Pages/Home/CirclesInfo/CirclesInfo";
-import Instruction from "../../Components/Pages/Home/Instruction/Instruction";
-import ListTechnologies from "../../Components/Pages/Home/ListTechnologies/ListTechnologies";
 import Button from "../../Components/Button/Button";
 import HomeAbout from "../../Components/Pages/Home/HomeAbout/HomeAbout";
 import Footer from "../../Components/Footer/Footer";
+import React, { Suspense } from "react";
+const ListTechnologies = React.lazy(
+  () => import("../../Components/Pages/Home/ListTechnologies/ListTechnologies")
+);
+const Instruction = React.lazy(
+  () => import("../../Components/Pages/Home/Instruction/Instruction")
+);
 export default function Home() {
   return (
     <div className={styles.homePage}>
@@ -30,8 +35,10 @@ export default function Home() {
       <main>
         <HomeAbout />
         <article className={styles.firstSide}>
-          <Instruction />
-          <ListTechnologies />
+          <Suspense fallback={<div>Generate Card Instruction</div>}>
+            <Instruction />
+            <ListTechnologies />
+          </Suspense>
           <CirclesInfo />
         </article>
         <section className={styles.bigQuestion}>
