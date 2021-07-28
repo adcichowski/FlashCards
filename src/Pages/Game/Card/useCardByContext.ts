@@ -15,6 +15,7 @@ export default function useCardByContext(saveAllDataCards: Card[]) {
         type: "getNextOrPrevCard",
         setCard: {
           ...saveAllDataCards[getIndexOpenedCard + number],
+
           isFlip: false,
         },
       });
@@ -24,7 +25,7 @@ export default function useCardByContext(saveAllDataCards: Card[]) {
   const handleClickFlipCard = useCallback(() => {
     dispatch({ type: "flipCard" });
   }, [dispatch]);
-  const getIconWithColor = () => {
+  const getIconAndColor = () => {
     const CardIcon =
       state.technology === "none"
         ? NoneTechIcon
@@ -37,9 +38,8 @@ export default function useCardByContext(saveAllDataCards: Card[]) {
   };
   return {
     handleClickNextOrPrevCard,
-
     handleClickFlipCard,
-    getIconWithColor,
+    getIconAndColor,
     state,
   };
 }

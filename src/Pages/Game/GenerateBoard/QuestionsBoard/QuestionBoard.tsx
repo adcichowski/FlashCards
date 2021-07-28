@@ -1,3 +1,4 @@
+import BackButton from "../../../../Components/Button/BackButton/BackButton";
 import { Card } from "../../../../Types";
 import CardByContext from "../../Card/CardByContext";
 import BlooperSVG from "./BlooperSVG/BlooperSVG";
@@ -18,9 +19,10 @@ export default function QuestionBoard({
     useQuestionBoard(technologyBoardName);
   return (
     <>
+      <BackButton />
       <BlooperSVG fill={colorTechnology} />
       <div className={styles.board}>
-        <h1 className={styles.someFeature}>Some Feature</h1>
+        <div className={styles.someFeature}></div>
         <div className={styles.cardBoard}>
           <CardByContext allSortedDataCards={sortedCardsByTech} />
         </div>

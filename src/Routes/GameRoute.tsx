@@ -7,7 +7,7 @@ import { useGameContext } from "../Context/GameContext";
 import GenerateBoard from "../Pages/Game/GenerateBoard/GenerateBoard";
 import QuestionBoard from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBoard";
 import CardProvider from "../Context/CardContext";
-import AddCard from "../Pages/Game/GenerateBoard/AddCard/AddCard";
+import AddCard from "../Pages/Game/AddCard/AddCard";
 export default function GameRoute() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { state } = useGameContext();

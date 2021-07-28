@@ -3,7 +3,12 @@ import { createContext, useContext } from "react";
 import { Card } from "../Types";
 import { getRandomMinMax } from "../Utils/Utils";
 interface Action {
-  type: "showCard" | "flipCard" | "getNextOrPrevCard" | "showEmptyCard";
+  type:
+    | "showCard"
+    | "flipCard"
+    | "getNextOrPrevCard"
+    | "showEmptyCard"
+    | "editingCard";
   setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
 interface Dispatch {
@@ -41,6 +46,12 @@ function modalMainReducer(
         ...action.setCard,
         randomSvgCard: getRandomMinMax(0, 10),
         isFlip: false,
+        isShow: true,
+      };
+    case "editingCard":
+      return {
+        ...state,
+        ...action.setCard,
         isShow: true,
       };
     case "showEmptyCard":

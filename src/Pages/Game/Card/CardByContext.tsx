@@ -3,6 +3,9 @@ import { capitalize } from "../../../Utils/Utils";
 import styles from "./CardByContext.module.scss";
 import CardWave from "./CardWave";
 import useCardByContext from "./useCardByContext";
+import { ReactComponent as Star } from "../../../Assets/Icons/star.svg";
+import { ReactComponent as Heart } from "../../../Assets/Icons/heart.svg";
+import { ReactComponent as FillHeart } from "../../../Assets/Icons/heart-fill.svg";
 export default function CardByContext({
   allSortedDataCards,
 }: {
@@ -12,14 +15,20 @@ export default function CardByContext({
     state,
     handleClickNextOrPrevCard,
     handleClickFlipCard,
-    getIconWithColor,
+    getIconAndColor,
   } = useCardByContext(allSortedDataCards);
-  const { CardIcon, colorIcon } = getIconWithColor();
+  const { CardIcon, colorIcon } = getIconAndColor();
   if (!state.isShow) return null;
 
   return (
     <div className={styles.cardWrapper}>
-      <p>{state.rating}</p>
+      <div className={styles.rating}>
+        Rating
+        <div className={styles.star}>
+          <Star />
+        </div>
+        x{state.rating}
+      </div>
       <div className={styles.card}>
         <div className={styles.wave}>
           <CardWave color={colorIcon} />
@@ -58,11 +67,16 @@ export default function CardByContext({
           </button>
         </div>
       </div>
-      <p>
-        {state.isFavorite
-          ? "Its your favorite card"
-          : "Its not your favorite card"}
-      </p>
+      <div>
+        <p>
+          {state.isFavorite
+            ? "Its your favorite card"
+            : "Its not your favorite card"}
+          <div className={styles.heart}>
+            {state.isFavorite ? <Heart /> : <FillHeart />}
+          </div>
+        </p>
+      </div>
     </div>
   );
 }
