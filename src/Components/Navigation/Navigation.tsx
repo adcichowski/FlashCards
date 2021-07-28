@@ -86,7 +86,9 @@ export default function Navigation() {
           {socialLinks.map((socialName) => (
             <li key={socialName}>
               <a href={`https://${socialName}.com`}>
-                <div className={`${styles[socialName]} ${styles.social}`}></div>
+                <div className={`${styles[socialName]} ${styles.social}`}>
+                  <span className="sr-only">{socialName}</span>
+                </div>
               </a>
             </li>
           ))}
