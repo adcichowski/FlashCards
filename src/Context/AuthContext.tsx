@@ -31,14 +31,14 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
 const AuthContext = createContext<
   { state: CurrentUser; dispatch: Dispatch<Action> } | undefined
 >(undefined);
-export const useAuthContext = () => {
+const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (!context) {
     throw Error("Error while reading context!");
   }
   return context;
 };
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+const AuthProvider = ({ children }: { children: ReactNode }) => {
   const currentUser: CurrentUser = {
     isLogin: false,
     idUser: "",
@@ -48,3 +48,4 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+export { AuthProvider, useAuthContext };

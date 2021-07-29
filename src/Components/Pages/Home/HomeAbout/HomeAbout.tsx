@@ -1,8 +1,8 @@
 import styles from "./HomeAbout.module.scss";
-import Logo from "../../../Logo/Logo";
+import { Logo } from "../../../../Components/Logo/Logo";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../../../Utils/Utils";
-export default function HomeAbout() {
+function HomeAbout() {
   const {
     register,
     formState: { errors },
@@ -56,3 +56,4 @@ export default function HomeAbout() {
     </>
   );
 }
+export { HomeAbout };

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import Logo from "../Logo/Logo";
+import { Logo } from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
 import { socialLinks, navigationLinks } from "../../Constants/Constants";
 
-export default function Navigation() {
+function Navigation() {
   const [isOpen, setOpen] = useState(false);
   const handleClick = () => setOpen(!isOpen);
   useEffect(() => {
@@ -97,3 +97,4 @@ export default function Navigation() {
     </nav>
   );
 }
+export { Navigation };

@@ -1,11 +1,11 @@
 import styles from "./GenerateIconsTechnologies.module.scss";
 import { Link } from "react-router-dom";
-import { Card, TechnologyProperty } from "../../../../Types";
+import { Card, TechnologyProperty } from "../../../../Types/Types";
 import { useAvaibleTechnologies } from "../useAvaibleTechnologies";
 import { useAnimationGSAP } from "../../../Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../../lib/gsap/AnimateIconTech";
 import { capitalize } from "../../../../Utils/Utils";
-export default function GenerateIconsTechnologies({
+function GenerateIconsTechnologies({
   arrayCardsData,
 }: {
   arrayCardsData: Card[];
@@ -44,3 +44,4 @@ export default function GenerateIconsTechnologies({
     </>
   );
 }
+export { GenerateIconsTechnologies };

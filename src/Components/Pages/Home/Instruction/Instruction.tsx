@@ -1,10 +1,9 @@
 import { ReactComponent as FrontCard } from "../../../../Assets/Pages/Home/CardInstruction/FrontCardR.svg";
 import { ReactComponent as BackCard } from "../../../../Assets/Pages/Home/CardInstruction/BackCardR.svg";
-import Button from "../../../Button/Button";
+import { Button } from "../../../Button/Button";
 import { useInstruction } from "./useInstruction";
 import styles from "./Instruction.module.scss";
-
-export default function Instruction() {
+function Instruction() {
   const { getElements, isFlip, flipCard } = useInstruction();
   const handleClickFlip = () => flipCard(!isFlip);
   return (
@@ -19,3 +18,4 @@ export default function Instruction() {
     </section>
   );
 }
+export { Instruction };

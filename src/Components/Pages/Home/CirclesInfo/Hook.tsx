@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-export default function useAnimationCircles() {
+function useAnimationCircles() {
   let getElements = useRef<HTMLDivElement>(null);
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -20,3 +20,4 @@ export default function useAnimationCircles() {
   });
   return { getElements };
 }
+export { useAnimationCircles };

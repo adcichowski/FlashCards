@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
-import { Card } from "../Types";
+import { Card } from "../Types/Types";
 
 interface Action {
   type: "setData" | "sendData";
@@ -28,14 +28,14 @@ function userReducer(state: UserData, action: Action): UserData {
 const GameContext = createContext<
   { state: UserData; dispatch: Dispatch<Action> } | undefined
 >(undefined);
-export const useGameContext = () => {
+const useGameContext = () => {
   const context = useContext(GameContext);
   if (!context) {
     throw Error("Error while reading context!");
   }
   return context;
 };
-export const GameProvider = ({ children }: { children: ReactNode }) => {
+const GameProvider = ({ children }: { children: ReactNode }) => {
   const userData: UserData = {
     personalCards: [],
     generalCards: [],
@@ -45,3 +45,4 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 };
+export { useGameContext, GameProvider };

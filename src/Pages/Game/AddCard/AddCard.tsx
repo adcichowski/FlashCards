@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import Button from "../../../Components/Button/Button";
+import { Button } from "../../../Components/Button/Button";
 import { useCardContext } from "../../../Context/CardContext";
 import { useGameContext } from "../../../Context/GameContext";
-import { Card } from "../../../Types";
-import CardByContext from "../Card/CardByContext";
+import { Card } from "../../../Types/Types";
+import { CardByContext } from "./CardByContext/CardByContext";
 
-export default function AddCard() {
+function AddCard() {
   const { state } = useGameContext();
   const { dispatch, state: stateCard } = useCardContext();
   const allDataCards = [...state.generalCards, ...state.personalCards];
@@ -49,3 +49,4 @@ export default function AddCard() {
     </div>
   );
 }
+export { AddCard };

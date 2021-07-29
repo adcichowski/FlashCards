@@ -1,8 +1,7 @@
 import styles from "./BackButton.module.scss";
 import { useHistory } from "react-router";
 import { useCallback } from "react";
-
-export default function BackButton() {
+function BackButton() {
   const history = useHistory();
   const handleClickBack = useCallback(() => {
     history.goBack();
@@ -13,3 +12,4 @@ export default function BackButton() {
     </div>
   );
 }
+export { BackButton };

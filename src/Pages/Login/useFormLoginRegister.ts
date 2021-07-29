@@ -3,11 +3,11 @@ import { useHistory } from "react-router";
 import { auth } from "../../lib/firebase/index";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useMainContext } from "../../Context/MainContext";
-import { UserData } from "../../Types";
+import { UserData } from "../../Types/Types";
 import { useState } from "react";
 import React from "react";
 
-export default function useFormLoginRegister() {
+function useFormLoginRegister() {
   const [isRegister, setIsRegister] = useState(false);
   const handleClickRegister = React.useCallback(
     () => setIsRegister(!isRegister),
@@ -25,9 +25,14 @@ export default function useFormLoginRegister() {
   const onSubmit = React.useCallback(
     async ({ email, password }: UserData) => {
       try {
-        if (!isRegister) await auth.signInWithEmailAndPassword(email, password);
-        if (isRegister)
-          await auth.createUserWithEmailAndPassword(email, password);
+        switch (typeOfAction) {
+          case "register":
+            auth.createUserWithEmailAndPassword(email, password);
+            break;
+          case "login":
+            auth.signInWithEmailAndPassword(email, password);
+            break;
+        }
         if (!auth?.currentUser?.uid) {
           throw Error("This account not exist!");
         }
@@ -43,7 +48,6 @@ export default function useFormLoginRegister() {
         });
         history.push("/game");
       } catch (e) {
-        console.log(e);
         dispatch({
           type: "errorModal",
           setModal: {
@@ -52,7 +56,7 @@ export default function useFormLoginRegister() {
         });
       }
     },
-    [authDispatch, dispatch, isRegister, history, typeOfAction]
+    [authDispatch, dispatch, history, typeOfAction]
   );
 
   return {
@@ -64,3 +68,4 @@ export default function useFormLoginRegister() {
     handleClickRegister,
   };
 }
+export { useFormLoginRegister };

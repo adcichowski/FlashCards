@@ -1,14 +1,14 @@
 import { useAvaibleTechnologies } from "../Components/Pages/Game/useAvaibleTechnologies";
-import MainBoard from "../Components/Pages/Game/MainBoard/MainBoard";
-import Game from "../Pages/Game/Game";
-import PrivateRoute from "./PrivateRoute";
+import { MainBoard } from "../Components/Pages/Game/MainBoard/MainBoard";
+import { Game } from "../Pages/Game/Game";
+import { PrivateRoute } from "./PrivateRoute";
 import { Route } from "react-router-dom";
 import { useGameContext } from "../Context/GameContext";
-import GenerateBoard from "../Pages/Game/GenerateBoard/GenerateBoard";
-import QuestionBoard from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBoard";
-import CardProvider from "../Context/CardContext";
-import AddCard from "../Pages/Game/AddCard/AddCard";
-export default function GameRoute() {
+import { GenerateBoard } from "../Pages/Game/GenerateBoard/GenerateBoard";
+import { QuestionBoard } from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBoard";
+import { CardProvider } from "../Context/CardContext";
+import { AddCard } from "../Pages/Game/AddCard/AddCard";
+function GameRoute() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { state } = useGameContext();
   return (
@@ -44,3 +44,4 @@ export default function GameRoute() {
     </Game>
   );
 }
+export { GameRoute };

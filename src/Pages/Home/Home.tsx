@@ -1,15 +1,19 @@
 import styles from "./Home.module.scss";
-import Navigation from "../../Components/Navigation/Navigation";
-import CirclesInfo from "../../Components/Pages/Home/CirclesInfo/CirclesInfo";
-import Button from "../../Components/Button/Button";
-import HomeAbout from "../../Components/Pages/Home/HomeAbout/HomeAbout";
-import Footer from "../../Components/Footer/Footer";
+import { Navigation } from "../../Components/Navigation/Navigation";
+import { CirclesInfo } from "../../Components/Pages/Home/CirclesInfo/CirclesInfo";
+import { Button } from "../../Components/Button/Button";
+import { HomeAbout } from "../../Components/Pages/Home/HomeAbout/HomeAbout";
+import { Footer } from "../../Components/Footer/Footer";
 import React, { Suspense } from "react";
-const ListTechnologies = React.lazy(
-  () => import("../../Components/Pages/Home/ListTechnologies/ListTechnologies")
+const ListTechnologies = React.lazy(() =>
+  import("../../Components/Pages/Home/ListTechnologies/ListTechnologies").then(
+    (module) => ({ default: module.ListTechnologies })
+  )
 );
-const Instruction = React.lazy(
-  () => import("../../Components/Pages/Home/Instruction/Instruction")
+const Instruction = React.lazy(() =>
+  import("../../Components/Pages/Home/Instruction/Instruction").then(
+    (module) => ({ default: module.Instruction })
+  )
 );
 export default function Home() {
   return (

@@ -1,10 +1,10 @@
-import BackButton from "../../../../Components/Button/BackButton/BackButton";
-import { Card } from "../../../../Types";
-import CardByContext from "../../Card/CardByContext";
-import BlooperSVG from "./BlooperSVG/BlooperSVG";
+import { BackButton } from "../../../../Components/Button/BackButton/BackButton";
+import { Card } from "../../../../Types/Types";
+import { CardByContext } from "../../AddCard/CardByContext/CardByContext";
+import { BlooperSVG } from "./BlooperSVG/BlooperSVG";
 import styles from "./QuestionBoard.module.scss";
 import { useQuestionBoard } from "./useQuestionBoard";
-export default function QuestionBoard({
+function QuestionBoard({
   cardsData,
   technologyBoardName,
 }: {
@@ -49,3 +49,4 @@ export default function QuestionBoard({
     </>
   );
 }
+export { QuestionBoard };

@@ -51,7 +51,7 @@ function modalMainReducer(
     }
   }
 }
-export const useMainContext = () => {
+const useMainContext = () => {
   const context = useContext(MainContext);
   if (!context) {
     throw new Error("Error while reading context!");
@@ -59,7 +59,7 @@ export const useMainContext = () => {
 
   return context;
 };
-export default function MainProvider({ children }: { children: ReactNode }) {
+function MainProvider({ children }: { children: ReactNode }) {
   const Modal: ModalInterface = {
     isOpen: false,
     type: "success",
@@ -69,3 +69,4 @@ export default function MainProvider({ children }: { children: ReactNode }) {
   const value = { state, dispatch };
   return <MainContext.Provider value={value}>{children}</MainContext.Provider>;
 }
+export { useMainContext, MainProvider };

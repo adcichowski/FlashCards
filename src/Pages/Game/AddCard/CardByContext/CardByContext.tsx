@@ -1,16 +1,12 @@
-import { Card } from "../../../Types";
-import { capitalize } from "../../../Utils/Utils";
+import { Card } from "../../../../Types/Types";
+import { capitalize } from "../../../../Utils/Utils";
 import styles from "./CardByContext.module.scss";
-import CardWave from "./CardWave";
-import useCardByContext from "./useCardByContext";
-import { ReactComponent as Star } from "../../../Assets/Icons/star.svg";
-import { ReactComponent as Heart } from "../../../Assets/Icons/heart.svg";
-import { ReactComponent as FillHeart } from "../../../Assets/Icons/heart-fill.svg";
-export default function CardByContext({
-  allSortedDataCards,
-}: {
-  allSortedDataCards: Card[];
-}) {
+import { CardWave } from "./CardWave";
+import { useCardByContext } from "./useCardByContext";
+import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
+import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
+import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
+function CardByContext({ allSortedDataCards }: { allSortedDataCards: Card[] }) {
   const {
     state,
     handleClickNextOrPrevCard,
@@ -80,3 +76,4 @@ export default function CardByContext({
     </div>
   );
 }
+export { CardByContext };

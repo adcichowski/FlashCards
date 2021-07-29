@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
-import { useCardContext } from "../../../Context/CardContext";
-import { Card } from "../../../Types";
-import { ReactComponent as NoneTechIcon } from "../../../Assets/Icons/IconsTechnology/cancel.svg";
-export default function useCardByContext(saveAllDataCards: Card[]) {
+import { useAvaibleTechnologies } from "../../../../Components/Pages/Game/useAvaibleTechnologies";
+import { useCardContext } from "../../../../Context/CardContext";
+import { Card } from "../../../../Types/Types";
+import { ReactComponent as NoneTechIcon } from "../../../../Assets/Icons/cancel.svg";
+function useCardByContext(saveAllDataCards: Card[]) {
   const { state, dispatch } = useCardContext();
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const getIndexOpenedCard = saveAllDataCards.findIndex(
@@ -43,3 +43,4 @@ export default function useCardByContext(saveAllDataCards: Card[]) {
     state,
   };
 }
+export { useCardByContext };

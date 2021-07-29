@@ -13,7 +13,7 @@ interface ButtonProps {
   maxWidth?: string;
   maxHeight?: string;
 }
-export default function Button({
+function Button({
   type,
   link,
   children,
@@ -60,3 +60,4 @@ export default function Button({
     </button>
   );
 }
+export { Button };

@@ -22,6 +22,6 @@ export interface TechnologyProperty {
   name: string;
   type: string;
   description: string;
-  render: React.ComponentType;
+  render: React.FunctionComponent;
   fill: string;
 }

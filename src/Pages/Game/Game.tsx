@@ -1,11 +1,7 @@
 import styles from "./Game.module.scss";
-import Modal from "../../Components/Modal/Modal";
+import { Modal } from "../../Components/Modal/Modal";
 
-export default function Game({
-  children,
-}: {
-  children: React.PropsWithChildren<{}>;
-}) {
+function Game({ children }: { children: React.PropsWithChildren<{}> }) {
   return (
     <>
       <Modal />
@@ -13,3 +9,4 @@ export default function Game({
     </>
   );
 }
+export { Game };

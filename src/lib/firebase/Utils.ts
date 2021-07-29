@@ -1,4 +1,4 @@
-import { Card } from "../../Types";
+import { Card } from "../../Types/Types";
 import { db } from "./index";
 
 function sendData(nameDatabase: string, card: Card) {

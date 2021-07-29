@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Button from "../Button/Button";
-import Logo from "../Logo/Logo";
+import { Button } from "../Button/Button";
+import { Logo } from "../Logo/Logo";
 import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../Utils/Utils";
 import { socialLinks, navigationLinks } from "../../Constants/Constants";
-export default function Footer() {
+function Footer() {
   const {
     register,
     handleSubmit,
@@ -76,3 +76,4 @@ export default function Footer() {
     </footer>
   );
 }
+export { Footer };

@@ -1,7 +1,7 @@
 import { Redirect, Route, RouteComponentProps } from "react-router";
 import { useAuthContext } from "../Context/AuthContext";
 
-export default function PrivateRoute({
+function PrivateRoute({
   component: Component,
   path,
   exact = true as const,
@@ -21,3 +21,4 @@ export default function PrivateRoute({
     />
   );
 }
+export { PrivateRoute };

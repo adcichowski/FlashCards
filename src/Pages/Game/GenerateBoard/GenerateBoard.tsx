@@ -1,8 +1,8 @@
 import styles from "./GenerateBoard.module.scss";
-import { Card } from "../../../Types";
-import BackButton from "../../../Components/Button/BackButton/BackButton";
-import GenerateIconsTechnologies from "../../../Components/Pages/Game/GenerateIconsTechnologies/GenerateIconsTechnologies";
-export default function GenerateBoard({
+import { Card } from "../../../Types/Types";
+import { BackButton } from "../../../Components/Button/BackButton/BackButton";
+import { GenerateIconsTechnologies } from "../../../Components/Pages/Game/GenerateIconsTechnologies/GenerateIconsTechnologies";
+function GenerateBoard({
   cardsData,
   title,
 }: {
@@ -21,3 +21,4 @@ export default function GenerateBoard({
     </>
   );
 }
+export { GenerateBoard };

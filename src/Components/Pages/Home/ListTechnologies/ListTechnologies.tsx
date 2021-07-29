@@ -2,7 +2,7 @@ import { ReactComponent as Technologies1 } from "../../../../Assets/Pages/Home/L
 import styles from "./ListTechnologies.module.scss";
 import { useAnimationGSAP } from "../../../Hooks/useAnimationGSAP";
 import { BounceBoxes } from "../../../../lib/gsap/BounceBoxes";
-export default function ListTechnologies() {
+function ListTechnologies() {
   const { getElements } = useAnimationGSAP(BounceBoxes);
   return (
     <div ref={getElements} className={styles.technologies}>
@@ -10,3 +10,4 @@ export default function ListTechnologies() {
     </div>
   );
 }
+export { ListTechnologies };

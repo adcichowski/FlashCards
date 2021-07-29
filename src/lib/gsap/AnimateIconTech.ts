@@ -1,7 +1,7 @@
 import { useAvaibleTechnologies } from "../../Components/Pages/Game/useAvaibleTechnologies";
 import { ColorizeIcon } from "./ColorizeIcon";
 import gsap from "gsap";
-export function AnimateIconTech(elements: HTMLDivElement) {
+function AnimateIconTech(elements: HTMLDivElement) {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const allIcon = elements.querySelectorAll("svg");
   const arrayNameColor = Object.values(avaibleTechnologies).reduce<
@@ -24,3 +24,4 @@ export function AnimateIconTech(elements: HTMLDivElement) {
     });
   }
 }
+export { AnimateIconTech };

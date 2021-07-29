@@ -1,9 +1,9 @@
 import { useMainContext } from "../../Context/MainContext";
-import Button from "../Button/Button";
+import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
 import { ReactComponent as Alert } from "../../Assets/Modal/alert-circle.svg";
 import { ReactComponent as Check } from "../../Assets/Modal/check-circle.svg";
-export default function Modal() {
+function Modal() {
   const { dispatch, state } = useMainContext();
   const handleClose = () => {
     dispatch({ type: "closeModal" });
@@ -26,3 +26,4 @@ export default function Modal() {
     </div>
   );
 }
+export { Modal };

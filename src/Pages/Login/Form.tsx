@@ -1,12 +1,12 @@
 import styles from "./Form.module.scss";
-import Modal from "../../Components/Modal/Modal";
-import Button from "../../Components/Button/Button";
-import BackButton from "../../Components/Button/BackButton/BackButton";
-import useFormLoginRegister from "./useFormLoginRegister";
+import { Modal } from "../../Components/Modal/Modal";
+import { Button } from "../../Components/Button/Button";
+import { BackButton } from "../../Components/Button/BackButton/BackButton";
+import { useFormLoginRegister } from "./useFormLoginRegister";
 import { inputValidation } from "../../Utils/Utils";
-import Logo from "../../Components/Logo/Logo";
+import { Logo } from "../../Components/Logo/Logo";
 import { Link } from "react-router-dom";
-export default function Form() {
+function Form() {
   const {
     onSubmit,
     handleSubmit,
@@ -64,3 +64,4 @@ export default function Form() {
     </div>
   );
 }
+export { Form };

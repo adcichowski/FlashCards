@@ -1,13 +1,13 @@
-import Navigation from "../../../Navigation/Navigation";
+import { Navigation } from "../../../Navigation/Navigation";
 import styles from "./MainBoard.module.scss";
-import Button from "../../../Button/Button";
+import { Button } from "../../../Button/Button";
 import { useAuthContext } from "../../../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { useGetData } from "../../../Hooks/useGetData";
 import { ReactComponent as Plus } from "../../../../Assets/Icons/plus.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { useCallback } from "react";
-export default function MainBoard() {
+function MainBoard() {
   useGetData();
   const { dispatch } = useAuthContext();
   const handleClickLogOut = useCallback(() => {
@@ -62,3 +62,4 @@ export default function MainBoard() {
     </>
   );
 }
+export { MainBoard };

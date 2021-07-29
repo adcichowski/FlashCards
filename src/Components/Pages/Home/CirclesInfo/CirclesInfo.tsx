@@ -1,8 +1,8 @@
-import useAnimationCircles from "./Hook";
+import { useAnimationCircles } from "./Hook";
 
 import styles from "./CirclesInfo.module.scss";
 import { ReactComponent as CirclesSVG } from "../../../../Assets/Pages/Home/CirclesAside.svg";
-export default function CirclesInfo() {
+function CirclesInfo() {
   const { getElements } = useAnimationCircles();
 
   return (
@@ -21,3 +21,4 @@ export default function CirclesInfo() {
     </section>
   );
 }
+export { CirclesInfo };
