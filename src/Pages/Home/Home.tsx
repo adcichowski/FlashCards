@@ -1,10 +1,14 @@
 import styles from "./Home.module.scss";
 import { Navigation } from "../../Components/Navigation/Navigation";
-import { CirclesInfo } from "../../Components/Pages/Home/CirclesInfo/CirclesInfo";
 import { Button } from "../../Components/Button/Button";
 import { HomeAbout } from "../../Components/Pages/Home/HomeAbout/HomeAbout";
-import { Footer } from "../../Components/Footer/Footer";
 import React, { Suspense } from "react";
+import { Footer } from "../../Components/Footer/Footer";
+const CirclesInfo = React.lazy(() =>
+  import("../../Components/Pages/Home/CirclesInfo/CirclesInfo").then(
+    (module) => ({ default: module.CirclesInfo })
+  )
+);
 const ListTechnologies = React.lazy(() =>
   import("../../Components/Pages/Home/ListTechnologies/ListTechnologies").then(
     (module) => ({ default: module.ListTechnologies })
@@ -42,8 +46,8 @@ export default function Home() {
           <Suspense fallback={<div>Generate Card Instruction</div>}>
             <Instruction />
             <ListTechnologies />
+            <CirclesInfo />
           </Suspense>
-          <CirclesInfo />
         </article>
         <section className={styles.bigQuestion}>
           <div className={styles.bigQuestionIcon}></div>
