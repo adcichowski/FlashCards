@@ -63,15 +63,13 @@ function CardByContext({ allSortedDataCards }: { allSortedDataCards: Card[] }) {
           </button>
         </div>
       </div>
-      <div>
-        <p>
-          {state.isFavorite
-            ? "Its your favorite card"
-            : "Its not your favorite card"}
-          <div className={styles.heart}>
-            {state.isFavorite ? <Heart /> : <FillHeart />}
-          </div>
+      <div className={styles.favorite}>
+        <p className={styles.favoriteText}>
+          {state.isFavorite ? "Favorite Card" : "Not Favorite Card"}
         </p>
+        <div className={styles.favoriteIcon}>
+          {state.isFavorite ? <FillHeart /> : <Heart />}
+        </div>
       </div>
     </div>
   );

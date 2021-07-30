@@ -5,8 +5,8 @@
 }
 .card {
   color: rgb(27, 27, 27);
-  width: 32rem;
-  height: 45rem;
+  width: clamp(16rem, calc(20rem + 10vw), 31rem);
+  height: clamp(30rem, calc(20rem + 30vh), 45rem);
   display: flex;
   flex-flow: column wrap;
   background-color: rgb(230, 224, 224);
@@ -94,21 +94,36 @@
   overflow-y: auto;
   max-height: 20rem;
 }
-.heart {
-  width: 5rem;
-  height: 5rem;
-  fill: red;
-}
 .rating {
   font-weight: 600;
-  gap: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .star {
+  margin: 0 7px;
   width: 6.5rem;
   height: 6.5rem;
+}
+.favorite {
+  margin-top: 2rem;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 952px) {
+    display: none;
+  }
+}
+.favoriteText {
+  font-size: clamp(2.3rem, calc(2rem+5vw), 3.5rem);
+}
+.favoriteIcon {
+  width: 5rem;
+  height: 5rem;
+}
+.isFavorite {
+  fill: transparent;
 }

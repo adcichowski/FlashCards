@@ -42,3 +42,28 @@
   transform: background-color scale 1s;
   background-color: #a31935;
 }
+.listTechnology {
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+  padding: 4rem;
+  border-radius: 2rem;
+  background-color: #9f1835e8;
+}
+.icon {
+  border: none;
+  cursor: pointer;
+}
+.technology {
+  margin: 0 30px;
+}
+.nameTechnology {
+  text-align: center;
+}
+
+.linkDisable {
+  opacity: 0.2;
+  pointer-events: none;
+}

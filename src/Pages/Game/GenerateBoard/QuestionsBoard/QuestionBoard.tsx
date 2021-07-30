@@ -1,7 +1,6 @@
 import { BackButton } from "../../../../Components/Button/BackButton/BackButton";
 import { Card } from "../../../../Types/Types";
 import { CardByContext } from "../../AddCard/CardByContext/CardByContext";
-import { BlooperSVG } from "./BlooperSVG/BlooperSVG";
 import styles from "./QuestionBoard.module.scss";
 import { useQuestionBoard } from "./useQuestionBoard";
 function QuestionBoard({
@@ -14,15 +13,13 @@ function QuestionBoard({
   const sortedCardsByTech = cardsData.filter(
     (card) => card.technology === technologyBoardName
   );
-  console.log(sortedCardsByTech);
   const { handleClickShowCard, colorTechnology } =
     useQuestionBoard(technologyBoardName);
   return (
     <>
       <BackButton />
-      <BlooperSVG fill={colorTechnology} />
       <div className={styles.board}>
-        <div className={styles.someFeature}></div>
+        <div className={styles.changeTech}></div>
         <div className={styles.cardBoard}>
           <CardByContext allSortedDataCards={sortedCardsByTech} />
         </div>
@@ -30,7 +27,11 @@ function QuestionBoard({
           <p className={styles.questionTitle}>Questions</p>
           <ul className={styles.listQuestion}>
             {sortedCardsByTech.map((card: Card, id) => (
-              <li key={id} className={styles.questionCard}>
+              <li
+                key={id}
+                className={styles.questionCard}
+                style={{ borderColor: colorTechnology }}
+              >
                 <div
                   onClick={() => {
                     handleClickShowCard(card);
