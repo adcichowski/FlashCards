@@ -8,10 +8,10 @@ import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 function GenerateBoard({
   cardsData,
-  title,
+  typeBoard,
 }: {
   cardsData: Card[];
-  title: string;
+  typeBoard: "general" | "personal";
 }) {
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   const { getAvaibleTechnologies } = useAvaibleTechnologies();
@@ -20,7 +20,7 @@ function GenerateBoard({
       <li key={name}>
         {console.log(isActive)}
         <Link
-          to={`/game/personal-cards/${name}`}
+          to={`/game/${typeBoard}-cards/${name}`}
           className={`${styles.technology} ${
             isActive ? "" : styles.linkDisable
           }`}
@@ -41,7 +41,7 @@ function GenerateBoard({
     <>
       <BackButton />
       <div className={styles.board}>
-        <h3 className={styles.title}>{title}</h3>
+        <h3 className={styles.title}>{`${capitalize(typeBoard)} Cards`}</h3>
         <div ref={getElements} className={styles.technology}>
           <ul className={styles.listTechnology}>{renderIcons}</ul>
         </div>

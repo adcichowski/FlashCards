@@ -80,7 +80,7 @@ function CardProvider({ children }: { children: ReactNode }) {
     technology: "none",
     isFlip: false,
     isShow: false,
-    rating: 0,
+    rating: 5,
     isFavorite: false,
     question: "Empty Question",
     answer: "Empty Answer",

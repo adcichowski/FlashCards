@@ -1,6 +1,6 @@
 import { BackButton } from "../../../../Components/Button/BackButton/BackButton";
 import { Card } from "../../../../Types/Types";
-import { CardByContext } from "../../AddCard/CardByContext/CardByContext";
+import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionBoard.module.scss";
 import { useQuestionBoard } from "./useQuestionBoard";
 function QuestionBoard({

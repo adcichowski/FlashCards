@@ -85,8 +85,9 @@
   fill: rgb(31, 136, 165);
 }
 .question {
-  font-size: 2.5rem;
+  font-size: 2rem;
   word-break: break-all;
+  overflow-y: auto;
   max-height: 20rem;
 }
 .answer {

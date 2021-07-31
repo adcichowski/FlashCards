@@ -30,7 +30,7 @@ function MainBoard() {
           <div className={styles.secondButton}>
             <div className={styles.outsideButton}>
               Create Card
-              <Link to="/game/personal-cards/add" className={styles.link}>
+              <Link to="/game/add" className={styles.link}>
                 <Plus />
               </Link>
             </div>

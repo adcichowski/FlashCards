@@ -15,30 +15,37 @@ function GameRoute() {
     <Game>
       <PrivateRoute path="/game" exact component={MainBoard} />
       <Route path="/game/personal-cards" exact>
-        <GenerateBoard
-          cardsData={state.personalCards}
-          title={"Personal Cards"}
-        />
+        <GenerateBoard cardsData={state.personalCards} typeBoard="personal" />
       </Route>
       <Route exact path="/game/general-cards">
-        <GenerateBoard cardsData={state.generalCards} title={"General Cards"} />
+        <GenerateBoard cardsData={state.generalCards} typeBoard="general" />
       </Route>
       <CardProvider>
-        <Route exact path={"/game/personal-cards/add"}>
+        <Route exact path={"/game/add"}>
           <AddCard />
         </Route>
       </CardProvider>
 
       {Object.values(avaibleTechnologies).map(({ name }: { name: string }) => {
         return (
-          <CardProvider key={name}>
-            <Route exact path={`/game/personal-cards/${name}`}>
-              <QuestionBoard
-                technologyBoardName={name}
-                cardsData={state.personalCards}
-              />
-            </Route>
-          </CardProvider>
+          <div key={name}>
+            <CardProvider>
+              <Route exact path={`/game/personal-cards/${name}`}>
+                <QuestionBoard
+                  technologyBoardName={name}
+                  cardsData={state.personalCards}
+                />
+              </Route>
+            </CardProvider>
+            <CardProvider key={name}>
+              <Route exact path={`/game/general-cards/${name}`}>
+                <QuestionBoard
+                  technologyBoardName={name}
+                  cardsData={state.generalCards}
+                />
+              </Route>
+            </CardProvider>
+          </div>
         );
       })}
     </Game>

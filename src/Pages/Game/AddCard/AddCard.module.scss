@@ -1,0 +1,38 @@
+.listTechnology {
+  display: flex;
+}
+
+.listRadioTechnology {
+  display: flex;
+  gap: 10px;
+}
+.radioLabel {
+  cursor: pointer;
+  position: relative;
+}
+.radioInput {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  width: 5rem;
+  height: 5rem;
+  position: relative;
+}
+.radioInput:checked {
+  background-color: #00b0ff;
+}
+.radioIcon {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  top: 10%;
+  width: 70%;
+  height: 70%;
+}
+
+.radioTechnologyInside {
+  width: 2rem;
+  height: 2rem;
+}
