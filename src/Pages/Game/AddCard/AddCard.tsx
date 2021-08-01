@@ -8,6 +8,7 @@ import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibl
 import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
+import { sendData } from "../../../lib/firebase/Utils";
 function AddCard() {
   const { state } = useGameContext();
   const { dispatch, state: stateCard } = useCardContext();
@@ -17,6 +18,9 @@ function AddCard() {
   useEffect(() => {
     if (stateCard.isShow === false) dispatch({ type: "showEmptyCard" });
   });
+  const {
+    state: { isFavorite, technology, rating, id, answer, question },
+  } = useCardContext();
   const handleChangePartCard = (
     partOfCard: keyof Card,
     changeTo: string | boolean
@@ -29,13 +33,20 @@ function AddCard() {
       },
     });
   };
+  const sendCardToData = () => {
+    const card: Card = { isFavorite, technology, rating, id, answer, question };
+    sendData("GeneralCards", card);
+  };
   const renderRadioButtons = Object.values(avaibleTechnologies).map(
     ({ name, render: Component }) => (
       <label className={styles.radioLabel}>
         <span className="sr-only">{name}</span>
         <input
           className={styles.radioInput}
-          onClick={() => handleChangePartCard("technology", name)}
+          onClick={() => {
+            handleChangePartCard("technology", name);
+            console.log(name);
+          }}
           type="radio"
           name="technology"
         />
@@ -51,7 +62,8 @@ function AddCard() {
     <div className={styles.board}>
       <div>
         <p>Added new card to database!</p>
-        <form className={styles.formAddTech}>
+
+        <div className={styles.formAddTechInside}>
           Technology
           <div ref={getElements} className={styles.listRadioTechnology}>
             {renderRadioButtons}
@@ -59,6 +71,7 @@ function AddCard() {
           <label>
             <p>Question</p>
             <input
+              className={styles.textInput}
               onChange={(e) =>
                 handleChangePartCard("question", e.currentTarget.value)
               }
@@ -67,6 +80,7 @@ function AddCard() {
           <label>
             <p>Answer</p>
             <input
+              className={styles.textInput}
               onChange={(e) => {
                 handleChangePartCard("answer", e.currentTarget.value);
               }}
@@ -82,8 +96,8 @@ function AddCard() {
             />
             Click if card must be your favorite
           </label>
-          <Button>Add Card</Button>
-        </form>
+        </div>
+        <Button onClick={sendCardToData}>Add Card</Button>
       </div>
       <CardByContext allSortedDataCards={allDataCards} />
     </div>

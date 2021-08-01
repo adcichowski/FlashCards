@@ -8,13 +8,16 @@
 .listTechnology {
   display: flex;
 }
-.formAddTech {
+.formAddTechInside {
   display: flex;
   flex-flow: column nowrap;
   padding: 1rem;
   width: 70%;
+  align-items: center;
+  gap: 20px;
   border-radius: 20px;
   background: #a01934;
+  text-align: center;
 }
 .listRadioTechnology {
   display: flex;
@@ -49,4 +52,17 @@
 .radioTechnologyInside {
   width: 2rem;
   height: 2rem;
+}
+.textInput {
+  font-weight: 600;
+  font-size: 1.7rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: var(--primary--font-color);
+}
+.textInput:hover,
+.textInput:focus {
+  background-color: #221f63;
 }
