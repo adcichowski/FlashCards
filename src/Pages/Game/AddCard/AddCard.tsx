@@ -6,48 +6,40 @@ import { Card } from "../../../Types/Types";
 import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
 import styles from "./AddCard.module.scss";
+import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
+import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 function AddCard() {
   const { state } = useGameContext();
   const { dispatch, state: stateCard } = useCardContext();
   const allDataCards = [...state.generalCards, ...state.personalCards];
   const { avaibleTechnologies } = useAvaibleTechnologies();
+  const { getElements } = useAnimationGSAP(AnimateIconTech);
   useEffect(() => {
     if (stateCard.isShow === false) dispatch({ type: "showEmptyCard" });
   });
-  const handleChangeTechnology = (
-    nameTechnology: string,
-    partOfCard: keyof Card
-  ) => {
-    dispatch({
-      type: "editingCard",
-      setCard: {
-        ...stateCard,
-        [partOfCard]: nameTechnology,
-      },
-    });
-  };
   const handleChangePartCard = (
-    e: React.FormEvent<HTMLInputElement>,
-    partOfCard: keyof Card
+    partOfCard: keyof Card,
+    changeTo: string | boolean
   ) => {
-    const newValue = e.currentTarget.value;
     dispatch({
       type: "editingCard",
       setCard: {
         ...stateCard,
-        [partOfCard]: newValue,
+        [partOfCard]: changeTo,
       },
     });
   };
-  const renderAllIconsTechnologies = Object.values(avaibleTechnologies).map(
+  const renderRadioButtons = Object.values(avaibleTechnologies).map(
     ({ name, render: Component }) => (
       <label className={styles.radioLabel}>
+        <span className="sr-only">{name}</span>
         <input
           className={styles.radioInput}
-          onClick={() => handleChangeTechnology(name, "technology")}
+          onClick={() => handleChangePartCard("technology", name)}
           type="radio"
           name="technology"
-        ></input>
+        />
+
         <div className={styles.radioIcon}>
           <Component />
         </div>
@@ -56,30 +48,44 @@ function AddCard() {
   );
 
   return (
-    <div>
-      <p>Added new card to database!</p>
+    <div className={styles.board}>
       <div>
-        <form>
-          <label>
-            <p>Technology</p>
-            <div className={styles.listRadioTechnology}>
-              {renderAllIconsTechnologies}
-            </div>
-            <p>Answer</p>
-            <input onChange={(e) => handleChangePartCard(e, "question")} />
-          </label>
+        <p>Added new card to database!</p>
+        <form className={styles.formAddTech}>
+          Technology
+          <div ref={getElements} className={styles.listRadioTechnology}>
+            {renderRadioButtons}
+          </div>
           <label>
             <p>Question</p>
             <input
+              onChange={(e) =>
+                handleChangePartCard("question", e.currentTarget.value)
+              }
+            />
+          </label>
+          <label>
+            <p>Answer</p>
+            <input
               onChange={(e) => {
-                handleChangePartCard(e, "answer");
+                handleChangePartCard("answer", e.currentTarget.value);
               }}
             />
           </label>
+          <label>
+            <input
+              type="checkbox"
+              onClick={() =>
+                handleChangePartCard("isFavorite", !stateCard.isFavorite)
+              }
+              value="Favorite Card"
+            />
+            Click if card must be your favorite
+          </label>
+          <Button>Add Card</Button>
         </form>
       </div>
       <CardByContext allSortedDataCards={allDataCards} />
-      <Button>Add Card</Button>
     </div>
   );
 }

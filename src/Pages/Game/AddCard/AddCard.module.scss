@@ -1,7 +1,21 @@
+.board {
+  display: grid;
+  padding: 2rem;
+  grid-template-columns: 0.5fr 0.2fr;
+  align-items: center;
+  justify-content: center;
+}
 .listTechnology {
   display: flex;
 }
-
+.formAddTech {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 1rem;
+  width: 70%;
+  border-radius: 20px;
+  background: #a01934;
+}
 .listRadioTechnology {
   display: flex;
   gap: 10px;
@@ -16,14 +30,14 @@
   -ms-appearance: none;
   -o-appearance: none;
   appearance: none;
-  width: 5rem;
-  height: 5rem;
-  position: relative;
+  padding: 3rem;
 }
 .radioInput:checked {
   background-color: #00b0ff;
+  border-radius: 10px;
 }
 .radioIcon {
+  margin: auto;
   position: absolute;
   top: 0;
   right: 15%;
