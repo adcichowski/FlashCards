@@ -5,15 +5,25 @@ function sendData(nameDatabase: string, card: Card) {
   db.collection(nameDatabase).add(card);
 }
 function getData(nameDatabase: string) {
-  let personalCards: Card[] = [];
-  let generalCards: Card[] = [];
+  const personalCards: { [index: string]: Card[] } = {};
+  const generalCards: { [index: string]: Card[] } = {};
+
   async function getDataFromFirestore() {
+    const sortCardByTechnology = (
+      object: { [index: string]: Card[] },
+      card: Card
+    ) => {
+      if (object[card.technology] === undefined) {
+        object[card.technology] = [];
+        object[card.technology].push(card);
+      }
+    };
     await db
       .collection(nameDatabase)
       .get()
       .then((data) =>
         data.forEach((cards) => {
-          personalCards.push(cards.data() as Card);
+          sortCardByTechnology(personalCards, cards.data() as Card);
         })
       );
     await db
@@ -21,7 +31,7 @@ function getData(nameDatabase: string) {
       .get()
       .then((data) =>
         data.forEach((cards) => {
-          generalCards.push(cards.data() as Card);
+          sortCardByTechnology(generalCards, cards.data() as Card);
         })
       );
   }

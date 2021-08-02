@@ -4,7 +4,7 @@ import { ReactComponent as VueIcon } from "../../../Assets/Icons/IconsTechnology
 import { ReactComponent as Css3Icon } from "../../../Assets/Icons/IconsTechnology/css3.svg";
 import { ReactComponent as JavascriptIcon } from "../../../Assets/Icons/IconsTechnology/javascript.svg";
 import { ReactComponent as TypescriptIcon } from "../../../Assets/Icons/IconsTechnology/typescript.svg";
-import { AvaibleTechnologiesProperty, Card } from "../../../Types/Types";
+import { AvaibleTechnologiesProperty } from "../../../Types/Types";
 function useAvaibleTechnologies() {
   const avaibleTechnologies: AvaibleTechnologiesProperty = {
     html5: {
@@ -56,8 +56,7 @@ function useAvaibleTechnologies() {
       fill: "#265F9E",
     },
   };
-  function getAvaibleTechnologies(data: Card[]) {
-    const isTechnologyInData = [...data].map(({ technology }) => technology);
+  function getAvaibleTechnologies(technologies: string[]) {
     const arrayAvaibleTechnologies = [
       ...Object.values(avaibleTechnologies),
     ].map(({ name, render, type, description }) => {
@@ -66,7 +65,7 @@ function useAvaibleTechnologies() {
         type,
         description,
         render,
-        isActive: isTechnologyInData.includes(name),
+        isActive: technologies.includes(name),
       };
     });
     return arrayAvaibleTechnologies;

@@ -9,8 +9,8 @@ interface Action {
   setData: UserData;
 }
 interface UserData {
-  personalCards: Card[];
-  generalCards: Card[];
+  personalCards: { [index: string]: Card[] };
+  generalCards: { [index: string]: Card[] };
 }
 function userReducer(state: UserData, action: Action): UserData {
   switch (action.type) {
@@ -37,8 +37,8 @@ const useGameContext = () => {
 };
 const GameProvider = ({ children }: { children: ReactNode }) => {
   const userData: UserData = {
-    personalCards: [],
-    generalCards: [],
+    personalCards: {},
+    generalCards: {},
   };
   const [state, dispatch] = useReducer(userReducer, userData);
   const value = { state, dispatch };

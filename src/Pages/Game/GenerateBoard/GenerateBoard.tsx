@@ -10,15 +10,15 @@ function GenerateBoard({
   cardsData,
   typeBoard,
 }: {
-  cardsData: Card[];
+  cardsData: { [index: string]: Card[] };
   typeBoard: "general" | "personal";
 }) {
+  console.log(cardsData);
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   const { getAvaibleTechnologies } = useAvaibleTechnologies();
-  const renderIcons = getAvaibleTechnologies(cardsData).map(
-    ({ name, type, render: Component, isActive }) => (
+  const renderIcons = getAvaibleTechnologies(Object.keys(cardsData)).map(
+    ({ type, name, isActive, render: Component }) => (
       <li key={name}>
-        {console.log(isActive)}
         <Link
           to={`/game/${typeBoard}-cards/${name}`}
           className={`${styles.technology} ${

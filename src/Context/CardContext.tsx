@@ -22,7 +22,7 @@ interface CardContextInterface extends Card {
 const CardContext = createContext<
   undefined | { state: CardContextInterface; dispatch: Dispatch }
 >(undefined);
-function modalMainReducer(
+function cardMainReducer(
   state: CardContextInterface,
   action: Action
 ): CardContextInterface {
@@ -86,7 +86,8 @@ function CardProvider({ children }: { children: ReactNode }) {
     answer: "Empty Answer",
     randomSvgCard: 0,
   };
-  const [state, dispatch] = useReducer(modalMainReducer, Card);
+
+  const [state, dispatch] = useReducer(cardMainReducer, Card);
   const value = { state, dispatch };
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;
 }

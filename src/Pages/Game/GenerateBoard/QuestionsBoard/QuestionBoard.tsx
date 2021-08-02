@@ -7,12 +7,9 @@ function QuestionBoard({
   cardsData,
   technologyBoardName,
 }: {
-  cardsData: Card[];
+  cardsData: { [index: string]: Card[] };
   technologyBoardName: string;
 }) {
-  const sortedCardsByTech = cardsData.filter(
-    (card) => card.technology === technologyBoardName
-  );
   const { handleClickShowCard, colorTechnology } =
     useQuestionBoard(technologyBoardName);
   return (
@@ -21,12 +18,12 @@ function QuestionBoard({
       <div className={styles.board}>
         <div className={styles.changeTech}></div>
         <div className={styles.cardBoard}>
-          <CardByContext allSortedDataCards={sortedCardsByTech} />
+          <CardByContext allSortedDataCards={cardsData[technologyBoardName]} />
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.questionTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {sortedCardsByTech.map((card: Card, id) => (
+            {cardsData[technologyBoardName].map((card: Card, id) => (
               <li
                 key={id}
                 className={styles.questionCard}

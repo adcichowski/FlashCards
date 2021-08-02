@@ -1,18 +1,15 @@
 import { useEffect } from "react";
 import { Button } from "../../../Components/Button/Button";
 import { useCardContext } from "../../../Context/CardContext";
-import { useGameContext } from "../../../Context/GameContext";
 import { Card } from "../../../Types/Types";
-import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
 import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { sendData } from "../../../lib/firebase/Utils";
 function AddCard() {
-  const { state } = useGameContext();
   const { dispatch, state: stateCard } = useCardContext();
-  const allDataCards = [...state.generalCards, ...state.personalCards];
+
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   useEffect(() => {
@@ -33,12 +30,12 @@ function AddCard() {
       },
     });
   };
-  const sendCardToData = () => {
+  const sendCardToData = (nameDataBase: string) => {
     const card: Card = { isFavorite, technology, rating, id, answer, question };
-    sendData("GeneralCards", card);
+    sendData(nameDataBase, card);
   };
   const renderRadioButtons = Object.values(avaibleTechnologies).map(
-    ({ name, render: Component }) => (
+    ({ name, render }) => (
       <label className={styles.radioLabel}>
         <span className="sr-only">{name}</span>
         <input
@@ -51,9 +48,7 @@ function AddCard() {
           name="technology"
         />
 
-        <div className={styles.radioIcon}>
-          <Component />
-        </div>
+        <div className={styles.radioIcon}>{render}</div>
       </label>
     )
   );
@@ -96,10 +91,17 @@ function AddCard() {
             />
             Click if card must be your favorite
           </label>
+          <label>
+            General Cards
+            <input type="radio" name="board" value="Save in General Cards" />
+          </label>
+          <label>
+            Personal Cards
+            <input type="radio" name="board" value="Save in General Cards" />
+          </label>
         </div>
-        <Button onClick={sendCardToData}>Add Card</Button>
+        <Button onClick={() => sendCardToData("GeneralCards")}>Add Card</Button>
       </div>
-      <CardByContext allSortedDataCards={allDataCards} />
     </div>
   );
 }
