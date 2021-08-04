@@ -1,4 +1,3 @@
-import { Card } from "../../../../Types/Types";
 import { capitalize } from "../../../../Utils/Utils";
 import styles from "./CardByContext.module.scss";
 import { CardWave } from "./CardWave";
@@ -6,16 +5,10 @@ import { useCardByContext } from "./useCardByContext";
 import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
-function CardByContext({ allSortedDataCards }: { allSortedDataCards: Card[] }) {
-  const {
-    state,
-    handleClickNextOrPrevCard,
-    handleClickFlipCard,
-    getIconAndColor,
-  } = useCardByContext(allSortedDataCards);
+function CardByContext() {
+  const { state, handleClickFlipCard, getIconAndColor } = useCardByContext();
   const { CardIcon, colorIcon } = getIconAndColor();
   if (!state.isShow) return null;
-
   return (
     <div className={styles.cardWrapper}>
       <div className={styles.rating}>
@@ -46,21 +39,11 @@ function CardByContext({ allSortedDataCards }: { allSortedDataCards: Card[] }) {
         </div>
         <div className={styles.cardCenterBottom}>0{state.id}</div>
         <div className={styles.cardButtons}>
-          <button
-            onClick={handleClickNextOrPrevCard(-1)}
-            className={styles.button}
-          >
-            Prev Card
-          </button>
+          <button className={styles.button}>Prev Card</button>
           <button className={styles.button} onClick={handleClickFlipCard}>
             {state.isFlip ? "Show Question" : "Show Answer"}
           </button>
-          <button
-            onClick={handleClickNextOrPrevCard(1)}
-            className={styles.button}
-          >
-            Next Card
-          </button>
+          <button className={styles.button}>Next Card</button>
         </div>
       </div>
       <div className={styles.favorite}>

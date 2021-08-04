@@ -8,7 +8,8 @@ interface Action {
     | "flipCard"
     | "getNextOrPrevCard"
     | "showEmptyCard"
-    | "editingCard";
+    | "editingCard"
+    | "setId";
   setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
 interface Dispatch {
@@ -55,6 +56,13 @@ function cardMainReducer(
         isShow: true,
       };
     case "showEmptyCard":
+      return {
+        ...state,
+        ...action.setCard,
+        isFlip: false,
+        isShow: true,
+      };
+    case "setId":
       return {
         ...state,
         ...action.setCard,

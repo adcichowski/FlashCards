@@ -32,7 +32,7 @@ function GameRoute() {
             <CardProvider>
               <Route exact path={`/game/personal-cards/${name}`}>
                 <QuestionBoard
-                  technologyBoardName={name}
+                  technologyName={name}
                   cardsData={state.personalCards}
                 />
               </Route>
@@ -40,7 +40,7 @@ function GameRoute() {
             <CardProvider key={name}>
               <Route exact path={`/game/general-cards/${name}`}>
                 <QuestionBoard
-                  technologyBoardName={name}
+                  technologyName={name}
                   cardsData={state.generalCards}
                 />
               </Route>

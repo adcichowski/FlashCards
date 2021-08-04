@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Button } from "../../../Components/Button/Button";
 import { useCardContext } from "../../../Context/CardContext";
 import { Card } from "../../../Types/Types";
@@ -7,17 +6,25 @@ import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { sendData } from "../../../lib/firebase/Utils";
+import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
+import { useEffect, useState } from "react";
+import { useGameContext } from "../../../Context/GameContext";
+import { useAuthContext } from "../../../Context/AuthContext";
+import { useGetData } from "../../../Components/Hooks/useGetData";
+import { useMainContext } from "../../../Context/MainContext";
+import { useHistory } from "react-router";
 function AddCard() {
+  useGetData();
+  const [nameDataBases, setNameDataBases] = useState<
+    "personalCards" | "generalCards" | ""
+  >("");
+  const history = useHistory();
   const { dispatch, state: stateCard } = useCardContext();
-
   const { avaibleTechnologies } = useAvaibleTechnologies();
+  const { dispatch: dispatchModal } = useMainContext();
   const { getElements } = useAnimationGSAP(AnimateIconTech);
-  useEffect(() => {
-    if (stateCard.isShow === false) dispatch({ type: "showEmptyCard" });
-  });
-  const {
-    state: { isFavorite, technology, rating, id, answer, question },
-  } = useCardContext();
+  const { state: authState } = useAuthContext();
+  const { state } = useGameContext();
   const handleChangePartCard = (
     partOfCard: keyof Card,
     changeTo: string | boolean
@@ -30,25 +37,52 @@ function AddCard() {
       },
     });
   };
-  const sendCardToData = (nameDataBase: string) => {
-    const card: Card = { isFavorite, technology, rating, id, answer, question };
-    sendData(nameDataBase, card);
+  useEffect(() => {
+    if (!stateCard.isShow) dispatch({ type: "showEmptyCard" });
+    if (stateCard.technology === "none" || !nameDataBases) return;
+    const newValueId = !!state[nameDataBases][stateCard.technology]
+      ? state[nameDataBases][stateCard.technology].slice(-1)[0].id + 1
+      : 1;
+    if (stateCard.id !== newValueId) {
+      dispatch({ type: "setId", setCard: { ...stateCard, id: newValueId } });
+    }
+  }, [dispatch, stateCard, state, nameDataBases]);
+  const {
+    state: { isFavorite, technology, rating, id, answer, question },
+  } = useCardContext();
+  const sendCardToData = (placeToSaveCard: string) => {
+    const card: Card = {
+      isFavorite,
+      technology,
+      rating,
+      id,
+      answer,
+      question,
+    };
+    if (placeToSaveCard === "personalCards") sendData(authState.idUser, card);
+    if (placeToSaveCard === "generalCards") sendData("GeneralCards", card);
+    dispatchModal({
+      type: "successModal",
+      setModal: { message: "Card Saved" },
+    });
+    history.push("/game");
   };
   const renderRadioButtons = Object.values(avaibleTechnologies).map(
-    ({ name, render }) => (
+    ({ name, render: Component }) => (
       <label className={styles.radioLabel}>
         <span className="sr-only">{name}</span>
         <input
           className={styles.radioInput}
           onClick={() => {
             handleChangePartCard("technology", name);
-            console.log(name);
           }}
           type="radio"
           name="technology"
         />
 
-        <div className={styles.radioIcon}>{render}</div>
+        <div className={styles.radioIcon}>
+          <Component />
+        </div>
       </label>
     )
   );
@@ -64,8 +98,9 @@ function AddCard() {
             {renderRadioButtons}
           </div>
           <label>
-            <p>Question</p>
+            <span className="sr-only">Question</span>
             <input
+              placeholder={"Question"}
               className={styles.textInput}
               onChange={(e) =>
                 handleChangePartCard("question", e.currentTarget.value)
@@ -73,7 +108,7 @@ function AddCard() {
             />
           </label>
           <label>
-            <p>Answer</p>
+            Answer:
             <input
               className={styles.textInput}
               onChange={(e) => {
@@ -93,15 +128,26 @@ function AddCard() {
           </label>
           <label>
             General Cards
-            <input type="radio" name="board" value="Save in General Cards" />
+            <input
+              type="radio"
+              name="board"
+              onClick={() => setNameDataBases("generalCards")}
+              value="Save in General Cards"
+            />
           </label>
           <label>
             Personal Cards
-            <input type="radio" name="board" value="Save in General Cards" />
+            <input
+              type="radio"
+              name="board"
+              onClick={() => setNameDataBases("personalCards")}
+              value="Save in General Cards"
+            />
           </label>
         </div>
-        <Button onClick={() => sendCardToData("GeneralCards")}>Add Card</Button>
+        <Button onClick={() => sendCardToData(nameDataBases)}>Add Card</Button>
       </div>
+      <CardByContext />
     </div>
   );
 }

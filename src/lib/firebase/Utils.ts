@@ -15,8 +15,8 @@ function getData(nameDatabase: string) {
     ) => {
       if (object[card.technology] === undefined) {
         object[card.technology] = [];
-        object[card.technology].push(card);
       }
+      object[card.technology].push(card);
     };
     await db
       .collection(nameDatabase)

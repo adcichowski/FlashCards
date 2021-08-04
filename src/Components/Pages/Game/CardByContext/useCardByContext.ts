@@ -1,27 +1,26 @@
 import { useCallback } from "react";
 import { useAvaibleTechnologies } from "../../../../Components/Pages/Game/useAvaibleTechnologies";
 import { useCardContext } from "../../../../Context/CardContext";
-import { Card } from "../../../../Types/Types";
 import { ReactComponent as NoneTechIcon } from "../../../../Assets/Icons/cancel.svg";
-function useCardByContext(saveAllDataCards: Card[]) {
+function useCardByContext() {
   const { state, dispatch } = useCardContext();
   const { avaibleTechnologies } = useAvaibleTechnologies();
-  const getIndexOpenedCard = saveAllDataCards.findIndex(
-    (item) => item.question === state.question
-  );
-  const handleClickNextOrPrevCard = useCallback(
-    (number) => () => {
-      dispatch({
-        type: "getNextOrPrevCard",
-        setCard: {
-          ...saveAllDataCards[getIndexOpenedCard + number],
+  // const handleClickNextOrPrevCard = useCallback(
+  //   (number) => () => {
+  //     const getIndexOpenedCard = state.findIndex(
+  //       (item) => item.question === state.question
+  //     );
+  //     dispatch({
+  //       type: "getNextOrPrevCard",
+  //       setCard: {
+  //         ...state[getIndexOpenedCard + number],
 
-          isFlip: false,
-        },
-      });
-    },
-    [dispatch, saveAllDataCards, getIndexOpenedCard]
-  );
+  //         isFlip: false,
+  //       },
+  //     });
+  //   },
+  //   [dispatch, saveAllDataCards, state.question]
+  // );
   const handleClickFlipCard = useCallback(() => {
     dispatch({ type: "flipCard" });
   }, [dispatch]);
@@ -37,7 +36,6 @@ function useCardByContext(saveAllDataCards: Card[]) {
     return { CardIcon, colorIcon };
   };
   return {
-    handleClickNextOrPrevCard,
     handleClickFlipCard,
     getIconAndColor,
     state,

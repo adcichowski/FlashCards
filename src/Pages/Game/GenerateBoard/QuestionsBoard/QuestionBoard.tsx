@@ -5,25 +5,26 @@ import styles from "./QuestionBoard.module.scss";
 import { useQuestionBoard } from "./useQuestionBoard";
 function QuestionBoard({
   cardsData,
-  technologyBoardName,
+  technologyName,
 }: {
   cardsData: { [index: string]: Card[] };
-  technologyBoardName: string;
+  technologyName: string;
 }) {
   const { handleClickShowCard, colorTechnology } =
-    useQuestionBoard(technologyBoardName);
+    useQuestionBoard(technologyName);
   return (
     <>
       <BackButton />
       <div className={styles.board}>
         <div className={styles.changeTech}></div>
         <div className={styles.cardBoard}>
-          <CardByContext allSortedDataCards={cardsData[technologyBoardName]} />
+          <CardByContext />
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.questionTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {cardsData[technologyBoardName].map((card: Card, id) => (
+            {console.log(cardsData)}
+            {cardsData[technologyName].map((card: Card, id) => (
               <li
                 key={id}
                 className={styles.questionCard}

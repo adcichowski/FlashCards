@@ -11,6 +11,7 @@ export function useGetData() {
   const { dispatch: gameDispatch } = useGameContext();
   const { dispatch } = useMainContext();
   useEffect(() => {
+    if (!idUser) return;
     const [personalCards, generalCards] = getData(idUser);
     gameDispatch({
       type: "setData",
@@ -19,5 +20,6 @@ export function useGetData() {
         generalCards,
       },
     });
+    return;
   }, [dispatch, gameDispatch, idUser]);
 }
