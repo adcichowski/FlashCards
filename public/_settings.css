@@ -21,9 +21,10 @@ html {
 }
 
 body {
+  display: grid;
   margin: 0 auto;
+  grid-template-columns: 1fr;
   max-width: 1920px;
-  overflow-x: hidden;
   background-color: var(--bg-article-primary);
   font-size: 1.6rem;
 }

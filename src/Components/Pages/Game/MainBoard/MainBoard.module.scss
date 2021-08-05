@@ -1,8 +1,7 @@
 .board {
-  margin: auto;
   width: 100%;
+  margin: auto;
   display: flex;
-  flex-flow: column;
   align-items: center;
 }
 .insideBoard {
@@ -11,7 +10,6 @@
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 6rem;
 }
 .secondButton {
   display: flex;
