@@ -90,8 +90,8 @@ function CardProvider({ children }: { children: ReactNode }) {
     isShow: false,
     rating: 5,
     isFavorite: false,
-    question: "Empty Question",
-    answer: "Empty Answer",
+    question: "",
+    answer: "",
     randomSvgCard: 0,
   };
 

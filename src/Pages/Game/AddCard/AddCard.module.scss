@@ -1,9 +1,21 @@
 .board {
   display: grid;
+  margin: auto;
   padding: 2rem;
+  gap: 40px;
   grid-template-columns: 0.5fr 0.2fr;
   align-items: center;
   justify-content: center;
+}
+.title {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 600;
+}
+.card {
+  @media screen and (max-width: 750px) {
+    display: none;
+  }
 }
 .listTechnology {
   display: flex;
@@ -12,16 +24,18 @@
   display: flex;
   flex-flow: column nowrap;
   padding: 1rem;
-  width: 70%;
-  align-items: center;
   gap: 20px;
+  align-items: center;
   border-radius: 20px;
   background: #a01934;
-  text-align: center;
+}
+.formAddTechTitle {
+  font-size: 2.5rem;
 }
 .listRadioTechnology {
   display: flex;
   gap: 10px;
+  overflow-x: auto;
 }
 .radioLabel {
   cursor: pointer;
@@ -36,11 +50,12 @@
   padding: 3rem;
 }
 .radioInput:checked {
-  background-color: #00b0ff;
-  border-radius: 10px;
+  background-color: #221f6382;
+  border-radius: 5px;
 }
 .radioIcon {
-  margin: auto;
+  display: grid;
+  align-items: center;
   position: absolute;
   top: 0;
   right: 15%;
@@ -54,6 +69,7 @@
   height: 2rem;
 }
 .textInput {
+  width: 100%;
   font-weight: 600;
   font-size: 1.7rem;
   padding: 5px 10px;
@@ -62,7 +78,22 @@
   border: 1px solid white;
   color: var(--primary--font-color);
 }
+.textInput::placeholder {
+  color: var(--primary--font-color);
+}
 .textInput:hover,
 .textInput:focus {
   background-color: #221f63;
+}
+.textarea {
+  min-height: 17rem;
+  resize: none;
+}
+.radioBoard {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.labelBoard {
+  display: flex;
+  align-items: center;
 }

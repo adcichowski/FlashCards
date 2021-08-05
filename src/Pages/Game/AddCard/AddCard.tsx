@@ -13,6 +13,7 @@ import { useAuthContext } from "../../../Context/AuthContext";
 import { useGetData } from "../../../Components/Hooks/useGetData";
 import { useMainContext } from "../../../Context/MainContext";
 import { useHistory } from "react-router";
+import { BackButton } from "../../../Components/Button/BackButton/BackButton";
 function AddCard() {
   useGetData();
   const [nameDataBases, setNameDataBases] = useState<
@@ -63,7 +64,7 @@ function AddCard() {
     if (placeToSaveCard === "generalCards") sendData("GeneralCards", card);
     dispatchModal({
       type: "successModal",
-      setModal: { message: "Card Saved" },
+      setModal: { message: `Card Saved` },
     });
     history.push("/game");
   };
@@ -89,11 +90,12 @@ function AddCard() {
 
   return (
     <div className={styles.board}>
+      <BackButton />
       <div>
-        <p>Added new card to database!</p>
+        <p className={styles.title}>Save your own card!</p>
 
         <div className={styles.formAddTechInside}>
-          Technology
+          <span className={styles.formAddTechTitle}>Set Techology</span>
           <div ref={getElements} className={styles.listRadioTechnology}>
             {renderRadioButtons}
           </div>
@@ -108,13 +110,14 @@ function AddCard() {
             />
           </label>
           <label>
-            Answer:
-            <input
-              className={styles.textInput}
+            <span className="sr-only">Answer</span>
+            <textarea
+              placeholder={"Answer"}
+              className={`${styles.textInput} ${styles.textarea}`}
               onChange={(e) => {
                 handleChangePartCard("answer", e.currentTarget.value);
               }}
-            />
+            ></textarea>
           </label>
           <label>
             <input
@@ -126,28 +129,32 @@ function AddCard() {
             />
             Click if card must be your favorite
           </label>
-          <label>
-            General Cards
-            <input
-              type="radio"
-              name="board"
-              onClick={() => setNameDataBases("generalCards")}
-              value="Save in General Cards"
-            />
-          </label>
-          <label>
-            Personal Cards
-            <input
-              type="radio"
-              name="board"
-              onClick={() => setNameDataBases("personalCards")}
-              value="Save in General Cards"
-            />
-          </label>
+          <div className={styles.radioBoard}>
+            <label className={styles.labelBoard}>
+              General Cards
+              <input
+                type="radio"
+                name="board"
+                onClick={() => setNameDataBases("generalCards")}
+              />
+            </label>
+            <label className={styles.labelBoard}>
+              Personal Cards
+              <input
+                type="radio"
+                name="board"
+                onClick={() => setNameDataBases("personalCards")}
+              />
+            </label>
+          </div>
+          <Button onClick={() => sendCardToData(nameDataBases)}>
+            Add Card
+          </Button>
         </div>
-        <Button onClick={() => sendCardToData(nameDataBases)}>Add Card</Button>
       </div>
-      <CardByContext />
+      <div className={styles.card}>
+        <CardByContext />
+      </div>
     </div>
   );
 }

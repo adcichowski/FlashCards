@@ -23,25 +23,26 @@ function QuestionBoard({
         <div className={styles.questionBoard}>
           <p className={styles.questionTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {console.log(cardsData)}
-            {cardsData[technologyName].map((card: Card, id) => (
-              <li
-                key={id}
-                className={styles.questionCard}
-                style={{ borderColor: colorTechnology }}
-              >
-                <div
-                  onClick={() => {
-                    handleClickShowCard(card);
-                  }}
-                  className={styles.questionCardInner}
+            {cardsData[technologyName]
+              .sort((a, b) => a.id - b.id)
+              .map((card: Card, id) => (
+                <li
+                  key={id}
+                  className={styles.questionCard}
+                  style={{ borderColor: colorTechnology }}
                 >
-                  <button className={styles.questionDots}></button>
-                  <p className={styles.question}>{card.question}</p>
-                  <div className={styles.questionId}>0{card.id}</div>
-                </div>
-              </li>
-            ))}
+                  <div
+                    onClick={() => {
+                      handleClickShowCard(card);
+                    }}
+                    className={styles.questionCardInner}
+                  >
+                    <button className={styles.questionDots}></button>
+                    <p className={styles.question}>{card.question}</p>
+                    <div className={styles.questionId}>0{card.id}</div>
+                  </div>
+                </li>
+              ))}
           </ul>
         </div>
       </div>
