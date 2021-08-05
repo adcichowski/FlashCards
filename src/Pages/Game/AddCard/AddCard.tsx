@@ -127,7 +127,7 @@ function AddCard() {
               }
               value="Favorite Card"
             />
-            Click if card must be your favorite
+            Favorite Card
           </label>
           <div className={styles.radioBoard}>
             <label className={styles.labelBoard}>

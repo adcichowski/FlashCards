@@ -54,7 +54,7 @@ function Form() {
                 {isRegister ? "Back to login" : "Create account"}
               </Button>
             </div>
-            <Link to="/">
+            <Link to="/" className={styles.formLogo}>
               <Logo />
             </Link>
           </form>
