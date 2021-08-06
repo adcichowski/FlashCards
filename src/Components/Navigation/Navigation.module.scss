@@ -96,26 +96,24 @@
 .menuSocial {
   display: flex;
   flex-flow: row wrap;
-  margin: 0 1rem;
+  justify-content: space-around;
 }
-.social {
-  margin: 0 0.5rem;
-}
+
 .instagram {
-  width: 33px;
-  height: 33px;
+  width: 30px;
+  height: 30px;
   background: url("../../Assets/SocialIcons/instagram.svg") no-repeat
     center/contain;
 }
 .twitter {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   background: url("../../Assets/SocialIcons/twitter.svg") no-repeat
     center/contain;
 }
 .facebook {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   background: url("../../Assets/SocialIcons/facebook.svg") no-repeat
     center/contain;
 }
