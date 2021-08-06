@@ -6,6 +6,10 @@ import { useMainContext } from "../../Context/MainContext";
 import { UserData } from "../../Types/Types";
 import { useState } from "react";
 import React from "react";
+import {
+  createUserEmailPass,
+  signUserEmailPass,
+} from "../../lib/firebase/Utils";
 
 function useFormLoginRegister() {
   const [isRegister, setIsRegister] = useState(false);
@@ -27,10 +31,10 @@ function useFormLoginRegister() {
       try {
         switch (typeOfAction) {
           case "register":
-            auth.createUserWithEmailAndPassword(email, password);
+            createUserEmailPass(email, password);
             break;
           case "login":
-            auth.signInWithEmailAndPassword(email, password);
+            signUserEmailPass(email, password);
             break;
         }
         if (!auth?.currentUser?.uid) {
