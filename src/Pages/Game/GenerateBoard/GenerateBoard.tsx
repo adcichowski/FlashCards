@@ -41,7 +41,7 @@ function GenerateBoard({
     <>
       <BackButton />
       <div className={styles.board}>
-        <h3 className={styles.title}>{`${capitalize(typeBoard)} Cards`}</h3>
+        <p className={styles.title}>{`${capitalize(typeBoard)} Cards`}</p>
         <div ref={getElements} className={styles.technology}>
           <ul className={styles.listTechnology}>{renderIcons}</ul>
         </div>

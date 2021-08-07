@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Logo } from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
@@ -7,6 +7,17 @@ import { useAuthContext } from "../../Context/AuthContext";
 import { Button } from "../Button/Button";
 
 function Navigation() {
+  const { state, dispatch } = useAuthContext();
+
+  const handleClickLogOut = useCallback(() => {
+    dispatch({ type: "logOut" });
+  }, [dispatch]);
+
+  const [isOpen, setOpen] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+  });
+  const handleClick = () => setOpen(!isOpen);
   const renderNavigationLinks = navigationLinks.map((element) => (
     <li key={element.name}>
       <Link className={styles.navItem} to={element.path}>
@@ -23,12 +34,6 @@ function Navigation() {
       </a>
     </li>
   ));
-  const { state, dispatch } = useAuthContext();
-  const handleClickLogOut = useCallback(() => {
-    dispatch({ type: "logOut" });
-  }, [dispatch]);
-  const [isOpen, setOpen] = useState(false);
-  const handleClick = () => setOpen(!isOpen);
   return (
     <nav className={styles.nav}>
       {isOpen ? (

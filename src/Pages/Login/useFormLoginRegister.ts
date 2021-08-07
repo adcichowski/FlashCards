@@ -6,10 +6,7 @@ import { useMainContext } from "../../Context/MainContext";
 import { UserData } from "../../Types/Types";
 import { useState } from "react";
 import React from "react";
-import {
-  createUserEmailPass,
-  signUserEmailPass,
-} from "../../lib/firebase/Utils";
+import { doActionWithEmailPass } from "../../lib/firebase/Utils";
 
 function useFormLoginRegister() {
   const [isRegister, setIsRegister] = useState(false);
@@ -29,14 +26,7 @@ function useFormLoginRegister() {
   const onSubmit = React.useCallback(
     async ({ email, password }: UserData) => {
       try {
-        switch (typeOfAction) {
-          case "register":
-            createUserEmailPass(email, password);
-            break;
-          case "login":
-            signUserEmailPass(email, password);
-            break;
-        }
+        await doActionWithEmailPass(typeOfAction, email, password);
         if (!auth?.currentUser?.uid) {
           throw Error("This account not exist!");
         }

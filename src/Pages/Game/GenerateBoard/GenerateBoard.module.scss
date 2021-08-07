@@ -1,12 +1,14 @@
 .board {
   margin: auto;
+  height: 100vh;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
 .title {
-  font-size: clamp(3rem, calc(5rem+5vw), 6rem);
+  font-size: clamp(2.6rem, calc(5rem+3vw), 6rem);
+  font-weight: 600;
 }
 .technology {
   display: flex;

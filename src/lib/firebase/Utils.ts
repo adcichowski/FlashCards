@@ -5,8 +5,18 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-function createUserEmailPass(email: string, password: string) {
-  return createUserWithEmailAndPassword(auth, email, password);
+function doActionWithEmailPass(
+  action: "register" | "login",
+  email: string,
+  password: string
+) {
+  switch (action) {
+    case "register":
+      return createUserWithEmailAndPassword(auth, email, password);
+
+    case "login":
+      return signInWithEmailAndPassword(auth, email, password);
+  }
 }
 function signUserEmailPass(email: string, password: string) {
   return signInWithEmailAndPassword(auth, email, password);
@@ -43,4 +53,4 @@ function getData(nameDatabase: string) {
   getDataFromFirestore();
   return [personalCards, generalCards];
 }
-export { sendData, getData, createUserEmailPass, signUserEmailPass };
+export { sendData, getData, doActionWithEmailPass, signUserEmailPass };
