@@ -6,57 +6,21 @@ interface ButtonProps {
   type?: "submit" | "button";
   children: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  width?: string;
-  height?: string;
-  fontSize?: string;
   link?: string;
   maxWidth?: string;
   maxHeight?: string;
 }
-function Button({
-  type,
-  link,
-  children,
-  onClick,
-  width,
-  height,
-  fontSize,
-  maxWidth = "20rem",
-  maxHeight = "10rem",
-}: ButtonProps) {
+function Button({ type, link, children, onClick }: ButtonProps) {
   if (link) {
     return (
-      <Link
-        to={`/${link}`}
-        className={styles.button}
-        style={{
-          width,
-          height,
-          maxWidth,
-          maxHeight,
-        }}
-      >
-        <span style={{ fontSize }} className={styles.front}>
-          {children}
-        </span>
+      <Link to={`/${link}`} className={styles.button}>
+        <span className={styles.front}>{children}</span>
       </Link>
     );
   }
   return (
-    <button
-      type={type}
-      style={{
-        width,
-        height,
-        maxWidth,
-        maxHeight,
-      }}
-      onClick={onClick}
-      className={styles.button}
-    >
-      <span style={{ fontSize }} className={styles.front}>
-        {children}
-      </span>
+    <button type={type} onClick={onClick} className={styles.button}>
+      <span className={styles.front}>{children}</span>
     </button>
   );
 }

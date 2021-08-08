@@ -1,12 +1,17 @@
 .button {
-  width: clamp(5rem, calc(10rem + 4vw), calc(5rem + 5vw));
-  height: clamp(4rem, calc(3rem + 2vw), 10rem);
+  width: clamp(5rem, calc(7rem + 10vw), 15rem);
+  height: clamp(4rem, calc(3rem + 5vw), 7rem);
   position: relative;
   border: none;
   background: transparent;
   cursor: pointer;
   outline-offset: 4px;
   transition: filter 250ms;
+}
+.bigButton {
+  width: clamp(10rem, calc(10rem + 10vw), 20rem);
+  height: clamp(9rem, calc(4rem + 5vw), 8rem);
+  font-size: 5rem;
 }
 .button::before {
   content: "";
@@ -56,6 +61,9 @@
   will-change: transform;
   transform: translateY(-4px);
   transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+.bigFront {
+  font-size: clamp(2.2rem, calc(2.2rem + 3vw), 2.7rem);
 }
 .button:hover {
   filter: brightness(110%);

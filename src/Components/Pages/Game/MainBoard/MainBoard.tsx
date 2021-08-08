@@ -13,14 +13,7 @@ function MainBoard() {
 
       <div className={styles.board}>
         <div className={styles.insideBoard}>
-          <Button
-            width="calc(13rem + 6vw)"
-            height="calc(3rem + 3vw)"
-            fontSize="clamp(2rem,calc(1rem + 1vw),6rem)"
-            link="game/personal-cards"
-          >
-            Personal Cards
-          </Button>
+          <Button link="game/personal-cards">Personal Cards</Button>
           <div className={styles.secondButton}>
             <div className={styles.outsideButton}>
               Create Card
@@ -41,14 +34,7 @@ function MainBoard() {
             </div>
           </div>
 
-          <Button
-            width="calc(13rem + 6vw)"
-            height="calc(3rem + 3vw)"
-            fontSize="clamp(2rem,calc(1rem + 1vw),6rem)"
-            link="game/general-cards"
-          >
-            General Cards
-          </Button>
+          <Button link="game/general-cards">General Cards</Button>
         </div>
       </div>
     </>
