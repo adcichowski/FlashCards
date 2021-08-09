@@ -8,11 +8,11 @@ import { Button } from "../Button/Button";
 
 function Navigation() {
   const { state, dispatch } = useAuthContext();
-  const [scrollPosition, setScrollPosition] = useState(0);
   const handleClickLogOut = useCallback(() => {
     dispatch({ type: "logOut" });
   }, [dispatch]);
   const [isOpen, setOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   useEffect(() => {
     if (document.body.style.position === "static") {
       setScrollPosition(window.scrollY);

@@ -3,9 +3,7 @@ function useAnimationGSAP(nameAnimation: (element: HTMLDivElement) => void) {
   const getElements = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const elements = getElements.current;
-    if (!elements) {
-      return;
-    }
+    if (!elements) return;
     nameAnimation(elements);
   });
   return { getElements };
