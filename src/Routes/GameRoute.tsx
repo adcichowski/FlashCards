@@ -13,15 +13,15 @@ function GameRoute() {
   const { state } = useGameContext();
   return (
     <Game>
-      <PrivateRoute path="/game" exact component={MainBoard} />
-      <Route path="/game/personal-cards" exact>
+      <PrivateRoute exact path="/game" component={MainBoard} />
+      <Route exact path="/game/personal-cards">
         <GenerateBoard cardsData={state.personalCards} typeBoard="personal" />
       </Route>
       <Route exact path="/game/general-cards">
         <GenerateBoard cardsData={state.generalCards} typeBoard="general" />
       </Route>
       <CardProvider>
-        <Route exact path={"/game/add"}>
+        <Route path={"/game/add"}>
           <AddCard />
         </Route>
       </CardProvider>

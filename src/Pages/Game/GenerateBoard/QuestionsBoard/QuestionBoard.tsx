@@ -3,6 +3,7 @@ import { Card } from "../../../../Types/Types";
 import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionBoard.module.scss";
 import { useQuestionBoard } from "./useQuestionBoard";
+import { useRef } from "react";
 function QuestionBoard({
   cardsData,
   technologyName,
@@ -10,27 +11,23 @@ function QuestionBoard({
   cardsData: { [index: string]: Card[] };
   technologyName: string;
 }) {
-  const { handleClickShowCard, colorTechnology } =
-    useQuestionBoard(technologyName);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { handleClickShowCard } = useQuestionBoard(technologyName);
   return (
     <>
       <BackButton />
       <div className={styles.board}>
-        <div className={styles.changeTech}></div>
         <div className={styles.cardBoard}>
           <CardByContext />
         </div>
-        <div className={styles.questionBoard}>
-          <p className={styles.questionTitle}>Questions</p>
+        <div ref={ref} className={styles.questionBoard}>
+          <p className={styles.boardTitle}>Questions</p>
           <ul className={styles.listQuestion}>
             {cardsData[technologyName]
               .sort((a, b) => a.id - b.id)
               .map((card: Card, id) => (
-                <li
-                  key={id}
-                  className={styles.questionCard}
-                  style={{ borderColor: colorTechnology }}
-                >
+                <li key={card.question} className={styles.questionCard}>
                   <div
                     onClick={() => {
                       handleClickShowCard(card);
@@ -39,6 +36,7 @@ function QuestionBoard({
                   >
                     <button className={styles.questionDots}></button>
                     <p className={styles.question}>{card.question}</p>
+                    <p>{card.rating}</p>
                     <div className={styles.questionId}>0{card.id}</div>
                   </div>
                 </li>

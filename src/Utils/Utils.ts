@@ -35,12 +35,8 @@ export function capitalize(txt: string) {
 export function validateInputOnlyNumbers(input: string) {
   return /^\d+$/.test(input);
 }
-// fuction getIdFromLastObj(obj:any , key: string, stateCard:Card) {
-//     if (stateCard.technology !== "none" && !!typeBoard) {
-//       const newValueId = !!state[typeBoard][stateCard.technology]
-//         ? state[typeBoard][stateCard.technology].slice(-1)[0].id + 1
-//         : 1;
-//       if (stateCard.id !== newValueId) {
-//         dispatch({ type: "setId", setCard: { ...stateCard, id: newValueId } });
-//       }
-// }
+export function changeMessageFromFirebase(message: string) {
+  const messageFromRegex = message.match(/\w+[\\-]\w.*\w+?/);
+  if (!messageFromRegex) return message;
+  return capitalize(messageFromRegex[0].split("-").join(" "));
+}

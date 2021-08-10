@@ -1,26 +1,18 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { Logo } from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import { Link } from "react-router-dom";
 import { socialLinks, navigationLinks } from "../../Constants/Constants";
 import { useAuthContext } from "../../Context/AuthContext";
 import { Button } from "../Button/Button";
-
 function Navigation() {
   const { state, dispatch } = useAuthContext();
   const handleClickLogOut = useCallback(() => {
     dispatch({ type: "logOut" });
   }, [dispatch]);
   const [isOpen, setOpen] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  useEffect(() => {
-    if (document.body.style.position === "static") {
-      setScrollPosition(window.scrollY);
-    }
-    document.body.style.position = isOpen ? "fixed" : "static";
-    window.scrollTo(0, scrollPosition);
-  }, [isOpen, scrollPosition]);
   const handleClick = () => setOpen(!isOpen);
+
   const renderNavigationLinks = navigationLinks.map((element) => (
     <li onClick={handleClick} key={element.name}>
       <Link className={styles.navItem} to={element.path}>

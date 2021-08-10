@@ -1,10 +1,8 @@
 import { useCallback } from "react";
-import { useAvaibleTechnologies } from "../../../../Components/Pages/Game/useAvaibleTechnologies";
 import { useCardContext } from "../../../../Context/CardContext";
 import { Card } from "../../../../Types/Types";
 
 function useQuestionBoard(nameTechnology: string) {
-  const { avaibleTechnologies } = useAvaibleTechnologies();
   const { dispatch, state } = useCardContext();
   const handleClickShowCard = useCallback(
     (card: Card) => {
@@ -16,8 +14,6 @@ function useQuestionBoard(nameTechnology: string) {
     [dispatch]
   );
 
-  const colorTechnology = avaibleTechnologies[nameTechnology].fill;
-
-  return { handleClickShowCard, colorTechnology, state };
+  return { handleClickShowCard, state };
 }
 export { useQuestionBoard };
