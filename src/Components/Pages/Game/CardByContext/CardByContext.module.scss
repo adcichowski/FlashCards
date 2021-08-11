@@ -2,6 +2,11 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
+  @media screen and (max-width: 952px) {
+    background-color: #221f63bd;
+    width: 100vw;
+    height: 100vh;
+  }
 }
 .card {
   color: rgb(27, 27, 27);
@@ -122,4 +127,11 @@
 .favoriteIcon {
   width: clamp(3rem, calc(1rem+5vw), 5rem);
   height: clamp(3rem, calc(1rem+5vw), 5rem);
+}
+.buttonHide {
+  display: none;
+  @media screen and (max-width: 952px) {
+    margin-top: 1rem;
+    display: block;
+  }
 }

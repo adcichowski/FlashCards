@@ -9,7 +9,8 @@ interface Action {
     | "getNextOrPrevCard"
     | "showEmptyCard"
     | "editingCard"
-    | "setId";
+    | "setId"
+    | "hideCard";
   setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
 interface Dispatch {
@@ -28,11 +29,17 @@ function cardMainReducer(
   action: Action
 ): CardContextInterface {
   switch (action.type) {
+    case "hideCard":
+      return {
+        ...state,
+        ...action.setCard,
+        isFlip: false,
+        isShow: false,
+      };
     case "showCard":
       return {
         ...state,
         ...action.setCard,
-        randomSvgCard: getRandomMinMax(0, 10),
         isFlip: false,
         isShow: true,
       };

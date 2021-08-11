@@ -16,8 +16,6 @@
   padding: 0;
 }
 html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
   font-size: 10px;
   color: var(--font-color-primary);
 }

@@ -24,6 +24,9 @@ function useCardByContext() {
   const handleClickFlipCard = useCallback(() => {
     dispatch({ type: "flipCard" });
   }, [dispatch]);
+  const handleClickHideCard = useCallback(() => {
+    dispatch({ type: "hideCard" });
+  }, [dispatch]);
   const getIconAndColor = () => {
     const CardIcon =
       state.technology === "none"
@@ -39,6 +42,7 @@ function useCardByContext() {
     handleClickFlipCard,
     getIconAndColor,
     state,
+    handleClickHideCard,
   };
 }
 export { useCardByContext };

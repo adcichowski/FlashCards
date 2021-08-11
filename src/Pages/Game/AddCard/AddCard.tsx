@@ -147,10 +147,8 @@ function AddCard() {
               />
             </label>
           </div>
-          <Button onClick={() => sendCardToData(nameDataBases)}>
-            Add Card
-          </Button>
         </div>
+        <Button onClick={() => sendCardToData(nameDataBases)}>Add Card</Button>
       </div>
       <div className={styles.card}>
         <CardByContext />

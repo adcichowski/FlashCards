@@ -5,8 +5,10 @@ import { useCardByContext } from "./useCardByContext";
 import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
+import { Button } from "../../../Button/Button";
 function CardByContext() {
-  const { state, handleClickFlipCard, getIconAndColor } = useCardByContext();
+  const { state, handleClickFlipCard, getIconAndColor, handleClickHideCard } =
+    useCardByContext();
   const { CardIcon, colorIcon } = getIconAndColor();
   if (!state.isShow) return null;
   return (
@@ -53,6 +55,9 @@ function CardByContext() {
         <div className={styles.favoriteIcon}>
           {state.isFavorite ? <FillHeart /> : <Heart />}
         </div>
+      </div>
+      <div className={styles.buttonHide}>
+        <Button onClick={handleClickHideCard}>Hide Card</Button>
       </div>
     </div>
   );

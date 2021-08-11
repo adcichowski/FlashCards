@@ -14,6 +14,6 @@ function useQuestionBoard(nameTechnology: string) {
     [dispatch]
   );
 
-  return { handleClickShowCard, state };
+  return { handleClickShowCard, state, dispatch };
 }
 export { useQuestionBoard };

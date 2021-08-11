@@ -2,6 +2,8 @@ import { BackButton } from "../../../../Components/Button/BackButton/BackButton"
 import { Card } from "../../../../Types/Types";
 import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionBoard.module.scss";
+import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
+import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { useQuestionBoard } from "./useQuestionBoard";
 import { useRef } from "react";
 function QuestionBoard({
@@ -13,11 +15,12 @@ function QuestionBoard({
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const { handleClickShowCard } = useQuestionBoard(technologyName);
+  const { handleClickShowCard, dispatch } = useQuestionBoard(technologyName);
   return (
-    <>
+    <div>
       <BackButton />
       <div className={styles.board}>
+        <div></div>
         <div className={styles.cardBoard}>
           <CardByContext />
         </div>
@@ -34,9 +37,12 @@ function QuestionBoard({
                     }}
                     className={styles.questionCardInner}
                   >
-                    <button className={styles.questionDots}></button>
+                    <div className={styles.questionRate}>
+                      {card.rating}x
+                      <Star />
+                    </div>
                     <p className={styles.question}>{card.question}</p>
-                    <p>{card.rating}</p>
+
                     <div className={styles.questionId}>0{card.id}</div>
                   </div>
                 </li>
@@ -44,7 +50,7 @@ function QuestionBoard({
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export { QuestionBoard };

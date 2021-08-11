@@ -2,10 +2,15 @@
   display: grid;
   margin: auto;
   padding: 2rem;
-  gap: 40px;
+  gap: 20px;
   grid-template-columns: 0.5fr 0.2fr;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 952px) {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .title {
   text-align: center;
@@ -13,7 +18,7 @@
   font-weight: 600;
 }
 .card {
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 952px) {
     display: none;
   }
 }
