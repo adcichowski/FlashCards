@@ -13,7 +13,8 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  background-color: #9f1835;
+  background-color: #221f63;
+  position: relative;
 }
 .boardTitle {
   font-size: 3rem;
@@ -35,17 +36,25 @@
   background-color: transparent;
   color: var(--primary-font-color);
   &:hover {
-    background-color: #221f63;
+    background-color: #9f1835;
     transition: background-color ease-in-out;
   }
 }
 .listQuestion {
-  width: 100%;
+  overflow: auto;
+  max-height: 90vh;
+  width: 90%;
   position: relative;
   z-index: 12;
 }
 .question {
   font-size: 1.75rem;
+  position: relative;
+}
+.questionFavorite {
+  width: 2.5rem;
+  position: absolute;
+  align-self: flex-start;
 }
 .questionRate {
   align-self: flex-end;
@@ -69,14 +78,40 @@
 .cardBoard {
   z-index: 0;
   place-self: center;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
   position: relative;
   @media screen and (max-width: 952px) {
+    display: grid;
     position: absolute;
     left: 0;
+    top: 0;
+    display: flex;
+    place-self: center;
     z-index: 20;
   }
 }
 .listQuestionOpen {
   transform: translateY(-20rem);
   transition: transform 0.5s ease-in-out;
+}
+.functionButtons {
+  display: flex;
+  gap: 40px;
+}
+.cardWrapper {
+  @media screen and (max-width: 952px) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #221f63c2;
+  }
 }

@@ -4,8 +4,9 @@ import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/C
 import styles from "./QuestionBoard.module.scss";
 import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
+import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
 import { useQuestionBoard } from "./useQuestionBoard";
-import { useRef } from "react";
+import { Button } from "../../../../Components/Button/Button";
 function QuestionBoard({
   cardsData,
   technologyName,
@@ -13,18 +14,23 @@ function QuestionBoard({
   cardsData: { [index: string]: Card[] };
   technologyName: string;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { handleClickShowCard, dispatch } = useQuestionBoard(technologyName);
+  const { handleClickShowCard, state } = useQuestionBoard(technologyName);
   return (
     <div>
       <BackButton />
       <div className={styles.board}>
         <div></div>
         <div className={styles.cardBoard}>
-          <CardByContext />
+          <div className={styles.cardWrapper}>
+            <div className={styles.functionButtons}>
+              {state.isShow && <Button>Delete Card</Button>}
+              {state.isShow && <Button>Rate Card</Button>}
+            </div>
+
+            <CardByContext />
+          </div>
         </div>
-        <div ref={ref} className={styles.questionBoard}>
+        <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
           <ul className={styles.listQuestion}>
             {cardsData[technologyName]
@@ -37,6 +43,9 @@ function QuestionBoard({
                     }}
                     className={styles.questionCardInner}
                   >
+                    <div className={styles.questionFavorite}>
+                      {card.isFavorite ? <FillHeart /> : <Heart />}
+                    </div>
                     <div className={styles.questionRate}>
                       {card.rating}x
                       <Star />
