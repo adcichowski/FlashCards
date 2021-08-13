@@ -21,7 +21,7 @@ function QuestionBoard({
       <div className={styles.board}>
         <div></div>
         <div className={styles.cardBoard}>
-          <div className={styles.cardWrapper}>
+          <div className={state.isShow ? styles.cardWrapper : ""}>
             <div className={styles.functionButtons}>
               {state.isShow && <Button>Delete Card</Button>}
               {state.isShow && <Button>Rate Card</Button>}

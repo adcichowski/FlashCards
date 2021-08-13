@@ -5,27 +5,17 @@ import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibl
 import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
-import { sendData } from "../../../lib/firebase/Utils";
 import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
-import { useEffect, useState } from "react";
-import { useGameContext } from "../../../Context/GameContext";
-import { useAuthContext } from "../../../Context/AuthContext";
-import { useGetData } from "../../../Components/Hooks/useGetData";
-import { useMainContext } from "../../../Context/MainContext";
-import { useHistory } from "react-router";
+
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
+import useSendCardToDatabase from "./useSendCardToDatabase";
+import { useSetIdCard } from "./useSetIdCard";
 function AddCard() {
-  useGetData();
-  const [nameDataBases, setNameDataBases] = useState<
-    "personalCards" | "generalCards" | ""
-  >("");
-  const history = useHistory();
+  const { nameDatabase, setNameDatabase } = useSetIdCard();
+  const { sendCardToDatabase } = useSendCardToDatabase(nameDatabase);
   const { dispatch, state: stateCard } = useCardContext();
   const { avaibleTechnologies } = useAvaibleTechnologies();
-  const { dispatch: dispatchModal } = useMainContext();
   const { getElements } = useAnimationGSAP(AnimateIconTech);
-  const { state: authState } = useAuthContext();
-  const { state } = useGameContext();
   const handleChangePartCard = (
     partOfCard: keyof Card,
     changeTo: string | boolean
@@ -38,39 +28,7 @@ function AddCard() {
       },
     });
   };
-  useEffect(() => {
-    if (!stateCard.isShow) dispatch({ type: "showEmptyCard" });
-    if (stateCard.technology === "none" || !nameDataBases) return;
-    const newValueId = !!state[nameDataBases][stateCard.technology]
-      ? state[nameDataBases][stateCard.technology].slice(-1)[0].id + 1
-      : 1;
-    if (stateCard.id !== newValueId) {
-      dispatch({
-        type: "editingCard",
-        setCard: { ...stateCard, id: newValueId },
-      });
-    }
-  }, [dispatch, stateCard, state, nameDataBases]);
-  const {
-    state: { isFavorite, technology, rating, id, answer, question },
-  } = useCardContext();
-  const sendCardToData = (placeToSaveCard: string) => {
-    const card: Card = {
-      isFavorite,
-      technology,
-      rating,
-      id,
-      answer,
-      question,
-    };
-    if (placeToSaveCard === "personalCards") sendData(authState.idUser, card);
-    if (placeToSaveCard === "generalCards") sendData("GeneralCards", card);
-    dispatchModal({
-      type: "successModal",
-      setModal: { message: `Card Saved` },
-    });
-    history.push("/game");
-  };
+
   const renderRadioButtons = Object.values(avaibleTechnologies).map(
     ({ name, render: Component }) => (
       <label className={styles.radioLabel}>
@@ -138,7 +96,7 @@ function AddCard() {
               <input
                 type="radio"
                 name="board"
-                onClick={() => setNameDataBases("generalCards")}
+                onClick={() => setNameDatabase("generalCards")}
               />
             </label>
             <label className={styles.labelBoard}>
@@ -146,12 +104,12 @@ function AddCard() {
               <input
                 type="radio"
                 name="board"
-                onClick={() => setNameDataBases("personalCards")}
+                onClick={() => setNameDatabase("personalCards")}
               />
             </label>
           </div>
         </div>
-        <Button onClick={() => sendCardToData(nameDataBases)}>Add Card</Button>
+        <Button onClick={() => sendCardToDatabase}>Add Card</Button>
       </div>
       <div className={styles.card}>
         <CardByContext />

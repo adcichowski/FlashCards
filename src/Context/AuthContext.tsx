@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
-import { auth } from "../lib/firebase";
+import { auth } from "../lib/firebase/Settings";
 interface Action {
   type: "logIn" | "logOut";
   setUser?: Omit<CurrentUser, "isLogin">;

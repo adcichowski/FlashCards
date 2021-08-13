@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
-import { auth } from "../../lib/firebase/index";
+import { auth } from "../../lib/firebase/Settings";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useMainContext } from "../../Context/MainContext";
 import { UserData } from "../../Types/Types";

@@ -23,14 +23,13 @@ function BounceBoxes(htmlElements: HTMLElement) {
   });
   tl.from(allBoxes, {
     duration: 1,
-    stagger: 0.2,
+    stagger: 0.3,
     opacity: 0,
-    scale: 0.3,
     ease: "bounce",
   });
   for (let box of allBoxes) {
     box?.addEventListener("mouseenter", (e) => {
-      if (!box) return null;
+      if (!box) return;
       mouseEnterChangeColor(e, box);
     });
   }
@@ -38,7 +37,5 @@ function BounceBoxes(htmlElements: HTMLElement) {
     const getIconID = String(box.children[1].id);
     ColorizeIcon(box, typeBoxes[getIconID]);
   };
-
-  return null;
 }
 export { BounceBoxes };

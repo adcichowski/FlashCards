@@ -1,5 +1,5 @@
 import { Card } from "../../Types/Types";
-import { auth, db } from "./index";
+import { auth, db } from "./Settings";
 import { collection, query, getDocs, addDoc } from "@firebase/firestore";
 import {
   createUserWithEmailAndPassword,
