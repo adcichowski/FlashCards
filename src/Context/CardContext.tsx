@@ -9,7 +9,7 @@ interface Action {
     | "getNextOrPrevCard"
     | "showEmptyCard"
     | "editingCard"
-    | "setId"
+    | "resetDataCard"
     | "hideCard";
   setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
@@ -65,16 +65,20 @@ function cardMainReducer(
     case "showEmptyCard":
       return {
         ...state,
-        ...action.setCard,
         isFlip: false,
         isShow: true,
       };
-    case "setId":
+    case "resetDataCard":
       return {
-        ...state,
-        ...action.setCard,
+        id: 0,
+        technology: "none",
         isFlip: false,
-        isShow: true,
+        isShow: false,
+        rating: 5,
+        isFavorite: false,
+        question: "",
+        answer: "",
+        randomSvgCard: 0,
       };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

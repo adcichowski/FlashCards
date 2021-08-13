@@ -23,9 +23,9 @@ function BounceBoxes(htmlElements: HTMLElement) {
   });
   tl.from(allBoxes, {
     duration: 1,
-    stagger: 0.25,
+    stagger: 0.2,
     opacity: 0,
-    scale: 0.4,
+    scale: 0.3,
     ease: "bounce",
   });
   for (let box of allBoxes) {

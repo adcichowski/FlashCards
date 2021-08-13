@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import { useGetData } from "../../../Hooks/useGetData";
 import { ReactComponent as Plus } from "../../../../Assets/Icons/plus.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
+
 function MainBoard() {
   useGetData();
   return (
     <>
       <Navigation />
-
       <div className={styles.board}>
         <div className={styles.insideBoard}>
           <Button link="game/personal-cards">Personal Cards</Button>

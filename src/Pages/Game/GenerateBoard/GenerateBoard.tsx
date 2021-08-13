@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { capitalize } from "../../../Utils/Utils";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
+import { useEffect } from "react";
+import { useCardContext } from "../../../Context/CardContext";
 function GenerateBoard({
   cardsData,
   typeBoard,
@@ -13,7 +15,12 @@ function GenerateBoard({
   cardsData: { [index: string]: Card[] };
   typeBoard: "general" | "personal";
 }) {
-  console.log(cardsData);
+  const { dispatch } = useCardContext();
+  useEffect(() => {
+    dispatch({
+      type: "resetDataCard",
+    });
+  });
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   const { getAvaibleTechnologies } = useAvaibleTechnologies();
   const renderIcons = getAvaibleTechnologies(Object.keys(cardsData)).map(

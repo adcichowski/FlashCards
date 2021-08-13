@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useCardContext } from "../../../../Context/CardContext";
 import { Card } from "../../../../Types/Types";
 
-function useQuestionBoard(nameTechnology: string) {
+function useQuestionBoard() {
   const { dispatch, state } = useCardContext();
   const handleClickShowCard = useCallback(
     (card: Card) => {

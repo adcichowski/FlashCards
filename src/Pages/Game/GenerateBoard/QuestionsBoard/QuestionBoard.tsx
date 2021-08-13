@@ -14,7 +14,7 @@ function QuestionBoard({
   cardsData: { [index: string]: Card[] };
   technologyName: string;
 }) {
-  const { handleClickShowCard, state } = useQuestionBoard(technologyName);
+  const { handleClickShowCard, state } = useQuestionBoard();
   return (
     <div>
       <BackButton />

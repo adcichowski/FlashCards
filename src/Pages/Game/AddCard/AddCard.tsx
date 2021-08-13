@@ -45,7 +45,10 @@ function AddCard() {
       ? state[nameDataBases][stateCard.technology].slice(-1)[0].id + 1
       : 1;
     if (stateCard.id !== newValueId) {
-      dispatch({ type: "setId", setCard: { ...stateCard, id: newValueId } });
+      dispatch({
+        type: "editingCard",
+        setCard: { ...stateCard, id: newValueId },
+      });
     }
   }, [dispatch, stateCard, state, nameDataBases]);
   const {
