@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { auth } from "../../lib/firebase/Settings";
 import { useAuthContext } from "../../Context/AuthContext";
-import { useMainContext } from "../../Context/MainContext";
+import { useModalContext } from "../../Context/ModalContext";
 import { UserData } from "../../Types/Types";
 import { useState } from "react";
 import React from "react";
@@ -21,8 +21,8 @@ function useFormLoginRegister() {
     formState: { errors },
   } = useForm();
   const history = useHistory();
-  const { dispatch } = useMainContext();
-  const { dispatch: authDispatch } = useAuthContext();
+  const { dispatch } = useModalContext();
+  const { dispatch: authDispatch, state } = useAuthContext();
   const typeOfAction = isRegister ? "register" : "login";
   const onSubmit = React.useCallback(
     async ({ email, password }: UserData) => {
@@ -33,7 +33,7 @@ function useFormLoginRegister() {
         }
         authDispatch({
           type: "logIn",
-          setUser: { idUser: auth?.currentUser?.uid },
+          setUser: { ...state, idUser: auth?.currentUser?.uid },
         });
         dispatch({
           type: "successModal",
@@ -51,7 +51,7 @@ function useFormLoginRegister() {
         });
       }
     },
-    [authDispatch, dispatch, history, typeOfAction]
+    [authDispatch, dispatch, history, typeOfAction, state]
   );
 
   return {

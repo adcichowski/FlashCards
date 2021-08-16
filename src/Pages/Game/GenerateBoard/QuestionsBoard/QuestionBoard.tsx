@@ -26,7 +26,6 @@ function QuestionBoard({
               {state.isShow && <Button>Delete Card</Button>}
               {state.isShow && <Button>Rate Card</Button>}
             </div>
-
             <CardByContext />
           </div>
         </div>

@@ -12,13 +12,10 @@ interface ModalInterface {
   type: "error" | "success";
   message: string;
 }
-const MainContext = createContext<
+const ModalContext = createContext<
   undefined | { state: ModalInterface; dispatch: Dispatch }
 >(undefined);
-function modalMainReducer(
-  state: ModalInterface,
-  action: Action
-): ModalInterface {
+function ModalReducer(state: ModalInterface, action: Action): ModalInterface {
   switch (action.type) {
     case "openModal":
       return {
@@ -51,22 +48,24 @@ function modalMainReducer(
     }
   }
 }
-const useMainContext = () => {
-  const context = useContext(MainContext);
+const useModalContext = () => {
+  const context = useContext(ModalContext);
   if (!context) {
     throw new Error("Error while reading context!");
   }
 
   return context;
 };
-function MainProvider({ children }: { children: ReactNode }) {
+function ModalProvider({ children }: { children: ReactNode }) {
   const Modal: ModalInterface = {
     isOpen: false,
     type: "success",
     message: "",
   };
-  const [state, dispatch] = useReducer(modalMainReducer, Modal);
+  const [state, dispatch] = useReducer(ModalReducer, Modal);
   const value = { state, dispatch };
-  return <MainContext.Provider value={value}>{children}</MainContext.Provider>;
+  return (
+    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+  );
 }
-export { useMainContext, MainProvider };
+export { useModalContext, ModalProvider };

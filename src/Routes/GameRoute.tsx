@@ -3,13 +3,13 @@ import { MainBoard } from "../Components/Pages/Game/MainBoard/MainBoard";
 import { Game } from "../Pages/Game/Game";
 import { PrivateRoute } from "./PrivateRoute";
 import { Route } from "react-router-dom";
-import { useGameContext } from "../Context/GameContext";
 import { GenerateBoard } from "../Pages/Game/GenerateBoard/GenerateBoard";
 import { QuestionBoard } from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBoard";
 import { AddCard } from "../Pages/Game/AddCard/AddCard";
+import { useAuthContext } from "../Context/AuthContext";
 function GameRoute() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
-  const { state } = useGameContext();
+  const { state } = useAuthContext();
   return (
     <Game>
       <PrivateRoute path="/game">

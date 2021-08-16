@@ -3,13 +3,17 @@ import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
 import { auth } from "../lib/firebase/Settings";
+import { Card } from "../Types/Types";
+
 interface Action {
-  type: "logIn" | "logOut";
+  type: "logIn" | "logOut" | "setWaistCard";
   setUser?: Omit<CurrentUser, "isLogin">;
 }
 interface CurrentUser {
   idUser: string;
   isLogin: boolean;
+  personalCards: { [index: string]: Card[] };
+  generalCards: { [index: string]: Card[] };
 }
 function userReducer(state: CurrentUser, action: Action): CurrentUser {
   switch (action.type) {
@@ -19,6 +23,12 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
         ...action.setUser,
         isLogin: true,
       };
+    case "setWaistCard":
+      return {
+        ...state,
+        ...action.setUser,
+      };
+
     case "logOut":
       auth.signOut();
       return { ...state, isLogin: false, idUser: "" };
@@ -42,6 +52,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const currentUser: CurrentUser = {
     isLogin: false,
     idUser: "",
+    personalCards: {},
+    generalCards: {},
   };
   const [state, dispatch] = useReducer(userReducer, currentUser);
   const value = { state, dispatch };

@@ -1,10 +1,10 @@
-import { useMainContext } from "../../Context/MainContext";
+import { useModalContext } from "../../Context/ModalContext";
 import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
 import { ReactComponent as Alert } from "../../Assets/Modal/alert-circle.svg";
 import { ReactComponent as Check } from "../../Assets/Modal/check-circle.svg";
 function Modal() {
-  const { dispatch, state } = useMainContext();
+  const { dispatch, state } = useModalContext();
   const handleClose = () => {
     dispatch({ type: "closeModal" });
   };

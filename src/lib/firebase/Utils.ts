@@ -18,9 +18,7 @@ function doActionWithEmailPass(
       return signInWithEmailAndPassword(auth, email, password);
   }
 }
-function signUserEmailPass(email: string, password: string) {
-  return signInWithEmailAndPassword(auth, email, password);
-}
+
 function sendData(nameDatabase: string, card: Card) {
   addDoc(collection(db, nameDatabase), card);
 }
@@ -33,7 +31,7 @@ const sortCardByTechnology = (
   }
   object[card.technology].push(card);
 };
-function getData(nameDatabase: string) {
+function getDeckCardFromFirestore(nameDatabase: string) {
   const personalCards: { [index: string]: Card[] } = {};
   const generalCards: { [index: string]: Card[] } = {};
 
@@ -53,4 +51,4 @@ function getData(nameDatabase: string) {
   getDataFromFirestore();
   return [personalCards, generalCards];
 }
-export { sendData, getData, doActionWithEmailPass, signUserEmailPass };
+export { sendData, getDeckCardFromFirestore, doActionWithEmailPass };

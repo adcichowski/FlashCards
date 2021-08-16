@@ -1,12 +1,12 @@
 import { useHistory } from "react-router";
 import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
-import { useMainContext } from "../../../Context/MainContext";
+import { useModalContext } from "../../../Context/ModalContext";
 import { sendData } from "../../../lib/firebase/Utils";
 import { Card } from "../../../Types/Types";
 
 export default function useSendCardToDatabase(nameDatabase: string) {
-  const { dispatch: dispatchModal } = useMainContext();
+  const { dispatch: dispatchModal } = useModalContext();
   const { state: authState } = useAuthContext();
   const history = useHistory();
   const { dispatch } = useCardContext();

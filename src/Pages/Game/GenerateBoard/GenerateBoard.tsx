@@ -15,11 +15,13 @@ function GenerateBoard({
   cardsData: { [index: string]: Card[] };
   typeBoard: "general" | "personal";
 }) {
-  const { dispatch } = useCardContext();
+  const { dispatch, state } = useCardContext();
   useEffect(() => {
-    dispatch({
-      type: "resetDataCard",
-    });
+    if (state.technology !== "none") {
+      dispatch({
+        type: "resetDataCard",
+      });
+    }
   });
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   const { getAvaibleTechnologies } = useAvaibleTechnologies();

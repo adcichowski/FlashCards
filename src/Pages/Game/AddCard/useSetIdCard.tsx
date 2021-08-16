@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
-import { useGameContext } from "../../../Context/GameContext";
 
 function useSetIdCard() {
   const [nameDatabase, setNameDatabase] = useState<
@@ -8,7 +8,7 @@ function useSetIdCard() {
   >("");
 
   const { dispatch, state: stateCard } = useCardContext();
-  const { state } = useGameContext();
+  const { state } = useAuthContext();
   useEffect(() => {
     if (!stateCard.isShow) dispatch({ type: "showEmptyCard" });
     if (stateCard.technology === "none" || !nameDatabase) return;
