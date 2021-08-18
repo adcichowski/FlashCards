@@ -8,7 +8,7 @@ import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
 
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
-import useSendCardToDatabase from "./useSendCardToDatabase";
+import { useSendCardToDatabase } from "./useSendCardToDatabase";
 import { useSetIdCard } from "./useSetIdCard";
 function AddCard() {
   const { nameDatabase, setNameDatabase } = useSetIdCard();
@@ -109,7 +109,14 @@ function AddCard() {
             </label>
           </div>
         </div>
-        <Button onClick={() => sendCardToDatabase}>Add Card</Button>
+        <Button
+          type="button"
+          onClick={() => {
+            sendCardToDatabase();
+          }}
+        >
+          Add Card
+        </Button>
       </div>
       <div className={styles.card}>
         <CardByContext />

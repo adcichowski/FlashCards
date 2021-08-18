@@ -1,15 +1,20 @@
 import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
 interface Action {
-  type: "openModal" | "closeModal" | "successModal" | "errorModal";
+  type:
+    | "openModal"
+    | "closeModal"
+    | "successModal"
+    | "errorModal"
+    | "rateModal";
   setModal?: Omit<ModalInterface, "isOpen" | "type">;
 }
 interface Dispatch {
   (action: Action): void;
 }
 interface ModalInterface {
+  type: "error" | "success" | "rate";
   isOpen: boolean;
-  type: "error" | "success";
   message: string;
 }
 const ModalContext = createContext<
@@ -41,6 +46,13 @@ function ModalReducer(state: ModalInterface, action: Action): ModalInterface {
         ...state,
         ...action.setModal,
         type: "error",
+        isOpen: true,
+      };
+    case "rateModal":
+      return {
+        ...state,
+        ...action.setModal,
+        type: "rate",
         isOpen: true,
       };
     default: {

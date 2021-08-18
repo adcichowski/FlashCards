@@ -1,17 +1,9 @@
-import { MouseEventHandler } from "react";
 import { Link } from "react-router-dom";
+import { ButtonInterface } from "../../Types/Types";
 import styles from "./Button.module.scss";
 
-interface ButtonProps {
-  type?: "submit" | "button";
-  children: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  link?: string;
-  maxWidth?: string;
-  maxHeight?: string;
-}
-function Button({ type, link, children, onClick }: ButtonProps) {
-  if (link) {
+function Button({ type, link, children, onClick }: ButtonInterface) {
+  if (type === "a") {
     return (
       <Link to={`/${link}`} className={styles.button}>
         <span className={styles.front}>{children}</span>

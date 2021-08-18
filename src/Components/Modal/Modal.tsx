@@ -3,6 +3,7 @@ import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
 import { ReactComponent as Alert } from "../../Assets/Modal/alert-circle.svg";
 import { ReactComponent as Check } from "../../Assets/Modal/check-circle.svg";
+import { RateModal } from "./RateModal";
 function Modal() {
   const { dispatch, state } = useModalContext();
   const handleClose = () => {
@@ -11,17 +12,22 @@ function Modal() {
   if (!state.isOpen) {
     return null;
   }
+  if (state.type === "rate") {
+    return <RateModal />;
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.modal}>
-        <h3 className={styles.modalTitle}>
+        <p className={styles.modalTitle}>
           {state.type === "error" ? "Error" : "Success"}
-        </h3>
+        </p>
         <div className={styles.modalIcon}>
           {state.type === "error" ? <Alert /> : <Check />}
         </div>
         <p className={styles.modalText}>{state.message}</p>
-        <Button onClick={handleClose}>Close</Button>
+        <Button type="button" onClick={handleClose}>
+          Close
+        </Button>
       </div>
     </div>
   );

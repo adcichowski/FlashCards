@@ -3,14 +3,25 @@ import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
 import { sendData } from "../../../lib/firebase/Utils";
-import { Card } from "../../../Types/Types";
 
-export default function useSendCardToDatabase(nameDatabase: string) {
+function useSendCardToDatabase(nameDatabase: string) {
   const { dispatch: dispatchModal } = useModalContext();
   const { state: authState } = useAuthContext();
+  const { state: cardState } = useCardContext();
   const history = useHistory();
   const { dispatch } = useCardContext();
-  const sendCardToDatabase = (card: Card) => {
+  function sendCardToDatabase() {
+    console.log(nameDatabase);
+    const { id, isFavorite, technology, question, answer, rating } = cardState;
+    const card = {
+      id,
+      isFavorite,
+      technology,
+      question,
+      answer,
+      rating,
+      whoRate: [{ id: authState.idUser, rating }],
+    };
     const personalDatabase = authState.idUser;
     if (nameDatabase === "personalCards") sendData(personalDatabase, card);
     if (nameDatabase === "generalCards") sendData("GeneralCards", card);
@@ -20,6 +31,7 @@ export default function useSendCardToDatabase(nameDatabase: string) {
       setModal: { message: `Card Saved` },
     });
     history.push("/game");
-  };
+  }
   return { sendCardToDatabase };
 }
+export { useSendCardToDatabase };

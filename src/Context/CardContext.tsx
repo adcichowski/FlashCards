@@ -79,6 +79,7 @@ function cardMainReducer(
         question: "",
         answer: "",
         randomSvgCard: 0,
+        whoRate: [],
       };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -104,6 +105,7 @@ function CardProvider({ children }: { children: ReactNode }) {
     question: "",
     answer: "",
     randomSvgCard: 0,
+    whoRate: [],
   };
 
   const [state, dispatch] = useReducer(cardMainReducer, Card);

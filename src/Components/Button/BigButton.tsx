@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
+import { ButtonInterface } from "../../Types/Types";
 import styles from "./Button.module.scss";
-export function BigButton({
-  children,
-  link,
-}: {
-  link?: string;
-  children: string;
-}) {
+export function BigButton({ link, children }: ButtonInterface) {
   if (link)
     return (
       <Link className={`${styles.button} ${styles.bigButton}`} to={`/${link}`}>

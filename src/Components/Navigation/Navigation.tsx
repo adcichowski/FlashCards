@@ -36,7 +36,9 @@ function Navigation() {
           <Logo />
           <ul className={styles.menuList}>{renderNavigationLinks}</ul>
           {state.isLogin ? (
-            <Button onClick={handleClickLogOut}>Logout</Button>
+            <Button type="button" onClick={handleClickLogOut}>
+              Logout
+            </Button>
           ) : (
             <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
           )}
@@ -58,7 +60,9 @@ function Navigation() {
         <Logo />
         <ul className={styles.navList}>{renderNavigationLinks}</ul>
         {state.isLogin ? (
-          <Button onClick={handleClickLogOut}>Logout</Button>
+          <Button type="button" onClick={handleClickLogOut}>
+            Logout
+          </Button>
         ) : (
           <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
         )}

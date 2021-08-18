@@ -1,11 +1,15 @@
+import { MouseEventHandler } from "react";
+
 export interface UserData {
   email: string;
   password: string;
 }
-export interface ModalInterface {
-  text: string;
-  isLoading: boolean;
+
+export interface PersonRating {
+  id: string;
+  rate: number;
 }
+
 export interface Card {
   id: number;
   technology: string;
@@ -13,7 +17,9 @@ export interface Card {
   question: string;
   isFavorite: boolean;
   rating: number;
+  whoRate: PersonRating[];
 }
+
 export interface AvaibleTechnologiesProperty {
   [key: string]: TechnologyProperty;
 }
@@ -24,4 +30,10 @@ export interface TechnologyProperty {
   description: string;
   render: React.FunctionComponent;
   fill: string;
+}
+export interface ButtonInterface {
+  type: "submit" | "button" | "a";
+  children: string;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  link?: string;
 }

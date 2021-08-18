@@ -15,7 +15,9 @@ function MainBoard() {
       </div>
 
       <div className={styles.insideBoard}>
-        <BigButton link="game/personal-cards">Personal Cards</BigButton>
+        <BigButton type="a" link="game/personal-cards">
+          Personal Cards
+        </BigButton>
         <div className={styles.secondButton}>
           <div className={styles.outsideButton}>
             Create Card
@@ -33,7 +35,9 @@ function MainBoard() {
           </div>
         </div>
 
-        <BigButton link="game/general-cards">General Cards</BigButton>
+        <BigButton type="a" link="game/general-cards">
+          General Cards
+        </BigButton>
       </div>
     </>
   );

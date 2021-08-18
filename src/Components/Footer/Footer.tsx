@@ -71,7 +71,7 @@ function Footer() {
             className={styles.formTextarea}
           />
         </label>
-        <Button>Send ideas</Button>
+        <Button type="submit">Send ideas</Button>
       </form>
     </footer>
   );

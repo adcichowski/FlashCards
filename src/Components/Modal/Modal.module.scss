@@ -24,6 +24,7 @@
 }
 .modalTitle {
   font-size: clamp(2rem, calc(3rem + 2vw), 7rem);
+  font-weight: 700;
 }
 .modalText {
   text-align: center;
@@ -32,4 +33,31 @@
 .modalIcon {
   width: clamp(5rem, calc(5rem + 10vw), 10rem);
   height: clamp(5rem, calc(5rem + 10vw), 10rem);
+}
+.rateNumber {
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+}
+.rateButton {
+  padding: 1rem;
+  width: 4rem;
+  height: 6rem;
+  font-size: 2rem;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+.rateButton:hover {
+  background-color: #9f1835;
+  transition: border 1s ease-in-out;
+}
+.blockButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }

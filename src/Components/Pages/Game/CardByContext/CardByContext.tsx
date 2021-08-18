@@ -57,7 +57,9 @@ function CardByContext() {
         </div>
       </div>
       <div className={styles.buttonHide}>
-        <Button onClick={handleClickHideCard}>Hide Card</Button>
+        <Button type="button" onClick={handleClickHideCard}>
+          Hide Card
+        </Button>
       </div>
     </div>
   );

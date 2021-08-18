@@ -24,7 +24,9 @@ export default function Home() {
           <p className={styles.heroSubtitle}>
             Easy way to improve your skill...
           </p>
-          <Button link="game">Click For Play</Button>
+          <Button type="a" link="game">
+            Click For Play
+          </Button>
         </section>
       </header>
       <main>
@@ -39,7 +41,9 @@ export default function Home() {
         <section className={styles.bigQuestion}>
           <div className={styles.bigQuestionIcon}></div>
           <h3 className={styles.bigQuestionTitle}>Do You Wanna TRY ??</h3>
-          <BigButton link="game">Create Account</BigButton>
+          <BigButton type="a" link="game">
+            Create Account
+          </BigButton>
         </section>
       </main>
       <Footer />

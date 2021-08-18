@@ -6,7 +6,8 @@ import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
 import { useQuestionBoard } from "./useQuestionBoard";
-import { Button } from "../../../../Components/Button/Button";
+import { useModalContext } from "../../../../Context/ModalContext";
+import { SmallButton } from "../../../../Components/Button/SmallButton";
 function QuestionBoard({
   cardsData,
   technologyName,
@@ -14,6 +15,7 @@ function QuestionBoard({
   cardsData: { [index: string]: Card[] };
   technologyName: string;
 }) {
+  const { dispatch: dispatchModal } = useModalContext();
   const { handleClickShowCard, state } = useQuestionBoard();
   return (
     <div>
@@ -22,39 +24,47 @@ function QuestionBoard({
         <div></div>
         <div className={styles.cardBoard}>
           <div className={state.isShow ? styles.cardWrapper : ""}>
-            <div className={styles.functionButtons}>
-              {state.isShow && <Button>Delete Card</Button>}
-              {state.isShow && <Button>Rate Card</Button>}
-            </div>
             <CardByContext />
           </div>
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {cardsData[technologyName]
-              .sort((a, b) => a.id - b.id)
-              .map((card: Card, id) => (
-                <li key={card.question} className={styles.questionCard}>
-                  <div
-                    onClick={() => {
-                      handleClickShowCard(card);
-                    }}
-                    className={styles.questionCardInner}
-                  >
-                    <div className={styles.questionFavorite}>
-                      {card.isFavorite ? <FillHeart /> : <Heart />}
-                    </div>
+            {cardsData[technologyName].map((card: Card, id) => (
+              <li key={card.question} className={styles.questionCard}>
+                <div className={styles.questionFavorite}>
+                  {card.isFavorite ? <FillHeart /> : <Heart />}
+                </div>
+                <div className={styles.deleteButton}>
+                  <SmallButton type="button">Delete</SmallButton>
+                </div>
+                <button
+                  onClick={() => {
+                    handleClickShowCard(card);
+                  }}
+                  className={styles.questionCardInner}
+                >
+                  <div className={styles.centerCardQuestion}>
+                    <p className={styles.question}>{card.question}</p>
+                    <div className={styles.questionId}>0{card.id}</div>
+                  </div>
+                  <div className={styles.blockQuestionRate}>
                     <div className={styles.questionRate}>
+                      <p>Overall</p>
                       {card.rating}x
                       <Star />
                     </div>
-                    <p className={styles.question}>{card.question}</p>
-
-                    <div className={styles.questionId}>0{card.id}</div>
+                    <div></div>
                   </div>
-                </li>
-              ))}
+                </button>
+                <div
+                  className={styles.questionRatePesonal}
+                  onClick={() => dispatchModal({ type: "rateModal" })}
+                >
+                  Your 5x <Star />
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
