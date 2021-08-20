@@ -1,12 +1,7 @@
 import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
 interface Action {
-  type:
-    | "openModal"
-    | "closeModal"
-    | "successModal"
-    | "errorModal"
-    | "rateModal";
+  type: "closeModal" | "successModal" | "errorModal" | "rateModal";
   setModal?: Omit<ModalInterface, "isOpen" | "type">;
 }
 interface Dispatch {
@@ -22,16 +17,10 @@ const ModalContext = createContext<
 >(undefined);
 function ModalReducer(state: ModalInterface, action: Action): ModalInterface {
   switch (action.type) {
-    case "openModal":
-      return {
-        ...state,
-        ...action.setModal,
-        isOpen: true,
-      };
     case "closeModal":
       return {
         ...state,
-        ...action.setModal,
+        message: "",
         isOpen: false,
       };
     case "successModal":
@@ -55,6 +44,7 @@ function ModalReducer(state: ModalInterface, action: Action): ModalInterface {
         type: "rate",
         isOpen: true,
       };
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

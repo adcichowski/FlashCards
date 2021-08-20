@@ -7,7 +7,7 @@ function RateModal() {
   const maxRateOnCard = 5;
   const minRateOnCard = 1;
   const { dispatch, state } = useModalContext();
-  const [rateValue, setRateValue] = useState(useMemo(() => 0, []));
+  const [rateValue, setRateValue] = useState(useMemo(() => 1, []));
   const handleClose = () => {
     dispatch({ type: "closeModal" });
   };

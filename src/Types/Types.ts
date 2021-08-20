@@ -10,7 +10,7 @@ export interface PersonRating {
   rate: number;
 }
 
-export interface Card {
+export interface ICard {
   id: number;
   technology: string;
   answer: string;

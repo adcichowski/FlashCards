@@ -3,7 +3,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 11;
+  z-index: 20;
   display: grid;
   align-items: center;
 }
@@ -28,7 +28,7 @@
 }
 .modalText {
   text-align: center;
-  font-size: clamp(1.5rem, calc(1rem + 2vw), 2.5rem);
+  font-size: clamp(1.8rem, calc(1rem + 2vw), 2.5rem);
 }
 .modalIcon {
   width: clamp(5rem, calc(5rem + 10vw), 10rem);

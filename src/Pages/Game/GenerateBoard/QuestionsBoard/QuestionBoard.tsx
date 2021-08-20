@@ -1,5 +1,5 @@
 import { BackButton } from "../../../../Components/Button/BackButton/BackButton";
-import { Card } from "../../../../Types/Types";
+import { ICard } from "../../../../Types/Types";
 import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionBoard.module.scss";
 import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
@@ -12,7 +12,7 @@ function QuestionBoard({
   cardsData,
   technologyName,
 }: {
-  cardsData: { [index: string]: Card[] };
+  cardsData: { [index: string]: ICard[] };
   technologyName: string;
 }) {
   const { dispatch: dispatchModal } = useModalContext();
@@ -30,7 +30,7 @@ function QuestionBoard({
         <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {cardsData[technologyName].map((card: Card, id) => (
+            {cardsData[technologyName].map((card: ICard, id) => (
               <li key={card.question} className={styles.questionCard}>
                 <div className={styles.questionFavorite}>
                   {card.isFavorite ? <FillHeart /> : <Heart />}

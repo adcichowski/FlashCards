@@ -1,6 +1,6 @@
 .button {
-  width: clamp(5rem, calc(7rem + 10vw), 13rem);
-  height: clamp(4rem, calc(3rem + 5vw), 6.5rem);
+  width: clamp(10rem, calc(4rem + 5vw), 12rem);
+  height: clamp(4rem, calc(1rem + 5vw), 6rem);
   position: relative;
   border: none;
   background: transparent;
@@ -61,7 +61,7 @@
   width: 100%;
   height: 77%;
   border-radius: 12px;
-  font-size: clamp(1.1rem, calc(1.1rem + 0.6vw), 2rem);
+  font-size: 1.6rem;
   color: white;
   background: var(--button--background);
   will-change: transform;

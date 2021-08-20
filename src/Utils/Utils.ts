@@ -1,3 +1,5 @@
+import { ICard, PersonRating } from "../Types/Types";
+
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 export const PASSWORD_REGEX =
@@ -40,3 +42,48 @@ export function changeMessageFromFirebase(message: string) {
   if (!messageFromRegex) return message;
   return capitalize(messageFromRegex[0].split("-").join(" "));
 }
+class Card implements ICard {
+  technology: string;
+  id: number;
+  answer: string;
+  rating: number;
+  question: string;
+  isFavorite: boolean;
+  whoRate: PersonRating[];
+  constructor({ technology, id, answer, question, isFavorite }: ICard) {
+    this.technology = technology;
+    this.answer = answer;
+    this.id = id;
+    this.question = question;
+    this.rating = 0;
+    this.isFavorite = isFavorite;
+    this.whoRate = [];
+  }
+  setFieldsCard({
+    technology,
+    id,
+    answer,
+    question,
+    rating,
+    isFavorite,
+    whoRate,
+  }: ICard) {
+    this.technology = technology;
+    this.id = id;
+    this.answer = answer;
+    this.question = question;
+    this.rating = rating;
+    this.isFavorite = isFavorite;
+    this.whoRate = whoRate;
+  }
+  validateFields() {
+    if (this.technology === "none") throw Error("Set Technology In Card");
+    if (this.answer === "") throw Error("Set Answer In Card");
+    if (this.question === "") throw Error("Set Question In Card");
+  }
+}
+
+export const useCreateCard = () => {
+  const createCard = (card: ICard) => new Card({ ...card });
+  return createCard;
+};

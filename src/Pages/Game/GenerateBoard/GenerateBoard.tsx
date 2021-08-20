@@ -1,5 +1,5 @@
 import styles from "./GenerateBoard.module.scss";
-import { Card } from "../../../Types/Types";
+import { ICard } from "../../../Types/Types";
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ function GenerateBoard({
   cardsData,
   typeBoard,
 }: {
-  cardsData: { [index: string]: Card[] };
+  cardsData: { [index: string]: ICard[] };
   typeBoard: "general" | "personal";
 }) {
   const { dispatch, state } = useCardContext();
@@ -35,8 +35,8 @@ function GenerateBoard({
           }`}
         >
           <div>
+            <p className={styles.technologyType}>{type}</p>
             <div className={styles.icon}>
-              <p className={styles.technologyType}>{type}</p>
               <Component />
             </div>
             <p className={styles.nameTechnology}>{capitalize(name)}</p>
@@ -50,9 +50,11 @@ function GenerateBoard({
     <>
       <BackButton />
       <div className={styles.board}>
-        <p className={styles.title}>{`${capitalize(typeBoard)} Cards`}</p>
-        <div ref={getElements} className={styles.technology}>
-          <ul className={styles.listTechnology}>{renderIcons}</ul>
+        <div className={styles.boardTechnologies}>
+          <p className={styles.title}>{`${capitalize(typeBoard)} Cards`}</p>
+          <div ref={getElements} className={styles.technology}>
+            <ul className={styles.listTechnology}>{renderIcons}</ul>
+          </div>
         </div>
       </div>
     </>

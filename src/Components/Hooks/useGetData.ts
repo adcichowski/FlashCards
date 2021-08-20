@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
 
-import {
-  getDeckCardFromFirestore,
-  useCreateBoard,
-} from "../../lib/firebase/Utils";
+import { useCreateBoard } from "../../lib/firebase/Utils";
 
 export function useGetData() {
   const { state, dispatch } = useAuthContext();
   const { dispatch: modalDispatch } = useModalContext();
   const [isUpdated, setIsUpdated] = useState(false);
 
-  useCreateBoard(state.idUser);
+  const createdBoard = useCreateBoard(state.idUser);
   useEffect(() => {
     try {
       if (state.isLogin && !state.idUser) throw Error("Not logged in");
       if (isUpdated) return;
-      const [personalCards, generalCards] = getDeckCardFromFirestore(
-        state.idUser
-      );
+      createdBoard.getCardsFromFirestore();
+      const [personalCards, generalCards] = [
+        createdBoard.personalCards,
+        createdBoard.generalCards,
+      ];
+
       dispatch({
         type: "setWaistCard",
         setUser: {
@@ -36,5 +36,5 @@ export function useGetData() {
     } finally {
       setIsUpdated(true);
     }
-  }, [dispatch, state, modalDispatch, isUpdated]);
+  }, [dispatch, state, modalDispatch, isUpdated, createdBoard]);
 }

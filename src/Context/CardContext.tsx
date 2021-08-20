@@ -1,6 +1,6 @@
 import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
-import { Card } from "../Types/Types";
+import { ICard } from "../Types/Types";
 import { getRandomMinMax } from "../Utils/Utils";
 interface Action {
   type:
@@ -16,7 +16,7 @@ interface Action {
 interface Dispatch {
   (action: Action): void;
 }
-interface CardContextInterface extends Card {
+interface CardContextInterface extends ICard {
   isShow: boolean;
   isFlip: boolean;
   randomSvgCard: number;
@@ -40,6 +40,7 @@ function cardMainReducer(
       return {
         ...state,
         ...action.setCard,
+        randomSvgCard: getRandomMinMax(0, 10),
         isFlip: false,
         isShow: true,
       };

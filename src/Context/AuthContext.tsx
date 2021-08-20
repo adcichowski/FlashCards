@@ -3,7 +3,7 @@ import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
 import { auth } from "../lib/firebase/Settings";
-import { Card } from "../Types/Types";
+import { ICard } from "../Types/Types";
 
 interface Action {
   type: "logIn" | "logOut" | "setWaistCard";
@@ -12,8 +12,8 @@ interface Action {
 interface CurrentUser {
   idUser: string;
   isLogin: boolean;
-  personalCards: { [index: string]: Card[] };
-  generalCards: { [index: string]: Card[] };
+  personalCards: { [index: string]: ICard[] };
+  generalCards: { [index: string]: ICard[] };
 }
 function userReducer(state: CurrentUser, action: Action): CurrentUser {
   switch (action.type) {

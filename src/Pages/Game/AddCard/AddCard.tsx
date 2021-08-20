@@ -1,6 +1,6 @@
 import { Button } from "../../../Components/Button/Button";
 import { useCardContext } from "../../../Context/CardContext";
-import { Card } from "../../../Types/Types";
+import { ICard } from "../../../Types/Types";
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
 import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
@@ -17,7 +17,7 @@ function AddCard() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   const handleChangePartCard = (
-    partOfCard: keyof Card,
+    partOfCard: keyof ICard,
     changeTo: string | boolean
   ) => {
     dispatch({
