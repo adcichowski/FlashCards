@@ -19,7 +19,7 @@ function useSetIdCard() {
       : 1;
     if (stateCard.id !== newValueId) {
       dispatch({
-        type: "editingCard",
+        type: "editCard",
         setCard: { ...stateCard, id: newValueId },
       });
     }

@@ -1,10 +1,3 @@
-.game {
-  display: flex;
-  flex-flow: column;
-  margin: auto 0;
-  overflow-x: hidden;
-  z-index: -1;
-}
 .game::after {
   content: "";
   position: absolute;

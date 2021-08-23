@@ -1,25 +1,21 @@
 .hero {
-  margin: auto;
   display: grid;
   justify-items: center;
   align-items: center;
 }
-.heroNavigation {
-  position: absolute;
-  width: 100%;
-}
+
 .heroBackground {
   display: flex;
   flex-flow: column nowrap;
   background: url("../../Assets/Pages/Home/HeroBackground.webp") no-repeat
     center / cover;
   height: 100vh;
-  max-height: 1200px;
+  max-height: 1680px;
 
   @media screen and (min-width: 1200px) {
     background-position: center -1rem;
   }
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 950px) {
     display: flex;
     flex-flow: column;
     justify-content: center;

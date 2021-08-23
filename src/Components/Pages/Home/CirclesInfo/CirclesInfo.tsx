@@ -22,3 +22,4 @@ function CirclesInfo() {
   );
 }
 export { CirclesInfo };
+CirclesInfo.displayName = "CirclesInfo";

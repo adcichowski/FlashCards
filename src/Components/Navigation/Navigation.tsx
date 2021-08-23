@@ -12,7 +12,6 @@ function Navigation() {
   }, [dispatch]);
   const [isOpen, setOpen] = useState(false);
   const handleClick = () => setOpen(!isOpen);
-
   const renderNavigationLinks = navigationLinks.map((element) => (
     <li onClick={handleClick} key={element.name}>
       <Link className={styles.navItem} to={element.path}>
@@ -30,11 +29,36 @@ function Navigation() {
     </li>
   ));
   return (
-    <nav className={styles.nav}>
-      {isOpen ? (
-        <div className={styles.bodyMenu}>
+    <nav>
+      <div className={styles.nav}>
+        {isOpen ? (
+          <div className={styles.bodyMenu}>
+            <Logo />
+            <ul className={styles.menuList}>{renderNavigationLinks}</ul>
+            {state.isLogin ? (
+              <Button type="button" onClick={handleClickLogOut}>
+                Logout
+              </Button>
+            ) : (
+              <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
+            )}
+          </div>
+        ) : null}
+        <button
+          aria-label="navigation"
+          name="button"
+          onClick={handleClick}
+          className={styles.hamburger}
+        >
+          <span className={styles.Boxhamburger}>
+            <div className={styles.lineHamburger}></div>
+            <div className={styles.lineHamburger}></div>
+            <div className={styles.lineHamburger}></div>
+          </span>
+        </button>
+        <div className={styles.hideNav}>
           <Logo />
-          <ul className={styles.menuList}>{renderNavigationLinks}</ul>
+          <ul className={styles.navList}>{renderNavigationLinks}</ul>
           {state.isLogin ? (
             <Button type="button" onClick={handleClickLogOut}>
               Logout
@@ -43,31 +67,9 @@ function Navigation() {
             <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
           )}
         </div>
-      ) : null}
-      <button
-        aria-label="navigation"
-        name="button"
-        onClick={handleClick}
-        className={styles.hamburger}
-      >
-        <span className={styles.Boxhamburger}>
-          <div className={styles.lineHamburger}></div>
-          <div className={styles.lineHamburger}></div>
-          <div className={styles.lineHamburger}></div>
-        </span>
-      </button>
-      <div className={styles.hideNav}>
-        <Logo />
-        <ul className={styles.navList}>{renderNavigationLinks}</ul>
-        {state.isLogin ? (
-          <Button type="button" onClick={handleClickLogOut}>
-            Logout
-          </Button>
-        ) : (
-          <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
-        )}
       </div>
     </nav>
   );
 }
 export { Navigation };
+Navigation.displayName = "Navigation";

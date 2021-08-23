@@ -8,3 +8,4 @@ function Logo() {
   );
 }
 export { Logo };
+Logo.displayName = "Logo";

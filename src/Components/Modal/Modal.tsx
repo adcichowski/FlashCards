@@ -33,3 +33,4 @@ function Modal() {
   );
 }
 export { Modal };
+Modal.displayName = "Modal";

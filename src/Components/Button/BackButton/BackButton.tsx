@@ -21,3 +21,4 @@ function BackButton({ pathTo }: { pathTo?: string }) {
   );
 }
 export { BackButton };
+BackButton.displayName = "BackButton";

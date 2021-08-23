@@ -19,7 +19,7 @@ function GenerateBoard({
   useEffect(() => {
     if (state.technology !== "none") {
       dispatch({
-        type: "resetDataCard",
+        type: "resetCard",
       });
     }
   });
@@ -61,3 +61,4 @@ function GenerateBoard({
   );
 }
 export { GenerateBoard };
+GenerateBoard.displayName = "GenerateBoard";

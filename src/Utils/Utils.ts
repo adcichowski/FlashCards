@@ -77,9 +77,10 @@ class Card implements ICard {
     this.whoRate = whoRate;
   }
   validateFields() {
-    if (this.technology === "none") throw Error("Set Technology In Card");
-    if (this.answer === "") throw Error("Set Answer In Card");
-    if (this.question === "") throw Error("Set Question In Card");
+    if (this.technology === "none") throw Error("Set technology in card");
+    if (this.answer === "") throw Error("Set answer in card");
+    if (this.question === "") throw Error("Set question in card");
+    if (this.id === 0) throw Error("Select card deck");
   }
 }
 

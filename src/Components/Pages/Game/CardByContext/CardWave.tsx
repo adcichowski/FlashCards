@@ -39,3 +39,4 @@ function CardWave({ color }: { color: string }) {
   );
 }
 export { CardWave };
+CardWave.displayName = "CardWave";

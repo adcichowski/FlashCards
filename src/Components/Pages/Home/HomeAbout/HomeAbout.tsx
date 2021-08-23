@@ -57,3 +57,4 @@ function HomeAbout() {
   );
 }
 export { HomeAbout };
+HomeAbout.displayName = "HomeAbout";

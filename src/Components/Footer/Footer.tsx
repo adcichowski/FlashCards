@@ -77,3 +77,4 @@ function Footer() {
   );
 }
 export { Footer };
+Footer.displayName = "Footer";

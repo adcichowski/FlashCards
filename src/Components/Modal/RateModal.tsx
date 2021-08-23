@@ -58,3 +58,4 @@ function RateModal() {
   );
 }
 export { RateModal };
+RateModal.displayName = "RateModal";

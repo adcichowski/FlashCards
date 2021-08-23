@@ -1,21 +1,26 @@
-.navigation {
-  position: absolute;
-  width: 100vw;
+.board {
+  place-self: center;
+  display: grid;
+  align-items: center;
+  place-items: center;
+  height: 60vh;
+  @media screen and (max-width: 950px) {
+    height: 100vh;
+  }
 }
 .insideBoard {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-flow: column;
+  gap: 4rem;
+  justify-items: center;
 }
 .secondButton {
   display: flex;
   flex-flow: column;
 }
 .outsideButton {
-  margin: 1.5rem 0;
+  margin: 0.5rem 0;
   text-align: center;
   font-weight: 600;
   font-size: clamp(1.8rem, calc(2rem+4vw), 4rem);
@@ -27,6 +32,7 @@
   height: clamp(6rem, calc(2rem+10vw), 8rem);
   border-radius: 20px;
   padding: 1.5rem;
+  fill: white;
   background-color: #a31935af;
   border: none;
   cursor: pointer;

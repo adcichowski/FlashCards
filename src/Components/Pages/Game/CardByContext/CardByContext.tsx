@@ -65,3 +65,4 @@ function CardByContext() {
   );
 }
 export { CardByContext };
+CardByContext.displayName = "CardByContext";

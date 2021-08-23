@@ -10,36 +10,33 @@ function MainBoard() {
   useGetData();
   return (
     <>
-      <div className={styles.navigation}>
-        <Navigation />
-      </div>
+      <Navigation />
+      <div className={styles.board}>
+        <div className={styles.insideBoard}>
+          <BigButton type="a" link="game/personal-cards">
+            Personal Cards
+          </BigButton>
+          <BigButton type="a" link="game/general-cards">
+            General Cards
+          </BigButton>
 
-      <div className={styles.insideBoard}>
-        <BigButton type="a" link="game/personal-cards">
-          Personal Cards
-        </BigButton>
-        <div className={styles.secondButton}>
           <div className={styles.outsideButton}>
             Create Card
             <Link to="/game/add" className={styles.link}>
               <Plus />
             </Link>
           </div>
-          <div className={styles.buttons}>
-            <div className={styles.outsideButton}>
-              Favorite Cards
-              <Link to="/game/personal-cards/favorite" className={styles.link}>
-                <Heart />
-              </Link>
-            </div>
+
+          <div className={styles.outsideButton}>
+            Favorite Cards
+            <Link to="/game/personal-cards/favorite" className={styles.link}>
+              <Heart />
+            </Link>
           </div>
         </div>
-
-        <BigButton type="a" link="game/general-cards">
-          General Cards
-        </BigButton>
       </div>
     </>
   );
 }
 export { MainBoard };
+MainBoard.displayName = "MainBoard";

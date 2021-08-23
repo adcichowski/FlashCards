@@ -21,7 +21,7 @@ function AddCard() {
     changeTo: string | boolean
   ) => {
     dispatch({
-      type: "editingCard",
+      type: "editCard",
       setCard: {
         ...stateCard,
         [partOfCard]: changeTo,
@@ -125,3 +125,4 @@ function AddCard() {
   );
 }
 export { AddCard };
+AddCard.displayName = "AddCard";

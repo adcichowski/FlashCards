@@ -17,3 +17,4 @@ function Button({ type, link, children, onClick }: ButtonInterface) {
   );
 }
 export { Button };
+Button.displayName = "Button";

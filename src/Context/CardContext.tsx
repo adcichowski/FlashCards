@@ -8,8 +8,8 @@ interface Action {
     | "flipCard"
     | "getNextOrPrevCard"
     | "showEmptyCard"
-    | "editingCard"
-    | "resetDataCard"
+    | "editCard"
+    | "resetCard"
     | "hideCard";
   setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
@@ -57,7 +57,7 @@ function cardMainReducer(
         isFlip: false,
         isShow: true,
       };
-    case "editingCard":
+    case "editCard":
       return {
         ...state,
         ...action.setCard,
@@ -69,7 +69,7 @@ function cardMainReducer(
         isFlip: false,
         isShow: true,
       };
-    case "resetDataCard":
+    case "resetCard":
       return {
         id: 0,
         technology: "none",

@@ -7,6 +7,7 @@ import { GenerateBoard } from "../Pages/Game/GenerateBoard/GenerateBoard";
 import { QuestionBoard } from "../Pages/Game/GenerateBoard/QuestionsBoard/QuestionBoard";
 import { AddCard } from "../Pages/Game/AddCard/AddCard";
 import { useAuthContext } from "../Context/AuthContext";
+import React from "react";
 function GameRoute() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { state } = useAuthContext();
@@ -28,7 +29,7 @@ function GameRoute() {
 
       {Object.values(avaibleTechnologies).map(({ name }: { name: string }) => {
         return (
-          <div key={name}>
+          <React.Fragment key={name}>
             <PrivateRoute path={`/game/personal-cards/${name}`}>
               <QuestionBoard
                 technologyName={name}
@@ -41,7 +42,7 @@ function GameRoute() {
                 cardsData={state.generalCards}
               />
             </PrivateRoute>
-          </div>
+          </React.Fragment>
         );
       })}
     </Game>

@@ -15,3 +15,4 @@ export function BigButton({ link, children }: ButtonInterface) {
     </button>
   );
 }
+BigButton.displayName = "BigButton";

@@ -60,6 +60,7 @@ class Board {
   }
 
   sendCardToFirestore(card: ICard, nameDatabase: string) {
+    if (nameDatabase === "") throw Error("Pick deck to save card!");
     addDoc(collection(db, nameDatabase), card);
   }
 }

@@ -14,3 +14,4 @@ export function SmallButton({ onClick, children }: ButtonInterface) {
     </div>
   );
 }
+SmallButton.displayName = "SmallButton";

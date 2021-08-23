@@ -11,3 +11,4 @@ function ListTechnologies() {
   );
 }
 export { ListTechnologies };
+ListTechnologies.displayName = "ListTechnologies";

@@ -21,3 +21,4 @@ function Instruction() {
   );
 }
 export { Instruction };
+Instruction.displayName = "Instruction";
