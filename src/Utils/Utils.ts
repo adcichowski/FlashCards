@@ -78,8 +78,8 @@ class Card implements ICard {
   }
   validateFields() {
     if (this.technology === "none") throw Error("Set technology in card");
-    if (this.answer === "") throw Error("Set answer in card");
-    if (this.question === "") throw Error("Set question in card");
+    if (this.answer === "") throw Error("Answer field is empty!");
+    if (this.question === "") throw Error("Question field is empty!");
     if (this.id === 0) throw Error("Select card deck");
   }
 }

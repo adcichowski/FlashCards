@@ -52,13 +52,15 @@ function AddCard() {
   return (
     <div className={styles.board}>
       <BackButton />
-      <div>
-        <p className={styles.title}>Save your own card!</p>
+      <div className={styles.addTech}>
+        <p className={styles.title}>Create Your Own Card</p>
 
-        <div className={styles.formAddTechInside}>
-          <span className={styles.formAddTechTitle}>Set Techology</span>
-          <div ref={getElements} className={styles.listRadioTechnology}>
-            {renderRadioButtons}
+        <div className={styles.addTechInside}>
+          <div className={styles.addTechTechnologies}>
+            <span className={styles.formAddTechTitle}>Set Techology</span>
+            <div ref={getElements} className={styles.listRadioTechnology}>
+              {renderRadioButtons}
+            </div>
           </div>
           <label>
             <span className="sr-only">Question</span>
@@ -109,12 +111,7 @@ function AddCard() {
             </label>
           </div>
         </div>
-        <Button
-          type="button"
-          onClick={() => {
-            sendCardToDatabase();
-          }}
-        >
+        <Button type="button" onClick={sendCardToDatabase}>
           Add Card
         </Button>
       </div>

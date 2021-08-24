@@ -1,59 +1,58 @@
 .board {
   display: grid;
-  margin: auto;
-  padding: 2rem;
   gap: 20px;
-  grid-template-columns: 0.5fr 0.2fr;
-  align-items: center;
+  grid-template-columns: 0.3fr 0.2fr;
+  align-content: center;
   justify-content: center;
+  height: 100vh;
   @media screen and (max-width: 952px) {
-    display: grid;
-    align-items: center;
-    justify-content: center;
+    grid-template-columns: 0.3fr;
   }
 }
+.addTechTechnologies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .title {
-  text-align: center;
-  font-size: 2.6rem;
-  font-weight: 600;
+  font-size: 3rem;
+  font-weight: 500;
 }
 .card {
   @media screen and (max-width: 952px) {
     display: none;
   }
 }
-.listTechnology {
-  display: flex;
+.addTech {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
 }
-.formAddTechInside {
-  display: flex;
-  flex-flow: column nowrap;
-  padding: 1rem;
-  gap: 20px;
+.addTechInside {
+  display: grid;
+  justify-items: center;
   align-items: center;
-  border-radius: 20px;
+  gap: 20px;
+  border-radius: 10px;
   background: #a01934;
 }
 .formAddTechTitle {
   font-size: 2.5rem;
 }
 .listRadioTechnology {
-  max-width: 30rem;
+  width: 80%;
   display: flex;
+  padding: 5px;
   gap: 5px;
   overflow-x: auto;
 }
 .radioLabel {
-  cursor: pointer;
   position: relative;
 }
 .radioInput {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
   appearance: none;
   padding: 3rem;
+  cursor: pointer;
 }
 .radioInput:checked {
   background-color: #221f6382;
@@ -63,9 +62,8 @@
   display: grid;
   align-items: center;
   position: absolute;
-  top: 0;
   right: 15%;
-  top: 10%;
+  top: 13%;
   width: 70%;
   height: 70%;
 }
@@ -75,9 +73,9 @@
   height: 2rem;
 }
 .textInput {
-  width: 100%;
   font-weight: 600;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
+  margin: 0 15px;
   padding: 5px 10px;
   border-radius: 6px;
   background-color: transparent;
