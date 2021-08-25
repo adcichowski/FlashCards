@@ -3,7 +3,7 @@
   display: grid;
   align-items: center;
   place-items: center;
-  height: 60vh;
+
   @media screen and (max-width: 950px) {
     height: 100vh;
   }
@@ -14,6 +14,9 @@
   flex-flow: column;
   gap: 4rem;
   justify-items: center;
+  @media screen and (max-width: 950px) {
+    grid-template-columns: 1fr;
+  }
 }
 .secondButton {
   display: flex;

@@ -9,8 +9,8 @@
   transition: filter 250ms;
 }
 .bigButton {
-  width: clamp(8rem, calc(8rem + 10vw), 19rem);
-  height: clamp(7rem, calc(4rem + 5vw), 9rem);
+  width: clamp(11rem, calc(11rem + 10vw), 19rem);
+  height: clamp(8rem, calc(8rem + 5vw), 9rem);
   font-size: 3rem;
   text-align: center;
 }
