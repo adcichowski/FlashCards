@@ -6,7 +6,7 @@ import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
-
+import { ReactComponent as Heart } from "../../../Assets/Icons/heart-fill.svg";
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
 import { useSendCardToDatabase } from "./useSendCardToDatabase";
 import { useSetIdCard } from "./useSetIdCard";
@@ -48,7 +48,13 @@ function AddCard() {
       </label>
     )
   );
-
+  const renderHeartSvg = (
+    <Heart
+      className={`${styles.favoriteIcon} ${
+        stateCard.isFavorite && styles.fill
+      } `}
+    />
+  );
   return (
     <div className={styles.board}>
       <BackButton />
@@ -83,31 +89,39 @@ function AddCard() {
             ></textarea>
           </label>
           <label>
-            <input
-              type="checkbox"
-              onClick={() =>
-                handleChangePartCard("isFavorite", !stateCard.isFavorite)
-              }
-              value="Favorite Card"
-            />
-            Favorite Card
+            <div className={styles.favoriteField}>
+              <input
+                type="checkbox"
+                className={styles.favoriteInput}
+                onClick={() =>
+                  handleChangePartCard("isFavorite", !stateCard.isFavorite)
+                }
+                value="Favorite Card"
+              />
+              {renderHeartSvg}
+              Favorite Card
+            </div>
           </label>
-          <div className={styles.radioBoard}>
-            <label className={styles.labelBoard}>
+          <div className={styles.inputsDeck}>
+            <label className={styles.labelDeck}>
               General Cards
               <input
+                className={styles.deckRadioInput}
                 type="radio"
                 name="board"
                 onClick={() => setNameDatabase("generalCards")}
               />
+              <div className={styles.deckRadioInputIcon}></div>
             </label>
-            <label className={styles.labelBoard}>
+            <label className={styles.labelDeck}>
               Personal Cards
               <input
+                className={styles.deckRadioInput}
                 type="radio"
                 name="board"
                 onClick={() => setNameDatabase("personalCards")}
               />
+              <div className={styles.deckRadioInputIcon}></div>
             </label>
           </div>
         </div>

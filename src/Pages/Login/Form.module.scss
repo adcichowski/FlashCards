@@ -1,12 +1,11 @@
 .game {
   display: flex;
   width: 100vw;
+  max-width: 1980px;
   height: 100vh;
-  position: relative;
-  overflow: hidden;
+  position: fixed;
   &::after {
     content: "";
-
     position: fixed;
     top: 0;
     left: 0;

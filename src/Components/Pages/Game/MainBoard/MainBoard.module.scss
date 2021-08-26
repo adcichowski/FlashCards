@@ -3,7 +3,7 @@
   display: grid;
   align-items: center;
   place-items: center;
-
+  height: 60vh;
   @media screen and (max-width: 950px) {
     height: 100vh;
   }
@@ -16,6 +16,7 @@
   justify-items: center;
   @media screen and (max-width: 950px) {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 }
 .secondButton {
@@ -23,17 +24,16 @@
   flex-flow: column;
 }
 .outsideButton {
-  margin: 0.5rem 0;
   text-align: center;
-  font-weight: 600;
-  font-size: clamp(1.8rem, calc(2rem+4vw), 4rem);
+  font-weight: 500;
+  font-size: clamp(1.6rem, calc(1.6rem + 4vw), 2.8rem);
   display: grid;
   justify-items: center;
 }
 .link {
-  width: clamp(6rem, calc(2rem+10vw), 8rem);
-  height: clamp(6rem, calc(2rem+10vw), 8rem);
-  border-radius: 20px;
+  width: clamp(4rem, calc(4rem + 5vw), 6rem);
+  height: clamp(4rem, calc(4rem + 5vw), 6rem);
+  border-radius: 10px;
   padding: 1.5rem;
   fill: white;
   background-color: #a31935af;

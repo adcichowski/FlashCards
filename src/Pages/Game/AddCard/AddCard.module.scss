@@ -3,10 +3,10 @@
   gap: 20px;
   grid-template-columns: 0.3fr 0.2fr;
   align-content: center;
-  justify-content: center;
   height: 100vh;
+  justify-content: center;
   @media screen and (max-width: 952px) {
-    grid-template-columns: 0.3fr;
+    grid-template-columns: 0.2fr;
   }
 }
 .addTechTechnologies {
@@ -85,6 +85,23 @@
 .textInput::placeholder {
   color: var(--primary--font-color);
 }
+.favoriteField {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.favoriteInput {
+  appearance: none;
+}
+.favoriteIcon {
+  width: 35px;
+  height: 35px;
+}
+.fill {
+  fill: #221f63;
+}
+
 .textInput:hover,
 .textInput:focus {
   background-color: #221f63;
@@ -93,11 +110,34 @@
   min-height: 10rem;
   resize: none;
 }
-.radioBoard {
+.inputsDeck {
   display: flex;
-  flex-flow: column nowrap;
+  gap: 10px;
 }
-.labelBoard {
-  display: flex;
-  align-items: center;
+.labelDeck {
+  padding: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  height: 70px;
+}
+
+.deckRadioInput {
+  background-image: url("../../../Assets/Icons/plus.svg") no-repeat;
+  appearance: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
+  z-index: 1;
+}
+.deckRadioInput:checked {
+  z-index: 2;
+  position: absolute;
+  background: url("../../../Assets/Icons/check.svg") no-repeat center/contain,
+    #221f63;
 }
