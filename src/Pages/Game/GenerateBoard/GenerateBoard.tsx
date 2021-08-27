@@ -34,13 +34,11 @@ function GenerateBoard({
             isActive ? "" : styles.linkDisable
           }`}
         >
-          <div>
-            <p className={styles.technologyType}>{type}</p>
-            <div className={styles.icon}>
-              <Component />
-            </div>
-            <p className={styles.nameTechnology}>{capitalize(name)}</p>
+          <p className={styles.technologyType}>{type}</p>
+          <div className={styles.icon}>
+            <Component />
           </div>
+          <p className={styles.nameTechnology}>{capitalize(name)}</p>
         </Link>
       </li>
     )

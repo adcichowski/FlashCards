@@ -38,11 +38,13 @@ export { sendData, doActionWithEmailPass };
 class Board {
   personalCards: { [index: string]: ICard[] };
   generalCards: { [index: string]: ICard[] };
+  favoriteCards: { [index: string]: ICard[] };
   idUser: string;
   constructor(idUser: string) {
     this.idUser = idUser;
     this.personalCards = {};
     this.generalCards = {};
+    this.favoriteCards = {};
   }
 
   async getCardsFromFirestore() {

@@ -6,11 +6,11 @@ import { auth } from "../lib/firebase/Settings";
 import { ICard } from "../Types/Types";
 
 interface Action {
-  type: "logIn" | "logOut" | "setWaistCard";
+  type: "logIn" | "logOut" | "setDeckCard";
   setUser?: Omit<CurrentUser, "isLogin">;
 }
-interface CurrentUser {
-  idUser: string;
+export interface CurrentUser {
+  idUser: any;
   isLogin: boolean;
   personalCards: { [index: string]: ICard[] };
   generalCards: { [index: string]: ICard[] };
@@ -23,7 +23,7 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
         ...action.setUser,
         isLogin: true,
       };
-    case "setWaistCard":
+    case "setDeckCard":
       return {
         ...state,
         ...action.setUser,

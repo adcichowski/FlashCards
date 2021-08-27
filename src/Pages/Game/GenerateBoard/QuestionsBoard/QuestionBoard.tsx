@@ -6,8 +6,8 @@ import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
 import { useQuestionBoard } from "./useQuestionBoard";
-import { useModalContext } from "../../../../Context/ModalContext";
 import { SmallButton } from "../../../../Components/Button/SmallButton";
+import { PersonalRate } from "./PersonalRate";
 function QuestionBoard({
   cardsData,
   technologyName,
@@ -15,8 +15,8 @@ function QuestionBoard({
   cardsData: { [index: string]: ICard[] };
   technologyName: string;
 }) {
-  const { dispatch: dispatchModal } = useModalContext();
   const { handleClickShowCard, state } = useQuestionBoard();
+
   return (
     <div>
       <BackButton />
@@ -30,8 +30,8 @@ function QuestionBoard({
         <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {cardsData[technologyName].map((card: ICard, id) => (
-              <li key={card.question} className={styles.questionCard}>
+            {cardsData[technologyName].map((card: ICard) => (
+              <li key={card.id} className={styles.questionCard}>
                 <div className={styles.questionFavorite}>
                   {card.isFavorite ? <FillHeart /> : <Heart />}
                 </div>
@@ -48,21 +48,15 @@ function QuestionBoard({
                     <p className={styles.question}>{card.question}</p>
                     <div className={styles.questionId}>0{card.id}</div>
                   </div>
-                  <div className={styles.blockQuestionRate}>
+                  <div className={styles.questionRateGeneral}>
                     <div className={styles.questionRate}>
                       <p>Overall</p>
                       {card.rating}x
                       <Star />
                     </div>
-                    <div></div>
                   </div>
                 </button>
-                <div
-                  className={styles.questionRatePesonal}
-                  onClick={() => dispatchModal({ type: "rateModal" })}
-                >
-                  Your 5x <Star />
-                </div>
+                <PersonalRate card={card} />
               </li>
             ))}
           </ul>

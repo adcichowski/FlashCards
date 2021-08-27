@@ -21,7 +21,7 @@ export function useGetData() {
       ];
 
       dispatch({
-        type: "setWaistCard",
+        type: "setDeckCard",
         setUser: {
           ...state,
           personalCards,

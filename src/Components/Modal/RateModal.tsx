@@ -15,6 +15,7 @@ function RateModal() {
     return null;
   }
   const setYourRateCard = {
+    initial: 0,
     add: () =>
       setRateValue(rateValue === maxRateOnCard ? rateValue : rateValue + 1),
     subtract: () =>

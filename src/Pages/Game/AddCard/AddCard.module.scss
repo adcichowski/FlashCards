@@ -5,6 +5,7 @@
   align-content: center;
   height: 100vh;
   justify-content: center;
+  min-width: 30rem;
   @media screen and (max-width: 952px) {
     grid-template-columns: 0.2fr;
   }
@@ -15,11 +16,11 @@
   align-items: center;
 }
 .title {
-  font-size: 3rem;
+  font-size: clamp(2rem, clac(2rem + 5vw), 3rem);
   font-weight: 500;
 }
 .card {
-  @media screen and (max-width: 952px) {
+  @media screen and (max-widsth: 952px) {
     display: none;
   }
 }
@@ -45,6 +46,9 @@
   padding: 5px;
   gap: 5px;
   overflow-x: auto;
+  @media screen and (max-width: 952px) {
+    max-width: 30rem;
+  }
 }
 .radioLabel {
   position: relative;
@@ -126,13 +130,12 @@
   appearance: none;
   cursor: pointer;
   position: absolute;
-  bottom: 0;
-  left: 30%;
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid white;
+  bottom: 9%;
+  left: 35%;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid white;
   z-index: 1;
 }
 .deckRadioInput:checked {

@@ -1,5 +1,4 @@
 .board {
-  margin: auto;
   height: 100vh;
   display: flex;
   flex-flow: column wrap;
@@ -7,11 +6,8 @@
   justify-content: center;
 }
 .title {
-  font-size: clamp(2.6rem, calc(5rem+3vw), 6rem);
+  font-size: clamp(2.5rem, calc(2.5rem + 3vw), 6rem);
   font-weight: 600;
-}
-.technology {
-  display: flex;
 }
 .iconTechnology {
   background-position: center;
@@ -39,6 +35,7 @@
   background-color: #a31935af;
   border: none;
   cursor: pointer;
+  display: grid;
 }
 .link:hover {
   transform: background-color scale 1s;
@@ -49,19 +46,20 @@
   flex-flow: wrap;
   align-items: center;
   justify-content: space-around;
-  gap: 0.5rem;
-  padding: 4rem;
+  padding: 3rem;
   border-radius: 2rem;
   background-color: #9f1835e8;
 }
 .icon {
-  width: clamp(5rem, calc(4rem + 10vw), 7rem);
-
+  width: clamp(3rem, calc(3rem + 10vw), 7rem);
   border: none;
   cursor: pointer;
 }
 .technology {
-  margin: 0 30px;
+  margin: 0 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 .nameTechnology {
   text-align: center;
