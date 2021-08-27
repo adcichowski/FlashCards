@@ -14,7 +14,10 @@ function PersonalRate({ card }: { card: ICard }) {
     <div
       className={`${styles.questionRatePesonal} ${styles.questionRatePesonalInfo}`}
     >
-      Your {yourRate.rate}x <Star />
+      Your {yourRate.rate}x
+      <div className={styles.smallStar}>
+        <Star />
+      </div>
     </div>
   ) : (
     <div className={styles.questionRatePesonal}>

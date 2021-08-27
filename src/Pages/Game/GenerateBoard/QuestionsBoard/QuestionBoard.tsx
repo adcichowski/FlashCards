@@ -50,9 +50,11 @@ function QuestionBoard({
                   </div>
                   <div className={styles.questionRateGeneral}>
                     <div className={styles.questionRate}>
-                      <p>Overall</p>
+                      <span>Overall</span>
                       {card.rating}x
-                      <Star />
+                      <div className={styles.star}>
+                        <Star />
+                      </div>
                     </div>
                   </div>
                 </button>

@@ -39,17 +39,17 @@
   cursor: pointer;
   background-color: transparent;
   color: var(--primary-font-color);
+  @media screen and (max-width: 952px) {
+    height: 14rem;
+  }
 }
 .listQuestion {
   overflow: auto;
-  max-height: 90vh;
   width: 100%;
-  position: relative;
   z-index: 12;
 }
 .question {
   font-size: 1.75rem;
-  position: relative;
 }
 .questionFavorite {
   position: absolute;
@@ -64,13 +64,12 @@
   justify-content: space-between;
 }
 .questionRate {
-  border: none;
+  align-self: flex-start;
   display: grid;
-  grid-template-columns: 4rem 3rem 4rem;
+  grid-template-columns: 3rem 2rem 4rem;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  cursor: pointer;
+  gap: 20px;
 }
 .deleteButton {
   position: absolute;
@@ -80,7 +79,6 @@
 }
 .questionRatePesonal,
 .questionRateGeneral {
-  height: 3.5rem;
   display: grid;
   align-items: center;
   gap: 5px;
@@ -90,7 +88,7 @@
   font-size: 1.3rem;
 }
 .questionRatePesonalInfo {
-  grid-template-columns: 5rem 2.75rem 1fr;
+  grid-template-columns: 5rem 3.2rem;
 }
 .questionRateGeneral {
   top: 10%;
@@ -101,6 +99,12 @@
 .questionTitle {
   font-size: clamp(2rem, calc(2.2rem + 2vw), 3rem);
   font-weight: 600;
+}
+.star {
+  width: 40px;
+}
+.smallStar {
+  width: 25px;
 }
 .cardBoard {
   z-index: 0;
