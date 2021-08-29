@@ -4,7 +4,7 @@ import { ICard } from "../../../Types/Types";
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
 import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
-import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
+import { AnimateIconTech } from "../../../Lib/gsap/AnimateIconTech";
 import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
 import { ReactComponent as Heart } from "../../../Assets/Icons/heart-fill.svg";
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
@@ -31,7 +31,7 @@ function AddCard() {
 
   const renderRadioButtons = Object.values(avaibleTechnologies).map(
     ({ name, render: Component }) => (
-      <label className={styles.radioLabel}>
+      <label key={name} className={styles.radioLabel}>
         <span className="sr-only">{name}</span>
         <input
           className={styles.radioInput}

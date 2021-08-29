@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FlipInstruction } from "../../../../lib/gsap/FlipInstruction";
+import { FlipInstruction } from "../../../../Lib/gsap/FlipInstruction";
 import { useAnimationGSAP } from "../../../Hooks/useAnimationGSAP";
 function useInstruction() {
   const [isFlip, flipCard] = useState(false);

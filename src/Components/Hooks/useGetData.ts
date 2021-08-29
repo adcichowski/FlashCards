@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
 
-import { useCreateBoard } from "../../lib/firebase/Utils";
+import { useCreateBoard } from "../../Lib/firebase/Board";
 
 export function useGetData() {
   const { state, dispatch } = useAuthContext();
@@ -12,22 +12,19 @@ export function useGetData() {
   const createdBoard = useCreateBoard(state.idUser);
   useEffect(() => {
     try {
-      if (state.isLogin && !state.idUser) throw Error("Not logged in");
       if (isUpdated) return;
-      createdBoard.getCardsFromFirestore();
-      const [personalCards, generalCards] = [
-        createdBoard.personalCards,
-        createdBoard.generalCards,
-      ];
-
-      dispatch({
-        type: "setDeckCard",
-        setUser: {
-          ...state,
-          personalCards,
-          generalCards,
-        },
-      });
+      const getData = async () => {
+        await createdBoard.getCardsFromFirestore();
+        await dispatch({
+          type: "setDeckCard",
+          setUser: {
+            ...state,
+            personalCards: createdBoard.personalCards,
+            generalCards: createdBoard.generalCards,
+          },
+        });
+      };
+      getData();
     } catch ({ message }) {
       modalDispatch({
         type: "errorModal",

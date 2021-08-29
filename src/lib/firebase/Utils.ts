@@ -1,6 +1,6 @@
 import { ICard } from "../../Types/Types";
 import { auth, db } from "./Settings";
-import { collection, query, getDocs, addDoc } from "@firebase/firestore";
+import { collection, addDoc } from "@firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -22,7 +22,7 @@ function doActionWithEmailPass(
 function sendData(nameDatabase: string, card: any) {
   addDoc(collection(db, nameDatabase), card);
 }
-const sortCardByTechnology = (
+export const sortCardByTechnology = (
   object: { [index: string]: ICard[] },
   card: ICard
 ) => {
@@ -34,40 +34,3 @@ const sortCardByTechnology = (
 };
 
 export { sendData, doActionWithEmailPass };
-
-class Board {
-  personalCards: { [index: string]: ICard[] };
-  generalCards: { [index: string]: ICard[] };
-  favoriteCards: { [index: string]: ICard[] };
-  idUser: string;
-  constructor(idUser: string) {
-    this.idUser = idUser;
-    this.personalCards = {};
-    this.generalCards = {};
-    this.favoriteCards = {};
-  }
-
-  async getCardsFromFirestore() {
-    const [queryPersonalCards, queryGeneralCards] = await Promise.all(
-      [this.idUser, "GeneralCards"].map((name) =>
-        getDocs(query(collection(db, name)))
-      )
-    );
-    await queryPersonalCards.forEach((cards) => {
-      sortCardByTechnology(this.personalCards, cards.data() as ICard);
-    });
-    await queryGeneralCards.forEach((cards) => {
-      sortCardByTechnology(this.generalCards, cards.data() as ICard);
-    });
-  }
-
-  sendCardToFirestore(card: ICard, nameDatabase: string) {
-    if (nameDatabase === "") throw Error("Pick deck to save card!");
-    addDoc(collection(db, nameDatabase), card);
-  }
-}
-
-export const useCreateBoard = (idUser: string) => {
-  const createdBoard = new Board(idUser);
-  return createdBoard;
-};

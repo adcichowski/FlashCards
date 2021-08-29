@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
-import { auth } from "../../lib/firebase/Settings";
+import { auth } from "../../Lib/firebase/Settings";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
 import { UserData } from "../../Types/Types";
 import { useState } from "react";
 import React from "react";
-import { doActionWithEmailPass } from "../../lib/firebase/Utils";
+import { doActionWithEmailPass } from "../../Lib/firebase/Utils";
 import { changeMessageFromFirebase } from "../../Utils/Utils";
 
 function useFormLoginRegister() {

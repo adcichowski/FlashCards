@@ -1,7 +1,7 @@
 import { ReactComponent as Technologies1 } from "../../../../Assets/Pages/Home/ListTechnologies/Technologies-1.svg";
 import styles from "./ListTechnologies.module.scss";
 import { useAnimationGSAP } from "../../../Hooks/useAnimationGSAP";
-import { BounceBoxes } from "../../../../lib/gsap/BounceBoxes";
+import { BounceBoxes } from "../../../../Lib/gsap/BounceBoxes";
 function ListTechnologies() {
   const { getElements } = useAnimationGSAP(BounceBoxes);
   return (

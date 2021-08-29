@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
-import { auth } from "../lib/firebase/Settings";
+import { auth } from "../Lib/firebase/Settings";
 import { ICard } from "../Types/Types";
 
 interface Action {
