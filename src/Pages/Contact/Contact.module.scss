@@ -1,0 +1,67 @@
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: flex-end;
+
+  @media screen and (max-width: 952px) {
+    height: 100vh;
+    padding: 0;
+  }
+}
+.contactBackground {
+  content: "";
+  top: 45%;
+  left: -10%;
+  width: 100rem;
+  height: 80rem;
+  position: absolute;
+  background: url("../../Assets/Pages/Home/About/ThreeCards.webp") no-repeat
+    center/contain;
+  z-index: -1;
+  @media screen and (max-width: 952px) {
+    width: 70rem;
+    height: 50rem;
+    top: 65%;
+  }
+}
+.title {
+  justify-self: center;
+  font-size: clamp(3rem, calc(3rem + 6vw), 10rem);
+  font-weight: 600;
+}
+.description {
+  justify-self: center;
+  align-self: center;
+}
+.descriptionTitle {
+  width: 80%;
+  font-weight: 600;
+  font-size: clamp(2rem, calc(2rem + 2vw), 5.5rem);
+}
+.descriptionText {
+  font-size: clamp(1.6rem, calc(1rem + 2vw), 2rem);
+}
+.descriptionLinks {
+  display: flex;
+  gap: 10px;
+}
+
+.instagram {
+  width: 30px;
+  height: 30px;
+  background: url("../../Assets/SocialIcons/instagram.svg") no-repeat
+    center/contain;
+}
+.twitter {
+  width: 32px;
+  height: 32px;
+  background: url("../../Assets/SocialIcons/twitter.svg") no-repeat
+    center/contain;
+}
+.facebook {
+  width: 27px;
+  height: 27px;
+  background: url("../../Assets/SocialIcons/facebook.svg") no-repeat
+    center/contain;
+}

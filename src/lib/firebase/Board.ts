@@ -38,7 +38,7 @@ class Board {
     this[deck][card.technology].push(card);
   }
 
-  sendCardToFirestore(card: { [index: string]: ICard[] }, deck: string) {
+  sendDeckToFirestore(card: { [index: string]: ICard[] }, deck: string) {
     if (deck === "") throw Error("Pick deck to save card!");
     setDoc(doc(db, "Board", deck), card);
   }

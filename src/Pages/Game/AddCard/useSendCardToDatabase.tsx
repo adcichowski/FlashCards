@@ -32,7 +32,7 @@ function useSendCardToDatabase(
       createdBoard.personalCards = authState.personalCards;
       createdBoard.generalCards = authState.generalCards;
       createdBoard.addCardToDeck(card, nameDatabase);
-      classCard.sendCardToFirestore(
+      createdBoard.sendDeckToFirestore(
         createdBoard[nameDatabase],
         nameDatabase === "personalCards" ? authState.idUser : "GeneralCards"
       );

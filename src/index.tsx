@@ -9,6 +9,7 @@ import { Modal } from "./Components/Modal/Modal";
 import { GameRoute } from "./Routes/GameRoute";
 import styles from "./index.module.scss";
 import { CardProvider } from "./Context/CardContext";
+import { Contact } from "./Pages/Contact/Contact";
 ReactDOM.render(
   <React.StrictMode>
     <div className={styles.cotainer}>
@@ -18,6 +19,7 @@ ReactDOM.render(
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Form} />
+              <Route path="/contact" component={Contact} />
               <CardProvider>
                 <GameRoute />
               </CardProvider>

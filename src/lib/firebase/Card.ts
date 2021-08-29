@@ -1,7 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
 import { ICard, PersonRating } from "../../Types/Types";
-
-import { db } from "./Settings";
 class Card implements ICard {
   technology: string;
   id: number;
@@ -25,13 +22,6 @@ class Card implements ICard {
     if (this.answer === "") throw Error("Answer field is empty!");
     if (this.question === "") throw Error("Question field is empty!");
     if (this.id === 0) throw Error("Select card deck");
-  }
-  sendCardToFirestore(
-    card: { [index: string]: ICard[] },
-    nameDatabase: string
-  ) {
-    if (nameDatabase === "") throw Error("Pick deck to save card!");
-    setDoc(doc(db, "Board", nameDatabase), card);
   }
 }
 
