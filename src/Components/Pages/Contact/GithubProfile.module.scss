@@ -6,6 +6,10 @@
   display: grid;
   align-self: flex-end;
   text-shadow: 1px 1px 1px black;
+  @media screen and (max-width: 800px) {
+    bottom: 22rem;
+    height: 10rem;
+  }
 }
 .cardTitle {
   font-size: 1.9rem;
@@ -19,6 +23,10 @@
   height: 10rem;
   box-shadow: 0 0 0 1px #262541;
   box-shadow: 1px 1px 1px #262541;
+  @media screen and (max-width: 800px) {
+    width: 8rem;
+    height: 8rem;
+  }
 }
 .icons {
   display: flex;

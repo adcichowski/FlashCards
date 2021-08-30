@@ -19,8 +19,8 @@
     center/contain;
   z-index: -1;
   @media screen and (max-width: 652px) {
-    width: 80rem;
-    height: 60rem;
+    width: 60rem;
+    height: 40rem;
     top: 55%;
     left: -30%;
   }
@@ -28,7 +28,7 @@
 .description {
   justify-self: center;
   align-self: center;
-  @media screen and (max-width: 952px) {
+  @media screen and (max-width: 948px) {
     margin-top: -15rem;
     padding: 10px;
   }
