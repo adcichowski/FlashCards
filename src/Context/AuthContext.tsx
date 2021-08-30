@@ -10,7 +10,7 @@ interface Action {
   setUser?: Omit<CurrentUser, "isLogin">;
 }
 export interface CurrentUser {
-  idUser: any;
+  idUser: string;
   isLogin: boolean;
   personalCards: { [index: string]: ICard[] };
   generalCards: { [index: string]: ICard[] };
