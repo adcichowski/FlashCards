@@ -98,7 +98,6 @@ ul {
 }
 *::-webkit-scrollbar {
   position: absolute;
-  width: 0.8 em;
   background-color: transparent;
   border: 2px solid rgba(0, 0, 0, 0.2);
 }
@@ -111,4 +110,7 @@ ul {
   border-radius: 100px;
   background: #a31934;
   border: 4px solid rgba(0, 0, 0, 0.2);
+}
+.facebook:hover {
+  stroke: #a31934;
 }

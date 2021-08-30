@@ -1,0 +1,41 @@
+.card {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 10rem;
+  display: grid;
+  align-self: flex-end;
+  text-shadow: 1px 1px 1px black;
+}
+.cardTitle {
+  font-size: 1.9rem;
+}
+.cardName {
+  text-align: center;
+}
+.cardAvatar {
+  border-radius: 60px;
+  width: 10rem;
+  height: 10rem;
+  box-shadow: 0 0 0 1px #262541;
+  box-shadow: 1px 1px 1px #262541;
+}
+.icons {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.icon {
+  width: 40px;
+  height: 40px;
+}
+.github {
+  background: url("../../../Assets/SocialIcons/github.svg") no-repeat
+    center/cover;
+}
+.linkedin {
+  width: 44px;
+  height: 44px;
+  background: url("../../../Assets/SocialIcons/linkedin.svg") no-repeat
+    center/contain;
+}

@@ -1,12 +1,11 @@
 .contact {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: flex-end;
+  margin: auto;
 
   @media screen and (max-width: 952px) {
     height: 100vh;
-    padding: 0;
   }
 }
 .contactBackground {
@@ -19,20 +18,20 @@
   background: url("../../Assets/Pages/Home/About/ThreeCards.webp") no-repeat
     center/contain;
   z-index: -1;
-  @media screen and (max-width: 952px) {
-    width: 70rem;
-    height: 50rem;
-    top: 65%;
+  @media screen and (max-width: 652px) {
+    width: 80rem;
+    height: 60rem;
+    top: 55%;
+    left: -30%;
   }
-}
-.title {
-  justify-self: center;
-  font-size: clamp(3rem, calc(3rem + 6vw), 10rem);
-  font-weight: 600;
 }
 .description {
   justify-self: center;
   align-self: center;
+  @media screen and (max-width: 952px) {
+    margin-top: -15rem;
+    padding: 10px;
+  }
 }
 .descriptionTitle {
   width: 80%;
@@ -46,16 +45,16 @@
   display: flex;
   gap: 10px;
 }
-
-.instagram {
-  width: 30px;
-  height: 30px;
-  background: url("../../Assets/SocialIcons/instagram.svg") no-repeat
-    center/contain;
+.social {
+  cursor: pointer;
+}
+.social:hover {
+  stroke: #a31934;
+  border-radius: 5px;
 }
 .twitter {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   background: url("../../Assets/SocialIcons/twitter.svg") no-repeat
     center/contain;
 }
@@ -63,5 +62,11 @@
   width: 27px;
   height: 27px;
   background: url("../../Assets/SocialIcons/facebook.svg") no-repeat
+    center/contain;
+}
+.linkedin {
+  width: 34px;
+  height: 34px;
+  background: url("../../Assets/SocialIcons/linkedin.svg") no-repeat
     center/contain;
 }
