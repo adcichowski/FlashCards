@@ -5,7 +5,7 @@ import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibl
 import { Link } from "react-router-dom";
 import { capitalize } from "../../../Utils/Utils";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
-import { AnimateIconTech } from "../../../Lib/gsap/AnimateIconTech";
+import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { useEffect } from "react";
 import { useCardContext } from "../../../Context/CardContext";
 function GenerateBoard({

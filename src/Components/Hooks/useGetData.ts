@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
 
-import { useCreateBoard } from "../../Lib/firebase/Board";
+import { useCreateBoard } from "../../lib/firebase/Board";
 
 export function useGetData() {
   const { state, dispatch } = useAuthContext();

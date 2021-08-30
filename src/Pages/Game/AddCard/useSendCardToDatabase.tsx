@@ -2,8 +2,8 @@ import { useHistory } from "react-router";
 import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
-import { useCreateBoard } from "../../../Lib/firebase/Board";
-import { useCreateCard } from "../../../Lib/firebase/Card";
+import { useCreateBoard } from "../../../lib/firebase/Board";
+import { useCreateCard } from "../../../lib/firebase/Card";
 
 function useSendCardToDatabase(
   nameDatabase: "personalCards" | "generalCards" | ""
