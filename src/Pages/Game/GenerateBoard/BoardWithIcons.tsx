@@ -1,4 +1,4 @@
-import styles from "./GenerateBoard.module.scss";
+import styles from "./BoardWithIcons.module.scss";
 import { ICard } from "../../../Types/Types";
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
@@ -8,7 +8,7 @@ import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { useEffect } from "react";
 import { useCardContext } from "../../../Context/CardContext";
-function GenerateBoard({
+function BoardWithIcons({
   cardsData,
   typeBoard,
 }: {
@@ -58,5 +58,5 @@ function GenerateBoard({
     </>
   );
 }
-export { GenerateBoard };
-GenerateBoard.displayName = "GenerateBoard";
+export { BoardWithIcons };
+BoardWithIcons.displayName = "BoardWithIcons";
