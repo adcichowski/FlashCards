@@ -9,6 +9,7 @@ interface Action {
     | "getNextOrPrevCard"
     | "showEmptyCard"
     | "editCard"
+    | "randomSVG"
     | "resetCard"
     | "hideCard";
   setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
@@ -40,7 +41,6 @@ function cardMainReducer(
       return {
         ...state,
         ...action.setCard,
-        randomSvgCard: getRandomMinMax(0, 10),
         isFlip: false,
         isShow: true,
       };
@@ -49,11 +49,15 @@ function cardMainReducer(
         ...state,
         isFlip: !state.isFlip,
       };
+    case "randomSVG":
+      return {
+        ...state,
+        randomSvgCard: getRandomMinMax(0, 10),
+      };
     case "getNextOrPrevCard":
       return {
         ...state,
         ...action.setCard,
-        randomSvgCard: getRandomMinMax(0, 10),
         isFlip: false,
         isShow: true,
       };

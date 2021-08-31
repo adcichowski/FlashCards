@@ -2,6 +2,19 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
+  @media screen and (max-width: 952px) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    background-color: #221f63c2;
+  }
 }
 .card {
   color: rgb(27, 27, 27);
@@ -123,10 +136,14 @@
   width: clamp(3rem, calc(1rem+5vw), 5rem);
   height: clamp(3rem, calc(1rem+5vw), 5rem);
 }
-.buttonHide {
+.functionallButtons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 20px;
+}
+.hideButton {
   display: none;
   @media screen and (max-width: 952px) {
-    margin-top: 1rem;
     display: block;
   }
 }

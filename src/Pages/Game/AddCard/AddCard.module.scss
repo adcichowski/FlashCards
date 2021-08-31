@@ -144,3 +144,15 @@
   background: url("../../../Assets/Icons/check.svg") no-repeat center/contain,
     #221f63;
 }
+.functionalButtons {
+  display: flex;
+  gap: 20px;
+}
+.shapeButton {
+  height: 5rem;
+  color: var(--primary--font-color);
+  background: #221f63;
+  border: 1px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+}

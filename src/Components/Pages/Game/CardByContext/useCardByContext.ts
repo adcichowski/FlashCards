@@ -43,6 +43,7 @@ function useCardByContext() {
     getIconAndColor,
     state,
     handleClickHideCard,
+    dispatch,
   };
 }
 export { useCardByContext };

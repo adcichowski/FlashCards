@@ -6,9 +6,14 @@ import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
 import { Button } from "../../../Button/Button";
-function CardByContext() {
-  const { state, handleClickFlipCard, getIconAndColor, handleClickHideCard } =
-    useCardByContext();
+function CardByContext({ isEdit }: { isEdit?: boolean }) {
+  const {
+    state,
+    dispatch,
+    handleClickFlipCard,
+    getIconAndColor,
+    handleClickHideCard,
+  } = useCardByContext();
   const { CardIcon, colorIcon } = getIconAndColor();
   if (!state.isShow) return null;
   return (
@@ -56,10 +61,18 @@ function CardByContext() {
           {state.isFavorite ? <FillHeart /> : <Heart />}
         </div>
       </div>
-      <div className={styles.buttonHide}>
-        <Button type="button" onClick={handleClickHideCard}>
-          Hide Card
-        </Button>
+
+      <div className={styles.functionallButtons}>
+        {isEdit ? (
+          <Button onClick={() => dispatch({ type: "randomSVG" })} type="button">
+            Set Shape
+          </Button>
+        ) : null}
+        <div className={styles.hideButton}>
+          <Button type="button" onClick={handleClickHideCard}>
+            Hide Card
+          </Button>
+        </div>
       </div>
     </div>
   );

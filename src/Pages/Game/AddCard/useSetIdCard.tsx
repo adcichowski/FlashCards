@@ -10,7 +10,6 @@ function useSetIdCard() {
   const { dispatch, state: stateCard } = useCardContext();
   const { state } = useAuthContext();
   useEffect(() => {
-    if (!stateCard.isShow) dispatch({ type: "showEmptyCard" });
     if (stateCard.technology === "none" || !nameDatabase) return;
     const getCardsByTechnology =
       state[nameDatabase][stateCard.technology] || undefined;

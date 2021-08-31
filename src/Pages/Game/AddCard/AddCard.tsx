@@ -125,12 +125,17 @@ function AddCard() {
             </label>
           </div>
         </div>
-        <Button type="button" onClick={sendCardToDatabase}>
-          Add Card
-        </Button>
+        <span className={styles.functionalButtons}>
+          <Button type="button" onClick={sendCardToDatabase}>
+            Add Card
+          </Button>
+          <Button type="button" onClick={() => dispatch({ type: "showCard" })}>
+            Show Card
+          </Button>
+        </span>
       </div>
       <div className={styles.card}>
-        <CardByContext />
+        <CardByContext isEdit />
       </div>
     </div>
   );
