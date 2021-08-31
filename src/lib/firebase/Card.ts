@@ -7,6 +7,7 @@ class Card implements ICard {
   question: string;
   isFavorite: boolean;
   whoRate: PersonRating[];
+  randomSvgCard: number;
   constructor({ technology, id, answer, question, isFavorite }: ICard) {
     this.technology = technology;
     this.answer = answer;
@@ -15,6 +16,7 @@ class Card implements ICard {
     this.rating = 0;
     this.isFavorite = isFavorite;
     this.whoRate = [];
+    this.randomSvgCard = 0;
   }
 
   validateFields() {

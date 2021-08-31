@@ -17,6 +17,7 @@ export interface ICard {
   question: string;
   isFavorite: boolean;
   rating: number;
+  randomSvgCard: number;
   whoRate: PersonRating[];
 }
 

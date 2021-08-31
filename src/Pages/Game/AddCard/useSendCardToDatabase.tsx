@@ -15,8 +15,17 @@ function useSendCardToDatabase(
   const createdBoard = useCreateBoard(authState.idUser);
   const createCard = useCreateCard();
   function sendCardToDatabase() {
-    const { id, isFavorite, technology, question, answer, rating } = cardState;
+    const {
+      id,
+      isFavorite,
+      technology,
+      question,
+      answer,
+      rating,
+      randomSvgCard,
+    } = cardState;
     const card = {
+      randomSvgCard,
       id,
       isFavorite,
       technology,

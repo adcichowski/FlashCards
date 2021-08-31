@@ -50,7 +50,16 @@ class Card implements ICard {
   question: string;
   isFavorite: boolean;
   whoRate: PersonRating[];
-  constructor({ technology, id, answer, question, isFavorite }: ICard) {
+  randomSvgCard: number;
+  constructor({
+    technology,
+    id,
+    answer,
+    question,
+    isFavorite,
+    randomSvgCard,
+  }: ICard) {
+    this.randomSvgCard = 0;
     this.technology = technology;
     this.answer = answer;
     this.id = id;

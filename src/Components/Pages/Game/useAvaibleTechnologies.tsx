@@ -45,7 +45,7 @@ function useAvaibleTechnologies() {
       description:
         "JavaScript is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.",
       render: JavascriptIcon,
-      fill: "#F7DF1E",
+      fill: "#d3ba01",
     },
     typescript: {
       name: "typescript",
