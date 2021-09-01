@@ -19,9 +19,9 @@ function Form() {
     <div className={styles.game}>
       <div className={styles.formLog}>
         <BackButton />
-        <h4 className={styles.formTitle}>
+        <h1 className={styles.formTitle}>
           {isRegister ? "Register In" : "Log In"}
-        </h4>
+        </h1>
         <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
           <label>
             <span className="sr-only">email</span>

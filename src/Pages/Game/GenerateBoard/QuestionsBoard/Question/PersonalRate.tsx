@@ -1,9 +1,9 @@
-import { useAuthContext } from "../../../../Context/AuthContext";
-import { ICard, PersonRating } from "../../../../Types/Types";
-import { useModalContext } from "../../../../Context/ModalContext";
-import { SmallButton } from "../../../../Components/Button/SmallButton";
-import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
-import styles from "./QuestionsBoard.module.scss";
+import { useAuthContext } from "../../../../../Context/AuthContext";
+import { ICard, PersonRating } from "../../../../../Types/Types";
+import { useModalContext } from "../../../../../Context/ModalContext";
+import { SmallButton } from "../../../../../Components/Button/SmallButton";
+import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
+import styles from "./Question.module.scss";
 function PersonalRate({ card }: { card: ICard }) {
   const { state: stateAuth } = useAuthContext();
   const { dispatch: dispatchModal } = useModalContext();

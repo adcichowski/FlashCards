@@ -19,12 +19,12 @@ export function Contact() {
       <Navigation />
       <div className={styles.contact}>
         <div className={styles.description}>
-          <p className={styles.descriptionTitle}>
+          <h1 className={styles.descriptionTitle}>
             Thanks for your interest in FlashCards
-          </p>
-          <p className={styles.descriptionText}>
+          </h1>
+          <h2 className={styles.descriptionText}>
             if you wanna extend this project, message to me.{" "}
-          </p>
+          </h2>
           <ul className={styles.descriptionLinks}>{renderSocialLinks}</ul>
         </div>
         <GithubProfile />

@@ -1,4 +1,4 @@
-import { PersonalRate } from "../PersonalRate";
+import { PersonalRate } from "./PersonalRate";
 import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../../Assets/Icons/heart.svg";
 import { ReactComponent as FillHeart } from "../../../../../Assets/Icons/heart-fill.svg";
@@ -6,7 +6,7 @@ import { useQuestionBoard } from "../useQuestionBoard";
 import { SmallButton } from "../../../../../Components/Button/SmallButton";
 import { ICard } from "../../../../../Types/Types";
 import styles from "./Question.module.scss";
-const Question = (card: ICard) => {
+const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
   const { handleClickShowCard } = useQuestionBoard();
   return (
     <li key={card.id} className={styles.questionCard}>
@@ -14,7 +14,9 @@ const Question = (card: ICard) => {
         {card.isFavorite ? <FillHeart /> : <Heart />}
       </div>
       <div className={styles.deleteButton}>
-        <SmallButton type="button">Delete</SmallButton>
+        {typeBoard === "personal" && (
+          <SmallButton type="button">Delete</SmallButton>
+        )}
       </div>
       <button
         onClick={() => {
@@ -22,7 +24,7 @@ const Question = (card: ICard) => {
         }}
         className={styles.questionCardInner}
       >
-        <div className={styles.centerCardQuestion}>
+        <div>
           <p className={styles.question}>{card.question}</p>
           <div className={styles.questionId}>0{card.id}</div>
         </div>
@@ -36,7 +38,7 @@ const Question = (card: ICard) => {
           </div>
         </div>
       </button>
-      <PersonalRate card={card} />
+      {typeBoard === "personal" || <PersonalRate card={card} />}
     </li>
   );
 };

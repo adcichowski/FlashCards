@@ -15,7 +15,14 @@ const Instruction = React.lazy(() =>
 export default function Home() {
   return (
     <div className={styles.homePage}>
-      <header className={styles.heroBackground}>
+      <header className={styles.header}>
+        <picture>
+          <img
+            className={styles.heroBackground}
+            src={"/HeroBackground.png"}
+            alt="background"
+          />
+        </picture>
         <div className={styles.heroNavigation}>
           <Navigation />
         </div>

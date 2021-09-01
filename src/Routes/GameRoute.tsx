@@ -32,12 +32,14 @@ function GameRoute() {
           <React.Fragment key={name}>
             <PrivateRoute path={`/game/personal-cards/${name}`}>
               <QuestionsBoard
+                typeBoard="personal"
                 technologyName={name}
                 cardsData={state.personalCards}
               />
             </PrivateRoute>
             <PrivateRoute path={`/game/general-cards/${name}`}>
               <QuestionsBoard
+                typeBoard="general"
                 technologyName={name}
                 cardsData={state.generalCards}
               />

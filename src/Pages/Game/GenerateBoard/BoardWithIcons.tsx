@@ -49,7 +49,7 @@ function BoardWithIcons({
       <BackButton />
       <div className={styles.board}>
         <div className={styles.boardTechnologies}>
-          <p className={styles.title}>{`${capitalize(typeBoard)} Cards`}</p>
+          <h1 className={styles.title}>{`${capitalize(typeBoard)} Cards`}</h1>
           <div ref={getElements} className={styles.technology}>
             <ul className={styles.listTechnology}>{renderIcons}</ul>
           </div>
