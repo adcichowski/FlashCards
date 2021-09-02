@@ -21,16 +21,16 @@ export default function Home() {
         </div>
         <picture>
           <source
-            srcSet="/HeroBackground/HeroBackground-1080.png"
+            srcSet="/HeroBackground/large.png"
             media="(min-width: 1080px)"
           />
           <source
-            srcSet="/HeroBackground/HeroBackground-480.png"
+            srcSet="/HeroBackground/medium.png"
             media="(min-width: 480px)"
           />
           <source
-            srcSet="/HeroBackground/HeroBackground-360.png"
-            media="(min-width: 360px)"
+            srcSet="/HeroBackground/small.png"
+            media="(max-width: 360px), (min-width:360px)"
           />
           <img className={styles.heroBackground} alt="background" />
         </picture>
@@ -48,6 +48,21 @@ export default function Home() {
       <main>
         <HomeAbout />
         <article className={styles.firstSide}>
+          <picture>
+            <source
+              srcSet="/ShoeBackground/large.png"
+              media="(min-width: 1080px)"
+            />
+            <source
+              srcSet="/ShoeBackground/medium.png"
+              media="(min-width: 480px)"
+            />
+            <source
+              srcSet="/ShoeBackground/small.png"
+              media="(max-width: 360px), (min-width:360px)"
+            />
+            <img className={styles.shoeBackground} alt="background" />
+          </picture>
           <Suspense fallback={<div>Generate Card Instruction</div>}>
             <Instruction />
           </Suspense>

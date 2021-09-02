@@ -8,7 +8,7 @@ function Instruction() {
   const handleClickFlip = () => flipCard(!isFlip);
   return (
     <section className={styles.introduce}>
-      <h2 className={`${styles.introduce__title}`}>
+      <h2 className={`${styles.introduceTitle}`}>
         {!isFlip ? "Front Card Side" : "Back Side Card"}
       </h2>
       <div ref={getElements} className={styles.card}>

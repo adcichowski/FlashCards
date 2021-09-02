@@ -13,10 +13,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  &__title {
-    font-size: clamp(2.4rem, 4vw, 7rem);
-    text-align: center;
-  }
+}
+.introduceTitle {
+  font-size: clamp(2.4rem, 4vw, 7rem);
+  text-align: center;
 }
 @media screen and (max-width: 950px) {
   .card {
