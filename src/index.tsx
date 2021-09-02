@@ -7,12 +7,11 @@ import { AuthProvider } from "./Context/AuthContext";
 import { Form } from "./Pages/Login/Form";
 import { Modal } from "./Components/Modal/Modal";
 import { GameRoute } from "./Routes/GameRoute";
-import styles from "./index.module.scss";
 import { CardProvider } from "./Context/CardContext";
 import { Contact } from "./Pages/Contact/Contact";
 ReactDOM.render(
   <React.StrictMode>
-    <div className={styles.cotainer}>
+    <div>
       <Router>
         <ModalProvider>
           <AuthProvider>

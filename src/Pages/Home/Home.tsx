@@ -16,16 +16,24 @@ export default function Home() {
   return (
     <div className={styles.homePage}>
       <header className={styles.header}>
-        <picture>
-          <img
-            className={styles.heroBackground}
-            src={"/HeroBackground.png"}
-            alt="background"
-          />
-        </picture>
         <div className={styles.heroNavigation}>
           <Navigation />
         </div>
+        <picture>
+          <source
+            srcSet="/HeroBackground/HeroBackground-1080.png"
+            media="(min-width: 1080px)"
+          />
+          <source
+            srcSet="/HeroBackground/HeroBackground-480.png"
+            media="(min-width: 480px)"
+          />
+          <source
+            srcSet="/HeroBackground/HeroBackground-360.png"
+            media="(min-width: 360px)"
+          />
+          <img className={styles.heroBackground} alt="background" />
+        </picture>
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
           <p className={styles.heroSubtitle}>
