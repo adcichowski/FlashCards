@@ -13,11 +13,11 @@ function BoardWithIcons({
   typeBoard,
 }: {
   cardsData: { [index: string]: ICard[] };
-  typeBoard: "general" | "personal";
+  typeBoard: "general" | "personal" | "favorite";
 }) {
   const { dispatch, state } = useCardContext();
   useEffect(() => {
-    if (state.technology !== "none") {
+    if (state.isShow) {
       dispatch({
         type: "resetCard",
       });
