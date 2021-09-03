@@ -4,7 +4,6 @@ import { CardWave } from "./CardWave";
 import { useCardByContext } from "./useCardByContext";
 import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
-import { ReactComponent as FillHeart } from "../../../../Assets/Icons/heart-fill.svg";
 import { Button } from "../../../Button/Button";
 function CardByContext({ isEdit }: { isEdit?: boolean }) {
   const {
@@ -57,8 +56,12 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
         <p className={styles.favoriteText}>
           {state.isFavorite ? "Favorite Card" : "Not Favorite Card"}
         </p>
-        <div className={styles.favoriteIcon}>
-          {state.isFavorite ? <FillHeart /> : <Heart />}
+        <div
+          className={`${styles.favoriteIcon}  ${
+            state.isFavorite && styles.fill
+          }`}
+        >
+          <Heart />
         </div>
       </div>
 

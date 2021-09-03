@@ -29,11 +29,14 @@ function Footer() {
             </ul>
             <ul className={styles.listSocial}>
               {socialLinks.map((socialName) => (
-                <a key={socialName} href={`https://${socialName}.com`}>
-                  <li className={`${styles[socialName]}`}>
+                <li key={socialName}>
+                  <a
+                    href={`https://${socialName}.com`}
+                    className={`${styles[socialName]}`}
+                  >
                     <span className="sr-only">{socialName}</span>
-                  </li>
-                </a>
+                  </a>
+                </li>
               ))}
             </ul>
           </nav>

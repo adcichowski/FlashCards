@@ -16,10 +16,18 @@
   font-size: 1.75rem;
 }
 .questionFavorite {
+  fill: transparent;
   position: absolute;
   width: 2.5rem;
   bottom: 10%;
   left: 2.5%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.questionFavorite:hover,
+.fill {
+  fill: #9f1835;
 }
 .deleteButton {
   position: absolute;

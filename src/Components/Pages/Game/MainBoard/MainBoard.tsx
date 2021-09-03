@@ -29,7 +29,10 @@ function MainBoard() {
 
           <div className={styles.outsideButton}>
             Favorite Cards
-            <Link to="/game/personal-cards/favorite" className={styles.link}>
+            <Link
+              to="/game/personal-cards/favorite"
+              className={`${styles.link} ${styles.heart}`}
+            >
               <Heart />
             </Link>
           </div>
