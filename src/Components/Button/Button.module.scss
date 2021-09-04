@@ -7,6 +7,7 @@
   cursor: pointer;
   outline-offset: 4px;
   transition: filter 250ms;
+  margin: 0 10px;
 }
 .bigButton {
   width: clamp(11rem, calc(11rem + 10vw), 20rem);

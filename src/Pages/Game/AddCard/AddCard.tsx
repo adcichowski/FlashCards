@@ -125,7 +125,7 @@ function AddCard() {
             </label>
           </div>
         </div>
-        <span className={styles.functionalButtons}>
+        <span>
           <Button type="button" onClick={sendCardToDatabase}>
             Add Card
           </Button>

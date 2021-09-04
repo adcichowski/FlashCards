@@ -7,12 +7,19 @@ import { ICard } from "../../../../../Types/Types";
 import styles from "./Question.module.scss";
 import { useCardContext } from "../../../../../Context/CardContext";
 import { useCallback } from "react";
-const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
+const Question = ({
+  card,
+  typeBoard,
+  deleteFunc,
+}: {
+  card: ICard;
+  typeBoard: string;
+  deleteFunc: () => void;
+}) => {
   const { handleClickShowCard } = useQuestionBoard();
   const { dispatch } = useCardContext();
   const setFavorite = useCallback(
     (card: ICard) => {
-      console.log("hi");
       dispatch({
         type: "editCard",
         setCard: { ...card, isFlip: false, isFavorite: !card.isFavorite },
@@ -34,7 +41,9 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
       </button>
       <div className={styles.deleteButton}>
         {typeBoard === "personalCards" && (
-          <SmallButton type="button">Delete</SmallButton>
+          <SmallButton type="button" onClick={() => deleteFunc()}>
+            Delete
+          </SmallButton>
         )}
       </div>
       <button

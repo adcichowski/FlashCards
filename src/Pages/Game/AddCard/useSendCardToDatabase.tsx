@@ -8,9 +8,7 @@ import {
   validateCardFields,
 } from "../../../lib/firebase/Utils";
 import { getErrorMessage } from "../../../Utils/Utils";
-function useSendCardToDatabase(
-  nameDatabase: "personalCards" | "generalCards" | ""
-) {
+function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
   const { dispatch: dispatchModal } = useModalContext();
   const { dispatch: authDispatch, state: authState } = useAuthContext();
   const { dispatch, state: cardState } = useCardContext();
@@ -36,20 +34,20 @@ function useSendCardToDatabase(
       whoRate: [{ id: authState.idUser, rate: rating }],
     };
     try {
-      if (nameDatabase === "") throw Error("Select deck for Card");
+      if (deck === "") throw Error("Select deck for Card");
       validateCardFields(card);
-      const copyStateDeck = authState[nameDatabase];
+      const copyStateDeck = authState[deck];
       addCardToDeck(card, copyStateDeck);
       authDispatch({
         type: "setDeckCard",
         setUser: {
           ...authState,
-          [nameDatabase]: copyStateDeck,
+          [deck]: copyStateDeck,
         },
       });
       sendDeckToFirestore(
-        authState[nameDatabase],
-        nameDatabase === "personalCards" ? authState.idUser : "GeneralCards"
+        authState[deck],
+        deck === "personalCards" ? authState.idUser : "GeneralCards"
       );
       dispatch({ type: "resetCard" });
       dispatchModal({

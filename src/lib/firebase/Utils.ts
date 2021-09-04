@@ -62,3 +62,18 @@ export function validateCardFields(card: ICard) {
   if (card.question === "") throw Error("Question field is empty!");
   if (card.id === 0) throw Error("Select card deck");
 }
+
+export function deleteCardFromFirestore(
+  card: ICard,
+  cards: ICardsFromFirestore
+) {
+  const filteredCards = cards[card.technology].filter((item) => item !== card);
+  const deckCardAfterDeleted: ICardsFromFirestore =
+    filteredCards.length === 0
+      ? {}
+      : {
+          ...cards,
+          [card.technology]: filteredCards,
+        };
+  return deckCardAfterDeleted;
+}

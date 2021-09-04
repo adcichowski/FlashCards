@@ -12,10 +12,7 @@ function Game({ children }: { children: React.PropsWithChildren<{}> }) {
           srcSet="/GameBackground/medium.png"
           media="(min-width: 480px)"
         />
-        <source
-          srcSet="/GameBackground/small.png"
-          media="(max-width: 480px), (min-width:360px)"
-        />
+        <source srcSet="/GameBackground/small.png" media="(min-width:360px)" />
         <img alt="background" className={styles.background} />
       </picture>
       {children}
