@@ -28,7 +28,6 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
         ...state,
         ...action.setUser,
       };
-
     case "logOut":
       auth.signOut();
       return { ...state, isLogin: false, idUser: "" };

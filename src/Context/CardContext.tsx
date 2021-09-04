@@ -65,7 +65,6 @@ function cardMainReducer(
       return {
         ...state,
         ...action.setCard,
-        isShow: true,
       };
     case "showEmptyCard":
       return {

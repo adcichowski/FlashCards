@@ -1,11 +1,12 @@
-import { ICard } from "../../Types/Types";
+import { getDoc, doc, setDoc } from "firebase/firestore";
+import { ICard, ICardsFromFirestore } from "../../Types/Types";
 import { auth, db } from "./Settings";
 import { collection, addDoc } from "@firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-function doActionWithEmailPass(
+export function doActionWithEmailPass(
   action: "register" | "login",
   email: string,
   password: string
@@ -19,7 +20,7 @@ function doActionWithEmailPass(
   }
 }
 
-function sendData(nameDatabase: string, card: any) {
+export function sendData(nameDatabase: string, card: any) {
   addDoc(collection(db, nameDatabase), card);
 }
 export const sortCardByTechnology = (
@@ -33,4 +34,31 @@ export const sortCardByTechnology = (
   return object[card.technology].sort((a, b) => a.id - b.id);
 };
 
-export { sendData, doActionWithEmailPass };
+export async function getCards(idUser: string) {
+  const [queryPersonalCards, queryGeneralCards] = await Promise.all(
+    [idUser, "GeneralCards"].map((name) => getDoc(doc(db, "Board", name)))
+  );
+  const personalCards = (await queryPersonalCards).data() || {};
+  const generalCards = (await queryGeneralCards).data() || {};
+  return { personalCards, generalCards };
+}
+export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
+  if (deck[card.technology] === undefined) {
+    deck[card.technology] = [];
+  }
+  deck[card.technology].push(card);
+}
+
+export function sendDeckToFirestore(
+  cards: ICardsFromFirestore,
+  toCollectionFirestore: string
+) {
+  setDoc(doc(db, "Board", toCollectionFirestore), cards);
+}
+
+export function validateCardFields(card: ICard) {
+  if (card.technology === "none") throw Error("Set technology in card");
+  if (card.answer === "") throw Error("Answer field is empty!");
+  if (card.question === "") throw Error("Question field is empty!");
+  if (card.id === 0) throw Error("Select card deck");
+}

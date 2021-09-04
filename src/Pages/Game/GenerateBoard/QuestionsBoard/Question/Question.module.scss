@@ -12,8 +12,11 @@
     height: 14rem;
   }
 }
+.centerCard {
+  margin-left: -2rem;
+}
 .question {
-  font-size: 1.75rem;
+  font-size: 1.6rem;
 }
 .questionFavorite {
   fill: transparent;
@@ -38,7 +41,7 @@
 .questionRate {
   align-self: flex-start;
   display: grid;
-  grid-template-columns: 3rem 2rem 4rem;
+  grid-template-columns: 2.6rem 1rem 4rem;
   align-items: center;
   justify-content: center;
   gap: 20px;

@@ -5,11 +5,27 @@ import { useQuestionBoard } from "../useQuestionBoard";
 import { SmallButton } from "../../../../../Components/Button/SmallButton";
 import { ICard } from "../../../../../Types/Types";
 import styles from "./Question.module.scss";
+import { useCardContext } from "../../../../../Context/CardContext";
+import { useCallback } from "react";
 const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
   const { handleClickShowCard } = useQuestionBoard();
+  const { dispatch } = useCardContext();
+  const setFavorite = useCallback(
+    (card: ICard) => {
+      console.log("hi");
+      dispatch({
+        type: "editCard",
+        setCard: { ...card, isFlip: false, isFavorite: !card.isFavorite },
+      });
+    },
+    [dispatch]
+  );
   return (
-    <li key={card.id} className={styles.questionCard}>
+    <li key={card.id + card.answer} className={styles.questionCard}>
       <button
+        onClick={() => {
+          setFavorite(card);
+        }}
         className={`${styles.questionFavorite} ${
           card.isFavorite && styles.fill
         }`}
@@ -17,7 +33,7 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
         <Heart />
       </button>
       <div className={styles.deleteButton}>
-        {typeBoard === "personal" && (
+        {typeBoard === "personalCards" && (
           <SmallButton type="button">Delete</SmallButton>
         )}
       </div>
@@ -27,7 +43,7 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
         }}
         className={styles.questionCardInner}
       >
-        <div>
+        <div className={styles.centerCard}>
           <p className={styles.question}>{card.question}</p>
           <div className={styles.questionId}>0{card.id}</div>
         </div>
@@ -41,7 +57,7 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
           </div>
         </div>
       </button>
-      {typeBoard === "personal" || <PersonalRate card={card} />}
+      {typeBoard === "personalCards" || <PersonalRate card={card} />}
     </li>
   );
 };

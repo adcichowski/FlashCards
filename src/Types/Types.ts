@@ -38,3 +38,6 @@ export interface ButtonInterface {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   link?: string;
 }
+export interface ICardsFromFirestore {
+  [index: string]: ICard[];
+}

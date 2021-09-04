@@ -2,18 +2,19 @@ import { useHistory } from "react-router";
 import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
-import { useCreateBoard } from "../../../lib/firebase/Board";
-import { useCreateCard } from "../../../lib/firebase/Card";
-
+import {
+  addCardToDeck,
+  sendDeckToFirestore,
+  validateCardFields,
+} from "../../../lib/firebase/Utils";
+import { getErrorMessage } from "../../../Utils/Utils";
 function useSendCardToDatabase(
   nameDatabase: "personalCards" | "generalCards" | ""
 ) {
   const { dispatch: dispatchModal } = useModalContext();
-  const { state: authState } = useAuthContext();
+  const { dispatch: authDispatch, state: authState } = useAuthContext();
   const { dispatch, state: cardState } = useCardContext();
   const history = useHistory();
-  const createdBoard = useCreateBoard(authState.idUser);
-  const createCard = useCreateCard();
   function sendCardToDatabase() {
     const {
       id,
@@ -35,14 +36,19 @@ function useSendCardToDatabase(
       whoRate: [{ id: authState.idUser, rate: rating }],
     };
     try {
-      const classCard = createCard(card);
       if (nameDatabase === "") throw Error("Select deck for Card");
-      classCard.validateFields();
-      createdBoard.personalCards = authState.personalCards;
-      createdBoard.generalCards = authState.generalCards;
-      createdBoard.addCardToDeck(card, nameDatabase);
-      createdBoard.sendDeckToFirestore(
-        createdBoard[nameDatabase],
+      validateCardFields(card);
+      const copyStateDeck = authState[nameDatabase];
+      addCardToDeck(card, copyStateDeck);
+      authDispatch({
+        type: "setDeckCard",
+        setUser: {
+          ...authState,
+          [nameDatabase]: copyStateDeck,
+        },
+      });
+      sendDeckToFirestore(
+        authState[nameDatabase],
         nameDatabase === "personalCards" ? authState.idUser : "GeneralCards"
       );
       dispatch({ type: "resetCard" });
@@ -51,8 +57,11 @@ function useSendCardToDatabase(
         setModal: { message: `Card Saved` },
       });
       history.push("/game");
-    } catch ({ message }) {
-      dispatchModal({ type: "errorModal", setModal: { message } });
+    } catch (e) {
+      dispatchModal({
+        type: "errorModal",
+        setModal: { message: getErrorMessage(e) },
+      });
     }
   }
   return { sendCardToDatabase };

@@ -1,5 +1,3 @@
-import { ICard, PersonRating } from "../Types/Types";
-
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 export const PASSWORD_REGEX =
@@ -42,58 +40,6 @@ export function changeMessageFromFirebase(message: string) {
   if (!messageFromRegex) return message;
   return capitalize(messageFromRegex[0].split("-").join(" "));
 }
-class Card implements ICard {
-  technology: string;
-  id: number;
-  answer: string;
-  rating: number;
-  question: string;
-  isFavorite: boolean;
-  whoRate: PersonRating[];
-  randomSvgCard: number;
-  constructor({
-    technology,
-    id,
-    answer,
-    question,
-    isFavorite,
-    randomSvgCard,
-  }: ICard) {
-    this.randomSvgCard = 0;
-    this.technology = technology;
-    this.answer = answer;
-    this.id = id;
-    this.question = question;
-    this.rating = 0;
-    this.isFavorite = isFavorite;
-    this.whoRate = [];
-  }
-  setFieldsCard({
-    technology,
-    id,
-    answer,
-    question,
-    rating,
-    isFavorite,
-    whoRate,
-  }: ICard) {
-    this.technology = technology;
-    this.id = id;
-    this.answer = answer;
-    this.question = question;
-    this.rating = rating;
-    this.isFavorite = isFavorite;
-    this.whoRate = whoRate;
-  }
-  validateFields() {
-    if (this.technology === "none") throw Error("Set technology in card");
-    if (this.answer === "") throw Error("Answer field is empty!");
-    if (this.question === "") throw Error("Question field is empty!");
-    if (this.id === 0) throw Error("Select card deck");
-  }
+export function getErrorMessage(error: unknown) {
+  return error instanceof Error ? error.message : "Unknown error";
 }
-
-export const useCreateCard = () => {
-  const createCard = (card: ICard) => new Card({ ...card });
-  return createCard;
-};

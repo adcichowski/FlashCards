@@ -12,10 +12,11 @@ function useSetIdCard() {
   useEffect(() => {
     if (stateCard.technology === "none" || !nameDatabase) return;
     const getCardsByTechnology =
-      state[nameDatabase][stateCard.technology] || undefined;
-    const newValueId = getCardsByTechnology
-      ? getCardsByTechnology.slice(-1)[0].id + 1
-      : 1;
+      state[nameDatabase][stateCard.technology] || [];
+    const newValueId =
+      getCardsByTechnology.length !== 0
+        ? getCardsByTechnology.slice(-1)[0].id + 1
+        : 1;
     if (stateCard.id !== newValueId) {
       dispatch({
         type: "editCard",

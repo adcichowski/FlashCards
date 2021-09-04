@@ -10,7 +10,7 @@ function QuestionsBoard({
 }: {
   cardsData: { [index: string]: ICard[] };
   technologyName: string;
-  typeBoard: "personal" | "general";
+  typeBoard: "personalCards" | "generalCards";
 }) {
   return (
     <div>
@@ -24,7 +24,11 @@ function QuestionsBoard({
           <p className={styles.boardTitle}>Questions</p>
           <ul className={styles.listQuestion}>
             {cardsData[technologyName].map((card: ICard) => (
-              <Question key={card.question} typeBoard={typeBoard} card={card} />
+              <Question
+                key={card.question + card.answer}
+                typeBoard={typeBoard}
+                card={card}
+              />
             ))}
           </ul>
         </div>

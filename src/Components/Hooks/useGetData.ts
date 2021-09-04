@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
-
-import { useCreateBoard } from "../../lib/firebase/Board";
-
+import { getCards } from "../../lib/firebase/Utils";
+import { getErrorMessage } from "../../Utils/Utils";
 export function useGetData() {
   const { state, dispatch } = useAuthContext();
   const { dispatch: modalDispatch } = useModalContext();
   const [isUpdated, setIsUpdated] = useState(false);
-
-  const createdBoard = useCreateBoard(state.idUser);
   useEffect(() => {
     try {
       if (isUpdated) return;
       const getData = async () => {
-        await createdBoard.getCardsFromFirestore();
+        const { personalCards, generalCards } = await getCards(state.idUser);
         await dispatch({
           type: "setDeckCard",
           setUser: {
             ...state,
-            personalCards: createdBoard.personalCards,
-            generalCards: createdBoard.generalCards,
+            personalCards,
+            generalCards,
           },
         });
       };
       getData();
-    } catch ({ message }) {
+    } catch (e) {
       modalDispatch({
         type: "errorModal",
-        setModal: { message },
+        setModal: { message: getErrorMessage(e) },
       });
     } finally {
       setIsUpdated(true);
     }
-  }, [dispatch, state, modalDispatch, isUpdated, createdBoard]);
+  }, [dispatch, state, modalDispatch, isUpdated]);
 }
