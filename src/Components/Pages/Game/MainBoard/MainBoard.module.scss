@@ -26,13 +26,13 @@
 .outsideButton {
   text-align: center;
   font-weight: 500;
-  font-size: clamp(1.6rem, calc(1.6rem + 4vw), 2.8rem);
+  font-size: clamp(1.6rem, calc(1.6rem + 4vw), 2.3rem);
   display: grid;
   justify-items: center;
 }
 .link {
-  width: clamp(4rem, calc(4rem + 5vw), 6rem);
-  height: clamp(4rem, calc(4rem + 5vw), 6rem);
+  width: clamp(3rem, calc(3rem + 5vw), 6rem);
+  height: clamp(3rem, calc(3rem + 5vw), 6rem);
   border-radius: 10px;
   padding: 1.5rem;
   fill: white;

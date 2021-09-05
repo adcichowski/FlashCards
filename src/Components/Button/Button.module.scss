@@ -10,9 +10,10 @@
   margin: 0 10px;
 }
 .bigButton {
-  width: clamp(11rem, calc(11rem + 10vw), 20rem);
-  height: clamp(6rem, calc(6rem + 5vw), 9rem);
+  width: clamp(10rem, calc(10rem + 10vw), 19rem);
+  height: clamp(4rem, calc(4rem + 5vw), 7rem);
   text-align: center;
+  margin: 0 5px;
 }
 .smallButton {
   width: clamp(3rem, calc(3rem + 5vw), 6rem);
@@ -69,7 +70,7 @@
   transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 .bigFront {
-  font-size: clamp(2rem, calc(2rem + 3vw), 2.3rem);
+  font-size: clamp(1.6rem, calc(1.6rem + 5vw), 2.1rem);
 }
 .smallFront {
   font-size: 1.6rem;
