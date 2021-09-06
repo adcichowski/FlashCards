@@ -7,7 +7,7 @@ import { UserData } from "../../Types/Types";
 import { useState } from "react";
 import React from "react";
 import { doActionWithEmailPass } from "../../lib/firebase/Utils";
-import { changeMessageFromFirebase } from "../../Utils/Utils";
+import { changeMessageFromFirebase, getErrorMessage } from "../../Utils/Utils";
 
 function useFormLoginRegister() {
   const [isRegister, setIsRegister] = useState(false);
@@ -46,7 +46,7 @@ function useFormLoginRegister() {
         dispatch({
           type: "errorModal",
           setModal: {
-            message: changeMessageFromFirebase(message),
+            message: changeMessageFromFirebase(getErrorMessage(message)),
           },
         });
       }
