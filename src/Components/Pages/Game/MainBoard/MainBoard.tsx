@@ -2,12 +2,12 @@ import { Navigation } from "../../../Navigation/Navigation";
 import styles from "./MainBoard.module.scss";
 import { BigButton } from "../../../Button/BigButton";
 import { Link } from "react-router-dom";
-import { useGetData } from "../../../Hooks/useGetData";
+import { useSetDecks } from "../../../Hooks/useSetDecks";
 import { ReactComponent as Plus } from "../../../../Assets/Icons/plus.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 
 function MainBoard() {
-  useGetData();
+  useSetDecks();
   return (
     <>
       <Navigation />

@@ -3,7 +3,7 @@ import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
 import { getCards } from "../../lib/firebase/Utils";
 import { getErrorMessage } from "../../Utils/Utils";
-export function useGetData() {
+export function useSetDecks() {
   const { state, dispatch } = useAuthContext();
   const { dispatch: modalDispatch } = useModalContext();
   const [isUpdated, setIsUpdated] = useState(false);

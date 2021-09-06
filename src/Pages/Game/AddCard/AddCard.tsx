@@ -59,7 +59,7 @@ function AddCard() {
     <div className={styles.board}>
       <BackButton />
       <div className={styles.addTech}>
-        <p className={styles.title}>Create Your Own Card</p>
+        <h1 className={styles.title}>Create Your Own Card</h1>
 
         <div className={styles.addTechInside}>
           <div className={styles.addTechTechnologies}>

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 
 interface FetcherData<T> {
-  errorMessage?: string;
+  readonly errorMessage?: string;
   readonly data: T | null;
   readonly status: "starting" | "loading" | "success" | "error";
 }
-export default function useFetcher<T>(fetchFunc: () => Promise<T>) {
+export function useFetcher<T>(fetchFunc: () => Promise<T>) {
   const [fetchData, setFetchData] = React.useState<FetcherData<T>>({
     data: null,
     status: "starting",
@@ -27,15 +27,13 @@ export default function useFetcher<T>(fetchFunc: () => Promise<T>) {
 
 interface FetchConfig {
   readonly body?: object;
-  readonly config?: RequestInit;
 }
 export async function fetcher<T>(
   path: string,
-  { body, config }: FetchConfig
+  { body }: FetchConfig
 ): Promise<T> {
   try {
     const response = await fetch(path, {
-      ...config,
       headers: {
         "Content-Type": "application/json",
       },

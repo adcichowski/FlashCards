@@ -1,4 +1,4 @@
-import useFetcher, { fetcher } from "../../Hooks/useFetcher";
+import { useFetcher, fetcher } from "../../Hooks/useFetcher";
 import styles from "./GithubProfile.module.scss";
 interface GithubProfileProps {
   html_url: string;

@@ -1,6 +1,6 @@
 .board {
   display: grid;
-  gap: 20px;
+  gap: 10px;
   grid-template-columns: 0.3fr 0.2fr;
   align-content: center;
   height: 100vh;
@@ -8,6 +8,7 @@
   min-width: 30rem;
   @media screen and (max-width: 952px) {
     grid-template-columns: 0.2fr;
+    gap: 0;
   }
 }
 .addTechTechnologies {
@@ -16,8 +17,9 @@
   align-items: center;
 }
 .title {
-  font-size: clamp(2rem, clac(2rem + 5vw), 3rem);
-  font-weight: 500;
+  font-size: clamp(2rem, clac(2rem + 5vw), 3.2rem);
+  font-weight: 600;
+  margin-top: 5px;
 }
 .card {
   @media screen and (max-widsth: 952px) {
@@ -57,6 +59,12 @@
   appearance: none;
   padding: 3rem;
   cursor: pointer;
+  @media screen and (max-width: 952px) {
+    padding: 2.8rem;
+  }
+  @media screen and (max-width: 576px) {
+    padding: 2.6rem;
+  }
 }
 .radioInput:checked {
   background-color: #221f6382;
@@ -77,11 +85,10 @@
   height: 2rem;
 }
 .textInput {
-  font-weight: 600;
   font-size: 1.6rem;
-  margin: 0 15px;
+  margin: 0 5px;
   padding: 5px 10px;
-  border-radius: 6px;
+  border-radius: 4px;
   background-color: transparent;
   border: 1px solid white;
   color: var(--primary--font-color);
@@ -111,16 +118,16 @@
   background-color: #221f63;
 }
 .textarea {
-  min-height: 10rem;
+  min-height: 9rem;
   resize: none;
 }
 .inputsDeck {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 .labelDeck {
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
   height: 70px;
 }
@@ -143,10 +150,6 @@
   position: absolute;
   background: url("../../../Assets/Icons/check.svg") no-repeat center/contain,
     #221f63;
-}
-.functionalButtons {
-  display: flex;
-  gap: 20px;
 }
 .shapeButton {
   height: 5rem;
