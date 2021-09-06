@@ -3,7 +3,7 @@
 }
 .background {
   content: "";
-  position: absolute;
+  position: fixed;
   object-fit: cover;
   object-position: bottom;
   z-index: -2;
