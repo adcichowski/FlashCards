@@ -6,7 +6,7 @@
   justify-content: center;
 }
 .title {
-  font-size: clamp(2.5rem, calc(2.5rem + 3vw), 6rem);
+  font-size: clamp(2rem, calc(2rem + 3vw), 6rem);
   font-weight: 600;
 }
 .iconTechnology {
@@ -51,12 +51,12 @@
   background-color: #9f1835e8;
 }
 .icon {
-  width: clamp(3rem, calc(3rem + 10vw), 7rem);
+  width: clamp(1.6rem, calc(1.6rem + 10vw), 7rem);
   border: none;
   cursor: pointer;
 }
 .technology {
-  margin: 0 20px;
+  margin: 0 10px;
   display: flex;
   flex-flow: column;
   align-items: center;
