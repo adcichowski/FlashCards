@@ -15,6 +15,7 @@ function QuestionsBoard({
   typeBoard: "personalCards" | "generalCards";
 }) {
   const { deleteCard } = useDeleteCard();
+
   return (
     <div>
       <BackButton />
@@ -28,10 +29,10 @@ function QuestionsBoard({
           <ul className={styles.listQuestion}>
             {cardsData[technologyName].map((card: ICard) => (
               <Question
-                key={card.question + card.answer}
+                key={card.question + card.id}
                 typeBoard={typeBoard}
                 card={card}
-                deleteFunc={() => deleteCard(card)}
+                deleteFunc={() => deleteCard(card, typeBoard)}
               />
             ))}
           </ul>

@@ -1,5 +1,6 @@
 import { MouseEventHandler } from "react";
 
+export type ITypeBoard = "personalCards" | "generalCards";
 export interface UserData {
   email: string;
   password: string;

@@ -43,13 +43,23 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
             <div className={styles.question}>{state.question}</div>
           )}
         </div>
-        <div className={styles.cardCenterBottom}>0{state.id}</div>
+        <div className={styles.cardCenterBottom}>
+          {state.id.toString().length >= 2 ? state.id : "0" + state.id}
+        </div>
         <div className={styles.cardButtons}>
-          <button className={styles.button}>Prev Card</button>
+          <button className={`${styles.button}`}>
+            <div className={styles.prevCardButton}>
+              <span className="sr-only">Previous Card</span>
+            </div>
+          </button>
           <button className={styles.button} onClick={handleClickFlipCard}>
             {state.isFlip ? "Show Question" : "Show Answer"}
           </button>
-          <button className={styles.button}>Next Card</button>
+          <button className={styles.button}>
+            <div className={styles.nextCardButton}>
+              <span className="sr-only">Next Card</span>
+            </div>
+          </button>
         </div>
       </div>
       <div className={styles.favorite}>

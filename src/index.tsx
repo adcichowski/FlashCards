@@ -21,9 +21,9 @@ ReactDOM.render(
               <Route path="/contact" component={Contact} />
               <CardProvider>
                 <GameRoute />
+                <Modal />
               </CardProvider>
             </Switch>
-            <Modal />
           </AuthProvider>
         </ModalProvider>
       </Router>

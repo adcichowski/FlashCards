@@ -66,6 +66,9 @@
   grid-template-columns: 0.2fr 0.6fr 0.2fr;
 }
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 2;
   background-color: rgb(230, 224, 224);
@@ -151,4 +154,15 @@
 }
 .fill {
   fill: #9f1835;
+}
+.prevCardButton,
+.nextCardButton {
+  width: 15px;
+  height: 15px;
+  background: url("../../../../Assets/Icons/arrow-card.svg") no-repeat
+    center/cover;
+  z-index: 10;
+}
+.nextCardButton {
+  transform: rotate(180deg);
 }

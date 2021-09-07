@@ -67,7 +67,9 @@ export function deleteCardFromFirestore(
   card: ICard,
   cards: ICardsFromFirestore
 ) {
-  const filteredCards = cards[card.technology].filter((item) => item !== card);
+  const filteredCards = cards[card.technology].filter(
+    (item) => item.id !== card.id && item.answer !== card.answer
+  );
   const deckCardAfterDeleted: ICardsFromFirestore =
     filteredCards.length === 0
       ? {}

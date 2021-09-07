@@ -4,9 +4,11 @@ import { useModalContext } from "../../../../../Context/ModalContext";
 import { SmallButton } from "../../../../../Components/Button/SmallButton";
 import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
 import styles from "./Question.module.scss";
+import { useCardContext } from "../../../../../Context/CardContext";
 function PersonalRate({ card }: { card: ICard }) {
   const { state: stateAuth } = useAuthContext();
   const { dispatch: dispatchModal } = useModalContext();
+  const { state: stateCard, dispatch: dispatchCard } = useCardContext();
   const yourRate = card.whoRate.find(
     (person: PersonRating) => person.id === stateAuth.idUser
   );
@@ -23,7 +25,13 @@ function PersonalRate({ card }: { card: ICard }) {
     <div className={styles.questionRatePesonal}>
       <SmallButton
         type="button"
-        onClick={() => dispatchModal({ type: "rateModal" })}
+        onClick={() => {
+          dispatchCard({
+            type: "editCard",
+            setCard: { ...stateCard, ...card },
+          });
+          dispatchModal({ type: "rateModal" });
+        }}
       >
         Rate
       </SmallButton>

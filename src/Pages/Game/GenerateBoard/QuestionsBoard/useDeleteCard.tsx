@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useHistory } from "react-router";
 import { useAuthContext } from "../../../../Context/AuthContext";
 import { useModalContext } from "../../../../Context/ModalContext";
@@ -5,33 +6,41 @@ import {
   deleteCardFromFirestore,
   sendDeckToFirestore,
 } from "../../../../lib/firebase/Utils";
-import { ICard } from "../../../../Types/Types";
+import { ICard, ITypeBoard } from "../../../../Types/Types";
 import { capitalize } from "../../../../Utils/Utils";
 
 function useDeleteCard() {
   const { dispatch: dispatchModal } = useModalContext();
   const history = useHistory();
   const { state, dispatch } = useAuthContext();
-  const deleteCard = (card: ICard) => {
-    const deckAfterDeletedCard = deleteCardFromFirestore(
-      card,
-      state.personalCards
-    );
-    if (deckAfterDeletedCard) {
-      dispatchModal({
-        type: "successModal",
-        setModal: {
-          message: `Tehnology ${capitalize(card.technology)} was deleted`,
-        },
+  const deleteCard = useCallback(
+    (card: ICard, typeBoard: ITypeBoard) => {
+      const deckAfterDeletedCard = deleteCardFromFirestore(
+        card,
+        state[typeBoard]
+      );
+      if (!Object.values(deckAfterDeletedCard).length) {
+        dispatchModal({
+          type: "successModal",
+          setModal: {
+            message: `Technology ${capitalize(card.technology)} was deleted`,
+          },
+        });
+        history.push("/game");
+      }
+      dispatch({
+        type: "setDeckCard",
+        setUser: { ...state, [typeBoard]: { ...deckAfterDeletedCard } },
       });
-      history.push("/game");
-    }
-    dispatch({
-      type: "setDeckCard",
-      setUser: { ...state, personalCards: { ...deckAfterDeletedCard } },
-    });
-    sendDeckToFirestore({ ...deckAfterDeletedCard }, state.idUser);
-  };
+      sendDeckToFirestore(
+        { ...deckAfterDeletedCard },
+        typeBoard === "personalCards" ? state.idUser : "GeneralCards"
+      );
+      console.log(state[typeBoard]);
+    },
+    [dispatch, dispatchModal, history, state]
+  );
+
   return { deleteCard };
 }
 export { useDeleteCard };

@@ -54,7 +54,9 @@ const Question = ({
       >
         <div className={styles.centerCard}>
           <p className={styles.question}>{card.question}</p>
-          <div className={styles.questionId}>0{card.id}</div>
+          <div className={styles.questionId}>
+            {card.id.toString().length >= 2 ? card.id : "0" + card.id}
+          </div>
         </div>
         <div className={styles.questionRateGeneral}>
           <div className={styles.questionRate}>

@@ -3,14 +3,45 @@ import { useModalContext } from "../../Context/ModalContext";
 import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
 import { ReactComponent as Star } from "../../Assets/Icons/star.svg";
+import { useAuthContext } from "../../Context/AuthContext";
+import { useCardContext } from "../../Context/CardContext";
+import { useDeleteCard } from "../../Pages/Game/GenerateBoard/QuestionsBoard/useDeleteCard";
 function RateModal() {
-  const maxRateOnCard = 5;
-  const minRateOnCard = 1;
+  const maxRateOnCard = useMemo(() => 5, []);
+  const minRateOnCard = useMemo(() => -5, []);
   const { dispatch, state } = useModalContext();
+  const { state: authState } = useAuthContext();
+  const { state: cardState } = useCardContext();
   const [rateValue, setRateValue] = useState(useMemo(() => 1, []));
-  const handleClose = () => {
-    dispatch({ type: "closeModal" });
+  const { deleteCard } = useDeleteCard();
+  const rateCard = () => {
+    const {
+      whoRate,
+      answer,
+      question,
+      isFavorite,
+      id,
+      technology,
+      rating,
+      randomSvgCard,
+    } = cardState;
+    const ratedCard = {
+      whoRate,
+      answer,
+      question,
+      isFavorite,
+      id,
+      technology,
+      rating,
+      randomSvgCard,
+    };
+    const allRates = [...whoRate, { id: authState.idUser, rate: rateValue }];
+    const overallCard =
+      allRates.reduce((a, b) => a + b.rate, 0) / allRates.length;
+    console.log(overallCard);
+    if (overallCard < 2.7) deleteCard(ratedCard, "generalCards");
   };
+
   if (!state.isOpen) {
     return null;
   }
@@ -47,10 +78,13 @@ function RateModal() {
           If the card overall will be smaller than 2.7 will be deleted!
         </p>
         <div className={styles.blockButton}>
-          <Button type="button" onClick={handleClose}>
+          <Button
+            type="button"
+            onClick={() => dispatch({ type: "closeModal" })}
+          >
             Close
           </Button>
-          <Button type="button" onClick={handleClose}>
+          <Button onClick={() => rateCard()} type="button">
             Rate
           </Button>
         </div>
