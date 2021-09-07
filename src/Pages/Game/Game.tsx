@@ -3,7 +3,7 @@ import styles from "./Game.module.scss";
 function Game({ children }: { children: React.PropsWithChildren<{}> }) {
   return (
     <section className={styles.game}>
-      <picture>
+      <picture tabIndex={-1}>
         <source
           srcSet="/GameBackground/large.png"
           media="(min-width: 1080px)"

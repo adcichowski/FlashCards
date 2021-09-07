@@ -19,7 +19,7 @@ export default function Home() {
         <div className={styles.heroNavigation}>
           <Navigation />
         </div>
-        <picture>
+        <picture tabIndex={-1}>
           <source
             srcSet="/HeroBackground/large.png"
             media="(min-width: 1080px)"
@@ -48,7 +48,7 @@ export default function Home() {
       <main>
         <HomeAbout />
         <article className={styles.firstSide}>
-          <picture>
+          <picture tabIndex={-1}>
             <source
               srcSet="/ShoeBackground/large.png"
               media="(min-width: 1080px)"
