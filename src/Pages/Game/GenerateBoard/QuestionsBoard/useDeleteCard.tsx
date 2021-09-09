@@ -4,7 +4,7 @@ import { useAuthContext } from "../../../../Context/AuthContext";
 import { useModalContext } from "../../../../Context/ModalContext";
 import {
   deleteCardFromFirestore,
-  sendDeckToFirestore,
+  sendToFirestore,
 } from "../../../../lib/firebase/Utils";
 import { ICard, ITypeBoard } from "../../../../Types/Types";
 import { capitalize } from "../../../../Utils/Utils";
@@ -30,13 +30,12 @@ function useDeleteCard() {
       }
       dispatch({
         type: "setDeckCard",
-        setUser: { ...state, [typeBoard]: { ...deckAfterDeletedCard } },
+        setUser: { ...state, [typeBoard]: { ...(deckAfterDeletedCard || {}) } },
       });
-      sendDeckToFirestore(
+      sendToFirestore(
         { ...deckAfterDeletedCard },
         typeBoard === "personalCards" ? state.idUser : "GeneralCards"
       );
-      console.log(state[typeBoard]);
     },
     [dispatch, dispatchModal, history, state]
   );

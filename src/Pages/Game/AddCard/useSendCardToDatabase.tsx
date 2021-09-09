@@ -4,7 +4,7 @@ import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
 import {
   addCardToDeck,
-  sendDeckToFirestore,
+  sendToFirestore,
   validateCardFields,
 } from "../../../lib/firebase/Utils";
 import { getErrorMessage } from "../../../Utils/Utils";
@@ -36,8 +36,7 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
     try {
       if (deck === "") throw Error("Select deck for Card");
       validateCardFields(card);
-      const copyStateDeck = authState[deck];
-      addCardToDeck(card, copyStateDeck);
+      const copyStateDeck = addCardToDeck(card, authState[deck]);
       authDispatch({
         type: "setDeckCard",
         setUser: {
@@ -45,8 +44,8 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
           [deck]: copyStateDeck,
         },
       });
-      sendDeckToFirestore(
-        authState[deck],
+      sendToFirestore(
+        deck === "personalCards" ? copyStateDeck : card,
         deck === "personalCards" ? authState.idUser : "GeneralCards"
       );
       dispatch({ type: "resetCard" });

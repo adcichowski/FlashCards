@@ -11,7 +11,7 @@ export function useSetDecks() {
     try {
       if (isUpdated) return;
       const getData = async () => {
-        const { personalCards, generalCards } = await getCards(state.idUser);
+        const [personalCards, generalCards] = await getCards(state.idUser);
         await dispatch({
           type: "setDeckCard",
           setUser: {

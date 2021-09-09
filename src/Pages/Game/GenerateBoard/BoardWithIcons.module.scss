@@ -41,6 +41,12 @@
   transform: background-color scale 1s;
   background-color: #a31935;
 }
+.boxTechnology {
+  margin: 15px;
+  @media screen and (max-width: 600px) {
+    margin: 10px;
+  }
+}
 .listTechnology {
   display: flex;
   flex-flow: wrap;

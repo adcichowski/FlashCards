@@ -1,7 +1,7 @@
 import { getDoc, doc, setDoc } from "firebase/firestore";
 import { ICard, ICardsFromFirestore } from "../../Types/Types";
 import { auth, db } from "./Settings";
-import { collection, addDoc } from "@firebase/firestore";
+import { collection, addDoc, getDocs } from "@firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -20,40 +20,50 @@ export function doActionWithEmailPass(
   }
 }
 
-export function sendData(nameDatabase: string, card: any) {
-  addDoc(collection(db, nameDatabase), card);
-}
-export const sortCardByTechnology = (
-  object: { [index: string]: ICard[] },
-  card: ICard
-) => {
-  if (object[card.technology] === undefined) {
-    object[card.technology] = [];
-  }
-  object[card.technology].push(card);
-  return object[card.technology].sort((a, b) => a.id - b.id);
-};
-
 export async function getCards(idUser: string) {
-  const [queryPersonalCards, queryGeneralCards] = await Promise.all(
-    [idUser, "GeneralCards"].map((name) => getDoc(doc(db, "Board", name)))
-  );
-  const personalCards = (await queryPersonalCards).data() || {};
-  const generalCards = (await queryGeneralCards).data() || {};
-  return { personalCards, generalCards };
+  const decks = {
+    personalCards: {
+      data: {} as ICardsFromFirestore,
+      query: await getDoc(doc(db, `PersonalCards/${idUser}`)),
+    },
+    generalCards: {
+      data: {} as ICardsFromFirestore,
+      query: await getDocs(collection(db, "GeneralCards")),
+    },
+  };
+  decks.generalCards.query.forEach((card) => {
+    const cardData = card.data() as ICard;
+    if (!decks.generalCards.data[cardData.technology]) {
+      decks.generalCards.data[cardData.technology] = [];
+    }
+    decks.generalCards.data[cardData.technology].push(cardData);
+  });
+  decks.personalCards.data = (await decks.personalCards.query.data()) || {};
+
+  return [decks.personalCards.data, decks.generalCards.data];
 }
 export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
-  if (deck[card.technology] === undefined) {
-    deck[card.technology] = [];
+  const copyDeck = { ...deck };
+  if (copyDeck[card.technology] === undefined) copyDeck[card.technology] = [];
+  const existedCard = copyDeck[card.technology].findIndex(
+    (item) => item === card
+  );
+  if (existedCard) {
+    copyDeck[card.technology][existedCard] = card;
   }
-  deck[card.technology].push(card);
+  copyDeck[card.technology].push(card);
+  return copyDeck;
 }
 
-export function sendDeckToFirestore(
-  cards: ICardsFromFirestore,
+export function sendToFirestore(
+  cards: ICardsFromFirestore | ICard,
   toCollectionFirestore: string
 ) {
-  setDoc(doc(db, "Board", toCollectionFirestore), cards);
+  if (toCollectionFirestore !== "GeneralCards") {
+    setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
+    return;
+  }
+  addDoc(collection(db, "GeneralCards"), cards);
 }
 
 export function validateCardFields(card: ICard) {
@@ -67,12 +77,16 @@ export function deleteCardFromFirestore(
   card: ICard,
   cards: ICardsFromFirestore
 ) {
-  const filteredCards = cards[card.technology].filter(
-    (item) => item.id !== card.id && item.answer !== card.answer
+  const filteredCards = cards[card.technology].filter((item) => item !== card);
+  const deleteEmptyDeck = Object.fromEntries(
+    Object.entries(cards).filter(
+      ([technology]) => technology !== card.technology
+    )
   );
+
   const deckCardAfterDeleted: ICardsFromFirestore =
     filteredCards.length === 0
-      ? {}
+      ? deleteEmptyDeck
       : {
           ...cards,
           [card.technology]: filteredCards,

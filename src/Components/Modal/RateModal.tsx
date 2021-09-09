@@ -6,11 +6,12 @@ import { ReactComponent as Star } from "../../Assets/Icons/star.svg";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useCardContext } from "../../Context/CardContext";
 import { useDeleteCard } from "../../Pages/Game/GenerateBoard/QuestionsBoard/useDeleteCard";
+import { addCardToDeck, sendToFirestore } from "../../lib/firebase/Utils";
 function RateModal() {
   const maxRateOnCard = useMemo(() => 5, []);
   const minRateOnCard = useMemo(() => -5, []);
   const { dispatch, state } = useModalContext();
-  const { state: authState } = useAuthContext();
+  const { dispatch: authDispatch, state: authState } = useAuthContext();
   const { state: cardState } = useCardContext();
   const [rateValue, setRateValue] = useState(useMemo(() => 1, []));
   const { deleteCard } = useDeleteCard();
@@ -40,6 +41,32 @@ function RateModal() {
       allRates.reduce((a, b) => a + b.rate, 0) / allRates.length;
     console.log(overallCard);
     if (overallCard < 2.7) deleteCard(ratedCard, "generalCards");
+    const newRatedCard = {
+      ...ratedCard,
+      rating: overallCard,
+      whoRate: allRates,
+    };
+    const indexOfRatedCard = authState.generalCards[
+      ratedCard.technology
+    ].findIndex((card) => (card = cardState));
+    authDispatch({
+      type: "setDeckCard",
+      setUser: {
+        ...authState,
+        generalCards: {
+          ...authState.generalCards,
+          [ratedCard.technology]: [
+            ...authState.generalCards[ratedCard.technology].filter((card) =>
+              console.log(card !== ratedCard)
+            ),
+
+            newRatedCard,
+          ],
+        },
+      },
+    });
+    console.log(newRatedCard);
+    // sendToFirestore(newRatedCard, "GeneralCards");
   };
 
   if (!state.isOpen) {

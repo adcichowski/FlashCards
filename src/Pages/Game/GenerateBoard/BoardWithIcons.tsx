@@ -27,7 +27,7 @@ function BoardWithIcons({
   const { getAvaibleTechnologies } = useAvaibleTechnologies();
   const renderIcons = getAvaibleTechnologies(Object.keys(cardsData)).map(
     ({ type, name, isActive, render: Component }) => (
-      <li key={name}>
+      <li key={name} className={styles.boxTechnology}>
         <Link
           to={`/game/${typeBoard}-cards/${name}`}
           className={`${styles.technology} ${

@@ -27,14 +27,15 @@ function QuestionsBoard({
         <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
           <ul className={styles.listQuestion}>
-            {cardsData[technologyName].map((card: ICard) => (
-              <Question
-                key={card.question + card.id}
-                typeBoard={typeBoard}
-                card={card}
-                deleteFunc={() => deleteCard(card, typeBoard)}
-              />
-            ))}
+            {cardsData[technologyName] &&
+              cardsData[technologyName].map((card: ICard) => (
+                <Question
+                  key={card.question + card.id}
+                  typeBoard={typeBoard}
+                  card={card}
+                  deleteFunc={() => deleteCard(card, typeBoard)}
+                />
+              ))}
           </ul>
         </div>
       </div>
