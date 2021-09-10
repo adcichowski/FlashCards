@@ -6,7 +6,6 @@ import { ReactComponent as Star } from "../../Assets/Icons/star.svg";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useCardContext } from "../../Context/CardContext";
 import { useDeleteCard } from "../../Pages/Game/GenerateBoard/QuestionsBoard/useDeleteCard";
-import { addCardToDeck, sendToFirestore } from "../../lib/firebase/Utils";
 function RateModal() {
   const maxRateOnCard = useMemo(() => 5, []);
   const minRateOnCard = useMemo(() => -5, []);
@@ -40,7 +39,10 @@ function RateModal() {
     const overallCard =
       allRates.reduce((a, b) => a + b.rate, 0) / allRates.length;
     console.log(overallCard);
-    if (overallCard < 2.7) deleteCard(ratedCard, "generalCards");
+    if (overallCard < 2.7) {
+      deleteCard(ratedCard, "generalCards");
+      return;
+    }
     const newRatedCard = {
       ...ratedCard,
       rating: overallCard,
@@ -48,7 +50,11 @@ function RateModal() {
     };
     const indexOfRatedCard = authState.generalCards[
       ratedCard.technology
-    ].findIndex((card) => (card = cardState));
+    ].findIndex(
+      (card) =>
+        card.answer === ratedCard.answer && card.question === ratedCard.question
+    );
+    const numberCards = authState.generalCards[ratedCard.technology].length;
     authDispatch({
       type: "setDeckCard",
       setUser: {
@@ -56,16 +62,20 @@ function RateModal() {
         generalCards: {
           ...authState.generalCards,
           [ratedCard.technology]: [
-            ...authState.generalCards[ratedCard.technology].filter((card) =>
-              console.log(card !== ratedCard)
+            ...authState.generalCards[ratedCard.technology].slice(
+              0,
+              indexOfRatedCard
             ),
-
             newRatedCard,
+            ...authState.generalCards[ratedCard.technology].slice(
+              indexOfRatedCard + 1,
+              numberCards
+            ),
           ],
         },
       },
     });
-    console.log(newRatedCard);
+    dispatch({ type: "closeModal" });
     // sendToFirestore(newRatedCard, "GeneralCards");
   };
 

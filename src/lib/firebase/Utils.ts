@@ -77,7 +77,23 @@ export function deleteCardFromFirestore(
   card: ICard,
   cards: ICardsFromFirestore
 ) {
-  const filteredCards = cards[card.technology].filter((item) => item !== card);
+  const filteredCards = cards[card.technology].filter((item) => {
+    const keysCard = Object.keys(card) as Array<keyof ICard>;
+    const keysItem = Object.keys(item) as Array<keyof ICard>;
+
+    if (keysCard.length !== keysItem.length) {
+      return false;
+    }
+
+    for (const key in keysCard) {
+      console.log(keysCard[key]);
+      if (keysCard[key] !== keysItem[key]) {
+        return false;
+      }
+    }
+
+    return true;
+  });
   const deleteEmptyDeck = Object.fromEntries(
     Object.entries(cards).filter(
       ([technology]) => technology !== card.technology
@@ -88,7 +104,6 @@ export function deleteCardFromFirestore(
     filteredCards.length === 0
       ? deleteEmptyDeck
       : {
-          ...cards,
           [card.technology]: filteredCards,
         };
   return deckCardAfterDeleted;

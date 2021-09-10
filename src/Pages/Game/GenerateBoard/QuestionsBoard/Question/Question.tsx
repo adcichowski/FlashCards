@@ -7,15 +7,9 @@ import { ICard } from "../../../../../Types/Types";
 import styles from "./Question.module.scss";
 import { useCardContext } from "../../../../../Context/CardContext";
 import { useCallback } from "react";
-const Question = ({
-  card,
-  typeBoard,
-  deleteFunc,
-}: {
-  card: ICard;
-  typeBoard: string;
-  deleteFunc: () => void;
-}) => {
+import { useDeleteCard } from "../useDeleteCard";
+const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
+  const { deleteCard } = useDeleteCard();
   const { handleClickShowCard } = useQuestionBoard();
   const { dispatch } = useCardContext();
   const setFavorite = useCallback(
@@ -30,9 +24,7 @@ const Question = ({
   return (
     <li key={card.id + card.answer} className={styles.questionCard}>
       <button
-        onClick={() => {
-          setFavorite(card);
-        }}
+        onClick={() => setFavorite(card)}
         className={`${styles.questionFavorite} ${
           card.isFavorite && styles.fill
         }`}
@@ -41,15 +33,16 @@ const Question = ({
       </button>
       <div className={styles.deleteButton}>
         {typeBoard === "personalCards" && (
-          <SmallButton type="button" onClick={() => deleteFunc()}>
+          <SmallButton
+            type="button"
+            onClick={() => deleteCard(card, typeBoard)}
+          >
             Delete
           </SmallButton>
         )}
       </div>
       <button
-        onClick={() => {
-          handleClickShowCard(card);
-        }}
+        onClick={() => handleClickShowCard(card)}
         className={styles.questionCardInner}
       >
         <div className={styles.centerCard}>

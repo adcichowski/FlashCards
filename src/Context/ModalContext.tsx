@@ -1,16 +1,16 @@
 import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
 interface Action {
-  type: "closeModal" | "successModal" | "errorModal" | "rateModal";
-  setModal?: Omit<ModalInterface, "isOpen" | "type">;
+  readonly type: "closeModal" | "successModal" | "errorModal" | "rateModal";
+  readonly setModal?: Omit<ModalInterface, "isOpen" | "type">;
 }
 interface Dispatch {
   (action: Action): void;
 }
 interface ModalInterface {
-  type: "error" | "success" | "rate";
-  isOpen: boolean;
-  message: string;
+  readonly type: "error" | "success" | "rate";
+  readonly isOpen: boolean;
+  readonly message: string;
 }
 const ModalContext = createContext<
   undefined | { state: ModalInterface; dispatch: Dispatch }

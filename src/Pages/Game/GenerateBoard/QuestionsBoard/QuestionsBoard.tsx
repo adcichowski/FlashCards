@@ -3,7 +3,6 @@ import { ICard } from "../../../../Types/Types";
 import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionsBoard.module.scss";
 import { Question } from "./Question/Question";
-import { useDeleteCard } from "./useDeleteCard";
 
 function QuestionsBoard({
   cardsData,
@@ -14,8 +13,6 @@ function QuestionsBoard({
   technologyName: string;
   typeBoard: "personalCards" | "generalCards";
 }) {
-  const { deleteCard } = useDeleteCard();
-
   return (
     <div>
       <BackButton />
@@ -33,7 +30,6 @@ function QuestionsBoard({
                   key={card.question + card.id}
                   typeBoard={typeBoard}
                   card={card}
-                  deleteFunc={() => deleteCard(card, typeBoard)}
                 />
               ))}
           </ul>

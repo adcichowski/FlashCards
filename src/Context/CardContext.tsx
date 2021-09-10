@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 import { ICard } from "../Types/Types";
 import { getRandomMinMax } from "../Utils/Utils";
 interface Action {
-  type:
+  readonly type:
     | "showCard"
     | "flipCard"
     | "getNextOrPrevCard"
@@ -12,15 +12,15 @@ interface Action {
     | "randomSVG"
     | "resetCard"
     | "hideCard";
-  setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
+  readonly setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
 interface Dispatch {
   (action: Action): void;
 }
 interface CardContextInterface extends ICard {
-  isShow: boolean;
-  isFlip: boolean;
-  randomSvgCard: number;
+  readonly isShow: boolean;
+  readonly isFlip: boolean;
+  readonly randomSvgCard: number;
 }
 const CardContext = createContext<
   undefined | { state: CardContextInterface; dispatch: Dispatch }
