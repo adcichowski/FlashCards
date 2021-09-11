@@ -6,6 +6,7 @@ import { ReactComponent as Star } from "../../Assets/Icons/star.svg";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useCardContext } from "../../Context/CardContext";
 import { useDeleteCard } from "../../Pages/Game/GenerateBoard/QuestionsBoard/useDeleteCard";
+import { sendToFirestore } from "../../lib/firebase/Utils";
 function RateModal() {
   const maxRateOnCard = useMemo(() => 5, []);
   const minRateOnCard = useMemo(() => -5, []);
@@ -38,9 +39,9 @@ function RateModal() {
     const allRates = [...whoRate, { id: authState.idUser, rate: rateValue }];
     const overallCard =
       allRates.reduce((a, b) => a + b.rate, 0) / allRates.length;
-    console.log(overallCard);
     if (overallCard < 2.7) {
       deleteCard(ratedCard, "generalCards");
+      dispatch({ type: "closeModal" });
       return;
     }
     const newRatedCard = {
@@ -76,7 +77,7 @@ function RateModal() {
       },
     });
     dispatch({ type: "closeModal" });
-    // sendToFirestore(newRatedCard, "GeneralCards");
+    sendToFirestore(newRatedCard, "GeneralCards");
   };
 
   if (!state.isOpen) {
@@ -121,7 +122,7 @@ function RateModal() {
           >
             Close
           </Button>
-          <Button onClick={() => rateCard()} type="button">
+          <Button onClick={rateCard} type="button">
             Rate
           </Button>
         </div>

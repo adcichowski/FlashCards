@@ -19,6 +19,7 @@ function useDeleteCard() {
         card,
         state[typeBoard]
       );
+
       if (!Object.values(deckAfterDeletedCard).length) {
         dispatchModal({
           type: "successModal",
@@ -32,9 +33,10 @@ function useDeleteCard() {
         type: "setDeckCard",
         setUser: { ...state, [typeBoard]: { ...(deckAfterDeletedCard || {}) } },
       });
+      console.log(deckAfterDeletedCard);
       sendToFirestore(
-        { ...deckAfterDeletedCard },
-        typeBoard === "personalCards" ? state.idUser : "GeneralCards"
+        typeBoard === "generalCards" ? card : { ...deckAfterDeletedCard },
+        typeBoard === "personalCards" ? state.idUser : "generalCards"
       );
     },
     [dispatch, dispatchModal, history, state]

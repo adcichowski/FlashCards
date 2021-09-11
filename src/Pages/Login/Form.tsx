@@ -20,7 +20,7 @@ function Form() {
     <Game>
       <div className={styles.game}>
         <div className={styles.formLog}>
-          <BackButton />
+          <BackButton pathTo="/" />
           <h1 className={styles.formTitle}>
             {isRegister ? "Register In" : "Log In"}
           </h1>

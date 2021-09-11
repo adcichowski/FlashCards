@@ -1,4 +1,4 @@
-import { getDoc, doc, setDoc } from "firebase/firestore";
+import { getDoc, doc, setDoc, query, where } from "firebase/firestore";
 import { ICard, ICardsFromFirestore } from "../../Types/Types";
 import { auth, db } from "./Settings";
 import { collection, addDoc, getDocs } from "@firebase/firestore";
@@ -55,15 +55,29 @@ export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
   return copyDeck;
 }
 
-export function sendToFirestore(
+export async function sendToFirestore(
   cards: ICardsFromFirestore | ICard,
   toCollectionFirestore: string
 ) {
-  if (toCollectionFirestore !== "GeneralCards") {
+  if (toCollectionFirestore === "personalCards") {
     setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
     return;
   }
-  addDoc(collection(db, "GeneralCards"), cards);
+  const cardRef = collection(db, "GeneralCards");
+  const q = query(
+    cardRef,
+    where("answer", "==", cards.answer),
+    where("question", "==", cards.question),
+    where("technology", "==", cards.technology),
+    where("randomSvgCard", "==", cards.randomSvgCard)
+  );
+  console.log(cards);
+  const refIdCard = (await getDocs(q)).docs[0].id;
+  if (refIdCard) {
+    await setDoc(doc(cardRef, refIdCard), cards);
+    return;
+  }
+  await addDoc(collection(db, "GeneralCards"), cards);
 }
 
 export function validateCardFields(card: ICard) {
@@ -74,29 +88,21 @@ export function validateCardFields(card: ICard) {
 }
 
 export function deleteCardFromFirestore(
-  card: ICard,
-  cards: ICardsFromFirestore
+  deletedCard: ICard,
+  cardsFromState: ICardsFromFirestore
 ) {
-  const filteredCards = cards[card.technology].filter((item) => {
-    const keysCard = Object.keys(card) as Array<keyof ICard>;
-    const keysItem = Object.keys(item) as Array<keyof ICard>;
-
-    if (keysCard.length !== keysItem.length) {
-      return false;
+  const copyStateCards = { ...cardsFromState };
+  const filteredCards = copyStateCards[deletedCard.technology].filter(
+    (cardFromState) => {
+      const keysCard = Object.keys(cardFromState) as Array<keyof ICard>;
+      return !keysCard.every((key) => {
+        return cardFromState[key] === deletedCard[key];
+      });
     }
-
-    for (const key in keysCard) {
-      console.log(keysCard[key]);
-      if (keysCard[key] !== keysItem[key]) {
-        return false;
-      }
-    }
-
-    return true;
-  });
+  );
   const deleteEmptyDeck = Object.fromEntries(
-    Object.entries(cards).filter(
-      ([technology]) => technology !== card.technology
+    Object.entries(copyStateCards).filter(
+      ([technology]) => technology !== deletedCard.technology
     )
   );
 
@@ -104,7 +110,7 @@ export function deleteCardFromFirestore(
     filteredCards.length === 0
       ? deleteEmptyDeck
       : {
-          [card.technology]: filteredCards,
+          [deletedCard.technology]: filteredCards,
         };
   return deckCardAfterDeleted;
 }
