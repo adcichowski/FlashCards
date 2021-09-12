@@ -4,17 +4,11 @@ import { auth } from "../../lib/firebase/Settings";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
 import { UserData } from "../../Types/Types";
-import { useState } from "react";
 import React from "react";
 import { doActionWithEmailPass } from "../../lib/firebase/Utils";
-import { changeMessageFromFirebase, getErrorMessage } from "../../Utils/Utils";
+import { changeMessageFromFirebase } from "../../Utils/Utils";
 
-function useFormLoginRegister() {
-  const [isRegister, setIsRegister] = useState(false);
-  const handleClickRegister = React.useCallback(
-    () => setIsRegister(!isRegister),
-    [isRegister]
-  );
+function useFormLoginRegister({ type }: { type: "login" | "register" }) {
   const {
     register,
     handleSubmit,
@@ -23,11 +17,10 @@ function useFormLoginRegister() {
   const history = useHistory();
   const { dispatch } = useModalContext();
   const { dispatch: authDispatch, state } = useAuthContext();
-  const typeOfAction = isRegister ? "register" : "login";
   const onSubmit = React.useCallback(
     async ({ email, password }: UserData) => {
       try {
-        await doActionWithEmailPass(typeOfAction, email, password);
+        await doActionWithEmailPass(type, email, password);
         if (!auth?.currentUser?.uid) {
           throw Error("This account not exist!");
         }
@@ -38,20 +31,22 @@ function useFormLoginRegister() {
         dispatch({
           type: "successModal",
           setModal: {
-            message: `You are ${typeOfAction} in website`,
+            message: `You are ${type} in website`,
           },
         });
         history.push("/game");
-      } catch ({ message }) {
-        dispatch({
-          type: "errorModal",
-          setModal: {
-            message: changeMessageFromFirebase(getErrorMessage(message)),
-          },
-        });
+      } catch (err) {
+        if (err instanceof Error) {
+          dispatch({
+            type: "errorModal",
+            setModal: {
+              message: changeMessageFromFirebase(err.message),
+            },
+          });
+        }
       }
     },
-    [authDispatch, dispatch, history, typeOfAction, state]
+    [authDispatch, dispatch, history, type, state]
   );
 
   return {
@@ -59,8 +54,6 @@ function useFormLoginRegister() {
     handleSubmit,
     register,
     errors,
-    isRegister,
-    handleClickRegister,
   };
 }
 export { useFormLoginRegister };

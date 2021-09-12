@@ -3,27 +3,25 @@ import { Modal } from "../../Components/Modal/Modal";
 import { Button } from "../../Components/Button/Button";
 import { BackButton } from "../../Components/Button/BackButton/BackButton";
 import { useFormLoginRegister } from "./useFormLoginRegister";
-import { inputValidation } from "../../Utils/Utils";
-import { Logo } from "../../Components/Logo/Logo";
+import { capitalize, inputValidation } from "../../Utils/Utils";
 import { Link } from "react-router-dom";
 import { Game } from "../Game/Game";
-function Form() {
-  const {
-    onSubmit,
-    handleSubmit,
-    register,
-    errors,
-    isRegister,
-    handleClickRegister,
-  } = useFormLoginRegister();
+function Form({ type }: { type: "login" | "register" }) {
+  const { onSubmit, handleSubmit, register, errors } = useFormLoginRegister({
+    type,
+  });
   return (
     <Game>
       <div className={styles.game}>
-        <div className={styles.formLog}>
+        <div
+          style={{
+            border:
+              type === "login" ? "4px solid #2b3361" : "4px solid #A01934",
+          }}
+          className={styles.formLog}
+        >
           <BackButton pathTo="/" />
-          <h1 className={styles.formTitle}>
-            {isRegister ? "Register In" : "Log In"}
-          </h1>
+          <h1 className={styles.formTitle}>{`${capitalize(type)} In`}</h1>
           <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
             <label>
               <span className="sr-only">email</span>
@@ -50,15 +48,17 @@ function Form() {
             </span>
 
             <div className={styles.formButtons}>
-              <Button type="submit">{isRegister ? "Register" : "Login"}</Button>
-              <Button type="button" onClick={handleClickRegister}>
-                {isRegister ? "Back to login" : "Create account"}
-              </Button>
+              <Button type="submit">{capitalize(type)}</Button>
             </div>
-            <Link to="/" className={styles.formLogo}>
-              <Logo />
-            </Link>
           </form>
+          <p className={styles.question}>
+            {type === "login" ? "Haven't got an account?" : "Have account?"}{" "}
+            <span className={styles.questionType}>
+              <Link to={type === "login" ? "/register" : "/login"}>
+                {type === "login" ? "Register" : "Login"}
+              </Link>
+            </span>
+          </p>
         </div>
 
         <Modal />

@@ -40,6 +40,6 @@ export function changeMessageFromFirebase(message: string) {
   if (!messageFromRegex) return message;
   return capitalize(messageFromRegex[0].split("-").join(" "));
 }
-export function getErrorMessage(error: unknown) {
-  return error instanceof Error ? error.message : "Unknown error";
+export function getErrorMessage(error: Error) {
+  return error instanceof Error ? error.message : new Error(error).message;
 }

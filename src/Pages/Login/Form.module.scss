@@ -37,15 +37,13 @@
   }
 }
 .gameForm {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
 }
 
 .inputPassword,
 .inputEmail {
-  width: 88%;
+  width: 100%;
   margin: 0.4rem 0.2rem;
   font-size: clamp(1.6rem, calc(0.5rem + 1vw), 1.9rem);
   color: var(--font-color-primary);
@@ -79,4 +77,14 @@
   @media screen and (max-height: 550px), screen and (max-width: 350px) {
     display: none;
   }
+}
+.question {
+  font-weight: 300;
+  font-size: 1.9rem;
+  text-align: center;
+}
+.questionType {
+  font-weight: 400;
+  text-decoration: underline;
+  font-size: 2.4rem;
 }
