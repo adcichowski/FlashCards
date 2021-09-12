@@ -3,9 +3,13 @@ import { ReactComponent as BackCard } from "../../../../Assets/Pages/Home/CardIn
 import { Button } from "../../../Button/Button";
 import { useInstruction } from "./useInstruction";
 import styles from "./Instruction.module.scss";
+import { useCallback } from "react";
 function Instruction() {
   const { getElements, isFlip, flipCard } = useInstruction();
-  const handleClickFlip = () => flipCard(!isFlip);
+  const handleClickFlip = useCallback(
+    () => flipCard(!isFlip),
+    [flipCard, isFlip]
+  );
   return (
     <section className={styles.introduce}>
       <h2 className={`${styles.introduceTitle}`}>

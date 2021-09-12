@@ -1,12 +1,7 @@
 import styles from "./HomeAbout.module.scss";
 import { Logo } from "../../../../Components/Logo/Logo";
-import { useForm } from "react-hook-form";
-import { inputValidation } from "../../../../Utils/Utils";
+
 function HomeAbout() {
-  const {
-    register,
-    formState: { errors },
-  } = useForm();
   return (
     <>
       <article className={styles.articleAbout}>
@@ -23,31 +18,6 @@ function HomeAbout() {
                 sorted by users, most assessed will be first in ranking in
                 chosen technology.
               </p>
-
-              <div className={styles.aboutForm}>
-                <form>
-                  <small>Send if you wanna get more information.</small>
-                  <div>
-                    <label>
-                      <span className="sr-only">Email</span>
-                      <input
-                        {...register("email", inputValidation.email)}
-                        placeholder="Write Your Email"
-                        className={styles.aboutFormInput}
-                      />
-                    </label>
-                    <label>
-                      <span className="sr-only">Save for news</span>
-                      <input
-                        type="submit"
-                        className={styles.aboutFormSubmit}
-                        value="Send"
-                      />
-                    </label>
-                  </div>
-                </form>
-                <span>{errors?.email?.message}</span>
-              </div>
             </div>
             <div className={styles.aboutImg}></div>
           </section>

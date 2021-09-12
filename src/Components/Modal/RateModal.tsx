@@ -39,16 +39,17 @@ function RateModal() {
     const allRates = [...whoRate, { id: authState.idUser, rate: rateValue }];
     const overallCard =
       allRates.reduce((a, b) => a + b.rate, 0) / allRates.length;
-    if (overallCard < 2.7) {
-      deleteCard(ratedCard, "generalCards");
-      dispatch({ type: "closeModal" });
-      return;
-    }
     const newRatedCard = {
       ...ratedCard,
       rating: overallCard,
       whoRate: allRates,
     };
+    if (overallCard < 2.7) {
+      sendToFirestore(newRatedCard, "GeneralCards");
+      deleteCard(ratedCard, "generalCards");
+      dispatch({ type: "closeModal" });
+      return;
+    }
     const indexOfRatedCard = authState.generalCards[
       ratedCard.technology
     ].findIndex(

@@ -47,11 +47,14 @@
 .shoeBackground {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 15rem;
+  object-fit: contain;
+  object-position: center;
   position: absolute;
   opacity: 0.6;
   z-index: -2;
+  @media screen and (max-width: 968px) {
+    object-fit: cover;
+  }
 }
 
 .bigQuestion {

@@ -1,7 +1,7 @@
 import { getDoc, doc, setDoc, query, where } from "firebase/firestore";
 import { ICard, ICardsFromFirestore } from "../../Types/Types";
 import { auth, db } from "./Settings";
-import { collection, addDoc, getDocs } from "@firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc } from "@firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -71,8 +71,13 @@ export async function sendToFirestore(
     where("technology", "==", cards.technology),
     where("randomSvgCard", "==", cards.randomSvgCard)
   );
-  console.log(cards);
   const refIdCard = (await getDocs(q)).docs[0].id;
+  console.log(cards.rating);
+  if (cards.rating < 2.7) {
+    await deleteDoc(doc(db, "GeneralCards", refIdCard));
+    return;
+  }
+
   if (refIdCard) {
     await setDoc(doc(cardRef, refIdCard), cards);
     return;
