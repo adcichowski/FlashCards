@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../Context/AuthContext";
 import { useModalContext } from "../../Context/ModalContext";
 import { getCards } from "../../lib/firebase/Utils";
-import { getErrorMessage } from "../../Utils/Utils";
 export function useSetDecks() {
   const { state, dispatch } = useAuthContext();
   const { dispatch: modalDispatch } = useModalContext();
@@ -23,10 +22,12 @@ export function useSetDecks() {
       };
       getData();
     } catch (e) {
-      modalDispatch({
-        type: "errorModal",
-        setModal: { message: getErrorMessage(e) },
-      });
+      if (e instanceof Error) {
+        modalDispatch({
+          type: "errorModal",
+          setModal: { message: e.message },
+        });
+      }
     } finally {
       setIsUpdated(true);
     }

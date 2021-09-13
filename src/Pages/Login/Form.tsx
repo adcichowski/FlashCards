@@ -50,15 +50,15 @@ function Form({ type }: { type: "login" | "register" }) {
             <div className={styles.formButtons}>
               <Button type="submit">{capitalize(type)}</Button>
             </div>
+            <p className={styles.question}>
+              {type === "login" ? "Haven't got an account?" : "Have account?"}{" "}
+              <span className={styles.questionType}>
+                <Link to={type === "login" ? "/register" : "/login"}>
+                  {type === "login" ? "Register" : "Login"}
+                </Link>
+              </span>
+            </p>
           </form>
-          <p className={styles.question}>
-            {type === "login" ? "Haven't got an account?" : "Have account?"}{" "}
-            <span className={styles.questionType}>
-              <Link to={type === "login" ? "/register" : "/login"}>
-                {type === "login" ? "Register" : "Login"}
-              </Link>
-            </span>
-          </p>
         </div>
 
         <Modal />

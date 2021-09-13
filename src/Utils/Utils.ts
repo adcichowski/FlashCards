@@ -1,7 +1,7 @@
+/* eslint-disable no-useless-escape */
 export const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-export const PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+export const PASSWORD_REGEX = /^.{12,32}$/;
 export const inputValidation = {
   email: {
     required: { value: true, message: "Email is empty." },
@@ -15,14 +15,8 @@ export const inputValidation = {
     pattern: {
       value: PASSWORD_REGEX,
       message:
-        "Password must have minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+        "Password must be at least 12 characters long, but smaller than 64 characters.",
     },
-  },
-  answer: {
-    required: { value: true, message: "Answer is empty." },
-  },
-  question: {
-    required: { value: true, message: "Question is empty." },
   },
 };
 
@@ -39,7 +33,4 @@ export function changeMessageFromFirebase(message: string) {
   const messageFromRegex = message.match(/\w+[\\-]\w.*\w+?/);
   if (!messageFromRegex) return message;
   return capitalize(messageFromRegex[0].split("-").join(" "));
-}
-export function getErrorMessage(error: Error) {
-  return error instanceof Error ? error.message : new Error(error).message;
 }

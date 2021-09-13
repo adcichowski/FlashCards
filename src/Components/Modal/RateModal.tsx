@@ -7,6 +7,7 @@ import { useAuthContext } from "../../Context/AuthContext";
 import { useCardContext } from "../../Context/CardContext";
 import { useDeleteCard } from "../../Pages/Game/GenerateBoard/QuestionsBoard/useDeleteCard";
 import { sendToFirestore } from "../../lib/firebase/Utils";
+import { useSetDecks } from "../Hooks/useSetDecks";
 function RateModal() {
   const maxRateOnCard = useMemo(() => 5, []);
   const minRateOnCard = useMemo(() => -5, []);
@@ -15,6 +16,7 @@ function RateModal() {
   const { state: cardState } = useCardContext();
   const [rateValue, setRateValue] = useState(useMemo(() => 1, []));
   const { deleteCard } = useDeleteCard();
+  useSetDecks();
   const rateCard = () => {
     const {
       whoRate,

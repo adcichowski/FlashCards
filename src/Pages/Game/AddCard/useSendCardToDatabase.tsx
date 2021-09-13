@@ -7,7 +7,6 @@ import {
   sendToFirestore,
   validateCardFields,
 } from "../../../lib/firebase/Utils";
-import { getErrorMessage } from "../../../Utils/Utils";
 function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
   const { dispatch: dispatchModal } = useModalContext();
   const { dispatch: authDispatch, state: authState } = useAuthContext();
@@ -55,10 +54,12 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
       });
       history.push("/game");
     } catch (e) {
-      dispatchModal({
-        type: "errorModal",
-        setModal: { message: getErrorMessage(e) },
-      });
+      if (e instanceof Error) {
+        dispatchModal({
+          type: "errorModal",
+          setModal: { message: e.message },
+        });
+      }
     }
   }
   return { sendCardToDatabase };

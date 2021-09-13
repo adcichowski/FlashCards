@@ -44,14 +44,11 @@ export async function getCards(idUser: string) {
 }
 export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
   const copyDeck = { ...deck };
-  if (copyDeck[card.technology] === undefined) copyDeck[card.technology] = [];
-  const existedCard = copyDeck[card.technology].findIndex(
-    (item) => item === card
-  );
-  if (existedCard) {
-    copyDeck[card.technology][existedCard] = card;
+  if (copyDeck[card.technology] === undefined) {
+    copyDeck[card.technology] = [];
   }
   copyDeck[card.technology].push(card);
+  console.log(copyDeck);
   return copyDeck;
 }
 
@@ -59,7 +56,7 @@ export async function sendToFirestore(
   cards: ICardsFromFirestore | ICard,
   toCollectionFirestore: string
 ) {
-  if (toCollectionFirestore === "personalCards") {
+  if (toCollectionFirestore !== "generalCards") {
     setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
     return;
   }
@@ -71,16 +68,13 @@ export async function sendToFirestore(
     where("technology", "==", cards.technology),
     where("randomSvgCard", "==", cards.randomSvgCard)
   );
-  const refIdCard = (await getDocs(q)).docs[0].id;
-  console.log(cards.rating);
-  if (cards.rating < 2.7) {
-    await deleteDoc(doc(db, "GeneralCards", refIdCard));
-    return;
-  }
-
+  const refIdCard = (await getDocs(q))?.docs[0]?.id;
   if (refIdCard) {
+    if (cards.rating < 2.7) {
+      await deleteDoc(doc(db, "GeneralCards", refIdCard));
+      return;
+    }
     await setDoc(doc(cardRef, refIdCard), cards);
-    return;
   }
   await addDoc(collection(db, "GeneralCards"), cards);
 }
