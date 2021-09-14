@@ -26,19 +26,13 @@ function BoardWithIcons({
   });
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   const { getAvaibleTechnologies } = useAvaibleTechnologies();
-  const favoriteIcon = () => (
-    <li className={styles.boxTechnology}>
-      <Link
-        to="game/personal-cards/favorite"
-        className={`${styles.technology}`}
-      >
-        <p className={styles.technologyType}>All</p>
-        <div className={styles.icon}>
-          <Heart />
-        </div>
-        <p className={styles.nameTechnology}>Favorite Cards</p>
-      </Link>
-    </li>
+  const FavoriteIcon = () => (
+    <Link to="game/personal-cards/favorite" className={styles.favoriteIcon}>
+      <p>Favorite Cards</p>
+      <div className={styles.heart}>
+        <Heart />
+      </div>
+    </Link>
   );
   const renderIcons = getAvaibleTechnologies(Object.keys(cardsData)).map(
     ({ type, name, isActive, render: Component }) => (
@@ -66,11 +60,9 @@ function BoardWithIcons({
         <div className={styles.boardTechnologies}>
           <h1 className={styles.title}>{`${capitalize(typeBoard)} Cards`}</h1>
           <div ref={getElements} className={styles.technology}>
-            <ul className={styles.listTechnology}>
-              {renderIcons}
-              {typeBoard === "personal" && favoriteIcon}
-            </ul>
+            <ul className={styles.listTechnology}>{renderIcons}</ul>
           </div>
+          {typeBoard === "personal" && <FavoriteIcon />}
         </div>
       </div>
     </>

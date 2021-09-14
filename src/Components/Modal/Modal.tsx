@@ -3,7 +3,7 @@ import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
 import { ReactComponent as Alert } from "../../Assets/Modal/alert-circle.svg";
 import { ReactComponent as Check } from "../../Assets/Modal/check-circle.svg";
-import { RateModal } from "./RateModal";
+import { RateModal } from "./RateModal/RateModal";
 function Modal() {
   const { dispatch, state } = useModalContext();
   const handleClose = () => {

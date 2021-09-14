@@ -2,7 +2,7 @@
   place-self: center;
   display: grid;
   align-items: center;
-  place-items: center;
+  justify-items: center;
   height: 60vh;
   @media screen and (max-width: 950px) {
     height: 100vh;
@@ -10,7 +10,6 @@
 }
 .insideBoard {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   flex-flow: column;
   gap: 4rem;
   justify-items: center;
@@ -24,6 +23,7 @@
   flex-flow: column;
 }
 .outsideButton {
+  grid-column: 1/4;
   text-align: center;
   font-weight: 500;
   font-size: clamp(1.6rem, calc(1.6rem + 4vw), 2.3rem);

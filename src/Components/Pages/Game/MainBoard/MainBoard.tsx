@@ -4,7 +4,6 @@ import { BigButton } from "../../../Button/BigButton";
 import { Link } from "react-router-dom";
 import { useSetDecks } from "../../../Hooks/useSetDecks";
 import { ReactComponent as Plus } from "../../../../Assets/Icons/plus.svg";
-import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 
 function MainBoard() {
   useSetDecks();

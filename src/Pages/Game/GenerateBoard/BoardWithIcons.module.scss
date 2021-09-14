@@ -51,7 +51,7 @@
   display: flex;
   flex-flow: wrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   padding: 3rem;
   border-radius: 2rem;
   background-color: #9f1835e8;
@@ -77,4 +77,22 @@
 }
 .boardTechnologies {
   text-align: center;
+}
+.heart {
+  cursor: pointer;
+  width: 6rem;
+  height: 6rem;
+  fill: #a31934;
+  transition: fill 0.7s;
+  &:hover {
+    fill: transparent;
+    stroke-width: 3;
+  }
+}
+.favoriteIcon {
+  margin-top: 10px;
+  font-size: 2rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }

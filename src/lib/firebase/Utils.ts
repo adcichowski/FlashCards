@@ -56,7 +56,7 @@ export async function sendToFirestore(
   cards: ICardsFromFirestore | ICard,
   toCollectionFirestore: string
 ) {
-  if (toCollectionFirestore !== "generalCards") {
+  if (toCollectionFirestore !== "GeneralCards") {
     setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
     return;
   }
@@ -74,7 +74,6 @@ export async function sendToFirestore(
       await deleteDoc(doc(db, "GeneralCards", refIdCard));
       return;
     }
-    await setDoc(doc(cardRef, refIdCard), cards);
   }
   await addDoc(collection(db, "GeneralCards"), cards);
 }
