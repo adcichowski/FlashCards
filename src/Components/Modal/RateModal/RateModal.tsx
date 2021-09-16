@@ -32,7 +32,7 @@ function RateModal() {
         </div>
         <span className={styles.rateNumber}>{rateValue}</span>
         <p className={styles.modalText}>
-          If the card overall will be smaller than 2.7 will be deleted!
+          If the card overall will be smaller than 2 will be deleted!
         </p>
         <div className={styles.blockButton}>
           <Button

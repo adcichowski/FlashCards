@@ -1,4 +1,12 @@
-import { getDoc, doc, setDoc, query, where } from "firebase/firestore";
+import {
+  getDoc,
+  doc,
+  setDoc,
+  query,
+  where,
+  arrayUnion,
+  updateDoc,
+} from "firebase/firestore";
 import { ICard, ICardsFromFirestore } from "../../Types/Types";
 import { auth, db } from "./Settings";
 import { collection, addDoc, getDocs, deleteDoc } from "@firebase/firestore";
@@ -51,7 +59,32 @@ export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
   console.log(copyDeck);
   return copyDeck;
 }
+export async function rateCardInFirestore(card: ICard) {
+  const cardRef = collection(db, "GeneralCards");
+  const q = query(
+    cardRef,
+    where("answer", "==", card.answer),
+    where("question", "==", card.question),
+    where("technology", "==", card.technology),
+    where("randomSvgCard", "==", card.randomSvgCard),
+    where("id", "==", card.id)
+  );
+  const refIdCard = (await getDocs(q))?.docs[0]?.id;
 
+  if (refIdCard) {
+    if (card.whoRate.reduce((prev, { rate }) => (prev += rate), 0) < 2) {
+      await deleteDoc(doc(db, "GeneralCards", refIdCard));
+      return;
+    }
+    await updateDoc(doc(db, "GeneralCards", refIdCard), {
+      whoRate: arrayUnion({
+        id: card.whoRate.slice(-1)[0].id,
+        rate: card.whoRate.slice(-1)[0].rate,
+      }),
+    });
+    return;
+  }
+}
 export async function sendToFirestore(
   cards: ICardsFromFirestore | ICard,
   toCollectionFirestore: string
@@ -60,21 +93,7 @@ export async function sendToFirestore(
     setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
     return;
   }
-  const cardRef = collection(db, "GeneralCards");
-  const q = query(
-    cardRef,
-    where("answer", "==", cards.answer),
-    where("question", "==", cards.question),
-    where("technology", "==", cards.technology),
-    where("randomSvgCard", "==", cards.randomSvgCard)
-  );
-  const refIdCard = (await getDocs(q))?.docs[0]?.id;
-  if (refIdCard) {
-    if (cards.rating < 2.7) {
-      await deleteDoc(doc(db, "GeneralCards", refIdCard));
-      return;
-    }
-  }
+
   await addDoc(collection(db, "GeneralCards"), cards);
 }
 

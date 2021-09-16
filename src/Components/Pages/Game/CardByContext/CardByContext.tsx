@@ -22,7 +22,11 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
         <div className={styles.star}>
           <Star />
         </div>
-        x{state.rating}
+        x
+        {isEdit
+          ? 5
+          : state.whoRate.reduce((prev, { rate }) => (prev += rate), 0) /
+            state.whoRate.length}
       </div>
       <div className={styles.card}>
         <div className={styles.wave}>

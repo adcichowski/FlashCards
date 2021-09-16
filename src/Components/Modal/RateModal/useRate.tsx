@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
-import { sendToFirestore } from "../../../lib/firebase/Utils";
+import { rateCardInFirestore } from "../../../lib/firebase/Utils";
 import { useDeleteCard } from "../../../Pages/Game/GenerateBoard/QuestionsBoard/useDeleteCard";
 
 export function useRate() {
@@ -28,7 +28,6 @@ export function useRate() {
       isFavorite,
       id,
       technology,
-      rating,
       randomSvgCard,
     } = cardState;
     const ratedCard = {
@@ -38,7 +37,6 @@ export function useRate() {
       isFavorite,
       id,
       technology,
-      rating,
       randomSvgCard,
     };
     const allRates = [...whoRate, { id: authState.idUser, rate: rateValue }];
@@ -46,11 +44,10 @@ export function useRate() {
       allRates.reduce((a, b) => a + b.rate, 0) / allRates.length;
     const newRatedCard = {
       ...ratedCard,
-      rating: overallCard,
+      rating: Math.floor(overallCard),
       whoRate: allRates,
     };
-    if (overallCard < 2.7) {
-      sendToFirestore(newRatedCard, "GeneralCards");
+    if (overallCard < 2) {
       deleteCard(ratedCard, "generalCards");
       dispatch({ type: "closeModal" });
       return;
@@ -83,7 +80,7 @@ export function useRate() {
       },
     });
     dispatch({ type: "closeModal" });
-    sendToFirestore(newRatedCard, "GeneralCards");
+    rateCardInFirestore(newRatedCard);
   };
   return { rateCard, setYourRateCard, rateValue };
 }

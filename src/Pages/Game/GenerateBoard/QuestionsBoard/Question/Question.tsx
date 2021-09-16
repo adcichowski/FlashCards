@@ -54,7 +54,10 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
         <div className={styles.questionRateGeneral}>
           <div className={styles.questionRate}>
             <span>Overall</span>
-            {card.rating}x
+            {console.log(card.whoRate)}
+            {card.whoRate.reduce((prev, { rate }) => (prev += rate), 0) /
+              card.whoRate.length}
+            x
             <div className={styles.star}>
               <Star />
             </div>

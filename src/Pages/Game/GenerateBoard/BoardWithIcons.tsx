@@ -9,6 +9,7 @@ import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { useEffect } from "react";
 import { useCardContext } from "../../../Context/CardContext";
 import { ReactComponent as Heart } from "../../../Assets/Icons/heart.svg";
+import { useSetDecks } from "../../../Components/Hooks/useSetDecks";
 function BoardWithIcons({
   cardsData,
   typeBoard,
@@ -16,6 +17,7 @@ function BoardWithIcons({
   cardsData: { [index: string]: ICard[] };
   typeBoard: "general" | "personal";
 }) {
+  useSetDecks();
   const { dispatch, state } = useCardContext();
   useEffect(() => {
     if (state.isShow) {

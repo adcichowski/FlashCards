@@ -13,15 +13,8 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
   const { dispatch, state: cardState } = useCardContext();
   const history = useHistory();
   function sendCardToDatabase() {
-    const {
-      id,
-      isFavorite,
-      technology,
-      question,
-      answer,
-      rating,
-      randomSvgCard,
-    } = cardState;
+    const { id, isFavorite, technology, question, answer, randomSvgCard } =
+      cardState;
     const card = {
       randomSvgCard,
       id,
@@ -29,8 +22,7 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
       technology,
       question,
       answer,
-      rating,
-      whoRate: [{ id: authState.idUser, rate: rating }],
+      whoRate: [{ id: authState.idUser, rate: 5 }],
     };
     try {
       if (deck === "") throw Error("Select deck for Card");
