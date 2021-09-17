@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import { Technologies } from "../Components/Pages/Game/useAvaibleTechnologies";
 
 export type ITypeBoard = "personalCards" | "generalCards";
 export interface UserData {
@@ -13,7 +14,7 @@ export interface PersonRating {
 
 export interface ICard {
   id: number;
-  technology: string;
+  technology: Technologies;
   answer: string;
   question: string;
   isFavorite: boolean;
@@ -22,11 +23,11 @@ export interface ICard {
 }
 
 export interface AvaibleTechnologiesProperty {
-  [key: string]: TechnologyProperty;
+  [index: string]: TechnologyProperty;
 }
 
 export interface TechnologyProperty {
-  name: string;
+  name: Technologies;
   type: string;
   description: string;
   render: React.FunctionComponent;

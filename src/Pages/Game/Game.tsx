@@ -2,7 +2,7 @@ import styles from "./Game.module.scss";
 
 function Game({ children }: { children: React.PropsWithChildren<{}> }) {
   return (
-    <section className={styles.game}>
+    <div className={styles.game}>
       <picture tabIndex={-1}>
         <source
           srcSet="/GameBackground/large.png"
@@ -19,7 +19,7 @@ function Game({ children }: { children: React.PropsWithChildren<{}> }) {
         <img alt="background" className={styles.background} />
       </picture>
       {children}
-    </section>
+    </div>
   );
 }
 export { Game };

@@ -3,15 +3,12 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  height: 60vh;
-  @media screen and (max-width: 950px) {
-    height: 100vh;
-  }
 }
 .insideBoard {
   display: grid;
   flex-flow: column;
   gap: 4rem;
+  grid-template-columns: 1fr 1fr;
   justify-items: center;
   @media screen and (max-width: 950px) {
     grid-template-columns: 1fr;

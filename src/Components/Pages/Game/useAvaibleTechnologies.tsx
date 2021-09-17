@@ -5,6 +5,14 @@ import { ReactComponent as Css3Icon } from "../../../Assets/Icons/IconsTechnolog
 import { ReactComponent as JavascriptIcon } from "../../../Assets/Icons/IconsTechnology/javascript.svg";
 import { ReactComponent as TypescriptIcon } from "../../../Assets/Icons/IconsTechnology/typescript.svg";
 import { AvaibleTechnologiesProperty } from "../../../Types/Types";
+export type Technologies =
+  | "html5"
+  | "vue"
+  | "css3"
+  | "javascript"
+  | "typescript"
+  | "react"
+  | "none";
 function useAvaibleTechnologies() {
   const avaibleTechnologies: AvaibleTechnologiesProperty = {
     html5: {

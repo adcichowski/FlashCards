@@ -1,4 +1,7 @@
-import { useAvaibleTechnologies } from "../Components/Pages/Game/useAvaibleTechnologies";
+import {
+  Technologies,
+  useAvaibleTechnologies,
+} from "../Components/Pages/Game/useAvaibleTechnologies";
 import { MainBoard } from "../Components/Pages/Game/MainBoard/MainBoard";
 import { Game } from "../Pages/Game/Game";
 import { PrivateRoute } from "./PrivateRoute";
@@ -27,26 +30,28 @@ function GameRoute() {
         <AddCard />
       </Route>
 
-      {Object.values(avaibleTechnologies).map(({ name }: { name: string }) => {
-        return (
-          <React.Fragment key={name}>
-            <PrivateRoute path={`/game/personal-cards/${name}`}>
-              <QuestionsBoard
-                typeBoard="personalCards"
-                technologyName={name}
-                cardsData={state.personalCards}
-              />
-            </PrivateRoute>
-            <PrivateRoute path={`/game/general-cards/${name}`}>
-              <QuestionsBoard
-                typeBoard="generalCards"
-                technologyName={name}
-                cardsData={state.generalCards}
-              />
-            </PrivateRoute>
-          </React.Fragment>
-        );
-      })}
+      {Object.values(avaibleTechnologies).map(
+        ({ name }: { name: Technologies }) => {
+          return (
+            <React.Fragment key={name}>
+              <PrivateRoute path={`/game/personal-cards/${name}`}>
+                <QuestionsBoard
+                  typeBoard="personalCards"
+                  technologyName={name}
+                  cardsData={state.personalCards}
+                />
+              </PrivateRoute>
+              <PrivateRoute path={`/game/general-cards/${name}`}>
+                <QuestionsBoard
+                  typeBoard="generalCards"
+                  technologyName={name}
+                  cardsData={state.generalCards}
+                />
+              </PrivateRoute>
+            </React.Fragment>
+          );
+        }
+      )}
     </Game>
   );
 }

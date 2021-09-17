@@ -89,6 +89,12 @@ export async function sendToFirestore(
   cards: ICardsFromFirestore | ICard,
   toCollectionFirestore: string
 ) {
+  if (cards.isFavorite) {
+    updateDoc(doc(db, "PersonalCards", toCollectionFirestore), {
+      ...cards,
+      favoriteCards: { cards },
+    });
+  }
   if (toCollectionFirestore !== "GeneralCards") {
     setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
     return;

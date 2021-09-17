@@ -8,18 +8,36 @@ import styles from "./Question.module.scss";
 import { useCardContext } from "../../../../../Context/CardContext";
 import { useCallback } from "react";
 import { useDeleteCard } from "../useDeleteCard";
+import { sendToFirestore } from "../../../../../lib/firebase/Utils";
+import { useAuthContext } from "../../../../../Context/AuthContext";
+import { arrayUnion } from "@firebase/firestore";
 const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
   const { deleteCard } = useDeleteCard();
   const { handleClickShowCard } = useQuestionBoard();
+  const { state } = useAuthContext();
   const { dispatch } = useCardContext();
   const setFavorite = useCallback(
     (card: ICard) => {
+      if (card.isFavorite) return;
+      sendToFirestore(
+        {
+          ...state.personalCards,
+          // 'favorites': arrayUnion({
+          //   question: card.question,
+          //   answer: card.answer,
+          //   id: card.id,
+          //   randomSvg: card.randomSvgCard,
+          //   technology: card.technology,
+          // }),
+        },
+        state.idUser
+      );
       dispatch({
         type: "editCard",
-        setCard: { ...card, isFlip: false, isFavorite: !card.isFavorite },
+        setCard: { ...card, isFlip: false, isFavorite: true },
       });
     },
-    [dispatch]
+    [dispatch, state.idUser, state.personalCards]
   );
   return (
     <li key={card.id + card.answer} className={styles.questionCard}>
