@@ -6,7 +6,11 @@ import {
   deleteCardFromFirestore,
   sendToFirestore,
 } from "../../../../lib/firebase/Utils";
-import { ICard, ITypeBoard } from "../../../../Types/Types";
+import {
+  ICard,
+  ICardsFromFirestore,
+  ITypeBoard,
+} from "../../../../Types/Types";
 import { capitalize } from "../../../../Utils/Utils";
 
 function useDeleteCard() {
@@ -35,7 +39,9 @@ function useDeleteCard() {
       });
       console.log(deckAfterDeletedCard);
       sendToFirestore(
-        typeBoard === "generalCards" ? card : { ...deckAfterDeletedCard },
+        typeBoard === "generalCards"
+          ? card
+          : { ...(deckAfterDeletedCard as ICardsFromFirestore) },
         typeBoard === "personalCards" ? state.idUser : "generalCards"
       );
     },

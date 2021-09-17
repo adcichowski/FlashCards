@@ -3,7 +3,7 @@ import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
 import { auth } from "../lib/firebase/Settings";
-import { ICard } from "../Types/Types";
+import { ICard, ICardsFromFirestore } from "../Types/Types";
 
 interface Action {
   readonly type: "logIn" | "logOut" | "setDeckCard";
@@ -12,8 +12,8 @@ interface Action {
 export interface CurrentUser {
   readonly idUser: string;
   readonly isLogin: boolean;
-  readonly personalCards: { [index: string]: ICard[] };
-  readonly generalCards: { [index: string]: ICard[] };
+  readonly personalCards: ICardsFromFirestore;
+  readonly generalCards: ICardsFromFirestore;
 }
 function userReducer(state: CurrentUser, action: Action): CurrentUser {
   switch (action.type) {
@@ -51,8 +51,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const currentUser: CurrentUser = {
     isLogin: false,
     idUser: "",
-    personalCards: {},
-    generalCards: {},
+    personalCards: {} as ICardsFromFirestore,
+    generalCards: {} as ICardsFromFirestore,
   };
   const [state, dispatch] = useReducer(userReducer, currentUser);
   const value = { state, dispatch };

@@ -46,7 +46,8 @@ export async function getCards(idUser: string) {
     }
     decks.generalCards.data[cardData.technology].push(cardData);
   });
-  decks.personalCards.data = (await decks.personalCards.query.data()) || {};
+  const card = (await decks.personalCards.query.data()) as ICardsFromFirestore;
+  decks.personalCards.data = card;
 
   return [decks.personalCards.data, decks.generalCards.data];
 }
@@ -56,7 +57,6 @@ export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
     copyDeck[card.technology] = [];
   }
   copyDeck[card.technology].push(card);
-  console.log(copyDeck);
   return copyDeck;
 }
 export async function rateCardInFirestore(card: ICard) {
@@ -89,12 +89,12 @@ export async function sendToFirestore(
   cards: ICardsFromFirestore | ICard,
   toCollectionFirestore: string
 ) {
-  if (cards.isFavorite) {
-    updateDoc(doc(db, "PersonalCards", toCollectionFirestore), {
-      ...cards,
-      favoriteCards: { cards },
-    });
-  }
+  // if (cards.isFavorite) {
+  //   updateDoc(doc(db, "PersonalCards", toCollectionFirestore), {
+  //     ...cards,
+  //     favoriteCards: { cards },
+  //   });
+  // }
   if (toCollectionFirestore !== "GeneralCards") {
     setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
     return;
@@ -129,7 +129,7 @@ export function deleteCardFromFirestore(
     )
   );
 
-  const deckCardAfterDeleted: ICardsFromFirestore =
+  const deckCardAfterDeleted =
     filteredCards.length === 0
       ? deleteEmptyDeck
       : {

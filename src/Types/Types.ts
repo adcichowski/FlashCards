@@ -39,6 +39,4 @@ export interface ButtonInterface {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   link?: string;
 }
-export interface ICardsFromFirestore {
-  [index: string]: ICard[];
-}
+export type ICardsFromFirestore = Record<Technologies, ICard[]>;
