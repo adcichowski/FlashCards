@@ -4,7 +4,7 @@ import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
 import {
   addCardToDeck,
-  sendToFirestore,
+  sendFunctionsToFirebase,
   validateCardFields,
 } from "../../../lib/firebase/Utils";
 function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
@@ -13,6 +13,7 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
   const { dispatch, state: cardState } = useCardContext();
   const history = useHistory();
   function sendCardToDatabase() {
+    const { sendDeck, sendCard } = sendFunctionsToFirebase();
     const { id, isFavorite, technology, question, answer, randomSvgCard } =
       cardState;
     const card = {
@@ -35,10 +36,8 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
           [deck]: copyStateDeck,
         },
       });
-      sendToFirestore(
-        deck === "personalCards" ? copyStateDeck : card,
-        deck === "personalCards" ? authState.idUser : "GeneralCards"
-      );
+      if (deck === "personalCards") sendDeck(copyStateDeck, authState.idUser);
+      if (deck === "generalCards") sendCard(card);
       dispatch({ type: "resetCard" });
       dispatchModal({
         type: "successModal",

@@ -3,7 +3,7 @@ import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
 import { auth } from "../lib/firebase/Settings";
-import { ICard, ICardsFromFirestore } from "../Types/Types";
+import { ICardsFromFirestore } from "../Types/Types";
 
 interface Action {
   readonly type: "logIn" | "logOut" | "setDeckCard";

@@ -32,7 +32,7 @@ export async function getCards(idUser: string) {
   const decks = {
     personalCards: {
       data: {} as ICardsFromFirestore,
-      query: await getDoc(doc(db, `PersonalCards/${idUser}`)),
+      query: await getDoc(doc(db, `PersonalCards`, idUser)),
     },
     generalCards: {
       data: {} as ICardsFromFirestore,
@@ -85,22 +85,14 @@ export async function rateCardInFirestore(card: ICard) {
     return;
   }
 }
-export async function sendToFirestore(
-  cards: ICardsFromFirestore | ICard,
-  toCollectionFirestore: string
-) {
-  // if (cards.isFavorite) {
-  //   updateDoc(doc(db, "PersonalCards", toCollectionFirestore), {
-  //     ...cards,
-  //     favoriteCards: { cards },
-  //   });
-  // }
-  if (toCollectionFirestore !== "GeneralCards") {
-    setDoc(doc(db, "PersonalCards", toCollectionFirestore), cards);
-    return;
+export function sendFunctionsToFirebase() {
+  function sendDeck(deck: ICardsFromFirestore, idUser: string) {
+    setDoc(doc(db, "PersonalCards", idUser), deck);
   }
-
-  await addDoc(collection(db, "GeneralCards"), cards);
+  function sendCard(card: ICard) {
+    addDoc(collection(db, "GeneralCards"), card);
+  }
+  return { sendDeck, sendCard };
 }
 
 export function validateCardFields(card: ICard) {
@@ -115,25 +107,25 @@ export function deleteCardFromFirestore(
   cardsFromState: ICardsFromFirestore
 ) {
   const copyStateCards = { ...cardsFromState };
-  const filteredCards = copyStateCards[deletedCard.technology].filter(
-    (cardFromState) => {
-      const keysCard = Object.keys(cardFromState) as Array<keyof ICard>;
-      return !keysCard.every((key) => {
-        return cardFromState[key] === deletedCard[key];
-      });
-    }
-  );
+  const deckWithoutDeletedCard = copyStateCards[
+    deletedCard?.technology
+  ]?.filter((cardFromState) => {
+    const keysCard = Object.keys(cardFromState) as Array<keyof ICard>;
+    return !keysCard.every((key) => {
+      return cardFromState[key] === deletedCard[key];
+    });
+  });
   const deleteEmptyDeck = Object.fromEntries(
-    Object.entries(copyStateCards).filter(
+    Object.entries(copyStateCards)?.filter(
       ([technology]) => technology !== deletedCard.technology
     )
   );
 
   const deckCardAfterDeleted =
-    filteredCards.length === 0
+    deckWithoutDeletedCard.length === 0
       ? deleteEmptyDeck
       : {
-          [deletedCard.technology]: filteredCards,
+          [deletedCard.technology]: deckWithoutDeletedCard,
         };
   return deckCardAfterDeleted;
 }

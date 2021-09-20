@@ -11,7 +11,7 @@ function QuestionsBoard({
   typeBoard,
 }: {
   cardsData: { [index: string]: ICard[] };
-  technologyName: Technologies;
+  technologyName: Technologies | "favorites";
   typeBoard: "personalCards" | "generalCards";
 }) {
   return (
@@ -24,7 +24,7 @@ function QuestionsBoard({
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
-          {cardsData[technologyName].length && (
+          {cardsData[technologyName]?.length && (
             <ul className={styles.listQuestion}>
               {cardsData[technologyName].map((card: ICard) => (
                 <Question

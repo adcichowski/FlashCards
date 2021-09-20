@@ -1,19 +1,20 @@
 import { useCallback } from "react";
 import { useHistory } from "react-router";
-import { useAuthContext } from "../../../../Context/AuthContext";
-import { useModalContext } from "../../../../Context/ModalContext";
+import { useAuthContext } from "../../../../../Context/AuthContext";
+import { useModalContext } from "../../../../../Context/ModalContext";
 import {
   deleteCardFromFirestore,
-  sendToFirestore,
-} from "../../../../lib/firebase/Utils";
+  sendFunctionsToFirebase,
+} from "../../../../../lib/firebase/Utils";
 import {
   ICard,
   ICardsFromFirestore,
   ITypeBoard,
-} from "../../../../Types/Types";
-import { capitalize } from "../../../../Utils/Utils";
+} from "../../../../../Types/Types";
+import { capitalize } from "../../../../../Utils/Utils";
 
 function useDeleteCard() {
+  const { sendDeck, sendCard } = sendFunctionsToFirebase();
   const { dispatch: dispatchModal } = useModalContext();
   const history = useHistory();
   const { state, dispatch } = useAuthContext();
@@ -37,15 +38,12 @@ function useDeleteCard() {
         type: "setDeckCard",
         setUser: { ...state, [typeBoard]: { ...(deckAfterDeletedCard || {}) } },
       });
-      console.log(deckAfterDeletedCard);
-      sendToFirestore(
-        typeBoard === "generalCards"
-          ? card
-          : { ...(deckAfterDeletedCard as ICardsFromFirestore) },
-        typeBoard === "personalCards" ? state.idUser : "generalCards"
-      );
+
+      if (typeBoard === "generalCards") sendCard(card);
+      if (typeBoard === "personalCards")
+        sendDeck(deckAfterDeletedCard as ICardsFromFirestore, state.idUser);
     },
-    [dispatch, dispatchModal, history, state]
+    [dispatch, dispatchModal, history, state, sendCard, sendDeck]
   );
 
   return { deleteCard };

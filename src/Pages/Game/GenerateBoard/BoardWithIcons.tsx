@@ -29,20 +29,35 @@ function BoardWithIcons({
   const { getElements } = useAnimationGSAP(AnimateIconTech);
   const { getAvaibleTechnologies } = useAvaibleTechnologies();
   const FavoriteIcon = () => (
-    <Link to="game/personal-cards/favorite" className={styles.favoriteIcon}>
-      <p>Favorite Cards</p>
-      <div className={styles.heart}>
+    <Link
+      to={
+        cardsData["favorites"]?.length
+          ? `/game/${typeBoard}-cards/favorite`
+          : `/game/${typeBoard}-cards`
+      }
+      className={styles.favoriteIcon}
+    >
+      <div>Favorite Cards</div>
+      <div
+        className={`${styles.heart} ${
+          cardsData["favorites"]?.length ? "" : styles.linkDisable
+        }`}
+      >
         <Heart />
       </div>
     </Link>
   );
-  const renderIcons = getAvaibleTechnologies(Object.keys(cardsData)).map(
+  const renderIcons = getAvaibleTechnologies(Object.keys(cardsData || {})).map(
     ({ type, name, isActive, render: Component }) => (
       <li key={name} className={styles.boxTechnology}>
         <Link
-          to={`/game/${typeBoard}-cards/${name}`}
+          to={
+            isActive
+              ? `/game/${typeBoard}-cards/${name}`
+              : `/game/${typeBoard}-cards`
+          }
           className={`${styles.technology} ${
-            isActive ? "" : styles.linkDisable
+            isActive ? styles.activeLink : styles.linkDisable
           }`}
         >
           <p className={styles.technologyType}>{type}</p>
@@ -57,7 +72,7 @@ function BoardWithIcons({
 
   return (
     <>
-      <BackButton />
+      <BackButton pathTo="/game" />
       <div className={styles.board}>
         <div className={styles.boardTechnologies}>
           <h1 className={styles.title}>{`${capitalize(typeBoard)} Cards`}</h1>

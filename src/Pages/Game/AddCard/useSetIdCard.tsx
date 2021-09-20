@@ -13,7 +13,7 @@ function useSetIdCard() {
   useEffect(() => {
     if (stateCard.technology === "none" || !nameDatabase) return;
     const getCardsByTechnology =
-      state["personalCards"][stateCard.technology] || [];
+      state["personalCards"]?.[stateCard.technology] || [];
     const newValueId =
       getCardsByTechnology.length !== 0
         ? getCardsByTechnology.slice(-1)[0].id + 1

@@ -73,7 +73,7 @@ function useAvaibleTechnologies() {
         type,
         description,
         render,
-        isActive: technologies.includes(name),
+        isActive: technologies?.includes(name),
       };
     });
     return arrayAvaibleTechnologies;

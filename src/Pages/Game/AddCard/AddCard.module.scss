@@ -16,7 +16,7 @@
   align-items: center;
 }
 .title {
-  font-size: clamp(2rem, clac(2rem + 5vw), 3.2rem);
+  font-size: clamp(2rem, calc(2rem + 5vw), 3.2rem);
   font-weight: 600;
   margin-top: 5px;
 }

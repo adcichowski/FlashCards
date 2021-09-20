@@ -23,7 +23,7 @@
 }
 .outsideButton {
   font-weight: 600;
-  font-size: clamp(3rem, calc(2rem+4vw), 6rem);
+  font-size: clamp(3rem, calc(2rem + 4vw), 6rem);
   display: grid;
   justify-items: center;
 }
@@ -95,4 +95,8 @@
   display: flex;
   flex-flow: column;
   align-items: center;
+}
+.activeLink {
+  opacity: 1;
+  transition: opacity 0.7s;
 }

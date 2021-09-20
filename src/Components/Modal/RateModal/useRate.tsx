@@ -3,7 +3,7 @@ import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
 import { rateCardInFirestore } from "../../../lib/firebase/Utils";
-import { useDeleteCard } from "../../../Pages/Game/GenerateBoard/QuestionsBoard/useDeleteCard";
+import { useDeleteCard } from "../../../Pages/Game/GenerateBoard/QuestionsBoard/Question/useDeleteCard";
 
 export function useRate() {
   const maxRateOnCard = useMemo(() => 5, []);

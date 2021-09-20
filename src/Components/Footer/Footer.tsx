@@ -11,7 +11,6 @@ function Footer() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: JSON) => console.log(data);
   return (
     <footer className={styles.footer}>
       <div className={styles.footerArticle}>
@@ -51,7 +50,7 @@ function Footer() {
           &copy; 2021 FlashCards, All rights is us
         </small>
       </div>
-      <form className={styles.footerForm} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.footerForm} onSubmit={() => handleSubmit}>
         <h3 className={styles.formTitle}>Send Us</h3>
         <p className={styles.formSubtitle}>We love got ideas</p>
         <label>

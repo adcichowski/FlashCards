@@ -31,8 +31,8 @@ function GameRoute() {
       </Route>
 
       {Object.values(avaibleTechnologies).map(
-        ({ name }: { name: Technologies }) => {
-          return (
+        ({ name }: { name: Technologies }) =>
+          state.personalCards[name] && (
             <React.Fragment key={name}>
               <PrivateRoute path={`/game/personal-cards/${name}`}>
                 <QuestionsBoard
@@ -41,6 +41,13 @@ function GameRoute() {
                   cardsData={state.personalCards}
                 />
               </PrivateRoute>
+            </React.Fragment>
+          )
+      )}
+      {Object.values(avaibleTechnologies).map(
+        ({ name }: { name: Technologies }) =>
+          state.generalCards[name] && (
+            <React.Fragment key={name}>
               <PrivateRoute path={`/game/general-cards/${name}`}>
                 <QuestionsBoard
                   typeBoard="generalCards"
@@ -49,9 +56,17 @@ function GameRoute() {
                 />
               </PrivateRoute>
             </React.Fragment>
-          );
-        }
+          )
       )}
+      <React.Fragment>
+        <PrivateRoute path={`/game/personal-cards/favorite`}>
+          <QuestionsBoard
+            typeBoard="personalCards"
+            technologyName={"favorites"}
+            cardsData={state.personalCards}
+          />
+        </PrivateRoute>
+      </React.Fragment>
     </Game>
   );
 }
