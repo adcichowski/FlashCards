@@ -11,8 +11,7 @@ export type Technologies =
   | "css3"
   | "javascript"
   | "typescript"
-  | "react"
-  | "none";
+  | "react";
 function useAvaibleTechnologies() {
   const avaibleTechnologies: AvaibleTechnologiesProperty = {
     html5: {

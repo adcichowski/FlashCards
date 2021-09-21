@@ -11,7 +11,6 @@ import {
   ICardsFromFirestore,
   ITypeBoard,
 } from "../../../../../Types/Types";
-import { capitalize } from "../../../../../Utils/Utils";
 
 function useDeleteCard() {
   const { sendDeck, sendCard } = sendFunctionsToFirebase();
@@ -24,12 +23,12 @@ function useDeleteCard() {
         card,
         state[typeBoard]
       );
-
-      if (!Object.values(deckAfterDeletedCard).length) {
+      console.log(deckAfterDeletedCard, "to");
+      if (Object.values(deckAfterDeletedCard).length === 0) {
         dispatchModal({
           type: "successModal",
           setModal: {
-            message: `Technology ${capitalize(card.technology)} was deleted`,
+            message: `Technology deck was deleted`,
           },
         });
         history.push("/game");

@@ -15,10 +15,10 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
   const { handleClickShowCard } = useQuestionBoard();
   const { state } = useAuthContext();
   const { dispatch } = useCardContext();
+  const { sendDeck } = sendFunctionsToFirebase();
   const setFavorite = useCallback(
     (card: ICard) => {
       if (card.isFavorite) return;
-      const { sendDeck } = sendFunctionsToFirebase();
       sendDeck(
         {
           ...state.personalCards,
@@ -36,7 +36,7 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
         setCard: { ...card, isFlip: false, isFavorite: true },
       });
     },
-    [dispatch, state.idUser, state.personalCards]
+    [sendDeck, dispatch, state.idUser, state.personalCards]
   );
   return (
     <li key={card.id + card.answer} className={styles.questionCard}>
@@ -84,5 +84,6 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
     </li>
   );
 };
+
 export { Question };
 Question.displayName = "Question";

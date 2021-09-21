@@ -14,7 +14,7 @@ export interface PersonRating {
 
 export interface ICard {
   id: number;
-  technology: Technologies;
+  technology: Technologies | "none";
   answer: string;
   question: string;
   isFavorite: boolean;
@@ -39,4 +39,4 @@ export interface ButtonInterface {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   link?: string;
 }
-export type ICardsFromFirestore = Record<Technologies | "favorites", ICard[]>;
+export type ICardsFromFirestore = { [key: string]: ICard[] };

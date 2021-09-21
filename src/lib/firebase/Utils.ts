@@ -14,6 +14,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
 export function doActionWithEmailPass(
   action: "register" | "login",
   email: string,
@@ -106,6 +107,7 @@ export function deleteCardFromFirestore(
   deletedCard: ICard,
   cardsFromState: ICardsFromFirestore
 ) {
+  console.log(cardsFromState);
   const copyStateCards = { ...cardsFromState };
   const deckWithoutDeletedCard = copyStateCards[
     deletedCard?.technology
@@ -120,12 +122,12 @@ export function deleteCardFromFirestore(
       ([technology]) => technology !== deletedCard.technology
     )
   );
-
   const deckCardAfterDeleted =
-    deckWithoutDeletedCard.length === 0
+    deckWithoutDeletedCard?.length === 0
       ? deleteEmptyDeck
       : {
           [deletedCard.technology]: deckWithoutDeletedCard,
         };
+  console.log(deckCardAfterDeleted, "decfafterdelteted");
   return deckCardAfterDeleted;
 }

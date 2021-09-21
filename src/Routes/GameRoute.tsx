@@ -38,7 +38,7 @@ function GameRoute() {
                 <QuestionsBoard
                   typeBoard="personalCards"
                   technologyName={name}
-                  cardsData={state.personalCards}
+                  cardsData={state.personalCards[name]}
                 />
               </PrivateRoute>
             </React.Fragment>
@@ -52,7 +52,7 @@ function GameRoute() {
                 <QuestionsBoard
                   typeBoard="generalCards"
                   technologyName={name}
-                  cardsData={state.generalCards}
+                  cardsData={state.generalCards[name]}
                 />
               </PrivateRoute>
             </React.Fragment>
@@ -63,7 +63,7 @@ function GameRoute() {
           <QuestionsBoard
             typeBoard="personalCards"
             technologyName={"favorites"}
-            cardsData={state.personalCards}
+            cardsData={state.personalCards["favorites"]}
           />
         </PrivateRoute>
       </React.Fragment>
