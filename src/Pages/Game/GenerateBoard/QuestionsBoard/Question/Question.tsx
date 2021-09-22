@@ -2,7 +2,6 @@ import { PersonalRate } from "./PersonalRate";
 import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../../Assets/Icons/heart.svg";
 import { useQuestionBoard } from "../useQuestionBoard";
-import { SmallButton } from "../../../../../Components/Button/SmallButton";
 import { ICard } from "../../../../../Types/Types";
 import styles from "./Question.module.scss";
 import { useCardContext } from "../../../../../Context/CardContext";
@@ -10,6 +9,7 @@ import { useCallback } from "react";
 import { useDeleteCard } from "./useDeleteCard";
 import { sendFunctionsToFirebase } from "../../../../../lib/firebase/Utils";
 import { useAuthContext } from "../../../../../Context/AuthContext";
+import { Button } from "../../../../../Components/Button/Button";
 const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
   const { deleteCard } = useDeleteCard();
   const { handleClickShowCard } = useQuestionBoard();
@@ -50,12 +50,13 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
       </button>
       <div className={styles.deleteButton}>
         {typeBoard === "personalCards" && (
-          <SmallButton
+          <Button
+            size="small"
             type="button"
             onClick={() => deleteCard(card, typeBoard)}
           >
             Delete
-          </SmallButton>
+          </Button>
         )}
       </div>
       <button

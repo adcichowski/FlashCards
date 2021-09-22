@@ -48,7 +48,9 @@ function Form({ type }: { type: "login" | "register" }) {
             </span>
 
             <div className={styles.formButtons}>
-              <Button type="submit">{capitalize(type)}</Button>
+              <Button size="normal" type="submit">
+                {capitalize(type)}
+              </Button>
             </div>
             <p className={styles.question}>
               {type === "login" ? "Haven't got an account?" : "Have account?"}{" "}

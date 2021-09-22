@@ -6,7 +6,6 @@ import React, { Suspense } from "react";
 import { Footer } from "../../Components/Footer/Footer";
 import { ListTechnologies } from "../../Components/Pages/Home/ListTechnologies/ListTechnologies";
 import { CirclesInfo } from "../../Components/Pages/Home/CirclesInfo/CirclesInfo";
-import { BigButton } from "../../Components/Button/BigButton";
 const Instruction = React.lazy(() =>
   import("../../Components/Pages/Home/Instruction/Instruction").then(
     (module) => ({ default: module.Instruction })
@@ -40,7 +39,7 @@ export default function Home() {
             Easy way to improve your skill...
           </p>
 
-          <Button type="a" link="game">
+          <Button size="normal" type="a" link="game">
             Click For Play
           </Button>
         </section>
@@ -72,9 +71,9 @@ export default function Home() {
         <section className={styles.bigQuestion}>
           <div className={styles.bigQuestionIcon}></div>
           <h3 className={styles.bigQuestionTitle}>Do You Wanna TRY ??</h3>
-          <BigButton type="a" link="game">
+          <Button size="big" type="a" link="game">
             Create Account
-          </BigButton>
+          </Button>
         </section>
       </main>
       <Footer />

@@ -1,8 +1,8 @@
 import { Navigation } from "../../../Navigation/Navigation";
 import styles from "./MainBoard.module.scss";
-import { BigButton } from "../../../Button/BigButton";
 import { Link } from "react-router-dom";
 import { ReactComponent as Plus } from "../../../../Assets/Icons/plus.svg";
+import { Button } from "../../../Button/Button";
 
 function MainBoard() {
   return (
@@ -14,12 +14,12 @@ function MainBoard() {
             <h1>Choose Deck To Seeing Cards</h1>
           </div>
 
-          <BigButton type="a" link="game/personal-cards">
+          <Button size="big" type="a" link="game/personal-cards">
             Personal Cards
-          </BigButton>
-          <BigButton type="a" link="game/general-cards">
+          </Button>
+          <Button size="big" type="a" link="game/general-cards">
             General Cards
-          </BigButton>
+          </Button>
 
           <div className={styles.outsideButton}>
             Create Card

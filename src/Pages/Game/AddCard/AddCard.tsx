@@ -127,10 +127,14 @@ function AddCard() {
           </div>
         </div>
         <span>
-          <Button type="button" onClick={sendCardToDatabase}>
+          <Button size="normal" type="button" onClick={sendCardToDatabase}>
             Add Card
           </Button>
-          <Button type="button" onClick={() => dispatch({ type: "showCard" })}>
+          <Button
+            size="normal"
+            type="button"
+            onClick={() => dispatch({ type: "showCard" })}
+          >
             Show Card
           </Button>
         </span>

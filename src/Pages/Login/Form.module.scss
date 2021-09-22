@@ -20,14 +20,14 @@
 }
 
 .formTitle {
-  font-size: 6rem;
+  font-size: 5.3rem;
   text-align: center;
   align-self: center;
   justify-self: stretch;
   &::after {
     content: "";
     display: block;
-    width: 100%;
+
     position: relative;
     top: 3rem;
     height: 7px;
@@ -43,7 +43,7 @@
 .inputEmail {
   width: 100%;
   margin: 1rem 0 0 0.2rem;
-  font-size: clamp(1.6rem, calc(0.5rem + 1vw), 1.9rem);
+  font-size: 1.8rem;
   color: var(--font-color-primary);
   background-color: transparent;
   border: 2px solid white;
@@ -81,5 +81,5 @@
 .questionType {
   font-weight: 400;
   text-decoration: underline;
-  font-size: 2.4rem;
+  font-size: clamp(2rem, 2vw, 2.6rem);
 }

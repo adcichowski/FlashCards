@@ -9,6 +9,10 @@
   transition: filter 250ms;
   margin: 0 10px;
 }
+.normalButton {
+  width: clamp(11rem, calc(4rem + 5vw), 12rem);
+  height: clamp(4rem, calc(1rem + 5vw), 6rem);
+}
 .bigButton {
   width: clamp(15rem, calc(15rem + 10vw), 20rem);
   height: clamp(5rem, calc(5rem + 10vw), 7rem);
@@ -72,7 +76,8 @@
 .bigFront {
   font-size: clamp(1.5rem, calc(1.5rem + 10vw), 2.4rem);
 }
-.smallFront {
+.smallFront,
+.normalFront {
   font-size: 1.6rem;
 }
 .button:hover {

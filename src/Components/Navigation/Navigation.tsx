@@ -36,7 +36,7 @@ function Navigation() {
             <Logo />
             <ul className={styles.menuList}>{renderNavigationLinks}</ul>
             {state.isLogin ? (
-              <Button type="button" onClick={handleClickLogOut}>
+              <Button size="normal" type="button" onClick={handleClickLogOut}>
                 Logout
               </Button>
             ) : (
@@ -60,7 +60,7 @@ function Navigation() {
           <Logo />
           <ul className={styles.navList}>{renderNavigationLinks}</ul>
           {state.isLogin ? (
-            <Button type="button" onClick={handleClickLogOut}>
+            <Button size="normal" type="button" onClick={handleClickLogOut}>
               Logout
             </Button>
           ) : (

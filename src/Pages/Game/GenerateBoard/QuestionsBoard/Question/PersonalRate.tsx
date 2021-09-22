@@ -1,10 +1,10 @@
 import { useAuthContext } from "../../../../../Context/AuthContext";
 import { ICard, PersonRating } from "../../../../../Types/Types";
 import { useModalContext } from "../../../../../Context/ModalContext";
-import { SmallButton } from "../../../../../Components/Button/SmallButton";
 import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
 import styles from "./Question.module.scss";
 import { useCardContext } from "../../../../../Context/CardContext";
+import { Button } from "../../../../../Components/Button/Button";
 function PersonalRate({ card }: { card: ICard }) {
   const { state: stateAuth } = useAuthContext();
   const { dispatch: dispatchModal } = useModalContext();
@@ -23,7 +23,8 @@ function PersonalRate({ card }: { card: ICard }) {
     </div>
   ) : (
     <div className={styles.questionRatePesonal}>
-      <SmallButton
+      <Button
+        size="small"
         type="button"
         onClick={() => {
           dispatchCard({
@@ -34,7 +35,7 @@ function PersonalRate({ card }: { card: ICard }) {
         }}
       >
         Rate
-      </SmallButton>
+      </Button>
     </div>
   );
 }

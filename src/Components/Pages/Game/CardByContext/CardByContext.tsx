@@ -81,12 +81,16 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
 
       <div className={styles.functionallButtons}>
         {isEdit && (
-          <Button onClick={() => dispatch({ type: "randomSVG" })} type="button">
+          <Button
+            size="normal"
+            onClick={() => dispatch({ type: "randomSVG" })}
+            type="button"
+          >
             Set Shape
           </Button>
         )}
         <div className={styles.hideButton}>
-          <Button type="button" onClick={handleClickHideCard}>
+          <Button size="normal" type="button" onClick={handleClickHideCard}>
             Hide Card
           </Button>
         </div>

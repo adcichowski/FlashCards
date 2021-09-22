@@ -36,12 +36,13 @@ function RateModal() {
         </p>
         <div className={styles.blockButton}>
           <Button
+            size="normal"
             type="button"
             onClick={() => dispatch({ type: "closeModal" })}
           >
             Close
           </Button>
-          <Button onClick={rateCard} type="button">
+          <Button size="normal" onClick={rateCard} type="button">
             Rate
           </Button>
         </div>

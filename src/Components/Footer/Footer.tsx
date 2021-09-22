@@ -73,7 +73,9 @@ function Footer() {
             className={styles.formTextarea}
           />
         </label>
-        <Button type="submit">Send ideas</Button>
+        <Button size="normal" type="submit">
+          Send ideas
+        </Button>
       </form>
     </footer>
   );

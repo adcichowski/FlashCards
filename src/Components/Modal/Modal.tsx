@@ -25,7 +25,7 @@ function Modal() {
           {state.type === "error" ? <Alert /> : <Check />}
         </div>
         <p className={styles.modalText}>{state.message}</p>
-        <Button type="button" onClick={handleClose}>
+        <Button size="normal" type="button" onClick={handleClose}>
           Close
         </Button>
       </div>

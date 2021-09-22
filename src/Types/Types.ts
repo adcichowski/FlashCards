@@ -34,6 +34,7 @@ export interface TechnologyProperty {
   fill: string;
 }
 export interface ButtonInterface {
+  size: "big" | "small" | "normal";
   type: "submit" | "button" | "a";
   children: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;

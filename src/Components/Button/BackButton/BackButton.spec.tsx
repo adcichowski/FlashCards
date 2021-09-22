@@ -3,18 +3,18 @@ import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import { BackButton } from "./BackButton";
-describe("render button to back your location URL after clicked", () => {
+describe("test render BackButton component", () => {
   const host = window.location.href.slice(0, -1);
   const fakeUrl = "/fake/path";
 
-  test("if you pass the prop pathTo, will be rendered archon with href", () => {
+  test("After passed prop (pathTo) to component, should render archon element", () => {
     render(<BackButton pathTo={fakeUrl} />, { wrapper: MemoryRouter });
     const backButton = screen.getByRole("link");
     userEvent.click(backButton);
     expect(backButton.closest("a")?.href).toBe(host + fakeUrl);
   });
 
-  test("if you do not pass the prop pathTo, will be rendered button with onClick to back your URL by click", () => {
+  test("If the prop will be miss, should generate button with action. The action after click must get user to previous page", () => {
     const browserHistory = createMemoryHistory();
     browserHistory.push(fakeUrl);
     render(<BackButton />, { wrapper: MemoryRouter });

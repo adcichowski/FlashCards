@@ -18,7 +18,7 @@ function Instruction() {
       <div ref={getElements} className={styles.card}>
         {!isFlip ? <FrontCard /> : <BackCard />}
       </div>
-      <Button type="button" onClick={handleClickFlip}>
+      <Button size="normal" type="button" onClick={handleClickFlip}>
         Flip Card
       </Button>
     </section>
