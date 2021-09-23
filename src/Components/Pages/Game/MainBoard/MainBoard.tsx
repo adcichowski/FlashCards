@@ -14,10 +14,16 @@ function MainBoard() {
             <h1>Choose Deck To Seeing Cards</h1>
           </div>
 
-          <Button size="big" type="a" link="game/personal-cards">
+          <Button
+            size="big"
+            type={{ element: "a", href: "game/personal-cards" }}
+          >
             Personal Cards
           </Button>
-          <Button size="big" type="a" link="game/general-cards">
+          <Button
+            size="big"
+            type={{ element: "a", href: "game/general-cards" }}
+          >
             General Cards
           </Button>
 

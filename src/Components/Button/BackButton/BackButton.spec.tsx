@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { MemoryRouter } from "react-router-dom";
 import { BackButton } from "./BackButton";
@@ -10,7 +9,7 @@ describe("test render BackButton component", () => {
   test("After passed prop (pathTo) to component, should render archon element", () => {
     render(<BackButton pathTo={fakeUrl} />, { wrapper: MemoryRouter });
     const backButton = screen.getByRole("link");
-    userEvent.click(backButton);
+    fireEvent.click(backButton);
     expect(backButton.closest("a")?.href).toBe(host + fakeUrl);
   });
 
@@ -19,7 +18,7 @@ describe("test render BackButton component", () => {
     browserHistory.push(fakeUrl);
     render(<BackButton />, { wrapper: MemoryRouter });
     const backButton = screen.getByRole("button");
-    userEvent.click(backButton);
+    fireEvent.click(backButton);
     expect(window.location.pathname).toBe("/");
   });
 });

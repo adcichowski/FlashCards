@@ -39,7 +39,7 @@ export default function Home() {
             Easy way to improve your skill...
           </p>
 
-          <Button size="normal" type="a" link="game">
+          <Button size="normal" type={{ element: "a", href: "game" }}>
             Click For Play
           </Button>
         </section>
@@ -71,7 +71,7 @@ export default function Home() {
         <section className={styles.bigQuestion}>
           <div className={styles.bigQuestionIcon}></div>
           <h3 className={styles.bigQuestionTitle}>Do You Wanna TRY ??</h3>
-          <Button size="big" type="a" link="game">
+          <Button size="big" type={{ element: "a", href: "game" }}>
             Create Account
           </Button>
         </section>

@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import { ButtonInterface } from "../../Types/Types";
 import styles from "./Button.module.scss";
 
-function Button({ type, link, children, onClick, size }: ButtonInterface) {
+function Button({ type, children, onClick, size }: ButtonInterface) {
   const stylesButton = {
     parent: styles[size + "Button"],
     children: styles[size + "Front"],
   };
-  if (type === "a") {
+  if (typeof type === "object") {
     return (
       <Link
-        to={`/${link}`}
+        to={`/${type.href}`}
         className={`${styles.button} ${stylesButton.parent}`}
       >
         <span className={`${styles.front} ${stylesButton.children}`}>

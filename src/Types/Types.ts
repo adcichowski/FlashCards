@@ -35,9 +35,8 @@ export interface TechnologyProperty {
 }
 export interface ButtonInterface {
   size: "big" | "small" | "normal";
-  type: "submit" | "button" | "a";
+  type: "submit" | "button" | { element: "a"; href: string };
   children: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  link?: string;
 }
 export type ICardsFromFirestore = { [key: string]: ICard[] };
