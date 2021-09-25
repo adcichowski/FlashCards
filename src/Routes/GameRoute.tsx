@@ -31,39 +31,37 @@ function GameRoute() {
       </Route>
 
       {Object.values(avaibleTechnologies).map(
-        ({ name }: { name: Technologies }) =>
-          state.personalCards[name] && (
-            <React.Fragment key={name}>
-              <PrivateRoute path={`/game/personal-cards/${name}`}>
-                <QuestionsBoard
-                  typeBoard="personalCards"
-                  technologyName={name}
-                  cardsData={state.personalCards[name]}
-                />
-              </PrivateRoute>
-            </React.Fragment>
-          )
+        ({ name }: { name: Technologies }) => (
+          <React.Fragment key={name}>
+            <PrivateRoute path={`/game/personal-cards/${name}`}>
+              <QuestionsBoard
+                typeBoard="personalCards"
+                technologyName={name}
+                cardsData={state.personalCards[name]}
+              />
+            </PrivateRoute>
+          </React.Fragment>
+        )
       )}
       {Object.values(avaibleTechnologies).map(
-        ({ name }: { name: Technologies }) =>
-          state.generalCards[name] && (
-            <React.Fragment key={name}>
-              <PrivateRoute path={`/game/general-cards/${name}`}>
-                <QuestionsBoard
-                  typeBoard="generalCards"
-                  technologyName={name}
-                  cardsData={state.generalCards[name]}
-                />
-              </PrivateRoute>
-            </React.Fragment>
-          )
+        ({ name }: { name: Technologies }) => (
+          <React.Fragment key={name}>
+            <PrivateRoute path={`/game/general-cards/${name}`}>
+              <QuestionsBoard
+                typeBoard="generalCards"
+                technologyName={name}
+                cardsData={state.generalCards[name]}
+              />
+            </PrivateRoute>
+          </React.Fragment>
+        )
       )}
       <React.Fragment>
         <PrivateRoute path={`/game/personal-cards/favorite`}>
           <QuestionsBoard
             typeBoard="personalCards"
             technologyName={"favorites"}
-            cardsData={state.personalCards["favorites"]}
+            cardsData={state?.personalCards?.favorites}
           />
         </PrivateRoute>
       </React.Fragment>

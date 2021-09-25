@@ -31,7 +31,7 @@ function BoardWithIcons({
   const FavoriteIcon = () => (
     <Link
       to={
-        cardsData["favorites"]?.length
+        cardsData?.favorites?.length
           ? `/game/${typeBoard}-cards/favorite`
           : `/game/${typeBoard}-cards`
       }
@@ -40,7 +40,7 @@ function BoardWithIcons({
       <div>Favorite Cards</div>
       <div
         className={`${styles.heart} ${
-          cardsData["favorites"]?.length ? "" : styles.linkDisable
+          cardsData?.favorites?.length ? "" : styles.linkDisable
         }`}
       >
         <Heart />
