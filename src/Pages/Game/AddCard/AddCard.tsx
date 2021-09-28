@@ -6,7 +6,6 @@ import styles from "./AddCard.module.scss";
 import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { CardByContext } from "../../../Components/Pages/Game/CardByContext/CardByContext";
-import { ReactComponent as Heart } from "../../../Assets/Icons/heart-fill.svg";
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
 import { useSendCardToDatabase } from "./useSendCardToDatabase";
 import { useSetIdCard } from "./useSetIdCard";
@@ -49,13 +48,7 @@ function AddCard() {
       </label>
     )
   );
-  const renderHeartSvg = (
-    <Heart
-      className={`${styles.favoriteIcon} ${
-        stateCard.isFavorite && styles.fill
-      } `}
-    />
-  );
+
   return (
     <div className={styles.board}>
       <BackButton />
@@ -70,9 +63,8 @@ function AddCard() {
             </div>
           </div>
           <label>
-            <span className="sr-only">Question</span>
+            <p>Question</p>
             <input
-              placeholder={"Question"}
               className={styles.textInput}
               onChange={(e) =>
                 handleChangePartCard("question", e.currentTarget.value)
@@ -80,29 +72,15 @@ function AddCard() {
             />
           </label>
           <label>
-            <span className="sr-only">Answer</span>
+            <p>Answer</p>
             <textarea
-              placeholder={"Answer"}
               className={`${styles.textInput} ${styles.textarea}`}
               onChange={(e) => {
                 handleChangePartCard("answer", e.currentTarget.value);
               }}
             ></textarea>
           </label>
-          <label>
-            <div className={styles.favoriteField}>
-              <input
-                type="checkbox"
-                className={styles.favoriteInput}
-                onClick={() =>
-                  handleChangePartCard("isFavorite", !stateCard.isFavorite)
-                }
-                value="Favorite Card"
-              />
-              {renderHeartSvg}
-              Favorite Card
-            </div>
-          </label>
+
           <div className={styles.inputsDeck}>
             <label className={styles.labelDeck}>
               General Cards

@@ -36,7 +36,6 @@ function GameRoute() {
             <PrivateRoute path={`/game/personal-cards/${name}`}>
               <QuestionsBoard
                 typeBoard="personalCards"
-                technologyName={name}
                 cardsData={state.personalCards[name]}
               />
             </PrivateRoute>
@@ -49,7 +48,6 @@ function GameRoute() {
             <PrivateRoute path={`/game/general-cards/${name}`}>
               <QuestionsBoard
                 typeBoard="generalCards"
-                technologyName={name}
                 cardsData={state.generalCards[name]}
               />
             </PrivateRoute>
@@ -59,8 +57,7 @@ function GameRoute() {
       <React.Fragment>
         <PrivateRoute path={`/game/personal-cards/favorite`}>
           <QuestionsBoard
-            typeBoard="personalCards"
-            technologyName={"favorites"}
+            typeBoard="favoriteCards"
             cardsData={state?.personalCards?.favorites}
           />
         </PrivateRoute>

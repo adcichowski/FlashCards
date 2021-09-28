@@ -1,11 +1,12 @@
 .backButton {
   position: absolute;
+  z-index: 99;
   width: 4rem;
   height: 4rem;
   left: 6%;
   border: none;
   cursor: pointer;
-  top: 5%;
+  top: 3.5%;
   background: url("../../../Assets/Icons/first-arrow.svg") no-repeat center;
 }
 .backButton:hover {

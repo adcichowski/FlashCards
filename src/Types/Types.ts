@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 import { Technologies } from "../Components/Pages/Game/useAvaibleTechnologies";
 
-export type ITypeBoard = "personalCards" | "generalCards";
+export type ITypeBoard = "personalCards" | "generalCards" | "favoriteCards";
 export interface UserData {
   email: string;
   password: string;

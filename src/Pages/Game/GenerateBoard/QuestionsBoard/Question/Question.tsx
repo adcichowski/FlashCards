@@ -2,54 +2,35 @@ import { PersonalRate } from "./PersonalRate";
 import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../../Assets/Icons/heart.svg";
 import { useQuestionBoard } from "../useQuestionBoard";
-import { ICard } from "../../../../../Types/Types";
+import { ICard, ITypeBoard } from "../../../../../Types/Types";
 import styles from "./Question.module.scss";
-import { useCardContext } from "../../../../../Context/CardContext";
-import { useCallback } from "react";
 import { useDeleteCard } from "./useDeleteCard";
-import { sendFunctionsToFirebase } from "../../../../../lib/firebase/Utils";
-import { useAuthContext } from "../../../../../Context/AuthContext";
 import { Button } from "../../../../../Components/Button/Button";
-const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
+import { useIsFavorire } from "./useIsFavorire";
+const Question = ({
+  card,
+  typeBoard,
+}: {
+  card: ICard;
+  typeBoard: ITypeBoard;
+}) => {
   const { deleteCard } = useDeleteCard();
   const { handleClickShowCard } = useQuestionBoard();
-  const { state } = useAuthContext();
-  const { dispatch } = useCardContext();
-  const { sendDeck } = sendFunctionsToFirebase();
-  const setFavorite = useCallback(
-    (card: ICard) => {
-      if (card.isFavorite) return;
-      sendDeck(
-        {
-          ...state.personalCards,
-          favorites: [
-            ...(state?.personalCards?.favorites?.length
-              ? state.personalCards.favorites
-              : []),
-            card,
-          ],
-        },
-        state.idUser
-      );
-      dispatch({
-        type: "editCard",
-        setCard: { ...card, isFlip: false, isFavorite: true },
-      });
-    },
-    [sendDeck, dispatch, state.idUser, state.personalCards]
-  );
+
+  const { isFavorite, setFavorite } = useIsFavorire(card);
+
   return (
     <li key={card.id + card.answer} className={styles.questionCard}>
-      <button
-        onClick={() => setFavorite(card)}
-        className={`${styles.questionFavorite} ${
-          card.isFavorite && styles.fill
-        }`}
-      >
-        <Heart />
-      </button>
+      {typeBoard !== "favoriteCards" && (
+        <button
+          onClick={() => setFavorite(card)}
+          className={`${styles.questionFavorite}`}
+        >
+          <Heart className={`${isFavorite && styles.fill}`} />
+        </button>
+      )}
       <div className={styles.deleteButton}>
-        {typeBoard === "personalCards" && (
+        {typeBoard !== "generalCards" && (
           <Button
             size="small"
             type="button"
@@ -60,7 +41,7 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
         )}
       </div>
       <button
-        onClick={() => handleClickShowCard(card)}
+        onClick={() => handleClickShowCard({ ...card, isFavorite })}
         className={styles.questionCardInner}
       >
         <div className={styles.centerCard}>
@@ -81,7 +62,7 @@ const Question = ({ card, typeBoard }: { card: ICard; typeBoard: string }) => {
           </div>
         </div>
       </button>
-      {typeBoard === "personalCards" || <PersonalRate card={card} />}
+      {typeBoard === "generalCards" && <PersonalRate card={card} />}
     </li>
   );
 };

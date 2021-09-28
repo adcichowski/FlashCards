@@ -107,15 +107,12 @@ export function deleteCardFromFirestore(
   deletedCard: ICard,
   cardsFromState: ICardsFromFirestore
 ) {
-  console.log(cardsFromState);
   const copyStateCards = { ...cardsFromState };
   const deckWithoutDeletedCard = copyStateCards[
     deletedCard?.technology
   ]?.filter((cardFromState) => {
     const keysCard = Object.keys(cardFromState) as Array<keyof ICard>;
-    return !keysCard.every((key) => {
-      return cardFromState[key] === deletedCard[key];
-    });
+    return !keysCard.every((key) => cardFromState[key] === deletedCard[key]);
   });
   const deleteEmptyDeck = Object.fromEntries(
     Object.entries(copyStateCards)?.filter(

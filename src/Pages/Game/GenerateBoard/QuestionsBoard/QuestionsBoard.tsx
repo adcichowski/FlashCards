@@ -3,16 +3,13 @@ import { ICard } from "../../../../Types/Types";
 import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionsBoard.module.scss";
 import { Question } from "./Question/Question";
-import { Technologies } from "../../../../Components/Pages/Game/useAvaibleTechnologies";
 
 function QuestionsBoard({
   cardsData,
-  technologyName,
   typeBoard,
 }: {
   cardsData: ICard[];
-  technologyName: Technologies | "favorites";
-  typeBoard: "personalCards" | "generalCards";
+  typeBoard: "personalCards" | "generalCards" | "favoriteCards";
 }) {
   return (
     <div>
@@ -24,7 +21,7 @@ function QuestionsBoard({
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
-          {cardsData?.length && (
+          {!!cardsData?.length && (
             <ul className={styles.listQuestion}>
               {cardsData.map((card: ICard) => (
                 <Question
