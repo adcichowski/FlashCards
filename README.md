@@ -1,13 +1,11 @@
-# FlashCards
+<h1><a href='https://flash-cards-alpha.vercel.app/'><img src='https://i.ibb.co/CbMJtLK/Group-320.png' align='center' width='100%'/></a></h1>
 It is a web application to help understand concepts, learn
 important information, and turn in well-researched assignments at
 your fingertips. You can easily rate cards and show others concepts
 to know/learn. If the card will be smaller rate than 2, it will be deleted.
 
-## How does the card look like? 
-![](https://github.com/adcichowski/FlashCards/blob/main/readme/card.png)
-### Instalation
-```
+## Instalation
+```bash
 git clone https://github.com/adcichowski/FlashCards
     
  npm install
@@ -28,3 +26,6 @@ git clone https://github.com/adcichowski/FlashCards
 |[React-testing-library](https://testing-library.com/ "React-testing-library")  |   Solution for testing React components|
 |[CSS Modules](https://github.com/css-modules/css-modules "CSS Modules") | A CSS Module is a CSS file in which all class names and animation names are scoped locally by default. |
 |[Jest](https://jestjs.io/ "Jest") | Jest is a delightful JavaScript Testing Framework with a focus on simplicity.|
+
+### Live
+https://flash-cards-alpha.vercel.app/
