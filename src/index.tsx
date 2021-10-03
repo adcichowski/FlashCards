@@ -9,6 +9,8 @@ import { Modal } from "./Components/Modal/Modal";
 import { GameRoute } from "./Routes/GameRoute";
 import { CardProvider } from "./Context/CardContext";
 import { Contact } from "./Pages/Contact/Contact";
+import dotenv from "dotenv";
+dotenv.config();
 ReactDOM.render(
   <React.StrictMode>
     <div>
