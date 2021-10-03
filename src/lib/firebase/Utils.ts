@@ -125,6 +125,5 @@ export function deleteCardFromFirestore(
       : {
           [deletedCard.technology]: deckWithoutDeletedCard,
         };
-  console.log(deckCardAfterDeleted, "decfafterdelteted");
   return deckCardAfterDeleted;
 }
