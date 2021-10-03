@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 describe("Test functionality Button component", () => {
-  test("test callback passed to the function was called", () => {
+  test("callback passed to the function was called", () => {
     const handleClick = jest.fn();
     render(
       <Button type="button" onClick={handleClick} size="normal">
@@ -15,7 +15,7 @@ describe("Test functionality Button component", () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  test("test render archon element in component, and assign style for element", () => {
+  test("render archon element in component, and style assign for element", () => {
     const fakeUrl = "fake";
     render(
       <Button size="small" type={{ element: "a", href: fakeUrl }}>

@@ -16,7 +16,7 @@ function AnimateIconTech(elements: HTMLDivElement) {
       stroke: arrayNameColor[getIconID],
       strokeWidth: "1",
     });
-    icon.addEventListener("mouseenter", (e) => {
+    icon.addEventListener("mouseenter", () => {
       ColorizeIcon(icon, arrayNameColor[getIconID]);
     });
     icon.addEventListener("mouseleave", () => {
