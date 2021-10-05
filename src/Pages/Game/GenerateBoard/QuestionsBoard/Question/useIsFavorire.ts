@@ -29,10 +29,6 @@ function useIsFavorire(card: ICard) {
         },
         state.idUser
       );
-      dispatch({
-        type: "editCard",
-        setCard: { ...card, isFlip: false, isFavorite: true },
-      });
     },
     [sendDeck, dispatch, state, setIsFavorite, isFavorite, stateCard]
   );

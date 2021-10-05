@@ -66,18 +66,20 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
           </button>
         </div>
       </div>
-      <div className={styles.favorite}>
-        <p className={styles.favoriteText}>
-          {state.isFavorite ? "Favorite Card" : "Not Favorite Card"}
-        </p>
-        <div
-          className={`${styles.favoriteIcon}  ${
-            state.isFavorite && styles.fill
-          }`}
-        >
-          <Heart />
+      {!isEdit && (
+        <div className={styles.favorite}>
+          <p className={styles.favoriteText}>
+            {state.isFavorite ? "Favorite Card" : "Not Favorite Card"}
+          </p>
+          <div
+            className={`${styles.favoriteIcon}  ${
+              state.isFavorite && styles.fill
+            }`}
+          >
+            <Heart />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className={styles.functionallButtons}>
         {isEdit && (
