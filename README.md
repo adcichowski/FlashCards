@@ -8,11 +8,11 @@ to know/learn. If the card will be smaller rate than 2, it will be deleted.
 ```bash
 git clone https://github.com/adcichowski/FlashCards
     
- npm install
+npm install
     
- # set up environment variables
+# set up environment variables
     
- npm run start
+npm run start
 ```
 ### Technology Stack
 |  Tech |  Description  |
