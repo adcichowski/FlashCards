@@ -11,58 +11,65 @@ import { QuestionsBoard } from "../Pages/Game/GenerateBoard/QuestionsBoard/Quest
 import { AddCard } from "../Pages/Game/AddCard/AddCard";
 import { useAuthContext } from "../Context/AuthContext";
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 function GameRoute() {
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { state } = useAuthContext();
+  const queryClient = new QueryClient();
   return (
-    <Game>
-      <PrivateRoute path="/game">
-        <MainBoard />
-      </PrivateRoute>
-      <Route exact path="/game/personal-cards">
-        <BoardWithIcons cardsData={state.personalCards} typeBoard="personal" />
-      </Route>
-      <Route exact path="/game/general-cards">
-        <BoardWithIcons cardsData={state.generalCards} typeBoard="general" />
-      </Route>
-
-      <Route path={"/game/add"}>
-        <AddCard />
-      </Route>
-
-      {Object.values(avaibleTechnologies).map(
-        ({ name }: { name: Technologies }) => (
-          <React.Fragment key={name}>
-            <PrivateRoute path={`/game/personal-cards/${name}`}>
-              <QuestionsBoard
-                typeBoard="personalCards"
-                cardsData={state.personalCards[name]}
-              />
-            </PrivateRoute>
-          </React.Fragment>
-        )
-      )}
-      {Object.values(avaibleTechnologies).map(
-        ({ name }: { name: Technologies }) => (
-          <React.Fragment key={name}>
-            <PrivateRoute path={`/game/general-cards/${name}`}>
-              <QuestionsBoard
-                typeBoard="generalCards"
-                cardsData={state.generalCards[name]}
-              />
-            </PrivateRoute>
-          </React.Fragment>
-        )
-      )}
-      <React.Fragment>
-        <PrivateRoute path={`/game/personal-cards/favorite`}>
-          <QuestionsBoard
-            typeBoard="favoriteCards"
-            cardsData={state?.personalCards?.favorites}
-          />
+    <QueryClientProvider client={queryClient}>
+      <Game>
+        <PrivateRoute path="/game">
+          <MainBoard />
         </PrivateRoute>
-      </React.Fragment>
-    </Game>
+        <Route exact path="/game/personal-cards">
+          <BoardWithIcons />
+        </Route>
+        <Route exact path="/game/general-cards">
+          <BoardWithIcons />
+        </Route>
+        <Route path={"/game/add"}>
+          <AddCard />
+        </Route>
+
+        {Object.values(avaibleTechnologies).map(
+          ({ name }: { name: Technologies }) => {
+            return state.personalCards[name]
+              ? state.personalCards[name].length > 0 && (
+                  <React.Fragment key={name}>
+                    <PrivateRoute path={`/game/personal-cards/${name}`}>
+                      <QuestionsBoard
+                        typeBoard="personalCards"
+                        cardsData={state.personalCards[name]}
+                      />
+                    </PrivateRoute>
+                  </React.Fragment>
+                )
+              : null;
+          }
+        )}
+        {Object.values(avaibleTechnologies).map(
+          ({ name }: { name: Technologies }) => (
+            <React.Fragment key={name}>
+              <PrivateRoute path={`/game/general-cards/${name}`}>
+                <QuestionsBoard
+                  typeBoard="generalCards"
+                  cardsData={state.generalCards[name]}
+                />
+              </PrivateRoute>
+            </React.Fragment>
+          )
+        )}
+        <React.Fragment>
+          <PrivateRoute path={`/game/personal-cards/favorite`}>
+            <QuestionsBoard
+              typeBoard="favoriteCards"
+              cardsData={state?.personalCards?.favorites}
+            />
+          </PrivateRoute>
+        </React.Fragment>
+      </Game>
+    </QueryClientProvider>
   );
 }
 export { GameRoute };

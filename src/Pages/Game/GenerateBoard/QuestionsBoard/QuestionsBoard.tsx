@@ -2,7 +2,6 @@ import { BackButton } from "../../../../Components/Button/BackButton/BackButton"
 import { ICard } from "../../../../Types/Types";
 import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionsBoard.module.scss";
-import { Question } from "./Question/Question";
 
 function QuestionsBoard({
   cardsData,
@@ -21,7 +20,7 @@ function QuestionsBoard({
         </div>
         <div className={styles.questionBoard}>
           <p className={styles.boardTitle}>Questions</p>
-          {!!cardsData?.length && (
+          {/* {!!cardsData?.length && (
             <ul className={styles.listQuestion}>
               {cardsData.map((card: ICard) => (
                 <Question
@@ -31,7 +30,7 @@ function QuestionsBoard({
                 />
               ))}
             </ul>
-          )}
+          )} */}
         </div>
       </div>
     </div>
