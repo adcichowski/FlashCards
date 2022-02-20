@@ -15,8 +15,7 @@ function Form({ type }: { type: "login" | "register" }) {
       <div className={styles.game}>
         <div
           style={{
-            border:
-              type === "login" ? "4px solid #2b3361" : "4px solid #A01934",
+            border: type === "login" ? "4px solid #2b3361" : "4px solid #A01934",
           }}
           className={styles.formLog}
         >
@@ -43,9 +42,7 @@ function Form({ type }: { type: "login" | "register" }) {
                 autoComplete="current-password"
               />
             </label>
-            <span className={styles.errorInfo}>
-              {errors?.password?.message}
-            </span>
+            <span className={styles.errorInfo}>{errors?.password?.message}</span>
 
             <div className={styles.formButtons}>
               <Button size="normal" type="submit">
@@ -55,9 +52,7 @@ function Form({ type }: { type: "login" | "register" }) {
             <p className={styles.question}>
               {type === "login" ? "Haven't got an account?" : "Have account?"}{" "}
               <span className={styles.questionType}>
-                <Link to={type === "login" ? "/register" : "/login"}>
-                  {type === "login" ? "Register" : "Login"}
-                </Link>
+                <Link to={type === "login" ? "/register" : "/login"}>{type === "login" ? "Register" : "Login"}</Link>
               </span>
             </p>
           </form>

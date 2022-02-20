@@ -18,35 +18,36 @@ function useFormLoginRegister({ type }: { type: "login" | "register" }) {
   const { dispatch } = useModalContext();
   const { dispatch: authDispatch, state } = useAuthContext();
   const onSubmit = React.useCallback(
-    async ({ email, password }: UserData) => {
-      try {
-        await doActionWithEmailPass(type, email, password);
-        if (!auth?.currentUser?.uid) {
-          throw Error("This account not exist!");
-        }
-        authDispatch({
-          type: "logIn",
-          setUser: { ...state, idUser: auth?.currentUser?.uid },
-        });
-        dispatch({
-          type: "successModal",
-          setModal: {
-            message: `You are ${type} in website`,
-          },
-        });
-        history.push("/game");
-      } catch (err) {
-        if (err instanceof Error) {
+    () =>
+      async ({ email, password }: UserData) => {
+        try {
+          await doActionWithEmailPass(type, email, password);
+          if (!auth?.currentUser?.uid) {
+            throw Error("This account not exist!");
+          }
+          authDispatch({
+            type: "logIn",
+            setUser: { ...state, idUser: auth?.currentUser?.uid },
+          });
           dispatch({
-            type: "errorModal",
+            type: "successModal",
             setModal: {
-              message: changeMessageFromFirebase(err.message),
+              message: `You are ${type} in website`,
             },
           });
+          history.push("/game");
+        } catch (err) {
+          if (err instanceof Error) {
+            dispatch({
+              type: "errorModal",
+              setModal: {
+                message: changeMessageFromFirebase(err.message),
+              },
+            });
+          }
         }
-      }
-    },
-    [authDispatch, dispatch, history, type, state]
+      },
+    [authDispatch, dispatch, history, type, state],
   );
 
   return {

@@ -1,0 +1,6 @@
+{
+  "plugins": ["functional"],
+  "rules": {
+    "functional/rule-name": "error"
+  }
+}
