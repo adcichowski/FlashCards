@@ -8,23 +8,12 @@
     "plugin:jsx-a11y/strict",
     "plugin:jest-dom/recommended",
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:functional/external-recommended",
     "plugin:functional/recommended",
     "plugin:functional/stylistic"
   ],
-  "plugins": [
-    "jsx-a11y",
-    "react-hooks",
-    "jest-dom",
-    "testing-library",
-    "@typescript-eslint",
-    "prettier",
-    "functional",
-    "react-app"
-  ],
+  "plugins": ["jsx-a11y", "react-hooks", "jest-dom", "@typescript-eslint", "prettier", "functional", "react-app"],
   "env": {
     "es6": true,
     "browser": true,

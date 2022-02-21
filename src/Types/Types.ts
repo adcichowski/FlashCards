@@ -3,40 +3,40 @@ import { Technologies } from "../Components/Pages/Game/useAvaibleTechnologies";
 
 export type ITypeBoard = "personalCards" | "generalCards" | "favoriteCards";
 export interface UserData {
-  email: string;
-  password: string;
+  readonly email: string;
+  readonly password: string;
 }
 
 export interface PersonRating {
-  id: string;
-  rate: number;
+  readonly id: string;
+  readonly rate: number;
 }
 
 export interface ICard {
-  id: number;
-  technology: Technologies | "none";
-  answer: string;
-  question: string;
-  isFavorite: boolean;
-  randomSvgCard: number;
-  whoRate: PersonRating[];
+  readonly id: number;
+  readonly technology: Technologies | "none";
+  readonly answer: string;
+  readonly question: string;
+  readonly isFavorite: boolean;
+  readonly randomSvgCard: number;
+  readonly whoRate: readonly PersonRating[];
 }
 
 export interface AvaibleTechnologiesProperty {
-  [index: string]: TechnologyProperty;
+  readonly [index: string]: TechnologyProperty;
 }
 
 export interface TechnologyProperty {
-  name: Technologies;
-  type: string;
-  description: string;
-  render: React.FunctionComponent;
-  fill: string;
+  readonly name: Technologies;
+  readonly type: string;
+  readonly description: string;
+  readonly render: React.FunctionComponent;
+  readonly fill: string;
 }
 export interface ButtonInterface {
-  size: "big" | "small" | "normal";
-  type: "submit" | "button" | { element: "a"; href: string };
-  children: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  readonly size: "big" | "small" | "normal";
+  readonly type: "submit" | "button" | { readonly element: "a"; readonly href: string };
+  readonly children: string;
+  readonly onClick?: MouseEventHandler<HTMLButtonElement>;
 }
-export type ICardsFromFirestore = { [key: string]: ICard[] };
+export type ICardsFromFirestore = { readonly [key: string]: readonly ICard[] };
