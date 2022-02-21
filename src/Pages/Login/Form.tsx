@@ -24,6 +24,7 @@ function Form({ type }: { type: "login" | "register" }) {
           <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
             <label>
               <span className="sr-only">email</span>
+
               <input
                 {...register("email", inputValidation.email)}
                 className={styles.inputEmail}
