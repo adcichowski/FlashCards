@@ -1,24 +1,21 @@
+import React from "react";
 import styles from "./BackButton.module.scss";
 import { useHistory } from "react-router";
-import { useCallback } from "react";
 import { Link } from "react-router-dom";
-function BackButton({ pathTo }: { pathTo?: string }) {
+function BackButton({ pathTo }: { readonly pathTo?: string }) {
   const history = useHistory();
-  const handleClickBack = useCallback(() => {
-    history.goBack();
-  }, [history]);
+  const handleClickBack = history.goBack();
+
   return (
     <>
-      {!!pathTo ? (
-        <Link className={styles.backButton} to={pathTo}></Link>
+      {pathTo ? (
+        <Link className={styles.backButton} to={pathTo} />
       ) : (
-        <button
-          className={styles.backButton}
-          onClick={handleClickBack}
-        ></button>
+        <button className={styles.backButton} onClick={handleClickBack}></button>
       )}
     </>
   );
 }
 export { BackButton };
+// eslint-disable-next-line
 BackButton.displayName = "BackButton";

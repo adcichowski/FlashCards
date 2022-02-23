@@ -20,7 +20,9 @@
     "jest": true
   },
   "rules": {
-    "no-console": "error"
+    "functional/no-return-void": "off",
+    "no-console": "error",
+    "functional/functional-parameters": "off"
   },
   "parserOptions": {
     "ecmaVersion": 12,
