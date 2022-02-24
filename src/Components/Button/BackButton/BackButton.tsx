@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 function BackButton({ pathTo }: { readonly pathTo?: string }) {
   const history = useHistory();
-  const handleClickBack = history.goBack();
+  const handleClickBack = () => history.goBack();
 
   return (
     <>
@@ -17,5 +17,4 @@ function BackButton({ pathTo }: { readonly pathTo?: string }) {
   );
 }
 export { BackButton };
-// eslint-disable-next-line
 BackButton.displayName = "BackButton";

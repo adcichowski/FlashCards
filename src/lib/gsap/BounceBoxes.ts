@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/all";
 import { ColorizeIcon } from "./ColorizeIcon";
 function BounceBoxes(htmlElements: HTMLElement) {
   interface TypeBoxes {
-    [key: string]: string;
+    readonly [key: string]: string;
   }
   const typeBoxes: TypeBoxes = {
     javascript: "#F7DF1E",
@@ -13,11 +13,11 @@ function BounceBoxes(htmlElements: HTMLElement) {
     typescript: "#265F9E",
     react: "#459CB4",
   };
-  const allBoxes = [...new Array(6)].map((_, id) => {
+  const allBoxes = new Array(6).map((_, id) => {
     return htmlElements.querySelector(`[id="Box-${id + 1}"]`);
   });
   gsap.registerPlugin(ScrollTrigger);
-  let tl = gsap.timeline({
+  const tl = gsap.timeline({
     scrollTrigger: allBoxes[0] as HTMLDivElement,
     delay: 0.2,
   });
@@ -27,12 +27,13 @@ function BounceBoxes(htmlElements: HTMLElement) {
     opacity: 0,
     ease: "bounce",
   });
-  for (let box of allBoxes) {
+
+  allBoxes.forEach((box) => {
     box?.addEventListener("mouseenter", (e) => {
-      if (!box) return;
       mouseEnterChangeColor(e, box);
     });
-  }
+  });
+
   const mouseEnterChangeColor = (e: Event, box: Element) => {
     const getIconID = String(box.children[1].id);
     ColorizeIcon(box, typeBoxes[getIconID]);
