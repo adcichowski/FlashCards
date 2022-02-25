@@ -1,32 +1,13 @@
-import {
-  getDoc,
-  doc,
-  setDoc,
-  query,
-  where,
-  arrayUnion,
-  updateDoc,
-} from "firebase/firestore";
+import { getDoc, doc, setDoc, query, where, arrayUnion, updateDoc } from "firebase/firestore";
 import { ICard, ICardsFromFirestore } from "../../Types/Types";
 import { auth, db } from "./Settings";
 import { collection, addDoc, getDocs, deleteDoc } from "@firebase/firestore";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-export function doActionWithEmailPass(
-  action: "register" | "login",
-  email: string,
-  password: string
-) {
-  switch (action) {
-    case "register":
-      return createUserWithEmailAndPassword(auth, email, password);
-
-    case "login":
-      return signInWithEmailAndPassword(auth, email, password);
-  }
+export function doActionWithEmailPass(action: "register" | "login", email: string, password: string) {
+  return action === "register"
+    ? createUserWithEmailAndPassword(auth, email, password)
+    : signInWithEmailAndPassword(auth, email, password);
 }
 
 export async function getCards(idUser: string) {
@@ -42,10 +23,9 @@ export async function getCards(idUser: string) {
   };
   decks.generalCards.query.forEach((card) => {
     const cardData = card.data() as ICard;
-    if (!decks.generalCards.data[cardData.technology]) {
-      decks.generalCards.data[cardData.technology] = [];
-    }
-    decks.generalCards.data[cardData.technology].push(cardData);
+    !decks.generalCards.data[cardData.technology]
+      ? (decks.generalCards.data[cardData.technology] = [])
+      : decks.generalCards.data[cardData.technology].push(cardData);
   });
   const card = (await decks.personalCards.query.data()) as ICardsFromFirestore;
   decks.personalCards.data = card;
@@ -54,9 +34,9 @@ export async function getCards(idUser: string) {
 }
 export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
   const copyDeck = { ...deck };
-  if (copyDeck[card.technology] === undefined) {
-    copyDeck[card.technology] = [];
-  }
+
+  copyDeck[card.technology] ??= [];
+
   copyDeck[card.technology].push(card);
   return copyDeck;
 }
@@ -68,7 +48,7 @@ export async function rateCardInFirestore(card: ICard) {
     where("question", "==", card.question),
     where("technology", "==", card.technology),
     where("randomSvgCard", "==", card.randomSvgCard),
-    where("id", "==", card.id)
+    where("id", "==", card.id),
   );
   const refIdCard = (await getDocs(q))?.docs[0]?.id;
 
@@ -103,21 +83,14 @@ export function validateCardFields(card: ICard) {
   if (card.id === 0) throw Error("Select card deck");
 }
 
-export function deleteCardFromFirestore(
-  deletedCard: ICard,
-  cardsFromState: ICardsFromFirestore
-) {
+export function deleteCardFromFirestore(deletedCard: ICard, cardsFromState: ICardsFromFirestore) {
   const copyStateCards = { ...cardsFromState };
-  const deckWithoutDeletedCard = copyStateCards[
-    deletedCard?.technology
-  ]?.filter((cardFromState) => {
-    const keysCard = Object.keys(cardFromState) as Array<keyof ICard>;
+  const deckWithoutDeletedCard = copyStateCards[deletedCard?.technology]?.filter((cardFromState) => {
+    const keysCard = Object.keys(cardFromState) as ReadonlyArray<keyof ICard>;
     return !keysCard.every((key) => cardFromState[key] === deletedCard[key]);
   });
   const deleteEmptyDeck = Object.fromEntries(
-    Object.entries(copyStateCards)?.filter(
-      ([technology]) => technology !== deletedCard.technology
-    )
+    Object.entries(copyStateCards)?.filter(([technology]) => technology !== deletedCard.technology),
   );
   const deckCardAfterDeleted =
     deckWithoutDeletedCard?.length === 0

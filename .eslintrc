@@ -20,6 +20,9 @@
     "jest": true
   },
   "rules": {
+    "@typescript-eslint/no-floating-promises": "off",
+    "functional/no-throw-statement": "off",
+    "functional/no-conditional-statement": "off",
     "functional/immutable-data": "off",
     "functional/prefer-type-literal": "off",
     "@typescript-eslint/explicit-function-return-type": "off",

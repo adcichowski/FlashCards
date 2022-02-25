@@ -22,13 +22,10 @@ interface CardContextInterface extends ICard {
   readonly isFlip: boolean;
   readonly randomSvgCard: number;
 }
-const CardContext = createContext<
-  undefined | { state: CardContextInterface; dispatch: Dispatch }
->(undefined);
-function cardMainReducer(
-  state: CardContextInterface,
-  action: Action
-): CardContextInterface {
+const CardContext = createContext<undefined | { readonly state: CardContextInterface; readonly dispatch: Dispatch }>(
+  undefined,
+);
+function cardMainReducer(state: CardContextInterface, action: Action): CardContextInterface {
   switch (action.type) {
     case "hideCard":
       return {
@@ -97,7 +94,7 @@ const useCardContext = () => {
 
   return context;
 };
-function CardProvider({ children }: { children: ReactNode }) {
+function CardProvider({ children }: { readonly children: ReactNode }) {
   const Card: CardContextInterface = {
     id: 0,
     technology: "none",
