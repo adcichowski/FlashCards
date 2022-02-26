@@ -1,5 +1,5 @@
 import { getDoc, doc, setDoc, query, where, arrayUnion, updateDoc } from "firebase/firestore";
-import { ICard, ICardsFromFirestore } from "../../Types/Types";
+import { ICard, ICardsFromFirestore, Mutable } from "../../Types/Types";
 import { auth, db } from "./Settings";
 import { collection, addDoc, getDocs, deleteDoc } from "@firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
@@ -13,21 +13,22 @@ export function doActionWithEmailPass(action: "register" | "login", email: strin
 export async function getCards(idUser: string) {
   const decks = {
     personalCards: {
-      data: {} as ICardsFromFirestore,
+      data: {} as Mutable<ICardsFromFirestore>,
       query: await getDoc(doc(db, `PersonalCards`, idUser)),
     },
     generalCards: {
-      data: {} as ICardsFromFirestore,
+      data: {} as Mutable<ICardsFromFirestore>,
       query: await getDocs(collection(db, "GeneralCards")),
     },
   };
   decks.generalCards.query.forEach((card) => {
-    const cardData = card.data() as ICard;
+    const cardData = card.data() as Mutable<ICard>;
     !decks.generalCards.data[cardData.technology]
       ? (decks.generalCards.data[cardData.technology] = [])
-      : decks.generalCards.data[cardData.technology].push(cardData);
+      : // eslint-disable-next-line
+        (decks.generalCards.data[cardData.technology] = [cardData, ...decks.generalCards.data[cardData.technology]]);
   });
-  const card = (await decks.personalCards.query.data()) as ICardsFromFirestore;
+  const card = decks.personalCards.query.data() as ICardsFromFirestore;
   decks.personalCards.data = card;
 
   return [decks.personalCards.data, decks.generalCards.data];
@@ -36,9 +37,7 @@ export function addCardToDeck(card: ICard, deck: ICardsFromFirestore) {
   const copyDeck = { ...deck };
 
   copyDeck[card.technology] ??= [];
-
-  copyDeck[card.technology].push(card);
-  return copyDeck;
+  return [...copyDeck[card.technology], card];
 }
 export async function rateCardInFirestore(card: ICard) {
   const cardRef = collection(db, "GeneralCards");

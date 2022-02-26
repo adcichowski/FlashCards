@@ -8,7 +8,7 @@ describe("Test functionality Button component", () => {
     render(
       <Button type="button" onClick={handleClick} size="normal">
         Button
-      </Button>
+      </Button>,
     );
     const button = screen.getByText("Button");
     fireEvent.click(button);
@@ -21,11 +21,11 @@ describe("Test functionality Button component", () => {
       <Button size="small" type={{ element: "a", href: fakeUrl }}>
         Archon
       </Button>,
-      { wrapper: MemoryRouter }
+      { wrapper: MemoryRouter },
     );
     const button = screen.getByRole("link");
     userEvent.click(button);
-    expect(button.className).toBe("button smallButton");
+    expect(button.className).toHaveClass("button smallButton");
     expect(button.closest("a")?.href).toBe(window.location.href + fakeUrl);
   });
 });

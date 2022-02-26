@@ -40,3 +40,6 @@ export interface ButtonInterface {
   readonly onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 export type ICardsFromFirestore = { readonly [key: string]: readonly ICard[] };
+export type Mutable<T> = {
+  -readonly [P in keyof T]: T[P];
+};
