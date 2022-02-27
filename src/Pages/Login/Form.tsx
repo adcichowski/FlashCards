@@ -6,7 +6,7 @@ import { useFormLoginRegister } from "./useFormLoginRegister";
 import { capitalize, inputValidation } from "../../Utils/Utils";
 import { Link } from "react-router-dom";
 import { Game } from "../Game/Game";
-function Form({ type }: { type: "login" | "register" }) {
+function Form({ type }: { readonly type: "login" | "register" }) {
   const { onSubmit, handleSubmit, register, errors } = useFormLoginRegister({
     type,
   });
@@ -43,7 +43,7 @@ function Form({ type }: { type: "login" | "register" }) {
                 autoComplete="current-password"
               />
             </label>
-            <span className={styles.errorInfo}>{errors?.password?.message}</span>
+            <span className={styles.errorInfo}>{errors.password?.message}</span>
 
             <div className={styles.formButtons}>
               <Button size="normal" type="submit">

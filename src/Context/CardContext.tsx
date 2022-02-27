@@ -15,6 +15,7 @@ interface Action {
   readonly setCard?: Omit<CardContextInterface, "isShow" | "randomSvgCard">;
 }
 interface Dispatch {
+  // eslint-disable-next-line no-unused-vars
   (action: Action): void;
 }
 interface CardContextInterface extends ICard {
@@ -82,6 +83,7 @@ function cardMainReducer(state: CardContextInterface, action: Action): CardConte
         whoRate: [],
       };
     default: {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       throw new Error(`Unhandled action type: ${action.type}`);
     }
   }

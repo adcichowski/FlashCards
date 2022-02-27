@@ -13,10 +13,12 @@ function Navigation() {
   const [isOpen, setOpen] = useState(false);
   const handleClick = () => setOpen(!isOpen);
   const renderNavigationLinks = navigationLinks.map((element) => (
-    <li onClick={handleClick} key={element.name}>
-      <Link className={styles.navItem} to={element.path}>
-        {element.name}
-      </Link>
+    <li key={element.name}>
+      <button onClick={handleClick}>
+        <Link className={styles.navItem} to={element.path}>
+          {element.name}
+        </Link>
+      </button>
     </li>
   ));
   const renderSocialLinks = socialLinks.map((socialName) => (
@@ -44,12 +46,7 @@ function Navigation() {
             )}
           </div>
         ) : null}
-        <button
-          aria-label="navigation"
-          name="button"
-          onClick={handleClick}
-          className={styles.hamburger}
-        >
+        <button aria-label="navigation" name="button" onClick={handleClick} className={styles.hamburger}>
           <span className={styles.Boxhamburger}>
             <div className={styles.lineHamburger}></div>
             <div className={styles.lineHamburger}></div>

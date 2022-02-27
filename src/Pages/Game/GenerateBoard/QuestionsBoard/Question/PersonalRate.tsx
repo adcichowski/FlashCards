@@ -5,17 +5,13 @@ import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
 import styles from "./Question.module.scss";
 import { useCardContext } from "../../../../../Context/CardContext";
 import { Button } from "../../../../../Components/Button/Button";
-function PersonalRate({ card }: { card: ICard }) {
+function PersonalRate({ card }: { readonly card: ICard }) {
   const { state: stateAuth } = useAuthContext();
   const { dispatch: dispatchModal } = useModalContext();
   const { state: stateCard, dispatch: dispatchCard } = useCardContext();
-  const yourRate = card.whoRate.find(
-    (person: PersonRating) => person.id === stateAuth.idUser
-  );
+  const yourRate = card.whoRate.find((person: PersonRating) => person.id === stateAuth.idUser);
   return yourRate ? (
-    <div
-      className={`${styles.questionRatePesonal} ${styles.questionRatePesonalInfo}`}
-    >
+    <div className={`${styles.questionRatePesonal} ${styles.questionRatePesonalInfo}`}>
       Your {yourRate.rate}x
       <div className={styles.smallStar}>
         <Star />

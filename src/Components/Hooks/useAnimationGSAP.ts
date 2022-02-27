@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef } from "react";
 function useAnimationGSAP(nameAnimation: (element: HTMLDivElement) => void) {
   const getElements = useRef<HTMLDivElement>(null);

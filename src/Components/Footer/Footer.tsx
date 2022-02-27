@@ -5,12 +5,10 @@ import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../Utils/Utils";
 import { socialLinks, navigationLinks } from "../../Constants/Constants";
+
 function Footer() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, formState } = useForm<{ readonly email: string; readonly textarea: string }>();
+  const { errors } = formState;
   return (
     <footer className={styles.footer}>
       <div className={styles.footerArticle}>
@@ -29,10 +27,7 @@ function Footer() {
             <ul className={styles.listSocial}>
               {socialLinks.map((socialName) => (
                 <li key={socialName}>
-                  <a
-                    href={`https://${socialName}.com`}
-                    className={`${styles[socialName]}`}
-                  >
+                  <a href={`https://${socialName}.com`} className={`${styles[socialName]}`}>
                     <span className="sr-only">{socialName}</span>
                   </a>
                 </li>
@@ -46,9 +41,7 @@ function Footer() {
           <small className={styles.right}>Term of Service</small>
           <small className={styles.right}>Privacy Policy</small>
         </div>
-        <small className={styles.copyright}>
-          &copy; 2021 FlashCards, All rights is us
-        </small>
+        <small className={styles.copyright}>&copy; 2021 FlashCards, All rights is us</small>
       </div>
       <form className={styles.footerForm} onSubmit={() => handleSubmit}>
         <h3 className={styles.formTitle}>Send Us</h3>
@@ -66,12 +59,7 @@ function Footer() {
         <span className={styles.formError}>{errors?.email?.message}</span>
         <label>
           <span className="sr-only"> Your idea</span>
-          <textarea
-            {...register("textarea")}
-            maxLength={255}
-            placeholder="Your idea"
-            className={styles.formTextarea}
-          />
+          <textarea {...register("textarea")} maxLength={255} placeholder="Your idea" className={styles.formTextarea} />
         </label>
         <Button size="normal" type="submit">
           Send ideas

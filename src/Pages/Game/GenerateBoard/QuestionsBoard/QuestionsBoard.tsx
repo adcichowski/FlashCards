@@ -1,15 +1,14 @@
 import { BackButton } from "../../../../Components/Button/BackButton/BackButton";
-import { ICard } from "../../../../Types/Types";
 import { CardByContext } from "../../../../Components/Pages/Game/CardByContext/CardByContext";
 import styles from "./QuestionsBoard.module.scss";
 
-function QuestionsBoard({
-  cardsData,
-  typeBoard,
-}: {
-  cardsData: ICard[];
-  typeBoard: "personalCards" | "generalCards" | "favoriteCards";
-}) {
+function QuestionsBoard() {
+  // {
+  //   cardsData,
+  //   typeBoard,
+  // }: {
+  //   readonly cardsData: readonly ICard[];
+  //   readonly typeBoard: "personalCards" | "generalCards" | "favoriteCards";
   return (
     <div>
       <BackButton />

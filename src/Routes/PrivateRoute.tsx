@@ -1,13 +1,7 @@
 import { Redirect, Route } from "react-router";
 import { useAuthContext } from "../Context/AuthContext";
 
-function PrivateRoute({
-  path,
-  children: Component,
-}: {
-  children: JSX.Element;
-  path: string;
-}) {
+function PrivateRoute({ path, children: Component }: { readonly children: JSX.Element; readonly path: string }) {
   const { state } = useAuthContext();
   if (!state.isLogin) return <Redirect to="/login" />;
   return (

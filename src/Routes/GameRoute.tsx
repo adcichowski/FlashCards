@@ -1,7 +1,4 @@
-import {
-  Technologies,
-  useAvaibleTechnologies,
-} from "../Components/Pages/Game/useAvaibleTechnologies";
+import { Technologies, useAvaibleTechnologies } from "../Components/Pages/Game/useAvaibleTechnologies";
 import { MainBoard } from "../Components/Pages/Game/MainBoard/MainBoard";
 import { Game } from "../Pages/Game/Game";
 import { PrivateRoute } from "./PrivateRoute";
@@ -32,40 +29,27 @@ function GameRoute() {
           <AddCard />
         </Route>
 
-        {Object.values(avaibleTechnologies).map(
-          ({ name }: { name: Technologies }) => {
-            return state.personalCards[name]
-              ? state.personalCards[name].length > 0 && (
-                  <React.Fragment key={name}>
-                    <PrivateRoute path={`/game/personal-cards/${name}`}>
-                      <QuestionsBoard
-                        typeBoard="personalCards"
-                        cardsData={state.personalCards[name]}
-                      />
-                    </PrivateRoute>
-                  </React.Fragment>
-                )
-              : null;
-          }
-        )}
-        {Object.values(avaibleTechnologies).map(
-          ({ name }: { name: Technologies }) => (
-            <React.Fragment key={name}>
-              <PrivateRoute path={`/game/general-cards/${name}`}>
-                <QuestionsBoard
-                  typeBoard="generalCards"
-                  cardsData={state.generalCards[name]}
-                />
-              </PrivateRoute>
-            </React.Fragment>
-          )
-        )}
+        {Object.values(avaibleTechnologies).map(({ name }: { readonly name: Technologies }) => {
+          return state.personalCards[name]
+            ? state.personalCards[name].length > 0 && (
+                <React.Fragment key={name}>
+                  <PrivateRoute path={`/game/personal-cards/${name}`}>
+                    <QuestionsBoard />
+                  </PrivateRoute>
+                </React.Fragment>
+              )
+            : null;
+        })}
+        {Object.values(avaibleTechnologies).map(({ name }: { readonly name: Technologies }) => (
+          <React.Fragment key={name}>
+            <PrivateRoute path={`/game/general-cards/${name}`}>
+              <QuestionsBoard />
+            </PrivateRoute>
+          </React.Fragment>
+        ))}
         <React.Fragment>
           <PrivateRoute path={`/game/personal-cards/favorite`}>
-            <QuestionsBoard
-              typeBoard="favoriteCards"
-              cardsData={state?.personalCards?.favorites}
-            />
+            <QuestionsBoard />
           </PrivateRoute>
         </React.Fragment>
       </Game>

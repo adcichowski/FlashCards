@@ -8,12 +8,12 @@ import React from "react";
 import { doActionWithEmailPass } from "../../lib/firebase/Utils";
 import { changeMessageFromFirebase } from "../../Utils/Utils";
 
-function useFormLoginRegister({ type }: { type: "login" | "register" }) {
+function useFormLoginRegister({ type }: { readonly type: "login" | "register" }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<{ readonly email: string; readonly password: string }>();
   const history = useHistory();
   const { dispatch } = useModalContext();
   const { dispatch: authDispatch, state } = useAuthContext();

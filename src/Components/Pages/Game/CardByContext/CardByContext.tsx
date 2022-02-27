@@ -5,14 +5,8 @@ import { useCardByContext } from "./useCardByContext";
 import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
 import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
 import { Button } from "../../../Button/Button";
-function CardByContext({ isEdit }: { isEdit?: boolean }) {
-  const {
-    state,
-    dispatch,
-    handleClickFlipCard,
-    getIconAndColor,
-    handleClickHideCard,
-  } = useCardByContext();
+function CardByContext({ isEdit }: { readonly isEdit?: boolean }) {
+  const { state, dispatch, handleClickFlipCard, getIconAndColor, handleClickHideCard } = useCardByContext();
   const { CardIcon, colorIcon } = getIconAndColor();
   if (!state.isShow) return null;
   return (
@@ -22,11 +16,7 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
         <div className={styles.star}>
           <Star />
         </div>
-        x
-        {isEdit
-          ? 5
-          : state.whoRate.reduce((prev, { rate }) => (prev += rate), 0) /
-            state.whoRate.length}
+        x{isEdit ? 5 : state.whoRate.reduce((prev, { rate }) => prev + rate, 0) / state.whoRate.length}
       </div>
       <div className={styles.card}>
         <div className={styles.wave}>
@@ -36,9 +26,7 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
           <div style={{ fill: colorIcon }} className={styles.icon}>
             <CardIcon />
           </div>
-          <span className={styles.iconText}>
-            {capitalize(state.technology)}
-          </span>
+          <span className={styles.iconText}>{capitalize(state.technology)}</span>
         </div>
         <div className={styles.cardCenterTop}>
           {state.isFlip ? (
@@ -47,9 +35,7 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
             <div className={styles.question}>{state.question}</div>
           )}
         </div>
-        <div className={styles.cardCenterBottom}>
-          {state.id.toString().length >= 2 ? state.id : "0" + state.id}
-        </div>
+        <div className={styles.cardCenterBottom}>{state.id.toString().length >= 2 ? state.id : 0 + state.id}</div>
         <div className={styles.cardButtons}>
           <button className={`${styles.button}`}>
             <div className={styles.prevCardButton}>
@@ -68,14 +54,8 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
       </div>
       {!isEdit && (
         <div className={styles.favorite}>
-          <p className={styles.favoriteText}>
-            {state.isFavorite ? "Favorite Card" : "Not Favorite Card"}
-          </p>
-          <div
-            className={`${styles.favoriteIcon}  ${
-              state.isFavorite && styles.fill
-            }`}
-          >
+          <p className={styles.favoriteText}>{state.isFavorite ? "Favorite Card" : "Not Favorite Card"}</p>
+          <div className={`${styles.favoriteIcon}  ${state.isFavorite ? styles.fill : ""}`}>
             <Heart />
           </div>
         </div>
@@ -83,11 +63,7 @@ function CardByContext({ isEdit }: { isEdit?: boolean }) {
 
       <div className={styles.functionallButtons}>
         {isEdit && (
-          <Button
-            size="normal"
-            onClick={() => dispatch({ type: "randomSVG" })}
-            type="button"
-          >
+          <Button size="normal" onClick={() => dispatch({ type: "randomSVG" })} type="button">
             Set Shape
           </Button>
         )}

@@ -2,20 +2,15 @@ import { useHistory } from "react-router";
 import { useAuthContext } from "../../../Context/AuthContext";
 import { useCardContext } from "../../../Context/CardContext";
 import { useModalContext } from "../../../Context/ModalContext";
-import {
-  addCardToDeck,
-  sendFunctionsToFirebase,
-  validateCardFields,
-} from "../../../lib/firebase/Utils";
+import { addCardToDeck, sendFunctionsToFirebase, validateCardFields } from "../../../lib/firebase/Utils";
 function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
   const { dispatch: dispatchModal } = useModalContext();
   const { dispatch: authDispatch, state: authState } = useAuthContext();
   const { dispatch, state: cardState } = useCardContext();
   const history = useHistory();
   function sendCardToDatabase() {
-    const { sendDeck, sendCard } = sendFunctionsToFirebase();
-    const { id, isFavorite, technology, question, answer, randomSvgCard } =
-      cardState;
+    const { sendCard } = sendFunctionsToFirebase();
+    const { id, isFavorite, technology, question, answer, randomSvgCard } = cardState;
     const card = {
       randomSvgCard,
       id,
@@ -25,6 +20,7 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
       answer,
       whoRate: [{ id: authState.idUser, rate: 5 }],
     };
+    // eslint-disable-next-line functional/no-try-statement
     try {
       if (deck === "") throw Error("Select deck for Card");
       validateCardFields(card);
@@ -36,7 +32,7 @@ function useSendCardToDatabase(deck: "personalCards" | "generalCards" | "") {
           [deck]: copyStateDeck,
         },
       });
-      if (deck === "personalCards") sendDeck(copyStateDeck, authState.idUser);
+      // if (deck === "personalCards") sendDeck(copyStateDeck, authState.idUser);
       if (deck === "generalCards") sendCard(card);
       dispatch({ type: "resetCard" });
       dispatchModal({

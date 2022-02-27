@@ -5,6 +5,7 @@ interface Action {
   readonly setModal?: Omit<IModal, "isOpen" | "type">;
 }
 interface Dispatch {
+  // eslint-disable-next-line no-unused-vars
   (action: Action): void;
 }
 export interface IModal {
@@ -12,9 +13,7 @@ export interface IModal {
   readonly isOpen: boolean;
   readonly message: string;
 }
-const ModalContext = createContext<
-  undefined | { state: IModal; dispatch: Dispatch }
->(undefined);
+const ModalContext = createContext<undefined | { readonly state: IModal; readonly dispatch: Dispatch }>(undefined);
 function ModalReducer(state: IModal, action: Action): IModal {
   switch (action.type) {
     case "closeModal":
@@ -46,7 +45,7 @@ function ModalReducer(state: IModal, action: Action): IModal {
       };
 
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type`);
     }
   }
 }
@@ -58,7 +57,7 @@ const useModalContext = () => {
 
   return context;
 };
-function ModalProvider({ children }: { children: ReactNode }) {
+function ModalProvider({ children }: { readonly children: ReactNode }) {
   const Modal: IModal = {
     isOpen: false,
     type: "success",
@@ -66,8 +65,6 @@ function ModalProvider({ children }: { children: ReactNode }) {
   };
   const [state, dispatch] = useReducer(ModalReducer, Modal);
   const value = { state, dispatch };
-  return (
-    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
-  );
+  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 }
 export { useModalContext, ModalProvider };

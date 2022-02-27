@@ -1,5 +1,4 @@
 import styles from "./BoardWithIcons.module.scss";
-import { ICard } from "../../../Types/Types";
 import { BackButton } from "../../../Components/Button/BackButton/BackButton";
 import { useAvaibleTechnologies } from "../../../Components/Pages/Game/useAvaibleTechnologies";
 import { Link, useLocation } from "react-router-dom";
@@ -8,20 +7,15 @@ import { useAnimationGSAP } from "../../../Components/Hooks/useAnimationGSAP";
 import { AnimateIconTech } from "../../../lib/gsap/AnimateIconTech";
 import { useEffect } from "react";
 import { useCardContext } from "../../../Context/CardContext";
-import { ReactComponent as Heart } from "../../../Assets/Icons/heart.svg";
 import { useQuery } from "react-query";
 import { getCards } from "../../../lib/firebase/Utils";
 function BoardWithIcons() {
   const { dispatch, state } = useCardContext();
   const typeBoard = useLocation().pathname.split("/").slice(-1)[0];
-  const { data: cardsData, isLoading } = useQuery(
-    `${typeBoard} cards`,
-    async () => {
-      return await getCards("hLYINQ5QXlTyPorJDSfjzHJ6LRg1");
-    }
-  );
+  const { data: cardsData, isLoading } = useQuery(`${typeBoard} cards`, async () => {
+    return await getCards("hLYINQ5QXlTyPorJDSfjzHJ6LRg1");
+  });
   useEffect(() => {
-    console.log(cardsData);
     if (state.isShow) {
       dispatch({
         type: "resetCard",
@@ -52,24 +46,20 @@ function BoardWithIcons() {
   const renderIcons =
     !isLoading &&
     cardsData !== undefined &&
-    getAvaibleTechnologies(Object.keys(cardsData)).map(
-      ({ type, name, isActive, render: Component }) => (
-        <li key={name} className={styles.boxTechnology}>
-          <Link
-            to={isActive ? `/game/${typeBoard}/${name}` : `/game/${typeBoard}`}
-            className={`${styles.technology} ${
-              isActive ? styles.activeLink : styles.linkDisable
-            }`}
-          >
-            <p className={styles.technologyType}>{type}</p>
-            <div className={styles.icon}>
-              <Component />
-            </div>
-            <p className={styles.nameTechnology}>{capitalize(name)}</p>
-          </Link>
-        </li>
-      )
-    );
+    getAvaibleTechnologies(Object.keys(cardsData)).map(({ type, name, isActive, render: Component }) => (
+      <li key={name} className={styles.boxTechnology}>
+        <Link
+          to={isActive ? `/game/${typeBoard}/${name}` : `/game/${typeBoard}`}
+          className={`${styles.technology} ${isActive ? styles.activeLink : styles.linkDisable}`}
+        >
+          <p className={styles.technologyType}>{type}</p>
+          <div className={styles.icon}>
+            <Component />
+          </div>
+          <p className={styles.nameTechnology}>{capitalize(name)}</p>
+        </Link>
+      </li>
+    ));
 
   return (
     <>

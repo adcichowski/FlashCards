@@ -19,7 +19,9 @@ export function useFetcher<T>(fetchFunc: () => Promise<T>) {
         setFetchData({ data: data, status: "success" });
       })
       .catch((e) => {
-        setFetchData({ data: null, status: "error", errorMessage: e.message });
+        if (e instanceof Error) {
+          setFetchData({ data: null, status: "error", errorMessage: e.message });
+        }
       });
   }, [fetchFunc, fetchData]);
   return fetchData;
@@ -28,10 +30,7 @@ export function useFetcher<T>(fetchFunc: () => Promise<T>) {
 interface FetchConfig {
   readonly body?: object;
 }
-export async function fetcher<T>(
-  path: string,
-  { body }: FetchConfig
-): Promise<T> {
+export async function fetcher<T>(path: string, { body }: FetchConfig): Promise<T> {
   try {
     const response = await fetch(path, {
       headers: {
@@ -40,7 +39,7 @@ export async function fetcher<T>(
       body: JSON.stringify(body),
     });
     if (response.ok) {
-      return response.json();
+      return response.json() as Promise<T>;
     }
     throw new Error("Problem during fetch data");
   } catch (e) {

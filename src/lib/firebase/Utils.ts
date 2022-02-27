@@ -52,7 +52,7 @@ export async function rateCardInFirestore(card: ICard) {
   const refIdCard = (await getDocs(q))?.docs[0]?.id;
 
   if (refIdCard) {
-    if (card.whoRate.reduce((prev, { rate }) => (prev += rate), 0) < 2) {
+    if (card.whoRate.reduce((prev, { rate }) => prev + rate, 0) < 2) {
       await deleteDoc(doc(db, "GeneralCards", refIdCard));
       return;
     }

@@ -5,20 +5,13 @@ import { ReactComponent as Css3Icon } from "../../../Assets/Icons/IconsTechnolog
 import { ReactComponent as JavascriptIcon } from "../../../Assets/Icons/IconsTechnology/javascript.svg";
 import { ReactComponent as TypescriptIcon } from "../../../Assets/Icons/IconsTechnology/typescript.svg";
 import { AvaibleTechnologiesProperty } from "../../../Types/Types";
-export type Technologies =
-  | "html5"
-  | "vue"
-  | "css3"
-  | "javascript"
-  | "typescript"
-  | "react";
+export type Technologies = "html5" | "vue" | "css3" | "javascript" | "typescript" | "react";
 function useAvaibleTechnologies() {
   const avaibleTechnologies: AvaibleTechnologiesProperty = {
     html5: {
       name: "html5",
       type: "Front-end",
-      description:
-        "HTML5 is the latest version of Hypertext Markup Language, the code that describes web pages.",
+      description: "HTML5 is the latest version of Hypertext Markup Language, the code that describes web pages.",
       render: HtmlIcon,
       fill: "#F73802",
     },
@@ -63,18 +56,18 @@ function useAvaibleTechnologies() {
       fill: "#265F9E",
     },
   };
-  function getAvaibleTechnologies(technologies: string[]) {
-    const arrayAvaibleTechnologies = [
-      ...Object.values(avaibleTechnologies),
-    ].map(({ name, render, type, description }) => {
-      return {
-        name,
-        type,
-        description,
-        render,
-        isActive: technologies?.includes(name),
-      };
-    });
+  function getAvaibleTechnologies(technologies: readonly string[]) {
+    const arrayAvaibleTechnologies = [...Object.values(avaibleTechnologies)].map(
+      ({ name, render, type, description }) => {
+        return {
+          name,
+          type,
+          description,
+          render,
+          isActive: technologies?.includes(name),
+        };
+      },
+    );
     return arrayAvaibleTechnologies;
   }
 

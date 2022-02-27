@@ -1,12 +1,12 @@
 import { useFetcher, fetcher } from "../../Hooks/useFetcher";
 import styles from "./GithubProfile.module.scss";
 interface GithubProfileProps {
-  html_url: string;
-  avatar_url: string;
+  readonly html_url: string;
+  readonly avatar_url: string;
 }
 function GithubProfile() {
   const { data } = useFetcher<GithubProfileProps>(() =>
-    fetcher<GithubProfileProps>("https://api.github.com/users/adcichowski", {})
+    fetcher<GithubProfileProps>("https://api.github.com/users/adcichowski", {}),
   );
   if (!data) return null;
   return (
@@ -19,10 +19,7 @@ function GithubProfile() {
           <span className={"sr-only"}>Github</span>
         </a>
 
-        <a
-          className={`${styles.icon} ${styles.linkedin}`}
-          href="https://www.linkedin.com/in/adam-cichowski-4916981b7/"
-        >
+        <a className={`${styles.icon} ${styles.linkedin}`} href="https://www.linkedin.com/in/adam-cichowski-4916981b7/">
           <span className={"sr-only"}>Linkedin</span>
         </a>
       </div>

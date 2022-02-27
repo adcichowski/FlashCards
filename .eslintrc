@@ -20,6 +20,7 @@
     "jest": true
   },
   "rules": {
+    "functional/no-try-statement": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "functional/no-throw-statement": "off",
     "functional/no-conditional-statement": "off",

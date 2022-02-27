@@ -20,29 +20,21 @@ function useIsFavorire(card: ICard) {
       sendDeck(
         {
           ...state.personalCards,
-          favorites: [
-            ...(state?.personalCards?.favorites?.length
-              ? state.personalCards.favorites
-              : []),
-            card,
-          ],
+          favorites: [...(state?.personalCards?.favorites?.length ? state.personalCards.favorites : []), card],
         },
-        state.idUser
+        state.idUser,
       );
     },
-    [sendDeck, dispatch, state, setIsFavorite, isFavorite, stateCard]
+    [sendDeck, dispatch, state, setIsFavorite, isFavorite, stateCard],
   );
 
   useEffect(() => {
     const isInFavorite = state?.personalCards?.favorites?.some(
       (personalCard) =>
-        card.question === personalCard.question &&
-        card.answer === personalCard.answer &&
-        card.id === personalCard.id
+        card.question === personalCard.question && card.answer === personalCard.answer && card.id === personalCard.id,
     );
     if (isInFavorite) setIsFavorite(true);
   }, [card, state.personalCards.favorites]);
-  console.log(isFavorite);
   return { isFavorite, setIsFavorite, setFavorite };
 }
 export { useIsFavorire };

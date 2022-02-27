@@ -32,14 +32,14 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
       auth.signOut();
       return { ...state, isLogin: false, idUser: "" };
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type in AuthContext`);
     }
   }
 }
 
-const AuthContext = createContext<
-  { state: CurrentUser; dispatch: Dispatch<Action> } | undefined
->(undefined);
+const AuthContext = createContext<{ readonly state: CurrentUser; readonly dispatch: Dispatch<Action> } | undefined>(
+  undefined,
+);
 const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -47,7 +47,7 @@ const useAuthContext = () => {
   }
   return context;
 };
-const AuthProvider = ({ children }: { children: ReactNode }) => {
+const AuthProvider = ({ children }: { readonly children: ReactNode }) => {
   const currentUser: CurrentUser = {
     isLogin: false,
     idUser: "",
