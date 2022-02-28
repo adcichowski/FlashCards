@@ -30,11 +30,11 @@
     "functional/no-expression-statement": "off",
     "react/react-in-jsx-scope": "off",
     "functional/no-return-void": "off",
-    "no-console": "error",
+    "no-console": "warn",
     "functional/functional-parameters": "off"
   },
   "parserOptions": {
-    "ecmaVersion": 12,
+    "ecmaVersion": 13,
     "sourceType": "module",
     "project": "./tsconfig.json"
   }

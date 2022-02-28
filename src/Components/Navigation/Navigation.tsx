@@ -13,11 +13,9 @@ function Navigation() {
   const [isOpen, setOpen] = useState(false);
   const handleClick = () => setOpen(!isOpen);
   const renderNavigationLinks = navigationLinks.map((element) => (
-    <li key={element.name}>
+    <li key={element.name} className={styles.navItem}>
       <button onClick={handleClick}>
-        <Link className={styles.navItem} to={element.path}>
-          {element.name}
-        </Link>
+        <Link to={element.path}>{element.name}</Link>
       </button>
     </li>
   ));

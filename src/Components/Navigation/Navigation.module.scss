@@ -8,16 +8,17 @@
   }
 }
 .navList {
+  width: 55%;
   display: flex;
+  justify-content: space-around;
   font-size: clamp(1.6rem, calc(2vh + 1.2rem), 3.5rem);
 }
 .navItem {
   font-weight: 600;
-  margin: 0 3rem;
+  font-size: clamp(2rem, calc(2vw + 1.8rem), 5rem);
   @media screen and (max-width: 950px) {
     margin: 9rem 0;
     font-weight: 600;
-    font-size: clamp(2rem, calc(2vw + 1.8rem), 5rem);
   }
 }
 .hamburger {
@@ -73,8 +74,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("../../Assets/Pages/Home/bigQuestionBg.svg") no-repeat
-      center/contain;
+    background: url("../../Assets/Pages/Home/bigQuestionBg.svg") no-repeat center/contain;
     transform: rotate(175deg);
     opacity: 0.5;
     z-index: -1;
@@ -97,18 +97,15 @@
 .twitter {
   width: 30px;
   height: 30px;
-  background: url("../../Assets/SocialIcons/twitter.svg") no-repeat
-    center/contain;
+  background: url("../../Assets/SocialIcons/twitter.svg") no-repeat center/contain;
 }
 .linkedin {
   width: 32px;
   height: 32px;
-  background: url("../../Assets/SocialIcons/linkedin.svg") no-repeat
-    center/contain;
+  background: url("../../Assets/SocialIcons/linkedin.svg") no-repeat center/contain;
 }
 .facebook {
   width: 27px;
   height: 27px;
-  background: url("../../Assets/SocialIcons/facebook.svg") no-repeat
-    center/contain;
+  background: url("../../Assets/SocialIcons/facebook.svg") no-repeat center/contain;
 }
