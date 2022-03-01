@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Home from "./Pages/Home/Home";
+import Home from "../pages";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ModalProvider } from "./Context/ModalContext";
 import { AuthProvider } from "./Context/AuthContext";
