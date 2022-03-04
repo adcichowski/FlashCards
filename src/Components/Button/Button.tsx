@@ -1,6 +1,4 @@
-/* eslint-disable functional/no-conditional-statement */
-/* eslint-disable react/react-in-jsx-scope */
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ButtonInterface } from "../../Types/Types";
 import styles from "./Button.module.scss";
 
@@ -11,8 +9,10 @@ function Button({ type, children, onClick, size }: ButtonInterface) {
   };
   if (typeof type === "object") {
     return (
-      <Link to={`/${type.href}`} className={`${styles.button} ${stylesButton.parent}`}>
-        <span className={`${styles.front} ${stylesButton.children}`}>{children}</span>
+      <Link href={`/${type.href}`}>
+        <div className={`${styles.button} ${stylesButton.parent}`}>
+          <a className={`${styles.front} ${stylesButton.children}`}>{children}</a>
+        </div>
       </Link>
     );
   }

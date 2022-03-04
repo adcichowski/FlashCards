@@ -1,3 +1,7 @@
+import { Navigation } from "src/Components/Navigation/Navigation";
+import { GithubProfile } from "src/Components/Pages/Contact/GithubProfile";
+import { socialLinks } from "src/Constants/Constants";
+import { Game } from "src/Pages/Game/Game";
 import styles from "../src/Pages/Contact/Contact.module.scss";
 
 export function Contact() {
@@ -11,8 +15,8 @@ export function Contact() {
     </li>
   ));
   return (
-    <Game>
-      <Navigation />
+    <>
+      {/* <Navigation /> */}
       <div className={styles.contact}>
         <div className={styles.description}>
           <h1 className={styles.descriptionTitle}>Thanks for your interest in FlashCards</h1>
@@ -22,7 +26,7 @@ export function Contact() {
         <GithubProfile />
         <div className={styles.contactBackground}></div>
       </div>
-    </Game>
+    </>
   );
 }
 Contact.displayName = "Contact";

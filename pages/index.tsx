@@ -1,21 +1,19 @@
-import styles from "../src/Pages/Home/Home.module.scss";
-import { Navigation } from "../src/Components/Navigation/Navigation";
-import { Button } from "../src/Components/Button/Button";
-import { HomeAbout } from "../src/Components/Pages/Home/HomeAbout/HomeAbout";
+import { Footer } from "src/Components/Footer/Footer";
+import { Navigation } from "src/Components/Navigation/Navigation";
+import { Button } from "src/Components/Button/Button";
+import { HomeAbout } from "src/Components/Pages/Home/HomeAbout/HomeAbout";
 import React, { Suspense } from "react";
-import { Footer } from "../src/Components/Footer/Footer";
-import { ListTechnologies } from "../src/Components/Pages/Home/ListTechnologies/ListTechnologies";
-import { CirclesInfo } from "../src/Components/Pages/Home/CirclesInfo/CirclesInfo";
+import styles from "src/Pages/Home/Home.module.scss";
+import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
+import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
 const Instruction = React.lazy(() =>
-  import("../src/Components/Pages/Home/Instruction/Instruction").then((module) => ({ default: module.Instruction })),
+  import("src/Components/Pages/Home/Instruction/Instruction").then((module) => ({ default: module.Instruction })),
 );
 export default function Home() {
   return (
     <div className={styles.homePage}>
       <header className={styles.header}>
-        <div className={styles.heroNavigation}>
-          <Navigation />
-        </div>
+        <div className={styles.heroNavigation}>{/* <Navigation /> */}</div>
         <picture tabIndex={-1}>
           <source srcSet="/HeroBackground/large.png" media="(min-width: 1080px)" />
           <source srcSet="/HeroBackground/medium.png" media="(min-width: 480px)" />
@@ -32,8 +30,8 @@ export default function Home() {
         </section>
       </header>
       <main>
-        <HomeAbout />
-        <article className={styles.firstSide}>
+        {/* <HomeAbout /> */}
+        {/* <article className={styles.firstSide}>
           <picture tabIndex={-1}>
             <source srcSet="/ShoeBackground/large.png" media="(min-width: 1080px)" />
             <source srcSet="/ShoeBackground/medium.png" media="(min-width: 480px)" />
@@ -52,9 +50,9 @@ export default function Home() {
           <Button size="big" type={{ element: "a", href: "game" }}>
             Create Account
           </Button>
-        </section>
+        </section> */}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
