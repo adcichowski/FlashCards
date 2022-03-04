@@ -30,7 +30,7 @@ export default function Home() {
         </section>
       </header>
       <main>
-        {/* <HomeAbout /> */}
+        <HomeAbout />
         {/* <article className={styles.firstSide}>
           <picture tabIndex={-1}>
             <source srcSet="/ShoeBackground/large.png" media="(min-width: 1080px)" />

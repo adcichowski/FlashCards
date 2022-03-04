@@ -1,7 +1,7 @@
-import logo from "../../Assets/logo.png";
+import Image from "next/image";
 import styles from "./Logo.module.scss";
 function Logo() {
-  return <img alt="Logo" src={logo} className={styles.logo} />;
+  return <Image alt="Logo" width={200} height={100} src="/logo.png" className={styles.logo} />;
 }
 export { Logo };
 Logo.displayName = "Logo";
