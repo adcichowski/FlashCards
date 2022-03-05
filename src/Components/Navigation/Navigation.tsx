@@ -1,10 +1,12 @@
 import { useState, useCallback } from "react";
 import { Logo } from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { socialLinks, navigationLinks } from "../../Constants/Constants";
 import { useAuthContext } from "../../Context/AuthContext";
 import { Button } from "../Button/Button";
+import { Hamburger } from "./Hamburger/Hamburger";
+
 function Navigation() {
   const { state, dispatch } = useAuthContext();
   const handleClickLogOut = useCallback(() => {
@@ -14,9 +16,11 @@ function Navigation() {
   const handleClick = () => setOpen(!isOpen);
   const renderNavigationLinks = navigationLinks.map((element) => (
     <li key={element.name} className={styles.navItem}>
-      <button onClick={handleClick}>
-        <Link to={element.path}>{element.name}</Link>
-      </button>
+      <Link href={element.path}>
+        <a className={styles.navItem} onClick={handleClick}>
+          {element.name}
+        </a>
+      </Link>
     </li>
   ));
   const renderSocialLinks = socialLinks.map((socialName) => (
@@ -44,13 +48,7 @@ function Navigation() {
             )}
           </div>
         ) : null}
-        <button aria-label="navigation" name="button" onClick={handleClick} className={styles.hamburger}>
-          <span className={styles.Boxhamburger}>
-            <div className={styles.lineHamburger}></div>
-            <div className={styles.lineHamburger}></div>
-            <div className={styles.lineHamburger}></div>
-          </span>
-        </button>
+        <Hamburger handleClick={handleClick} />
         <div className={styles.hideNav}>
           <Logo />
           <ul className={styles.navList}>{renderNavigationLinks}</ul>

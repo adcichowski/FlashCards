@@ -13,7 +13,9 @@ export default function Home() {
   return (
     <div className={styles.homePage}>
       <header className={styles.header}>
-        <div className={styles.heroNavigation}>{/* <Navigation /> */}</div>
+        <div className={styles.heroNavigation}>
+          <Navigation />
+        </div>
         <picture tabIndex={-1}>
           <source srcSet="/HeroBackground/large.png" media="(min-width: 1080px)" />
           <source srcSet="/HeroBackground/medium.png" media="(min-width: 480px)" />

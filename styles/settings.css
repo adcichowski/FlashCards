@@ -16,6 +16,7 @@
   padding: 0;
 }
 html {
+  font-family: "Kanit", sans-serif;
   font-size: 10px;
   color: var(--font-color-primary);
 }
