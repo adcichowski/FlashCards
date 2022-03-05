@@ -1,9 +1,10 @@
-import { ReactComponent as HtmlIcon } from "../../../Assets/Icons/IconsTechnology/html5.svg";
-import { ReactComponent as ReactIcon } from "../../../Assets/Icons/IconsTechnology/react.svg";
-import { ReactComponent as VueIcon } from "../../../Assets/Icons/IconsTechnology/vue.svg";
-import { ReactComponent as Css3Icon } from "../../../Assets/Icons/IconsTechnology/css3.svg";
-import { ReactComponent as JavascriptIcon } from "../../../Assets/Icons/IconsTechnology/javascript.svg";
-import { ReactComponent as TypescriptIcon } from "../../../Assets/Icons/IconsTechnology/typescript.svg";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import HtmlIcon from "../../../Assets/Icons/IconsTechnology/html5.svg";
+import ReactIcon from "../../../Assets/Icons/IconsTechnology/react.svg";
+import VueIcon from "../../../Assets/Icons/IconsTechnology/vue.svg";
+import Css3Icon from "../../../Assets/Icons/IconsTechnology/css3.svg";
+import JavascriptIcon from "../../../Assets/Icons/IconsTechnology/javascript.svg";
+import TypescriptIcon from "../../../Assets/Icons/IconsTechnology/typescript.svg";
 import { AvaibleTechnologiesProperty } from "../../../Types/Types";
 export type Technologies = "html5" | "vue" | "css3" | "javascript" | "typescript" | "react";
 function useAvaibleTechnologies() {

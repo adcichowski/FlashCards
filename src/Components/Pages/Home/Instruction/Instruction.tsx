@@ -1,20 +1,15 @@
-import { ReactComponent as FrontCard } from "../../../../Assets/Pages/Home/CardInstruction/FrontCardR.svg";
-import { ReactComponent as BackCard } from "../../../../Assets/Pages/Home/CardInstruction/BackCardR.svg";
+import FrontCard from "../../../../Assets/Pages/Home/CardInstruction/FrontCardR.svg";
+import BackCard from "../../../../Assets/Pages/Home/CardInstruction/BackCardR.svg";
 import { Button } from "../../../Button/Button";
 import { useInstruction } from "./useInstruction";
 import styles from "./Instruction.module.scss";
 import { useCallback } from "react";
 function Instruction() {
   const { getElements, isFlip, flipCard } = useInstruction();
-  const handleClickFlip = useCallback(
-    () => flipCard(!isFlip),
-    [flipCard, isFlip]
-  );
+  const handleClickFlip = useCallback(() => flipCard(!isFlip), [flipCard, isFlip]);
   return (
     <section className={styles.introduce}>
-      <h2 className={`${styles.introduceTitle}`}>
-        {!isFlip ? "Front Card Side" : "Back Side Card"}
-      </h2>
+      <h2 className={`${styles.introduceTitle}`}>{!isFlip ? "Front Card Side" : "Back Side Card"}</h2>
       <div ref={getElements} className={styles.card}>
         {!isFlip ? <FrontCard /> : <BackCard />}
       </div>

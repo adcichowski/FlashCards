@@ -2,6 +2,7 @@
   "root": true,
   "parser": "@typescript-eslint/parser",
   "extends": [
+    "plugin:@next/next/recommended",
     "prettier",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
@@ -31,11 +32,18 @@
     "react/react-in-jsx-scope": "off",
     "functional/no-return-void": "off",
     "no-console": "warn",
-    "functional/functional-parameters": "off"
+    "functional/functional-parameters": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "jsx-a11y/anchor-is-valid": "off"
   },
   "parserOptions": {
     "ecmaVersion": 13,
     "sourceType": "module",
     "project": "./tsconfig.json"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

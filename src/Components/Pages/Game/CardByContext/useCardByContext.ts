@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useAvaibleTechnologies } from "../../../../Components/Pages/Game/useAvaibleTechnologies";
 import { useCardContext } from "../../../../Context/CardContext";
-import { ReactComponent as NoneTechIcon } from "../../../../Assets/Icons/cancel.svg";
+import NoneTechIcon from "../../../../Assets/Icons/cancel.svg";
 function useCardByContext() {
   const { state, dispatch } = useCardContext();
   const { avaibleTechnologies } = useAvaibleTechnologies();
@@ -28,14 +28,8 @@ function useCardByContext() {
     dispatch({ type: "hideCard" });
   }, [dispatch]);
   const getIconAndColor = () => {
-    const CardIcon =
-      state.technology === "none"
-        ? NoneTechIcon
-        : avaibleTechnologies[state.technology].render;
-    const colorIcon =
-      state.technology === "none"
-        ? "#505050"
-        : avaibleTechnologies[state.technology].fill;
+    const CardIcon = state.technology === "none" ? NoneTechIcon : avaibleTechnologies[state.technology].render;
+    const colorIcon = state.technology === "none" ? "#505050" : avaibleTechnologies[state.technology].fill;
     return { CardIcon, colorIcon };
   };
   return {

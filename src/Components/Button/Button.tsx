@@ -10,9 +10,9 @@ function Button({ type, children, onClick, size }: ButtonInterface) {
   if (typeof type === "object") {
     return (
       <Link href={`/${type.href}`}>
-        <div className={`${styles.button} ${stylesButton.parent}`}>
-          <a className={`${styles.front} ${stylesButton.children}`}>{children}</a>
-        </div>
+        <a className={`${styles.button} ${stylesButton.parent}`}>
+          <span className={`${styles.front} ${stylesButton.children}`}>{children}</span>
+        </a>
       </Link>
     );
   }

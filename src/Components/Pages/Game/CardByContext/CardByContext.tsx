@@ -2,8 +2,8 @@ import { capitalize } from "../../../../Utils/Utils";
 import styles from "./CardByContext.module.scss";
 import { CardWave } from "./CardWave";
 import { useCardByContext } from "./useCardByContext";
-import { ReactComponent as Star } from "../../../../Assets/Icons/star.svg";
-import { ReactComponent as Heart } from "../../../../Assets/Icons/heart.svg";
+import Star from "../../../../Assets/Icons/star.svg";
+import Heart from "../../../../Assets/Icons/heart.svg";
 import { Button } from "../../../Button/Button";
 function CardByContext({ isEdit }: { readonly isEdit?: boolean }) {
   const { state, dispatch, handleClickFlipCard, getIconAndColor, handleClickHideCard } = useCardByContext();

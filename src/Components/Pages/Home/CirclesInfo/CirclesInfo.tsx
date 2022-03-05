@@ -1,5 +1,5 @@
 import styles from "./CirclesInfo.module.scss";
-import { ReactComponent as CirclesSVG } from "../../../../Assets/Pages/Home/CirclesAside.svg";
+import CirclesSVG from "../../../../Assets/Pages/Home/CirclesAside.svg";
 function CirclesInfo() {
   return (
     <section className={styles.circles}>
@@ -9,9 +9,8 @@ function CirclesInfo() {
       <div className={styles.circlesText}>
         <h3 className={styles.circlesTitle}>Look at this...</h3>
         <p className={styles.circlesParagraph}>
-          This graph always show you what we have on the website, we can help
-          themselves day after day. Stay with us, and send more information in
-          cards.
+          This graph always show you what we have on the website, we can help themselves day after day. Stay with us,
+          and send more information in cards.
         </p>
       </div>
     </section>

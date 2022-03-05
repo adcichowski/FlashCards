@@ -2,13 +2,14 @@ import { Footer } from "src/Components/Footer/Footer";
 import { Navigation } from "src/Components/Navigation/Navigation";
 import { Button } from "src/Components/Button/Button";
 import { HomeAbout } from "src/Components/Pages/Home/HomeAbout/HomeAbout";
-import React, { Suspense } from "react";
+import React from "react";
+import Image from "next/image";
 import styles from "src/Pages/Home/Home.module.scss";
-import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
-import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
-const Instruction = React.lazy(() =>
-  import("src/Components/Pages/Home/Instruction/Instruction").then((module) => ({ default: module.Instruction })),
-);
+// import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
+// import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
+// const Instruction = React.lazy(() =>
+//   import("src/Components/Pages/Home/Instruction/Instruction").then((module) => ({ default: module.Instruction })),
+// );
 export default function Home() {
   return (
     <div className={styles.homePage}>
@@ -20,7 +21,7 @@ export default function Home() {
           <source srcSet="/HeroBackground/large.png" media="(min-width: 1080px)" />
           <source srcSet="/HeroBackground/medium.png" media="(min-width: 480px)" />
           <source srcSet="/HeroBackground/small.png" media="(max-width: 360px), (min-width:360px)" />
-          <img className={styles.heroBackground} alt="background" />
+          <Image layout="fill" src="/HeroBackground/small.png" className={styles.heroBackground} alt="background" />
         </picture>
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
@@ -54,7 +55,7 @@ export default function Home() {
           </Button>
         </section> */}
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

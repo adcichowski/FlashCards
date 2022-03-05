@@ -32,7 +32,6 @@ export default function Document() {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        <link rel="stylesheet" href="/_settings.css" />
       </Head>
       <body>
         <Main />

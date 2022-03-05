@@ -1,4 +1,5 @@
 import { useFetcher, fetcher } from "../../Hooks/useFetcher";
+import Image from "next/image";
 import styles from "./GithubProfile.module.scss";
 interface GithubProfileProps {
   readonly html_url: string;
@@ -13,7 +14,7 @@ function GithubProfile() {
     <div className={styles.card}>
       <p className={styles.cardTitle}>Created By</p>
       <span className={styles.cardName}>Adam</span>
-      <img className={styles.cardAvatar} src={data.avatar_url} alt="avatar" />
+      <Image width={100} height={100} className={styles.cardAvatar} src={data.avatar_url} alt="avatar" />
       <div className={styles.icons}>
         <a className={`${styles.icon} ${styles.github}`} href={data.html_url}>
           <span className={"sr-only"}>Github</span>

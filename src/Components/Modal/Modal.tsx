@@ -1,8 +1,8 @@
 import { useModalContext } from "../../Context/ModalContext";
 import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
-import { ReactComponent as Alert } from "../../Assets/Modal/alert-circle.svg";
-import { ReactComponent as Check } from "../../Assets/Modal/check-circle.svg";
+import Alert from "../../Assets/Modal/alert-circle.svg";
+import Check from "../../Assets/Modal/check-circle.svg";
 import { RateModal } from "./RateModal/RateModal";
 function Modal() {
   const { dispatch, state } = useModalContext();
@@ -18,12 +18,8 @@ function Modal() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.modal}>
-        <p className={styles.modalTitle}>
-          {state.type === "error" ? "Error" : "Success"}
-        </p>
-        <div className={styles.modalIcon}>
-          {state.type === "error" ? <Alert /> : <Check />}
-        </div>
+        <p className={styles.modalTitle}>{state.type === "error" ? "Error" : "Success"}</p>
+        <div className={styles.modalIcon}>{state.type === "error" ? <Alert /> : <Check />}</div>
         <p className={styles.modalText}>{state.message}</p>
         <Button size="normal" type="button" onClick={handleClose}>
           Close

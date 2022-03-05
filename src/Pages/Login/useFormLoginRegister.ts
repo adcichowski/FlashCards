@@ -37,7 +37,6 @@ function useFormLoginRegister({ type }: { readonly type: "login" | "register" })
           });
           history.push("/game");
         } catch (err) {
-          console.log(err);
           if (err instanceof Error) {
             dispatch({
               type: "errorModal",

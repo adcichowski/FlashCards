@@ -1,7 +1,7 @@
 import { Navigation } from "../../../Navigation/Navigation";
 import styles from "./MainBoard.module.scss";
 import { Link } from "react-router-dom";
-import { ReactComponent as Plus } from "../../../../Assets/Icons/plus.svg";
+import Plus from "../../../../Assets/Icons/plus.svg";
 import { Button } from "../../../Button/Button";
 
 function MainBoard() {
@@ -14,16 +14,10 @@ function MainBoard() {
             <h1>Choose Deck To Seeing Cards</h1>
           </div>
 
-          <Button
-            size="big"
-            type={{ element: "a", href: "game/personal-cards" }}
-          >
+          <Button size="big" type={{ element: "a", href: "game/personal-cards" }}>
             Personal Cards
           </Button>
-          <Button
-            size="big"
-            type={{ element: "a", href: "game/general-cards" }}
-          >
+          <Button size="big" type={{ element: "a", href: "game/general-cards" }}>
             General Cards
           </Button>
 

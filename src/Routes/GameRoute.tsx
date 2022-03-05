@@ -19,10 +19,10 @@ function GameRoute() {
         <PrivateRoute path="/game">
           <MainBoard />
         </PrivateRoute>
-        <Route exact path="/game/personal-cards">
+        <Route path="/game/personal-cards">
           <BoardWithIcons />
         </Route>
-        <Route exact path="/game/general-cards">
+        <Route path="/game/general-cards">
           <BoardWithIcons />
         </Route>
         <Route path={"/game/add"}>

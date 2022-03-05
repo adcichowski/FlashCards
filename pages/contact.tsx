@@ -1,10 +1,9 @@
 import { Navigation } from "src/Components/Navigation/Navigation";
 import { GithubProfile } from "src/Components/Pages/Contact/GithubProfile";
 import { socialLinks } from "src/Constants/Constants";
-import { Game } from "src/Pages/Game/Game";
 import styles from "../src/Pages/Contact/Contact.module.scss";
 
-export function Contact() {
+export default function Contact() {
   const renderSocialLinks = socialLinks.map((socialName) => (
     <li key={socialName}>
       <a href={`https://${socialName}.com`}>
@@ -16,7 +15,7 @@ export function Contact() {
   ));
   return (
     <>
-      {/* <Navigation /> */}
+      <Navigation />
       <div className={styles.contact}>
         <div className={styles.description}>
           <h1 className={styles.descriptionTitle}>Thanks for your interest in FlashCards</h1>

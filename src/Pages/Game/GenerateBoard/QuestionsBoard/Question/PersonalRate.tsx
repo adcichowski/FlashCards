@@ -1,7 +1,7 @@
 import { useAuthContext } from "../../../../../Context/AuthContext";
 import { ICard, PersonRating } from "../../../../../Types/Types";
 import { useModalContext } from "../../../../../Context/ModalContext";
-import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
+import Star from "../../../../../Assets/Icons/star.svg";
 import styles from "./Question.module.scss";
 import { useCardContext } from "../../../../../Context/CardContext";
 import { Button } from "../../../../../Components/Button/Button";

@@ -1,6 +1,6 @@
 import { PersonalRate } from "./PersonalRate";
-import { ReactComponent as Star } from "../../../../../Assets/Icons/star.svg";
-import { ReactComponent as Heart } from "../../../../../Assets/Icons/heart.svg";
+import Star from "../../../../../Assets/Icons/star.svg";
+import Heart from "../../../../../Assets/Icons/heart.svg";
 import { useQuestionBoard } from "../useQuestionBoard";
 import { ICard, ITypeBoard } from "../../../../../Types/Types";
 import styles from "./Question.module.scss";

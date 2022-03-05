@@ -1,4 +1,5 @@
 import "../styles/settings.css";
+
 import type { AppProps } from "next/app";
 import { ModalProvider } from "src/Context/ModalContext";
 import { AuthProvider } from "src/Context/AuthContext";
