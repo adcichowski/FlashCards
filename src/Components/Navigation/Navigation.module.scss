@@ -11,14 +11,16 @@
   width: 55%;
   display: flex;
   justify-content: space-around;
-  font-size: clamp(1.6rem, calc(2vh + 1.2rem), 3.5rem);
 }
 .navItem {
   font-weight: 600;
-  font-size: clamp(2rem, calc(2vw + 1.8rem), 5rem);
+  font-size: clamp(2rem, calc(0.5vw + 1.6rem), 5rem);
   @media screen and (max-width: 950px) {
     margin: 9rem 0;
     font-weight: 600;
+  }
+  &Open {
+    font-size: clamp(2rem, calc(2vw + 1.6rem), 5rem);
   }
 }
 
