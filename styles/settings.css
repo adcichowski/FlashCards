@@ -1,0 +1,135 @@
+:root {
+  --font-color-primary: #e9e9e9;
+  --bg-color-input: #ab1100;
+  --bg-article-primary: #221f63;
+  --color--underscore: #a31934;
+  --button--background: #a31934;
+  --button--shadow: #680b1d;
+  --hamburger--front: #05ff6d;
+  --hamburger--back: #c93434;
+  --focus--input: #7b0019;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 10px;
+  color: var(--font-color-primary);
+}
+
+body {
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+  max-width: 1920px;
+  background-color: var(--bg-article-primary);
+  font-size: 1.6rem;
+}
+a {
+  text-decoration: none;
+  color: var(--font-color-primary);
+}
+ul {
+  list-style: none;
+}
+/*
+	Improved screen reader only CSS class
+	@author Gaël Poupard
+	@note Based on Yahoo!'s technique
+	@author Thierry Koblentz
+	@see https://developer.yahoo.com/blogs/ydn/clip-hidden-content-better-accessibility-53456.html
+	* 1.
+		@note `clip` is deprecated but works everywhere
+		@see https://developer.mozilla.org/en-US/docs/Web/CSS/clip
+	* 2.
+		@note `clip-path` is the future-proof version, but not very well supported yet
+		@see https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+		@see http://caniuse.com/#search=clip-path
+		@author Yvain Liechti
+		@see https://twitter.com/ryuran78/status/778943389819604992
+	* 3.
+		@note preventing text to be condensed
+		author J. Renée Beach
+		@see https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+		@note Drupal 8 goes with word-wrap: normal instead
+		@see https://www.drupal.org/node/2045151
+		@see http://cgit.drupalcode.org/drupal/commit/?id=5b847ea
+	* 4.
+		@note !important is important
+		@note Obviously you wanna hide something
+		@author Harry Roberts
+		@see https://csswizardry.com/2016/05/the-importance-of-important/
+*/
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important; /* 2 */
+  height: 1px !important;
+  overflow: hidden !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; /* 3 */
+}
+
+/*
+	Use in conjunction with .sr-only to only display content when it's focused.
+	@note Useful for skip links
+	@see http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
+	@note Based on a HTML5 Boilerplate technique, included in Bootstrap
+*/
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  clip: auto !important;
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  position: static !important;
+  width: auto !important;
+  white-space: normal !important;
+}
+*::-webkit-scrollbar {
+  position: absolute;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px rgb(4, 10, 76, 0.4);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background: #a31934;
+  border: 4px solid rgba(0, 0, 0, 0.2);
+}
+[type="color"],
+[type="date"],
+[type="datetime"],
+[type="datetime-local"],
+[type="email"],
+[type="month"],
+[type="number"],
+[type="password"],
+[type="search"],
+[type="tel"],
+[type="text"],
+[type="time"],
+[type="url"],
+[type="week"],
+button,
+select,
+textarea {
+  background-color: transparent;
+  border-radius: 0;
+  border-style: none;
+  color: inherit;
+}
