@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { ColorizeIcon } from "./ColorizeIcon";
 function BounceBoxes(htmlElements: HTMLElement) {
   interface TypeBoxes {
@@ -13,9 +13,8 @@ function BounceBoxes(htmlElements: HTMLElement) {
     typescript: "#265F9E",
     react: "#459CB4",
   };
-  const allBoxes = new Array(6).map((_, id) => {
-    return htmlElements.querySelector(`[id="Box-${id + 1}"]`);
-  });
+  const allBoxes = htmlElements.querySelectorAll(`[data-name="Box"]`);
+
   gsap.registerPlugin(ScrollTrigger);
   const tl = gsap.timeline({
     scrollTrigger: allBoxes[0] as HTMLDivElement,
@@ -34,9 +33,9 @@ function BounceBoxes(htmlElements: HTMLElement) {
     });
   });
 
-  const mouseEnterChangeColor = (e: Event, box: Element) => {
-    const getIconID = String(box.children[1].id);
-    ColorizeIcon(box, typeBoxes[getIconID]);
+  const mouseEnterChangeColor = (_: Event, box: Element) => {
+    const getIconID = box.children[1].getAttribute("data-name");
+    if (getIconID) ColorizeIcon(box, typeBoxes[getIconID]);
   };
 }
 export { BounceBoxes };

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "../Button/Button";
 import { Logo } from "../Logo/Logo";
 import styles from "./Footer.module.scss";
@@ -18,8 +18,8 @@ function Footer() {
             <ul className={styles.listLinks}>
               {navigationLinks.map((element) => (
                 <li key={element.name}>
-                  <Link className={styles.link} to={element.path}>
-                    {element.name}
+                  <Link href={element.path}>
+                    <a className={styles.link}>{element.name}</a>
                   </Link>
                 </li>
               ))}

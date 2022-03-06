@@ -1,15 +1,17 @@
+/* eslint-disable @next/next/no-img-element */
+//optimzie background by picture element
 import { Footer } from "src/Components/Footer/Footer";
 import { Navigation } from "src/Components/Navigation/Navigation";
 import { Button } from "src/Components/Button/Button";
 import { HomeAbout } from "src/Components/Pages/Home/HomeAbout/HomeAbout";
 import React from "react";
-import Image from "next/image";
 import styles from "src/Pages/Home/Home.module.scss";
+import { Instruction } from "src/Components/Pages/Home/Instruction/Instruction";
+import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
+import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
 // import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
 // import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
-// const Instruction = React.lazy(() =>
-//   import("src/Components/Pages/Home/Instruction/Instruction").then((module) => ({ default: module.Instruction })),
-// );
+
 export default function Home() {
   return (
     <div className={styles.homePage}>
@@ -21,7 +23,7 @@ export default function Home() {
           <source srcSet="/HeroBackground/large.png" media="(min-width: 1080px)" />
           <source srcSet="/HeroBackground/medium.png" media="(min-width: 480px)" />
           <source srcSet="/HeroBackground/small.png" media="(max-width: 360px), (min-width:360px)" />
-          <Image layout="fill" src="/HeroBackground/small.png" className={styles.heroBackground} alt="background" />
+          <img src="/HeroBackground/large.png" className={styles.heroBackground} alt="background" />
         </picture>
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
@@ -34,16 +36,16 @@ export default function Home() {
       </header>
       <main>
         <HomeAbout />
-        {/* <article className={styles.firstSide}>
+        <article className={styles.firstSide}>
           <picture tabIndex={-1}>
             <source srcSet="/ShoeBackground/large.png" media="(min-width: 1080px)" />
             <source srcSet="/ShoeBackground/medium.png" media="(min-width: 480px)" />
             <source srcSet="/ShoeBackground/small.png" media="(max-width: 360px), (min-width:360px)" />
             <img className={styles.shoeBackground} alt="background" />
           </picture>
-          <Suspense fallback={<div>Generate Card Instruction</div>}>
-            <Instruction />
-          </Suspense>
+
+          <Instruction />
+
           <ListTechnologies />
           <CirclesInfo />
         </article>
@@ -53,7 +55,7 @@ export default function Home() {
           <Button size="big" type={{ element: "a", href: "game" }}>
             Create Account
           </Button>
-        </section> */}
+        </section>
       </main>
       <Footer />
     </div>

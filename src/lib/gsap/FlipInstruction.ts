@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 function FlipInstruction(htmlElements: HTMLElement) {
   gsap.registerPlugin(ScrollTrigger);
   const frameBorder = Array.from(htmlElements.querySelectorAll(".frame__border"));

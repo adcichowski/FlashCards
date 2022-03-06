@@ -4,6 +4,7 @@ import { useAnimationGSAP } from "../../../Hooks/useAnimationGSAP";
 import { BounceBoxes } from "../../../../lib/gsap/BounceBoxes";
 function ListTechnologies() {
   const { getElements } = useAnimationGSAP(BounceBoxes);
+
   return (
     <div ref={getElements} className={styles.technologies}>
       <Technologies1 />
