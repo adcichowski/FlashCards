@@ -1,5 +1,5 @@
-import FrontCard from "../../../../Assets/Pages/Home/CardInstruction/FrontCardR.svg";
-import BackCard from "../../../../Assets/Pages/Home/CardInstruction/BackCardR.svg";
+import FrontCard from "./FrontCardR";
+import BackCard from "./BackCardR";
 import { Button } from "../../../Button/Button";
 import { useInstruction } from "./useInstruction";
 import styles from "./Instruction.module.scss";

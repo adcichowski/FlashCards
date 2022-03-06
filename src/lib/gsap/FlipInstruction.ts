@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 function FlipInstruction(htmlElements: HTMLElement) {
   gsap.registerPlugin(ScrollTrigger);
-  const frameBorder = Array.from(htmlElements.querySelectorAll(".frame__border"));
+  const frameBorder = Array.from(htmlElements.querySelectorAll(`[data-name="frame__border"]`));
   const frameArrow = Array.from(htmlElements.querySelectorAll(".frame__arrow"));
   const card = htmlElements.querySelector("#Card");
 
