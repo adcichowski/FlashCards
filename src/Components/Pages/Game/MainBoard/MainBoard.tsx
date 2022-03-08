@@ -1,6 +1,6 @@
 import { Navigation } from "../../../Navigation/Navigation";
 import styles from "./MainBoard.module.scss";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Plus from "../../../../Assets/Icons/plus.svg";
 import { Button } from "../../../Button/Button";
 
@@ -23,8 +23,10 @@ function MainBoard() {
 
           <div className={styles.outsideButton}>
             Create Card
-            <Link to="/game/add" className={styles.link}>
-              <Plus />
+            <Link href="/game/add">
+              <a className={styles.link}>
+                <Plus />
+              </a>
             </Link>
           </div>
         </div>
