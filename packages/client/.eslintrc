@@ -1,5 +1,4 @@
 {
-  "project": "client/tsconfig.json",
   "root": true,
   "parser": "@typescript-eslint/parser",
   "extends": [
@@ -22,6 +21,8 @@
     "jest": true
   },
   "rules": {
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
     "functional/no-try-statement": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "functional/no-throw-statement": "off",

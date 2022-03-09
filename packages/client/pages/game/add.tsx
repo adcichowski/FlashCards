@@ -1,15 +1,15 @@
-import { useAnimationGSAP } from "client/src/Components/Hooks/useAnimationGSAP";
-import { useAvaibleTechnologies } from "client/src/Components/Pages/Game/useAvaibleTechnologies";
-import { useCardContext } from "client/src/Context/CardContext";
-import { AnimateIconTech } from "client/src/lib/gsap/AnimateIconTech";
-import { useSendCardToDatabase } from "client/src/Pages/Game/AddCard/useSendCardToDatabase";
-import { useSetIdCard } from "client/src/Pages/Game/AddCard/useSetIdCard";
-import { ICard } from "client/src/Types/Types";
-import styles from "client/src/Pages/Game/AddCard/AddCard.module.scss";
-import { BackButton } from "client/src/Components/Button/BackButton/BackButton";
-import { Button } from "client/src/Components/Button/Button";
-import { CardByContext } from "client/src/Components/Pages/Game/CardByContext/CardByContext";
-import { Game } from "client/src/Pages/Game/Game";
+import { useAnimationGSAP } from "src/Components/Hooks/useAnimationGSAP";
+import { useAvaibleTechnologies } from "src/Components/Pages/Game/useAvaibleTechnologies";
+import { useCardContext } from "src/Context/CardContext";
+import { AnimateIconTech } from "src/lib/gsap/AnimateIconTech";
+import { useSendCardToDatabase } from "src/Pages/Game/AddCard/useSendCardToDatabase";
+import { useSetIdCard } from "src/Pages/Game/AddCard/useSetIdCard";
+import { ICard } from "src/Types/Types";
+import styles from "src/Pages/Game/AddCard/AddCard.module.scss";
+import { BackButton } from "src/Components/Button/BackButton/BackButton";
+import { Button } from "src/Components/Button/Button";
+import { CardByContext } from "src/Components/Pages/Game/CardByContext/CardByContext";
+import { Game } from "src/Pages/Game/Game";
 export default function AddCard() {
   const { nameDatabase, setNameDatabase } = useSetIdCard();
   const { sendCardToDatabase } = useSendCardToDatabase(nameDatabase);

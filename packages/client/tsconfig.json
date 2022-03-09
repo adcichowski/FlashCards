@@ -16,7 +16,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "packages/",
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
