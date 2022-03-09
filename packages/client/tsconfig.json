@@ -16,13 +16,13 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "packages/",
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next.config.js", "client/next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

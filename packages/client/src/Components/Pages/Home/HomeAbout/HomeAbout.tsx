@@ -1,5 +1,5 @@
 import styles from "./HomeAbout.module.scss";
-import { Logo } from "src/Components/Logo/Logo";
+import { Logo } from "client/src/Components/Logo/Logo";
 
 function HomeAbout() {
   return (
