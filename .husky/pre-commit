@@ -1,4 +1,3 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-
-npm run pre-commit
+# lerna run --concurency 1 --stream pre-commit --since HEAD --exclude-depends

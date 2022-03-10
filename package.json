@@ -2,6 +2,8 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
     "husky": "^7.0.4",
     "lerna": "^4.0.0"
   },
@@ -20,6 +22,12 @@
     "*.js": "eslint --cache --fix"
   },
   "dependencies": {
+    "commitlint": "^16.2.1",
     "prettier": "^2.5.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
