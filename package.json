@@ -22,6 +22,7 @@
     "*.js": "eslint --cache --fix"
   },
   "dependencies": {
+    "@commitlint/config-conventional": "^16.2.1",
     "commitlint": "^16.2.1",
     "prettier": "^2.5.1"
   },
