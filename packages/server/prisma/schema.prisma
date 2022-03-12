@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cards {
+  card_id    Int         @id @default(autoincrement())
+  technology String      @db.VarChar(255)
+  question   String      @db.VarChar(255)
+  answer     String      @db.VarChar(255)
+  rate_card  rate_card[]
+}
+
+model rate_card {
+  user_id Int
+  card_id Int
+  rate    Int
+  cards   cards @relation(fields: [card_id], references: [card_id], onDelete: NoAction, onUpdate: NoAction)
+  users   users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([user_id, card_id])
+}
+
+model type {
+  technology_id Int     @id @default(autoincrement())
+  type_card     String?
+}
+
+model users {
+  user_id    Int         @id @default(autoincrement())
+  username   String      @unique @db.VarChar(50)
+  password   String      @db.VarChar(50)
+  email      String      @unique @db.VarChar(255)
+  created_on DateTime    @default(now()) @db.Timestamp(6)
+  last_login DateTime?   @db.Timestamp(6)
+  rate_card  rate_card[]
+}
