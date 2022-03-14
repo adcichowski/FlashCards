@@ -4,11 +4,13 @@ import express from "express";
 const prisma = new PrismaClient();
 const app = express();
 app.use(express.json());
-app.get("/users", async (req, res) => {
-  res.json(await prisma.users.findFirst());
+app.get("/card", async (req, res) => {
+  const subject = await prisma.user.findMany();
+  await res.json(subject);
 });
-const server = app.listen(3000, () =>
+
+const server = app.listen(3000, () => {
   console.log(`
-🚀 Server ready at: http://localhost:3000
-`)
-);
+  🚀 Server ready at: http://localhost:3000, hi
+  `);
+});

@@ -48,3 +48,5 @@ ALTER TABLE "rate_card" ADD CONSTRAINT "rate_card_card_id_fkey" FOREIGN KEY ("ca
 
 -- AddForeignKey
 ALTER TABLE "rate_card" ADD CONSTRAINT "rate_card_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("user_id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+INSERT INTO users (username, password, email) VALUES ('Adamek', 'admin123', 'adamcek8@gmail.com'),('Martyna', 'admin12', 'martyna@gmail.com'), ('Dorota', 'dor123', 'dor@wp.pl');
