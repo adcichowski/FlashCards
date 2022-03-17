@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docker": "docker run -d --rm --name postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=flashcards -p 5432:5432 postgres",
-    "start": "tsnd --respawn index.ts",
+    "docker": "docker run -d --rm --name postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e -p 5432:5432 postgres",
+    "start": "tsnd --respawn server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-commit": "echo 'Server precommit running'"
   },
@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^3.10.0",
+    "body-parser": "^1.19.2",
     "express": "^4.17.3"
   },
   "devDependencies": {

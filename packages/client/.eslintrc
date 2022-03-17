@@ -37,12 +37,13 @@
     "no-console": "warn",
     "functional/functional-parameters": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
-    "jsx-a11y/anchor-is-valid": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   },
   "parserOptions": {
-    "ecmaVersion": 13,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+    "ecmaVersion": "latest",
+    "project": ["./tsconfig.json"],
+    "sourceType": "module"
   },
   "settings": {
     "react": {

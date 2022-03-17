@@ -6,10 +6,10 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_PASSWORD: pass
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 5342:5342
+      - 5343:5342

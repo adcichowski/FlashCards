@@ -16,10 +16,7 @@ function AddCard() {
   const { dispatch, state: stateCard } = useCardContext();
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { getElements } = useAnimationGSAP(AnimateIconTech);
-  const handleChangePartCard = (
-    partOfCard: keyof ICard,
-    changeTo: string | boolean
-  ) => {
+  const handleChangePartCard = (partOfCard: keyof ICard, changeTo: string | boolean) => {
     dispatch({
       type: "editCard",
       setCard: {
@@ -29,25 +26,23 @@ function AddCard() {
     });
   };
 
-  const renderRadioButtons = Object.values(avaibleTechnologies).map(
-    ({ name, render: Component }) => (
-      <label key={name} className={styles.radioLabel}>
-        <span className="sr-only">{name}</span>
-        <input
-          className={styles.radioInput}
-          onClick={() => {
-            handleChangePartCard("technology", name);
-          }}
-          type="radio"
-          name="technology"
-        />
+  const renderRadioButtons = Object.values(avaibleTechnologies).map(({ name, render: Component }) => (
+    <label key={name} className={styles.radioLabel}>
+      <span className="sr-only">{name}</span>
+      <input
+        className={styles.radioInput}
+        onClick={() => {
+          handleChangePartCard("technology", name);
+        }}
+        type="radio"
+        name="technology"
+      />
 
-        <div className={styles.radioIcon}>
-          <Component />
-        </div>
-      </label>
-    )
-  );
+      <div className={styles.radioIcon}>
+        <Component />
+      </div>
+    </label>
+  ));
 
   return (
     <div className={styles.board}>
@@ -66,9 +61,7 @@ function AddCard() {
             <p>Question</p>
             <input
               className={styles.textInput}
-              onChange={(e) =>
-                handleChangePartCard("question", e.currentTarget.value)
-              }
+              onChange={(e) => handleChangePartCard("question", e.currentTarget.value)}
             />
           </label>
           <label>
@@ -108,11 +101,7 @@ function AddCard() {
           <Button size="normal" type="button" onClick={sendCardToDatabase}>
             Add Card
           </Button>
-          <Button
-            size="normal"
-            type="button"
-            onClick={() => dispatch({ type: "showCard" })}
-          >
+          <Button size="normal" type="button" onClick={() => dispatch({ type: "showCard" })}>
             Show Card
           </Button>
         </span>

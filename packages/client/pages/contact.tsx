@@ -1,6 +1,6 @@
-import { Navigation } from "src/Components/Navigation/Navigation";
-import { GithubProfile } from "src/Components/Pages/Contact/GithubProfile";
-import { socialLinks } from "src/Constants/Constants";
+import { Navigation } from "../src/Components/Navigation/Navigation";
+import { GithubProfile } from "../src/Components/Pages/Contact/GithubProfile";
+import { socialLinks } from "../src/Constants/Constants";
 import styles from "../src/Pages/Contact/Contact.module.scss";
 
 export default function Contact() {
