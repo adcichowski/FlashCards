@@ -1,5 +1,5 @@
 import { prisma } from "../../server";
-import { Response, Request } from "express";
+import { Response, Request, NextFunction } from "express";
 import { Card, Subject } from "@prisma/client";
 const scrapCard = ({
   id,
@@ -28,4 +28,20 @@ export const getCardById = async (req: Request, res: Response) => {
     res.json(scrapCard(cardById));
   }
   res.status(404).json("Not Found");
+};
+
+export const getCardBySubject = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const subjectName = req.query.subject;
+  if (typeof subjectName === "string") {
+    const cardBySubject = await prisma.card.findMany({
+      where: { Subject: { name: subjectName } },
+      include: { Subject: true },
+    });
+    res.json(cardBySubject.map((card) => scrapCard(card)));
+  }
+  next();
 };

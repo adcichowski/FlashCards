@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bodyParser from "body-parser";
 import express from "express";
+import { subjectRouter } from "./routes/subject/subject.router";
 import { cardRouter } from "./routes/card/card.router";
 export const prisma = new PrismaClient();
 export const app = express();
@@ -8,6 +9,7 @@ export const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/card", cardRouter);
+app.use("/subject", subjectRouter);
 app.disable("x-powered-by");
 app.listen(3000, () => {
   console.log(`

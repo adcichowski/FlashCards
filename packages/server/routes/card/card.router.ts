@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getAllCards, getCardById } from "./card.controllers";
+import { getAllCards, getCardById, getCardBySubject } from "./card.controllers";
 const router = Router();
-router.get("/", getAllCards);
+router.get("/", [getCardBySubject, getAllCards]);
 router.get("/:id", getCardById);
 export { router as cardRouter };
