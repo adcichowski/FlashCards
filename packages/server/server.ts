@@ -8,7 +8,7 @@ export const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/card", cardRouter);
+app.use("/", cardRouter);
 app.use("/subject", subjectRouter);
 app.disable("x-powered-by");
 app.listen(3000, () => {
