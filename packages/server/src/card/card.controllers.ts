@@ -1,6 +1,7 @@
 import { prisma } from "../../server";
 import { Response, Request, NextFunction } from "express";
 import { Card, Subject } from "@prisma/client";
+import { cardService } from "./card.services";
 const scrapCard = ({
   id,
   question,
@@ -20,13 +21,7 @@ export const getAllCards = async (_: Request, res: Response) => {
 };
 
 export const getCardById = async (req: Request, res: Response) => {
-  const cardById = await prisma.card.findFirst({
-    where: { id: +req.params.id },
-    include: { Subject: true },
-  });
-  if (cardById) {
-    res.json(scrapCard(cardById));
-  }
+  res.json(scrapCard(cardService.firstCardById(req.params.id)));
   res.status(404).json("Not Found");
 };
 
