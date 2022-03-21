@@ -1,7 +1,7 @@
-import { prisma } from "../../server";
 import { Response, Request, NextFunction } from "express";
 import { Card, Subject } from "@prisma/client";
-import { cardService } from "./card.services";
+import { cardService } from "./card.service";
+
 const scrapCard = ({
   id,
   question,
@@ -12,16 +12,17 @@ const scrapCard = ({
 }) => ({ id, question, answer, subject: Subject.name });
 
 export const getAllCards = async (_: Request, res: Response) => {
-  const allCards = await prisma.card.findMany({
-    include: { Subject: true },
-  });
+  const allCards = await cardService.getAllCards();
   const scrapeData = allCards.map((card) => scrapCard(card));
 
   res.json(scrapeData);
 };
 
 export const getCardById = async (req: Request, res: Response) => {
-  res.json(scrapCard(cardService.firstCardById(req.params.id)));
+  const cardById = await cardService.getFirstCardById(req.params.id);
+  if (cardById) {
+    res.json(scrapCard(cardById));
+  }
   res.status(404).json("Not Found");
 };
 
@@ -30,13 +31,11 @@ export const getCardBySubject = async (
   res: Response,
   next: NextFunction
 ) => {
-  const subjectName = req.query.subject;
-  if (typeof subjectName === "string") {
-    const cardBySubject = await prisma.card.findMany({
-      where: { Subject: { name: subjectName } },
-      include: { Subject: true },
-    });
-    res.json(cardBySubject.map((card) => scrapCard(card)));
+  const subject = req.query.subject;
+  if (typeof subject === "string") {
+    const cardBySubject = await cardService.getCardBySubject(subject);
+
+    res.json(await cardBySubject.map((card) => scrapCard(card)));
   }
   next();
 };

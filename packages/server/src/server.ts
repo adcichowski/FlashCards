@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import bodyParser from "body-parser";
 import express from "express";
-import { subjectRouter } from "./routes/subject/subject.router";
-import { cardRouter } from "./routes/card/card.router";
+import { subjectRouter } from "./subject/subject.router";
+import { cardRouter } from "./card/card.router";
 export const prisma = new PrismaClient();
 export const app = express();
 
