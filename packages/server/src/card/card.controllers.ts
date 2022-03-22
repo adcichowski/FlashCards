@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import { Card, Subject } from "@prisma/client";
 import { cardService } from "./card.service";
-const pino = require("pino-http")();
+import { logger } from "../utils/logger";
 const scrapCard = ({
   id,
   question,
@@ -13,7 +13,7 @@ const scrapCard = ({
 
 export const getAllCards = async (_: Request, res: Response) => {
   const allCards = await cardService.getAllCards();
-  pino.console.log();
+  logger.info(allCards);
 
   const scrapeData = allCards.map((card) => scrapCard(card));
 
@@ -22,6 +22,7 @@ export const getAllCards = async (_: Request, res: Response) => {
 
 export const getCardById = async (req: Request, res: Response) => {
   const cardById = await cardService.getFirstCardById(req.params.id);
+
   if (cardById) {
     res.json(scrapCard(cardById));
   }
