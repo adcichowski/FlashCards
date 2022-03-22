@@ -21,7 +21,6 @@ export const getAllCards = async (_: Request, res: Response) => {
 };
 
 export const getCardById = async (req: Request, res: Response) => {
-  req.log.info("something");
   const cardById = await cardService.getFirstCardById(req.params.id);
   if (cardById) {
     res.json(scrapCard(cardById));

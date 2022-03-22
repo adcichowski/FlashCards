@@ -14,7 +14,13 @@ function GithubProfile() {
     <div className={styles.card}>
       <p className={styles.cardTitle}>Created By</p>
       <span className={styles.cardName}>Adam</span>
-      <Image width={100} height={100} className={styles.cardAvatar} src={data.avatar_url} alt="avatar" />
+      <Image
+        width={100}
+        height={100}
+        className={styles.cardAvatar}
+        src="https://avatars.githubusercontent.com/u/71249791?v=4"
+        alt="avatar"
+      />
       <div className={styles.icons}>
         <a className={`${styles.icon} ${styles.github}`} href={data.html_url}>
           <span className={"sr-only"}>Github</span>

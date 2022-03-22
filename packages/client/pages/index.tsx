@@ -9,8 +9,6 @@ import styles from "src/Pages/Home/Home.module.scss";
 import { Instruction } from "src/Components/Pages/Home/Instruction/Instruction";
 import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
 import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
-// import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
-// import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
 
 export default function Home() {
   return (
