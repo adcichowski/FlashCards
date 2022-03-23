@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-
+import cors from "cors";
 import bodyParser from "body-parser";
 import express from "express";
 import { subjectRouter } from "./subject/subject.router";
@@ -8,7 +8,7 @@ const PORT = 3001;
 
 export const prisma = new PrismaClient();
 export const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", cardRouter, subjectRouter);
