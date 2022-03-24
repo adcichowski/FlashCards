@@ -22,11 +22,11 @@ export const getAllCards = async (_: Request, res: Response) => {
 
 export const getCardById = async (req: Request, res: Response) => {
   const cardById = await cardService.getFirstCardById(req.params.id);
-
+  logger.info(`Getting Card by ID ${req.params.id}`);
   if (cardById) {
     res.json(scrapCard(cardById));
   }
-  res.status(404).json("Not Found");
+  res.status(404).send("Not Found");
 };
 
 export const getCardBySubject = async (
@@ -35,10 +35,10 @@ export const getCardBySubject = async (
   next: NextFunction
 ) => {
   const subject = req.query.subject;
+  logger.info(`Getting Card by subject '${subject}'`);
   if (typeof subject === "string") {
     const cardBySubject = await cardService.getCardBySubject(subject);
-
-    res.json(await cardBySubject.map((card) => scrapCard(card)));
+    return res.json(await cardBySubject.map((card) => scrapCard(card)));
   }
   next();
 };
