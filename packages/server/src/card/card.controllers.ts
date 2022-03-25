@@ -1,4 +1,4 @@
-import { Response, Request, NextFunction } from "express";
+import { Response, Request } from "express";
 import { Card, Subject } from "@prisma/client";
 import { cardService } from "./card.service";
 import { logger } from "../utils/logger";
@@ -13,7 +13,7 @@ const scrapCard = ({
 
 export const getAllCards = async (_: Request, res: Response) => {
   const allCards = await cardService.getAllCards();
-  logger.info(allCards);
+  logger.info("Getting all cards");
 
   const scrapeData = allCards.map((card) => scrapCard(card));
 
@@ -26,19 +26,15 @@ export const getCardById = async (req: Request, res: Response) => {
   if (cardById) {
     res.json(scrapCard(cardById));
   }
-  res.status(404).send("Not Found");
+  res.status(404).send({ message: "Not Found" });
 };
 
-export const getCardBySubject = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getCardBySubject = async (req: Request, res: Response) => {
   const subject = req.query.subject;
   logger.info(`Getting Card by subject '${subject}'`);
   if (typeof subject === "string") {
     const cardBySubject = await cardService.getCardBySubject(subject);
     return res.json(await cardBySubject.map((card) => scrapCard(card)));
   }
-  next();
+  res.status(404).send({ message: "Not found" });
 };

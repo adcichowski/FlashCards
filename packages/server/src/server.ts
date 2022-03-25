@@ -11,7 +11,7 @@ export const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/", cardRouter, subjectRouter);
+app.use(cardRouter, subjectRouter);
 
 app.disable("x-powered-by");
 app.listen(PORT, () => {
