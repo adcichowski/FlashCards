@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import { subjectRouter } from "./subject/subject.router";
 import { cardRouter } from "./card/card.router";
-const PORT = 3001;
+const { PORT, NODE_ENV } = process.env;
 
 export const prisma = new PrismaClient();
 export const app = express();
@@ -16,6 +16,6 @@ app.use(cardRouter, subjectRouter);
 app.disable("x-powered-by");
 app.listen(PORT, () => {
   console.log(`
-  🚀 Server ready at: http://localhost:${PORT}
+  🚀 Server ready at: http://${NODE_ENV || `http://localhost:${PORT}`}
   `);
 });
