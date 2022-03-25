@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { getAllSubject } from "./subject.controler";
+import { isAvaibleSubject } from "./subject.middleware";
+import { subjectService } from "./subject.service";
 
 const router = Router();
-router.get("/subjects", getAllSubject);
+router.get("/subjects", isAvaibleSubject, subjectService.getSubjects);
 export { router as subjectRouter };
