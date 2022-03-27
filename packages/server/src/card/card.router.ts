@@ -1,5 +1,7 @@
 import { Router } from "express";
+
 import { isAvaibleSubject } from "../subject/subject.middleware";
+
 import { getAllCards, getCardById, getCardBySubject } from "./card.controllers";
 const router = Router();
 router.get("/cards", getAllCards);

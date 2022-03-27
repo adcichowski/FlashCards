@@ -1,5 +1,7 @@
-import { Response, Request, NextFunction } from "express";
 import { subjectService } from "./subject.service";
+
+import type { Response, Request, NextFunction } from "express";
+
 
 export const isAvaibleSubject = async (
   req: Request,

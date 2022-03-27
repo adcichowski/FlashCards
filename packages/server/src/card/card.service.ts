@@ -1,4 +1,6 @@
-import { prisma } from "../server";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const getFirstCardById = async (id: string) =>
   await prisma.card.findFirst({

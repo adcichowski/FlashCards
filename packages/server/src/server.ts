@@ -1,16 +1,15 @@
-import { PrismaClient } from "@prisma/client";
-import cors from "cors";
-import bodyParser from "body-parser";
-import express from "express";
-import { subjectRouter } from "./subject/subject.router";
+import BodyParser from "body-parser";
+import Cors from "cors";
+import Express from "express";
+
 import { cardRouter } from "./card/card.router";
+import { subjectRouter } from "./subject/subject.router";
 const { PORT, NODE_ENV } = process.env;
 
-export const prisma = new PrismaClient();
-export const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+export const app = Express();
+app.use(Cors());
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: true }));
 app.use(cardRouter, subjectRouter);
 
 app.disable("x-powered-by");
