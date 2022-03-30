@@ -12,6 +12,9 @@ model Card {
   subjectId Int
   question  String  @db.VarChar(255)
   answer    String  @db.VarChar(255)
+  createdBy Int?
+  shape     Int     @default(1)
+  User      User?   @relation(fields: [createdBy], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_user_id_fk")
   Subject   Subject @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_subject_subject_id_fk")
   Rate      Rate[]
 }
@@ -27,17 +30,20 @@ model Rate {
 }
 
 model Subject {
-  id   Int     @id(map: "technologies_pk") @unique(map: "technologies_technologyid_uindex") @default(autoincrement())
-  name String? @db.VarChar(22)
-  Card Card[]
+  id      Int     @id(map: "technologies_pk") @default(autoincrement())
+  name    String? @db.VarChar(22)
+  color   String? @db.VarChar(6)
+  section String? @db.VarChar(32)
+  Card    Card[]
 }
 
 model User {
   id        Int       @id(map: "users_pkey") @default(autoincrement())
-  userName  String    @unique(map: "users_username_key") @db.VarChar(50)
+  userName  String    @db.VarChar(50)
   password  String    @db.VarChar(50)
   email     String    @unique(map: "users_email_key") @db.VarChar(60)
   createdOn DateTime  @default(now()) @db.Timestamp(6)
   lastLogin DateTime? @db.Timestamp(6)
+  Card      Card[]
   Rate      Rate[]
 }

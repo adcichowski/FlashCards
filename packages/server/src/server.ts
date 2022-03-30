@@ -10,11 +10,11 @@ export const app = Express();
 app.use(Cors());
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
-app.use(cardRouter, subjectRouter);
+app.use(subjectRouter, cardRouter);
 
 app.disable("x-powered-by");
 app.listen(PORT, () => {
   console.log(`
-  🚀 Server ready at: http://${NODE_ENV || `http://localhost:${PORT}`}
+  🚀 Server ready at: http://${NODE_ENV || `localhost:${PORT}`}
   `);
 });
