@@ -10,9 +10,23 @@ const scrapCard = ({
   question,
   Subject,
   answer,
+  User,
+  shape,
 }: Card & {
   readonly Subject: Subject;
-}) => ({ id, question, answer, subject: Subject.name });
+  readonly User: {
+    readonly userName: string;
+  };
+}) => ({
+  id,
+  question,
+  answer,
+  subjectName: Subject.name,
+  subjectColor: Subject.color,
+  section: Subject.section,
+  createdBy: User.userName,
+  shape,
+});
 
 export const getAllCards = async (_: Request, res: Response) => {
   const allCards = await cardService.getAllCards();
