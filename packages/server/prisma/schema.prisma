@@ -13,7 +13,8 @@ model Card {
   question  String  @db.VarChar(255)
   answer    String  @db.VarChar(255)
   userId    Int
-  shape     Int     @default(1)
+  shapeId   Int?
+  Shape     Shape?  @relation(fields: [shapeId], references: [shapeId], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_shapeid_fk")
   Subject   Subject @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_subject_subject_id_fk")
   User      User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_user_id_fk")
   Rate      Rate[]
@@ -46,4 +47,9 @@ model User {
   lastLogin DateTime? @db.Timestamp(6)
   Card      Card[]
   Rate      Rate[]
+}
+
+model Shape {
+  shapeId Int    @id(map: "shape_pk")
+  Card    Card[]
 }

@@ -11,7 +11,7 @@ const scrapCard = ({
   Subject,
   answer,
   User,
-  shape,
+  shapeId,
 }: Card & {
   readonly Subject: Subject;
   readonly User: {
@@ -25,7 +25,7 @@ const scrapCard = ({
   subjectColor: Subject.color,
   section: Subject.section,
   createdBy: User.userName,
-  shape,
+  shapeId,
 });
 
 export const getAllCards = async (_: Request, res: Response) => {
