@@ -1,3 +1,12 @@
+// routes/users.js
+
+/**
+ * @swagger
+ * /subjects:
+ *   get:
+ *     summary: Receive all avaible flashcards subjects
+ *
+ */
 import { Router } from "express";
 
 import { subjectService } from "./subject.service";

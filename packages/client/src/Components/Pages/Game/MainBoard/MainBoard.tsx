@@ -7,33 +7,17 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 function MainBoard() {
-  const { data } = useQuery("repoData", () =>
+  const { data, isLoading } = useQuery("repoData", () =>
     axios.get("http://localhost:3001/subjects", { method: "GET" }).then((res) => res.data),
   );
-  console.log(data);
+
   return (
     <>
       <Navigation />
       <div className={styles.board}>
         <div className={styles.insideBoard}>
           <div className={styles.boardTitle}>
-            <h1>Choose Deck To Seeing Cards</h1>
-          </div>
-
-          <Button size="big" type={{ element: "a", href: "game/personal-cards" }}>
-            Personal Cards
-          </Button>
-          <Button size="big" type={{ element: "a", href: "game/general-cards" }}>
-            General Cards
-          </Button>
-
-          <div className={styles.outsideButton}>
-            Create Card
-            <Link href="/game/add">
-              <a className={styles.link}>
-                <Plus />
-              </a>
-            </Link>
+            <h1>Avaible Subjects</h1>
           </div>
         </div>
       </div>
