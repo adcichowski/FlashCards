@@ -2,10 +2,9 @@ import BodyParser from "body-parser";
 import Cors from "cors";
 import Express from "express";
 
-import { routerSwagger } from "../swager";
-
 import { cardRouter } from "./card/card.router";
 import { subjectRouter } from "./subject/subject.router";
+import { routerSwagger } from "./utils/swager/swager";
 
 const { PORT, NODE_ENV } = process.env;
 
