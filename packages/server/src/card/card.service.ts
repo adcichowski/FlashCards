@@ -21,6 +21,7 @@ const getCardBySubject = async (subject: string) =>
     where: { Subject: { name: subject } },
     include: {
       Subject: true,
+      Rate: true,
       User: {
         select: {
           userName: true,
@@ -33,6 +34,7 @@ const getAllCards = async () =>
   await prisma.card.findMany({
     include: {
       Subject: true,
+      Rate: true,
       User: {
         select: {
           userName: true,

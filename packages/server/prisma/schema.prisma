@@ -23,7 +23,7 @@ model Card {
 model Rate {
   userId Int
   cardId Int
-  rate   Int?
+  rate   Int
   Card   Card @relation(fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_card_id_fkey")
   User   User @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_user_id_fkey")
 
@@ -31,10 +31,10 @@ model Rate {
 }
 
 model Subject {
-  id      Int     @id(map: "technologies_pk") @default(autoincrement())
-  name    String? @db.VarChar(22)
-  color   String? @db.VarChar(6)
-  section String? @db.VarChar(32)
+  id      Int    @id(map: "technologies_pk") @default(autoincrement())
+  name    String @db.VarChar(22)
+  color   String @db.VarChar(6)
+  section String @db.VarChar(32)
   Card    Card[]
 }
 

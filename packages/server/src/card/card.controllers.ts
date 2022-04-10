@@ -2,7 +2,7 @@ import { logger } from "../utils/logger";
 
 import { cardService } from "./card.service";
 
-import type { Card, Subject } from "@prisma/client";
+import type { Card, Rate, Subject } from "@prisma/client";
 import type { Response, Request } from "express";
 
 const scrapCard = ({
@@ -12,8 +12,10 @@ const scrapCard = ({
   answer,
   User,
   shapeId,
+  Rate,
 }: Card & {
   readonly Subject: Subject;
+  readonly Rate: readonly Rate[];
   readonly User: {
     readonly userName: string;
   };
@@ -21,9 +23,17 @@ const scrapCard = ({
   id,
   question,
   answer,
-  subjectName: Subject.name,
-  subjectColor: Subject.color,
-  section: Subject.section,
+  rate: {
+    list: Rate.map((userRate) => userRate.rate),
+    overall: Rate.reduce((prev, userRate) => {
+      return prev + userRate.rate / Rate.length;
+    }, 0).toFixed(2),
+  },
+  subject: {
+    name: Subject.name,
+    color: Subject.color,
+    section: Subject.section,
+  },
   createdBy: User.userName,
   shapeId,
 });

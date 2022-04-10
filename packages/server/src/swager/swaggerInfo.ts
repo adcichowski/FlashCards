@@ -40,6 +40,27 @@ export const swaggerInfo = {
         },
       },
     },
+    "/cards": {
+      get: {
+        tags: ["Card"],
+        summary: "Find All Cards in FlashCards",
+        responses: {
+          "200": {
+            description: "successful operation",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "array",
+                  items: {
+                    $ref: "#/components/schemas/Card",
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   components: {
     schemas: {
@@ -50,6 +71,31 @@ export const swaggerInfo = {
           name: { type: "string" },
           color: { type: "string" },
           section: { type: "string" },
+        },
+      },
+      Card: {
+        type: "object",
+        properties: {
+          id: { type: "integer", format: "int64" },
+          question: { type: "string" },
+          answer: { type: "string" },
+          subject: {
+            type: "object",
+            properties: {
+              name: { type: "string" },
+              color: { type: "string" },
+              section: { type: "string" },
+            },
+          },
+          rate: {
+            type: "object",
+            properties: {
+              list: { type: "array", items: { type: "integer" } },
+              overall: { type: "number", format: "float" },
+            },
+          },
+          createdBy: { type: "string" },
+          shapeId: { type: "integer", format: "int64" },
         },
       },
     },
