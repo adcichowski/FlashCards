@@ -1,6 +1,6 @@
 import { logger } from "../utils/logger";
 
-import { cardService } from "./card.service";
+import { cardService, createCard } from "./card.service";
 
 import type { Card, Rate, Subject } from "@prisma/client";
 import type { Response, Request } from "express";
@@ -48,12 +48,14 @@ export const getAllCards = async (_: Request, res: Response) => {
 };
 
 export const getCardById = async (req: Request, res: Response) => {
-  const cardById = await cardService.getFirstCardById(req.params.id);
-  if (cardById) {
-    logger.info(`Getting Card by ID ${req.params.id}`);
-    res.json(scrapCard(cardById));
+  if (!/[A-Z]/i.test(req.params.id)) {
+    const cardById = await cardService.getFirstCardById(req.params.id);
+    if (cardById) {
+      logger.info(`Getting Card by ID ${req.params.id}`);
+      res.json(scrapCard(cardById));
+    }
+    res.status(404).send({ message: "Not Found" });
   }
-  res.status(404).send({ message: "Not Found" });
 };
 
 export const getCardBySubject = async (req: Request, res: Response) => {
@@ -64,4 +66,10 @@ export const getCardBySubject = async (req: Request, res: Response) => {
     return res.json(cardBySubject.map((card) => scrapCard(card)));
   }
   res.status(404).send({ message: "Not found" });
+};
+
+export const postCreateCard = async (req: Request, res: Response) => {
+  const card = req.body;
+  await createCard(card);
+  res.status(200).send({ message: "Card is created" });
 };

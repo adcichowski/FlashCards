@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
+import type { Card } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
 const getFirstCardById = async (id: string) =>
@@ -43,6 +45,9 @@ const getAllCards = async () =>
     },
   });
 
+export const createCard = async (card: Omit<Card, "id">) => {
+  await prisma.card.create({ data: card });
+};
 export const cardService = {
   getFirstCardById,
   getCardBySubject,

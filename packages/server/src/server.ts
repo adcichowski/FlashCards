@@ -4,7 +4,7 @@ import Express from "express";
 
 import { cardRouter } from "./card/card.router";
 import { subjectRouter } from "./subject/subject.router";
-import { routerSwagger } from "./swager/swager";
+import { routerSwagger } from "./swagger/swagger";
 
 const { PORT, NODE_ENV } = process.env;
 
