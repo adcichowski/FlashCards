@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { subjectService } from "./subject.service";
+import { subjectService } from "./subject-service";
 
 import type { Request, Response } from "express";
 // import { isAvaibleSubject } from "./subject.middleware";

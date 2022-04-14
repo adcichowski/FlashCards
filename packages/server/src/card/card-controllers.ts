@@ -1,6 +1,6 @@
 import { logger } from "../utils/logger";
 
-import { cardService, createCard } from "./card.service";
+import { cardService, createCard } from "./card-service";
 
 import type { Card, Rate, Subject } from "@prisma/client";
 import type { Response, Request } from "express";
@@ -70,6 +70,7 @@ export const getCardBySubject = async (req: Request, res: Response) => {
 
 export const postCreateCard = async (req: Request, res: Response) => {
   const card = req.body;
+  console.log(req.body);
   await createCard(card);
   res.status(200).send({ message: "Card is created" });
 };

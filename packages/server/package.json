@@ -13,10 +13,10 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^3.10.0",
-    "body-parser": "^1.19.2",
     "commitlint": "^16.2.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "joi": "^17.6.0",
     "pino": "^7.9.1",
     "pino-pretty": "^7.5.4",
     "prettier": "^2.5.1",
