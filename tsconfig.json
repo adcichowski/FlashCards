@@ -16,9 +16,6 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
-  },
-  "include": ["**/*.ts", "**/*.tsx", "next.config.js"],
-  "exclude": ["node_modules"]
+  }
 }

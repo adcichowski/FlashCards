@@ -76,7 +76,7 @@ export const swaggerInfo = {
       Card: {
         type: "object",
         properties: {
-          id: { type: "integer", format: "int64" },
+          id: { type: "number", format: "integer" },
           question: { type: "string" },
           answer: { type: "string" },
           subject: {

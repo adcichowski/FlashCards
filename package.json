@@ -13,17 +13,18 @@
   },
   "scripts": {
     "new-version": "lerna version --conventional-commits --yes",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "eslint": "lerna run eslint --stream"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
+      " lerna run eslint --stream --fix",
       "prettier --write"
     ],
     "*.{json,md,yaml,yml,scss,css}": [
       "prettier --write"
     ],
-    "*.js": "eslint --cache --fix"
+    "*.js": "lerna run eslint --stream --cache --fix"
   },
   "dependencies": {
     "@commitlint/config-conventional": "^16.2.1",

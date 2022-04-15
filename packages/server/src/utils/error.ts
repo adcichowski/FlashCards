@@ -12,9 +12,7 @@
  * });
  */
 
-import { NextFunction } from "express";
 import { HttpStatusCode } from "./httpStatusCodes";
-import { logger } from "./logger";
 
 export interface StatusError {
   readonly statusCode: HttpStatusCode;
@@ -42,14 +40,5 @@ export class HttpError extends Error implements StatusError {
       this.message = message;
     }
     Object.setPrototypeOf(this, HttpError.prototype);
-  }
-}
-
-function errorGuard = (_:Request,_:Response,next:NextFunction) => {
-  try{
-next()
-  }
-  catch(e: Error){
-    logger.error(e.message)
   }
 }

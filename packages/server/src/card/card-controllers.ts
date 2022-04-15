@@ -68,9 +68,9 @@ export const getCardBySubject = async (req: Request, res: Response) => {
   res.status(404).send({ message: "Not found" });
 };
 
-export const postCreateCard = async (req: Request, res: Response) => {
-  const card = req.body;
+export const postCreateCard = (req: Request, res: Response) => {
+  const card: Omit<Card, "id"> = req.body;
   console.log(req.body);
-  await createCard(card);
+  createCard(card);
   res.status(200).send({ message: "Card is created" });
 };
