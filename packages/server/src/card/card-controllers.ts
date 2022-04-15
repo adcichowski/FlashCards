@@ -31,8 +31,6 @@ const scrapCard = ({
   },
   subject: {
     name: Subject.name,
-    color: Subject.color,
-    section: Subject.section,
   },
   createdBy: User.userName,
   shapeId,
@@ -68,9 +66,9 @@ export const getCardBySubject = async (req: Request, res: Response) => {
   res.status(404).send({ message: "Not found" });
 };
 
-export const postCreateCard = (req: Request, res: Response) => {
+export const postCreateCard = async (req: Request, res: Response) => {
   const card: Omit<Card, "id"> = req.body;
   console.log(req.body);
-  createCard(card);
+  await createCard(card);
   res.status(200).send({ message: "Card is created" });
 };

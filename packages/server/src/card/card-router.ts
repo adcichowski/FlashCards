@@ -15,9 +15,5 @@ const router = Router();
 router.get("/cards", getAllCards);
 router.get("/card", isAvaibleSubject, getCardBySubject);
 router.get("/card/:id", getCardById);
-router.post(
-  "/card/add",
-  reusableValidation(validateSchemaCard),
-  postCreateCard
-);
+router.post("/card", reusableValidation(validateSchemaCard), postCreateCard);
 export { router as cardRouter };

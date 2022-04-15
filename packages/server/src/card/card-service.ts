@@ -45,8 +45,16 @@ const getAllCards = async () =>
     },
   });
 
-export const createCard = (card: Omit<Card, "id">) => {
-  // await prisma.card.create({ data: card });
+export const createCard = async (card: Omit<Card, "id">) => {
+  await prisma.card.create({
+    data: {
+      question: card.question,
+      answer: card.answer,
+      Shape: { connect: { shapeId: +card.shapeId } },
+      Subject: { connect: { id: +card.subjectId } },
+      User: { connect: { id: +card.userId } },
+    },
+  });
   return card;
 };
 export const cardService = {

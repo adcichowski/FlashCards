@@ -13,8 +13,8 @@ model Card {
   question  String  @db.VarChar(255)
   answer    String  @db.VarChar(255)
   userId    Int
-  shapeId   Int?
-  Shape     Shape?  @relation(fields: [shapeId], references: [shapeId], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_shapeid_fk")
+  shapeId   Int
+  Shape     Shape   @relation(fields: [shapeId], references: [shapeId], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_shapeid_fk")
   Subject   Subject @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_subject_subject_id_fk")
   User      User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_user_id_fk")
   Rate      Rate[]
@@ -31,11 +31,11 @@ model Rate {
 }
 
 model Subject {
-  id      Int    @id(map: "technologies_pk") @default(autoincrement())
-  name    String @db.VarChar(22)
-  color   String @db.VarChar(6)
-  section String @db.VarChar(32)
-  Card    Card[]
+  id        Int     @id(map: "technologies_pk") @default(autoincrement())
+  name      String  @db.VarChar(22)
+  sectionId Int
+  Section   Section @relation(fields: [sectionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "subject_section_id_fk")
+  Card      Card[]
 }
 
 model User {
@@ -52,4 +52,10 @@ model User {
 model Shape {
   shapeId Int    @id(map: "shape_pk")
   Card    Card[]
+}
+
+model Section {
+  id      Int       @id(map: "section_pk") @default(autoincrement())
+  name    String    @db.VarChar(32)
+  Subject Subject[]
 }

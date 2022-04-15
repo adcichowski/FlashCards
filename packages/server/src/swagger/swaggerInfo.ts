@@ -40,6 +40,23 @@ export const swaggerInfo = {
         },
       },
     },
+    "/card": {
+      post: {
+        tags: ["Card"],
+        summay: "Create Card in FlashCards",
+      },
+      consumes: ["application/json"],
+      responses: {
+        "200": {
+          description: "successful operation",
+          content: {
+            "application/json": {
+              message: "Card was created",
+            },
+          },
+        },
+      },
+    },
     "/cards": {
       get: {
         tags: ["Card"],
