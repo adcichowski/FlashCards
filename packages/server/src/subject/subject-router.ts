@@ -1,13 +1,9 @@
 import { Router } from "express";
 
-import { subjectService } from "./subject-service";
+import { getAllSubjects } from "./subject-controller";
 
-import type { Request, Response } from "express";
 // import { isAvaibleSubject } from "./subject.middleware";
 
 const router = Router();
-router.get("/subjects", async (_: Request, res: Response) => {
-  const allSubjects = await subjectService.getSubjects();
-  res.json({ data: allSubjects });
-});
+router.get("/subjects", getAllSubjects);
 export { router as subjectRouter };

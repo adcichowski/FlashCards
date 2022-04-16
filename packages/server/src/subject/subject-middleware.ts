@@ -8,10 +8,11 @@ export const isAvaibleSubject = async (
   next: NextFunction
 ) => {
   const subject = req.query.subject;
+  const subjects = await subjectService.findManySubjects();
   if (typeof subject === "string") {
-    const hasThisSubject = (await subjectService.getNamesSubjets()).includes(
-      subject
-    );
+    const hasThisSubject = subjects
+      .map((subject) => subject.name)
+      .includes(subject);
     if (!hasThisSubject) res.status(404).send({ message: "Not Found" });
   }
   next();
