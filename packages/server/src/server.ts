@@ -1,3 +1,4 @@
+import BodyParser from "body-parser";
 import Cors from "cors";
 import Express from "express";
 
@@ -9,10 +10,13 @@ const { PORT, NODE_ENV } = process.env;
 
 export const app = Express();
 app.use(Cors());
-app.use(Express.urlencoded({ extended: true }));
-app.use(Express.json());
+app.use(BodyParser.json());
+app.use(
+  BodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(subjectRouter, cardRouter, routerSwagger);
-
 app.disable("x-powered-by");
 app.listen(PORT, () => {
   console.log(`

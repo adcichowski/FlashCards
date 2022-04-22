@@ -3,12 +3,11 @@ import { PrismaClient } from "@prisma/client";
 import type { Card } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
 const getFirstCardById = async (id: string) =>
   await prisma.card.findFirst({
     where: { id: +id },
     include: {
-      Subject: true,
+      Subject: { include: { Section: true } },
       Rate: true,
       User: {
         select: {
@@ -22,7 +21,7 @@ const getCardBySubject = async (subject: string) =>
   await prisma.card.findMany({
     where: { Subject: { name: subject } },
     include: {
-      Subject: true,
+      Subject: { include: { Section: true } },
       Rate: true,
       User: {
         select: {
@@ -35,7 +34,7 @@ const getCardBySubject = async (subject: string) =>
 const getAllCards = async () =>
   await prisma.card.findMany({
     include: {
-      Subject: true,
+      Subject: { include: { Section: true } },
       Rate: true,
       User: {
         select: {

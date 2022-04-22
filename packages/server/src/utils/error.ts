@@ -14,6 +14,7 @@
 
 import { HttpStatusCode } from "./httpStatusCodes";
 
+import type { Response, Request } from "express";
 export interface StatusError {
   readonly statusCode: HttpStatusCode;
 }
@@ -42,3 +43,11 @@ export class HttpError extends Error implements StatusError {
     Object.setPrototypeOf(this, HttpError.prototype);
   }
 }
+export const errorMiddleware = (err: unknown, _: Request, res: Response) => {
+  console.log("errorMiddleware");
+  if (err instanceof HttpError) {
+    return res
+      .status(err.statusCode)
+      .json({ name: err.name, message: err.message, body: err.body });
+  }
+};

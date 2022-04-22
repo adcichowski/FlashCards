@@ -2,7 +2,7 @@ import { logger } from "../utils/logger";
 
 import { cardService, createCard } from "./card-service";
 
-import type { Card, Rate, Subject } from "@prisma/client";
+import type { Card, Rate, Section, Subject } from "@prisma/client";
 import type { Response, Request } from "express";
 
 const scrapCard = ({
@@ -14,8 +14,10 @@ const scrapCard = ({
   shapeId,
   Rate,
 }: Card & {
-  readonly Subject: Subject;
   readonly Rate: readonly Rate[];
+  readonly Subject: Subject & {
+    readonly Section: Section;
+  };
   readonly User: {
     readonly userName: string;
   };
@@ -24,14 +26,15 @@ const scrapCard = ({
   question,
   answer,
   rate: {
-    list: Rate.map((userRate) => userRate.rate),
+    list: Rate.map((userRate) => {
+      rate: userRate.rate;
+    }),
     overall: Rate.reduce((prev, userRate) => {
       return prev + userRate.rate / Rate.length;
     }, 0).toFixed(2),
   },
-  subject: {
-    name: Subject.name,
-  },
+  section: Subject.Section.name,
+  subject: Subject.name,
   createdBy: User.userName,
   shapeId,
 });
@@ -49,7 +52,7 @@ export const getCardById = async (req: Request, res: Response) => {
   if (!/[A-Z]/i.test(req.params.id)) {
     const cardById = await cardService.getFirstCardById(req.params.id);
     if (cardById) {
-      logger.info(`Getting Card by ID ${req.params.id}`);
+      logger.info(`Getting card by id ${req.params.id}`);
       res.json(scrapCard(cardById));
     }
     res.status(404).send({ message: "Not Found" });
@@ -59,7 +62,7 @@ export const getCardById = async (req: Request, res: Response) => {
 export const getCardBySubject = async (req: Request, res: Response) => {
   const subject = req.query.subject;
   if (typeof subject === "string") {
-    logger.info(`Getting Card by subject '${subject}'`);
+    logger.info(`Getting card by subject '${subject}'`);
     const cardBySubject = await cardService.getCardBySubject(subject);
     return res.json(cardBySubject.map((card) => scrapCard(card)));
   }

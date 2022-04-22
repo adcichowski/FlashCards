@@ -22,7 +22,7 @@ export const swaggerInfo = {
     "/subjects": {
       get: {
         tags: ["Subjects"],
-        summary: "Find Subjects in FlashCards",
+        summary: "Get subjects",
         responses: {
           "200": {
             description: "successful operation",
@@ -43,7 +43,7 @@ export const swaggerInfo = {
     "/card": {
       post: {
         tags: ["Card"],
-        summay: "Create Card in FlashCards",
+        summary: "Create card",
       },
       consumes: ["application/json"],
       responses: {
@@ -60,7 +60,7 @@ export const swaggerInfo = {
     "/cards": {
       get: {
         tags: ["Card"],
-        summary: "Find All Cards in FlashCards",
+        summary: "Get cards",
         responses: {
           "200": {
             description: "successful operation",
@@ -84,9 +84,7 @@ export const swaggerInfo = {
       Subject: {
         type: "object",
         properties: {
-          id: { type: "integer", format: "int64" },
           name: { type: "string" },
-          color: { type: "string" },
           section: { type: "string" },
         },
       },
@@ -100,7 +98,6 @@ export const swaggerInfo = {
             type: "object",
             properties: {
               name: { type: "string" },
-              color: { type: "string" },
               section: { type: "string" },
             },
           },
