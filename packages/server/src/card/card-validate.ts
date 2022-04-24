@@ -1,10 +1,8 @@
-import Joi from "joi";
-
-import type { Card } from "@prisma/client";
-export const validateSchemaCard = Joi.object<Omit<Card, "id">>({
-  question: Joi.string().max(255).required(),
-  answer: Joi.string().max(255).required(),
-  shapeId: Joi.required(),
-  userId: Joi.number().required(),
-  subjectId: Joi.required(),
+import * as Yup from "yup";
+export const validateSchemaCard = Yup.object().shape({
+  question: Yup.string().max(255).required(),
+  answer: Yup.string().max(255).required(),
+  shapeId: Yup.string().required(),
+  userId: Yup.string().required(),
+  subjectId: Yup.number().required(),
 });

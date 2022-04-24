@@ -17,12 +17,12 @@
     "commitlint": "^16.2.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "joi": "^17.6.0",
     "pino": "^7.9.1",
     "pino-pretty": "^7.5.4",
     "prettier": "^2.5.1",
     "swagger-jsdoc": "^6.2.0",
-    "swagger-ui-express": "^4.3.0"
+    "swagger-ui-express": "^4.3.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@typeofweb/eslint-plugin": "^0.3.0",

@@ -71,7 +71,6 @@ export const getCardBySubject = async (req: Request, res: Response) => {
 
 export const postCreateCard = async (req: Request, res: Response) => {
   const card: Omit<Card, "id"> = req.body;
-  console.log(req.body);
   await createCard(card);
   res.status(200).send({ message: "Card is created" });
 };
