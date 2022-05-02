@@ -2,6 +2,7 @@
   "name": "server",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "docker": "docker run -d --rm --name postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e -p 5432:5432 postgres",
