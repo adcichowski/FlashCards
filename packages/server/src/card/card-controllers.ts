@@ -55,7 +55,6 @@ export const getCardById = async (req: Request, res: Response) => {
       logger.info(`Getting card by id ${req.params.id}`);
       res.json(scrapCard(cardById));
     }
-    res.status(404).send({ message: "Not Found" });
   }
 };
 
@@ -66,7 +65,6 @@ export const getCardBySubject = async (req: Request, res: Response) => {
     const cardBySubject = await cardService.getCardBySubject(subject);
     return res.json(cardBySubject.map((card) => scrapCard(card)));
   }
-  res.status(404).send({ message: "Not found" });
 };
 
 export const postCreateCard = async (req: Request, res: Response) => {

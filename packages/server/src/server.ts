@@ -6,7 +6,8 @@ import { cardRouter } from "./card/card-router";
 import { subjectRouter } from "./subject/subject-router";
 import { routerSwagger } from "./swagger/swagger";
 import { errorHandler } from "./utils/error/errorHandler";
-import { swaggerDocs } from "./utils/swagger";
+import { logger } from "./utils/logger";
+import { swaggerRouter } from "./utils/swagger";
 
 const { PORT, NODE_ENV } = process.env;
 
@@ -21,12 +22,11 @@ app.use(
   })
 );
 
-app.use(subjectRouter, cardRouter, routerSwagger);
+app.use(swaggerRouter, subjectRouter, cardRouter, routerSwagger);
 app.use(errorHandler);
 app.disable("x-powered-by");
 app.listen(PORT, () => {
-  swaggerDocs(app, PORT ?? "4000");
-  console.log(`
+  logger.info(`
   🚀 Server ready at: http://${NODE_ENV || `localhost:${PORT}`}
   `);
 });

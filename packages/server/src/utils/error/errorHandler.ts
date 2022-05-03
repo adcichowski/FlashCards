@@ -1,3 +1,5 @@
+import { logger } from "../logger";
+
 import { HttpError } from "./httpError";
 
 import type { Response, Request, NextFunction } from "express";
@@ -8,6 +10,7 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   if (err) {
+    logger.error("Error!");
     if (err instanceof HttpError) {
       return res
         .status(err.statusCode)

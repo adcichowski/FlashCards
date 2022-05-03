@@ -1,9 +1,10 @@
+import { Router } from "express";
 import SwaggerJsdoc from "swagger-jsdoc";
 import SwaggerUi from "swagger-ui-express";
 
 import { logger } from "./logger";
 
-import type { Request, Response, Express } from "express";
+import type { Request, Response } from "express";
 
 const options: SwaggerJsdoc.Options = {
   definition: {
@@ -31,18 +32,17 @@ const options: SwaggerJsdoc.Options = {
 };
 
 const swaggerSpec = SwaggerJsdoc(options);
+const router = Router();
 
-function swaggerDocs(app: Express, port: string) {
-  // Swagger page
-  app.use("/docs", SwaggerUi.serve, SwaggerUi.setup(swaggerSpec));
+// Swagger page
+router.get("/docs", SwaggerUi.serve, SwaggerUi.setup(swaggerSpec));
 
-  // Docs in JSON format
-  app.get("/docs.json", (_: Request, res: Response) => {
-    res.setHeader("Content-Type", "application/json");
-    res.send(swaggerSpec);
-  });
+// Docs in JSON format
+router.get("/docs.json", (_: Request, res: Response) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
 
-  logger.info(`Docs available at http://localhost:${port}/docs`);
-}
+logger.info(`Docs available at http://localhost:${process.env.PORT}/docs`);
 
-export { swaggerDocs };
+export { router as swaggerRouter };

@@ -1,10 +1,13 @@
+import { HttpError } from "../utils/error/httpError";
+import { HttpStatusCode } from "../utils/error/httpStatusCodes";
+
 import { subjectService } from "./subject-service";
 
 import type { Response, Request, NextFunction } from "express";
 
 export const isAvaibleSubject = async (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ) => {
   const subject = req.query.subject;
@@ -13,7 +16,9 @@ export const isAvaibleSubject = async (
     const hasThisSubject = subjects
       .map((subject) => subject.name)
       .includes(subject);
-    if (!hasThisSubject) res.status(404).send({ message: "Not Found" });
+    if (!hasThisSubject) {
+      next(new HttpError(HttpStatusCode.NotFound, "Subject not exist!"));
+    }
   }
   next();
 };
