@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "isolatedModules": true,
+    "isolatedModules": false,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": false,

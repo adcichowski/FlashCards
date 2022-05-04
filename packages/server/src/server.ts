@@ -9,7 +9,7 @@ import { errorHandler } from "./utils/error/errorHandler";
 import { logger } from "./utils/logger";
 import { swaggerRouter } from "./utils/swagger";
 
-const { PORT, NODE_ENV } = process.env;
+const { PORT } = process.env;
 
 export const app = Express();
 
@@ -25,8 +25,9 @@ app.use(
 app.use(swaggerRouter, subjectRouter, cardRouter, routerSwagger);
 app.use(errorHandler);
 app.disable("x-powered-by");
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   logger.info(`
-  🚀 Server ready at: http://${NODE_ENV || `localhost:${PORT}`}
+  🚀 Server ready at: http://localhost:${PORT}
   `);
 });
+export { server };
