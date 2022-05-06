@@ -3,12 +3,7 @@ import { Router } from "express";
 import { isAvaibleSubject } from "../subject/subject-middleware";
 import { reusableValidation } from "../utils/reusableValidation";
 
-import {
-  getAllCards,
-  getCardById,
-  getCardBySubject,
-  postCreateCard,
-} from "./card-controllers";
+import { getAllCards, getCardById, postCreateCard } from "./card-controllers";
 import { validateSchemaCard } from "./card-schema";
 
 const router = Router();
@@ -23,15 +18,15 @@ const router = Router();
  *       200:
  *         description: App is up and running
  */
-router.get("/cards", getAllCards);
+router.get("/cards", isAvaibleSubject, getAllCards);
 
 /**
  * @openapi
- * /card:
+ * /cards:
  *  get:
  *     tags:
- *     - Card
- *     description: Recive card from database
+ *     - Cards
+ *     description: Recive cards from database
  *     parameters:
  *      - name: "subject"
  *        in: "query"
@@ -47,20 +42,20 @@ router.get("/cards", getAllCards);
  *       200:
  *         description: App is up and running
  */
-router.get("/card", isAvaibleSubject, getCardBySubject);
+router.get("/cards", isAvaibleSubject);
 
 /**
  * @openapi
- * /card/:id:
+ * /cards/:id:
  *  get:
  *     tags:
- *     - Card
+ *     - Cards
  *     description: Recive card from database
  *     responses:
  *       200:
  *         description: App is up and running
  *
  */
-router.get("/card/:id", getCardById);
-router.post("/card", reusableValidation(validateSchemaCard), postCreateCard);
+router.get("/cards/:id", getCardById);
+router.post("/cards", reusableValidation(validateSchemaCard), postCreateCard);
 export { router as cardRouter };

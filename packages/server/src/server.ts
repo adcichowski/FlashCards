@@ -27,7 +27,7 @@ app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(PORT, () => {
   logger.info(`
-  🚀 Server ready at: http://localhost:${PORT}
+  🚀 Server ready at: http://localhost:${process.env.PORT}
   `);
 });
 export { server };

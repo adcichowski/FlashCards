@@ -10,7 +10,7 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   if (err) {
-    logger.error("Error!");
+    logger.error(err.message || "Error!");
     if (err instanceof HttpError) {
       return res
         .status(err.statusCode)

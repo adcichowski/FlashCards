@@ -1,5 +1,3 @@
-import { logger } from "../utils/logger";
-
 import { cardService, createCard } from "./card-service";
 
 import type { Card, Rate, Section, Subject } from "@prisma/client";
@@ -39,10 +37,13 @@ const scrapCard = ({
   shapeId,
 });
 
-export const getAllCards = async (_: Request, res: Response) => {
+export const getAllCards = async (req: Request, res: Response) => {
+  const subject = req.query.subject;
+  if (typeof subject === "string") {
+    const cardBySubject = await cardService.getCardBySubject(subject);
+    return res.json(cardBySubject.map((card) => scrapCard(card)));
+  }
   const allCards = await cardService.getAllCards();
-  logger.info("Getting all cards");
-
   const scrapeData = allCards.map((card) => scrapCard(card));
 
   res.json(scrapeData);
@@ -52,18 +53,8 @@ export const getCardById = async (req: Request, res: Response) => {
   if (!/[A-Z]/i.test(req.params.id)) {
     const cardById = await cardService.getFirstCardById(req.params.id);
     if (cardById) {
-      logger.info(`Getting card by id ${req.params.id}`);
       res.json(scrapCard(cardById));
     }
-  }
-};
-
-export const getCardBySubject = async (req: Request, res: Response) => {
-  const subject = req.query.subject;
-  if (typeof subject === "string") {
-    logger.info(`Getting card by subject '${subject}'`);
-    const cardBySubject = await cardService.getCardBySubject(subject);
-    return res.json(cardBySubject.map((card) => scrapCard(card)));
   }
 };
 
