@@ -26,6 +26,7 @@ router.get("/cards", isAvaibleSubject, getAllCards);
  *  get:
  *     tags:
  *     - Cards
+ *     summary: Get cards
  *     description: Recive cards from database
  *     parameters:
  *      - name: "subject"
@@ -41,19 +42,35 @@ router.get("/cards", isAvaibleSubject, getAllCards);
  *     responses:
  *       200:
  *         description: App is up and running
+ *       400:
+ *         description: "Invalid Subject supplied"
+ *       404:
+ *         description: "Cards not found"
  */
 router.get("/cards", isAvaibleSubject);
 
 /**
  * @openapi
- * /cards/:id:
+ * /cards/{cardId}:
  *  get:
  *     tags:
  *     - Cards
- *     description: Recive card from database
+ *     summary: Find card by ID
+ *     description: Return a single card
+ *     parameters:
+ *     - name: cardId
+ *       in: "path"
+ *       description: "ID of card to return"
+ *       required: true
+ *       type: "integer"
+ *       format: "int64"
  *     responses:
  *       200:
  *         description: App is up and running
+ *       400:
+ *         description: "Invalid ID supplied"
+ *       404:
+ *         description: "Card not found"
  *
  */
 router.get("/cards/:id", getCardById);
