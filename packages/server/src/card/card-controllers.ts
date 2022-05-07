@@ -1,4 +1,4 @@
-import { cardService, createCard } from "./card-service";
+import { cardService } from "./card-service";
 
 import type { InferPromise } from "../types/utility";
 import type { validateSchemaCard } from "./card-schema";
@@ -17,9 +17,7 @@ const scrapCard = ({
   question,
   answer,
   rate: {
-    list: Rate.map((userRate) => {
-      rate: userRate.rate, User.userName;
-    }),
+    list: Rate.map(({ rate, User }) => ({ rate, ...User })),
     overall: Rate.reduce((prev, userRate) => {
       return prev + userRate.rate / Rate.length;
     }, 0).toFixed(2),
@@ -53,6 +51,6 @@ export const getCardById = async (req: Request, res: Response) => {
 
 export const postCreateCard = async (req: Request, res: Response) => {
   const card: InferType<typeof validateSchemaCard> = req.body;
-  await createCard(card);
-  res.status(200).send({ message: "Card is created" });
+  await cardService.createCard(card);
+  res.status(200).send({ message: "Card was created" });
 };

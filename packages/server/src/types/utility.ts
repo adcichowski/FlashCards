@@ -3,6 +3,6 @@ export type InferPromise<
   R = ReturnType<T>
 > = R extends Promise<infer Value>
   ? Value extends readonly unknown[]
-    ? Value[0]
+    ? Value[number]
     : Value
   : never;
