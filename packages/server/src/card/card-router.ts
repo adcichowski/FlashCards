@@ -59,20 +59,40 @@ router.get("/cards", isAvaibleSubject);
  *     description: Return a single card
  *     parameters:
  *     - name: cardId
- *       in: "path"
- *       description: "ID of card to return"
+ *       in: path
+ *       description: ID of card to return
  *       required: true
- *       type: "integer"
- *       format: "int64"
+ *       type: integer
+ *       format: int64
  *     responses:
  *       200:
  *         description: App is up and running
  *       400:
- *         description: "Invalid ID supplied"
+ *         description: Invalid ID supplied
  *       404:
- *         description: "Card not found"
+ *         description: Card not found
  *
  */
 router.get("/cards/:id", getCardById);
+
+/**
+ * @openapi
+ * /cards:
+ *  post:
+ *    tags:
+ *    - Cards
+ *    summary: Create card
+ *    consumes:
+ *    - "application/x-www-form-urlencoded"
+ *    produces:
+ *    - "application/json"
+ *    parameters:
+ *    - in: "body"
+ *      name: "body"
+ *      description: "Card object that needs to be added to the store"
+ *      required: true
+ *      schema:
+ *        $ref: "#/components/schemas/CreateCardInput"
+ */
 router.post("/cards", reusableValidation(validateSchemaCard), postCreateCard);
 export { router as cardRouter };

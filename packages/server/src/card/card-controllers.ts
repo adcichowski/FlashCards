@@ -1,8 +1,9 @@
 import { cardService, createCard } from "./card-service";
 
-import type { Card, Rate, Section, Subject } from "@prisma/client";
+import type { InferPromise } from "../types/utility";
+import type { validateSchemaCard } from "./card-schema";
 import type { Response, Request } from "express";
-
+import type { InferType } from "yup";
 const scrapCard = ({
   id,
   question,
@@ -11,21 +12,13 @@ const scrapCard = ({
   User,
   shapeId,
   Rate,
-}: Card & {
-  readonly Rate: readonly Rate[];
-  readonly Subject: Subject & {
-    readonly Section: Section;
-  };
-  readonly User: {
-    readonly userName: string;
-  };
-}) => ({
+}: InferPromise<typeof cardService["getAllCards"]>) => ({
   id,
   question,
   answer,
   rate: {
     list: Rate.map((userRate) => {
-      rate: userRate.rate;
+      rate: userRate.rate, User.userName;
     }),
     overall: Rate.reduce((prev, userRate) => {
       return prev + userRate.rate / Rate.length;
@@ -59,7 +52,7 @@ export const getCardById = async (req: Request, res: Response) => {
 };
 
 export const postCreateCard = async (req: Request, res: Response) => {
-  const card: Omit<Card, "id"> = req.body;
+  const card: InferType<typeof validateSchemaCard> = req.body;
   await createCard(card);
   res.status(200).send({ message: "Card is created" });
 };

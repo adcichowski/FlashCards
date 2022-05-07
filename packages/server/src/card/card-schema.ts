@@ -6,6 +6,7 @@ export const validateSchemaCard = Yup.object().shape({
   userId: Yup.string().required(),
   subjectId: Yup.number().required(),
 });
+
 /**
  * @openapi
  * components:
@@ -18,6 +19,7 @@ export const validateSchemaCard = Yup.object().shape({
  *     - shapeId
  *     - userId
  *     - subjectId
+ *     - rate
  *    properties:
  *     question:
  *      type: string
@@ -30,4 +32,12 @@ export const validateSchemaCard = Yup.object().shape({
  *      type: number
  *     subjectId:
  *      type: number
+ *     rate:
+ *      type: object
+ *      readOnly: true
+ *      properties:
+ *        userId:
+ *              type: number
+ *        rate:
+ *            type: 5
  */
