@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 export const validateSchemaRate = Yup.object().shape({
-  rate: Yup.number().required(),
-  userId: Yup.string().required(),
+  rate: Yup.number().required().max(5).min(1),
+  userId: Yup.number().required(),
   cardId: Yup.number().required(),
 });
 
@@ -15,27 +15,14 @@ export const validateSchemaRate = Yup.object().shape({
  *     - rate
  *     - userId
  *     - cardId
- *     - userId
- *     - subjectId
- *     - rate
  *    properties:
- *     question:
- *      type: string
- *     answer:
- *      type: string
- *     shapeId:
+ *     rate:
  *      type: number
- *      default: 1
+ *      required: true
  *     userId:
  *      type: number
- *     subjectId:
+ *      required: true
+ *     cardId:
  *      type: number
- *     rate:
- *      type: object
- *      readOnly: true
- *      properties:
- *        userId:
- *              type: number
- *        rate:
- *            type: 5
+ *      required: true
  */
