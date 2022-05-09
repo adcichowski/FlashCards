@@ -9,7 +9,7 @@ export const validateSchemaRate = Yup.object().shape({
  * @openapi
  * components:
  *  schemas:
- *   Rate:
+ *   CreateRateInput:
  *    type: object
  *    required:
  *     - rate
