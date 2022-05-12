@@ -2,23 +2,25 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/client",
-    "packages/server"
+    "packages/server",
+    "packages/client"
   ],
   "devDependencies": {
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "husky": "^7.0.4",
-    "lerna": "^4.0.0"
+    "turbo": "^1.2.9"
   },
   "scripts": {
-    "new-version": "lerna version --conventional-commits --yes",
+    "dev": "turbo run dev --parallel --no-cache",
+    "test": "turbo run test",
+    "build": "turbo run build",
     "pre-commit": "lint-staged",
-    "eslint": "lerna run eslint --stream"
+    "eslint": "turbo run lint --parallel"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      " lerna run eslint --stream --fix",
+      "turbo run eslint --stream",
       "prettier --write"
     ],
     "*.{json,md,yaml,yml,scss,css}": [

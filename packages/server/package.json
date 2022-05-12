@@ -8,7 +8,7 @@
     "docker": "docker run -d --rm --name postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e -p 5432:5432 postgres",
     "start": "tsnd --respawn src/server.ts",
     "test": "jest",
-    "eslint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
     "pre-commit": "eslint . --fix"
   },
   "author": "Adam Cichowski",
@@ -44,6 +44,7 @@
     "ts-jest": "^28.0.0",
     "ts-node": "^10.7.0",
     "ts-node-dev": "^1.1.8",
+    "turbo": "^1.2.8",
     "typescript": "^4.6.2"
   }
 }
