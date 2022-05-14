@@ -9,7 +9,7 @@ const createUser = async (user: InferType<typeof validateRegisterSchema>) => {
 };
 
 const isUserExist = async (user: InferType<typeof validateRegisterSchema>) => {
-  await prisma.user.findFirst({ where: { ...user } });
+  return await prisma.user.findFirst({ where: { ...user } });
 };
 
 export const authService = {

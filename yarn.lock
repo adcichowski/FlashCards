@@ -4829,11 +4829,6 @@ expect@^28.0.2:
     jest-message-util "^28.0.2"
     jest-util "^28.0.2"
 
-express-jwt-authz@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.npmjs.org/express-jwt-authz/-/express-jwt-authz-2.4.1.tgz"
-  integrity sha512-ruH86e2NvWicG9maStztyAyBJV0E8RsInXUm6Kuc/9pDtVJmJw3qigv1MEVs5bH+aksZuxocYZdz+N1V/9F+Dg==
-
 express-jwt@^7.4.3:
   version "7.4.3"
   resolved "https://registry.npmjs.org/express-jwt/-/express-jwt-7.4.3.tgz"
