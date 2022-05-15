@@ -1,6 +1,7 @@
 import { logger } from "../logger";
 
 import { HttpError } from "./httpError";
+import { HttpStatusCode } from "./httpStatusCodes";
 
 import type { Response, Request, NextFunction } from "express";
 export const errorHandler = (
@@ -12,11 +13,15 @@ export const errorHandler = (
   if (err) {
     logger.error(err.message || "Error!");
     if (err instanceof HttpError) {
-      return res
-        .status(err.statusCode)
-        .json({ name: err.name, message: err.message, body: err.body });
+      return res.status(err.statusCode).json({
+        name: err.name,
+        message: err.message,
+        body: err.body,
+      });
     }
-    return res.status(500).json({ name: "Error", message: err.message });
+    return res
+      .status(HttpStatusCode.BadRequest)
+      .json({ name: "Error", message: err.message });
   }
 
   next();
