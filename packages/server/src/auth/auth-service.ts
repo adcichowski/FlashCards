@@ -5,11 +5,11 @@ import type { InferType } from "yup";
 
 const prisma = new PrismaClient();
 const createUser = async (user: InferType<typeof validateRegisterSchema>) => {
-  await prisma.user.create({ data: { ...user } });
+  return await prisma.user.create({ data: user });
 };
 
 const isUserExist = async (user: InferType<typeof validateRegisterSchema>) => {
-  return await prisma.user.findFirst({ where: { ...user } });
+  return await prisma.user.findFirst({ where: user });
 };
 
 export const authService = {

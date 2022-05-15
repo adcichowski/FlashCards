@@ -1,4 +1,4 @@
-import { HttpError } from "src/utils/error/httpError";
+import { HttpError } from "../utils/error/httpError";
 
 import { authService } from "./auth-service";
 
@@ -10,8 +10,9 @@ export const checkUserExist = async (
   _: Response,
   next: NextFunction
 ) => {
-  const reqData: InferType<typeof validateRegisterSchema> = req.body;
-  const isExistUser = await authService.isUserExist(reqData);
-  if (!isExistUser) next(new HttpError(400, "User exist in database!"));
+  const user: InferType<typeof validateRegisterSchema> = req.body;
+  const isExistUser = await authService.isUserExist(user);
+  if (isExistUser) next(new HttpError(400, "User exist in database!"));
+
   next();
 };

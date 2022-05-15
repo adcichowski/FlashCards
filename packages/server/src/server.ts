@@ -1,6 +1,8 @@
 import BodyParser from "body-parser";
 import Cors from "cors";
 import Express from "express";
+
+import { authRouter } from "../src/auth/auth-router";
 import("dotenv");
 
 import { cardRouter } from "./card/card-router";
@@ -23,7 +25,7 @@ app.use(
   })
 );
 
-app.use(swaggerRouter, subjectRouter, cardRouter, routerSwagger);
+app.use(swaggerRouter, subjectRouter, cardRouter, authRouter, routerSwagger);
 app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(PORT, () => {

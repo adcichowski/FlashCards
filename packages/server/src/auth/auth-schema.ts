@@ -1,4 +1,4 @@
-import Yup from "yup";
+import * as Yup from "yup";
 export const validateRegisterSchema = Yup.object().shape({
   email: Yup.string().max(64).required("Email is require!"),
   password: Yup.string().max(64).min(12).required("Password is require!"),

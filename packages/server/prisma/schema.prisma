@@ -41,7 +41,7 @@ model Subject {
 model User {
   id        Int       @id(map: "users_pkey") @default(autoincrement())
   userName  String    @db.VarChar(50)
-  password  String    @db.VarChar(50)
+  password  String    @db.VarChar(60)
   email     String    @unique(map: "users_email_key") @db.VarChar(60)
   createdOn DateTime  @default(now()) @db.Timestamp(6)
   lastLogin DateTime? @db.Timestamp(6)

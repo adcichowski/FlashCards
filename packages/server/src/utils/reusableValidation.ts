@@ -8,7 +8,6 @@ import type { ObjectShape } from "yup/lib/object";
 export const reusableValidation =
   <T extends ObjectShape>(schema: Yup.ObjectSchema<T>) =>
   async (req: Request, _: Response, next: NextFunction) => {
-    console.log(req.body);
     try {
       const value = await schema.validate(req.body);
       Object.assign(req, value);

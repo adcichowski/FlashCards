@@ -1,13 +1,14 @@
 import { Router } from "express";
-import { reusableValidation } from "src/utils/reusableValidation";
+
+import { reusableValidation } from "../utils/reusableValidation";
 
 import { registerUser } from "./auth-controller";
 import { checkUserExist } from "./auth-middleware";
-import { validateLoginSchema, validateRegisterSchema } from "./auth-schema";
+import { validateRegisterSchema } from "./auth-schema";
 
 const router = Router();
 
-router.get("/login", reusableValidation(validateLoginSchema));
+// router.get("/login", reusableValidation(validateLoginSchema));
 router.post(
   "/register",
   reusableValidation(validateRegisterSchema),

@@ -15,6 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^3.10.0",
+    "bcrypt": "^5.0.1",
     "commitlint": "^16.2.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@typeofweb/eslint-plugin": "^0.3.0",
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.5.0",
