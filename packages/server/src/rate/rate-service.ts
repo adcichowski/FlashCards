@@ -17,6 +17,17 @@ const createRate = async ({
     },
   });
 };
+const updateYourRate = async ({
+  cardId,
+  userId,
+  rate,
+}: InferType<typeof validateSchemaRate>) => {
+  return await prisma.rate.update({
+    where: { userId_cardId: { cardId, userId } },
+    data: { rate },
+  });
+};
 export const rateService = {
   createRate,
+  updateYourRate,
 };

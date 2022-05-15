@@ -1,6 +1,9 @@
 import { Router } from "express";
+import { reusableValidation } from "src/utils/reusableValidation";
 
-import { rateCard } from "./rate-controller";
+import { rateCard, updateRate } from "./rate-controller";
+import { validateSchemaRate } from "./rate-schema";
 
 const router = Router();
-router.post("/rate", rateCard);
+router.post("/rate", reusableValidation(validateSchemaRate), rateCard);
+router.put("/rate", reusableValidation(validateSchemaRate), updateRate);

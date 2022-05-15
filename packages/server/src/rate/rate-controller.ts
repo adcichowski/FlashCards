@@ -8,3 +8,8 @@ export const rateCard = async (req: Request, res: Response) => {
   await rateService.createRate(rate);
   res.status(200).send({ message: "Great! You are rated card." });
 };
+export const updateRate = async (req: Request, res: Response) => {
+  const rate: InferType<typeof validateSchemaRate> = req.body;
+  await rateService.updateYourRate(rate);
+  res.status(200).send({ message: "Great! You are updated rate card." });
+};
