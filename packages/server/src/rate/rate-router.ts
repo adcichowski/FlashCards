@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { reusableValidation } from "src/utils/reusableValidation";
+
+import { reusableValidation } from "../utils/reusableValidation";
 
 import { rateCard, updateRate } from "./rate-controller";
 import { validateSchemaRate } from "./rate-schema";

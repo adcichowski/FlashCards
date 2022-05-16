@@ -18,6 +18,8 @@ export const validateSchemaRate = Yup.object().shape({
  *    properties:
  *     rate:
  *      type: number
+ *      maximum: 5
+ *      minimum: 1
  *      required: true
  *     userId:
  *      type: number

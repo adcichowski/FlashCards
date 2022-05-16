@@ -1,4 +1,27 @@
 import * as Yup from "yup";
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *   Register:
+ *    type: object
+ *    required:
+ *     - email
+ *     - password
+ *     - username
+ *    properties:
+ *     email:
+ *      type: string
+ *      maximum: 60
+ *     password:
+ *      type: string
+ *      maximum: 60
+ *      minimum: 12
+ *     username:
+ *      type: string
+ *      maximum: 32
+ */
+
 export const validateRegisterSchema = Yup.object().shape({
   email: Yup.string().max(64).required("Email is require!"),
   password: Yup.string().max(64).min(12).required("Password is require!"),
