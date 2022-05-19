@@ -6,11 +6,10 @@ import { authRouter } from "../src/auth/auth-router";
 import("dotenv");
 
 import { cardRouter } from "./card/card-router";
+import { routerSwagger } from "./docs/swagger";
 import { subjectRouter } from "./subject/subject-router";
-import { routerSwagger } from "./swagger/swagger";
 import { errorHandler } from "./utils/error/errorHandler";
 import { logger } from "./utils/logger";
-import { swaggerRouter } from "./utils/swagger";
 
 const { PORT } = process.env;
 
@@ -25,7 +24,7 @@ app.use(
   })
 );
 
-app.use(swaggerRouter, subjectRouter, cardRouter, authRouter, routerSwagger);
+app.use(subjectRouter, cardRouter, authRouter, routerSwagger);
 app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(PORT, () => {

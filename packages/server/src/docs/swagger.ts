@@ -1,12 +1,14 @@
 import { Router } from "express";
-import SwaggerJsdoc from "swagger-jsdoc";
-import SwaggerUi from "swagger-ui-express";
+import SwaggerJSDoc from "swagger-jsdoc";
+import SwaggerUI from "swagger-ui-express";
 
-import { logger } from "./logger";
+import { logger } from "../utils/logger";
 
 import type { Request, Response } from "express";
 
-const options: SwaggerJsdoc.Options = {
+const router = Router();
+
+const options: SwaggerJSDoc.Options = {
   definition: {
     openapi: "3.0.0",
     info: {
@@ -30,19 +32,15 @@ const options: SwaggerJsdoc.Options = {
   },
   apis: ["./src/*/*-router.ts", "./src/*/*-schema.ts"],
 };
-
-const swaggerSpec = SwaggerJsdoc(options);
-const router = Router();
+const swaggerSpec = SwaggerJSDoc(options);
 
 // Swagger page
-router.get("/docs", SwaggerUi.serve, SwaggerUi.setup(swaggerSpec));
+router.use("/docs", SwaggerUI.serve, SwaggerUI.setup(swaggerSpec));
 
 // Docs in JSON format
 router.get("/docs.json", (_: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
-
 logger.info(`Docs available at http://localhost:${process.env.PORT}/docs`);
-
-export { router as swaggerRouter };
+export { router as routerSwagger };
