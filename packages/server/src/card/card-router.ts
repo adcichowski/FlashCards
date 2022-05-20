@@ -66,7 +66,11 @@ router.get("/cards", isAvaibleSubject);
  *       format: int64
  *     responses:
  *       200:
- *         description: App is up and running
+ *         description: Return list cards
+ *         content:
+ *         application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/GetCard'
  *       400:
  *         description: Invalid ID supplied
  *       404:

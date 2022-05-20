@@ -39,5 +39,5 @@ export const validateSchemaCard = Yup.object().shape({
  *        userId:
  *              type: number
  *        rate:
- *            type: 5
+ *            type: number
  */

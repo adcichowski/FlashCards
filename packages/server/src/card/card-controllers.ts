@@ -4,6 +4,43 @@ import type { InferPromise } from "../types/utility";
 import type { validateSchemaCard } from "./card-schema";
 import type { Response, Request } from "express";
 import type { InferType } from "yup";
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *   GetCard:
+ *    type: object
+ *    properties:
+ *     question:
+ *      type: string
+ *     answer:
+ *      type: string
+ *     shapeId:
+ *      type: number
+ *      default: 1
+ *     createdBy:
+ *      type: string
+ *     subject:
+ *      type: string
+ *     section:
+ *      type: string
+ *     rates:
+ *      type: object
+ *      properties:
+ *       overall:
+ *        type: number
+ *       list:
+ *        type: array
+ *        items:
+ *         type: object
+ *         properties:
+ *          userName:
+ *           type: string
+ *          rate:
+ *           type: number
+ */
+
 const scrapCard = ({
   id,
   question,

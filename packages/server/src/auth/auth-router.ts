@@ -9,7 +9,7 @@ import { validateLoginSchema, validateRegisterSchema } from "./auth-schema";
 const router = Router();
 /**
  * @openapi
- * /login:
+ * /sessions:
  *  post:
  *     tags:
  *     - Authentication
@@ -27,11 +27,33 @@ const router = Router();
  *       401:
  *         description: User is exist in database
  */
-router.post("/login", reusableValidation(validateLoginSchema));
+router.post("/sessions", reusableValidation(validateLoginSchema));
 
 /**
  * @openapi
- * /register:
+ * /sessions:
+ *  delete:
+ *     tags:
+ *     - Authentication
+ *     description: Register user to database.
+ *     parameters:
+ *     - in: "body"
+ *       name: "body"
+ *       description: "Card object that needs to be added to the store"
+ *       required: true
+ *       schema:
+ *         $ref: "#/components/schemas/Login"
+ *     responses:
+ *       200:
+ *         description: App is up and running
+ *       401:
+ *         description: User is exist in database
+ */
+router.delete("/sessions/:id");
+
+/**
+ * @openapi
+ * /users:
  *  post:
  *     tags:
  *     - Authentication
@@ -50,9 +72,10 @@ router.post("/login", reusableValidation(validateLoginSchema));
  *         description: User is exist in database
  */
 router.post(
-  "/register",
+  "/users",
   reusableValidation(validateRegisterSchema),
   checkUserExist,
   registerUser
 );
+
 export { router as authRouter };
