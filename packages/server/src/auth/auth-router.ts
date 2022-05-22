@@ -3,7 +3,12 @@ import { Router } from "express";
 import { reusableValidation } from "../utils/reusableValidation";
 
 import { registerUser } from "./auth-controller";
-import { checkUserExist } from "./auth-middleware";
+import {
+  checkSession,
+  checkThePassword,
+  checkUserExist,
+  hashThePassword,
+} from "./auth-middleware";
 import { validateLoginSchema, validateRegisterSchema } from "./auth-schema";
 
 const router = Router();
@@ -13,6 +18,8 @@ const router = Router();
  *  post:
  *     tags:
  *     - Authentication
+ *     consumes:
+ *     - application/json
  *     description: Register user to database.
  *     parameters:
  *     - in: "body"
@@ -27,7 +34,12 @@ const router = Router();
  *       401:
  *         description: User is exist in database
  */
-router.post("/sessions", reusableValidation(validateLoginSchema));
+router.post(
+  "/sessions",
+  reusableValidation(validateLoginSchema),
+  checkThePassword,
+  checkSession
+);
 
 /**
  * @openapi
@@ -75,6 +87,7 @@ router.post(
   "/users",
   reusableValidation(validateRegisterSchema),
   checkUserExist,
+  hashThePassword,
   registerUser
 );
 
