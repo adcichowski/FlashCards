@@ -4,9 +4,9 @@ import { Button } from "../../Components/Button/Button";
 import { BackButton } from "../../Components/Button/BackButton/BackButton";
 import { useFormLoginRegister } from "./useFormLoginRegister";
 import { capitalize, inputValidation } from "../../Utils/Utils";
-import { Link } from "react-router-dom";
 import { Game } from "../Game/Game";
-function Form({ type }: { readonly type: "login" | "register" }) {
+import Link from "next/link";
+function Form({ type }: { readonly type: "Login" | "Register" }) {
   const { onSubmit, handleSubmit, register, errors } = useFormLoginRegister({
     type,
   });
@@ -15,7 +15,7 @@ function Form({ type }: { readonly type: "login" | "register" }) {
       <div className={styles.game}>
         <div
           style={{
-            border: type === "login" ? "4px solid #2b3361" : "4px solid #A01934",
+            border: type === "Login" ? "4px solid #2b3361" : "4px solid #A01934",
           }}
           className={styles.formLog}
         >
@@ -51,9 +51,9 @@ function Form({ type }: { readonly type: "login" | "register" }) {
               </Button>
             </div>
             <p className={styles.question}>
-              {type === "login" ? "Haven't got an account?" : "Have account?"}{" "}
+              {type === "Login" ? "Haven't got an account?" : "Have account?"}{" "}
               <span className={styles.questionType}>
-                <Link to={type === "login" ? "/register" : "/login"}>{type === "login" ? "Register" : "Login"}</Link>
+                <Link href={type === "Login" ? "/register" : "/login"}>{type}</Link>
               </span>
             </p>
           </form>

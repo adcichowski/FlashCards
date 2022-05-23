@@ -2,8 +2,6 @@ import { Dispatch } from "react";
 import { useReducer } from "react";
 import { createContext, ReactNode } from "react";
 import { useContext } from "react";
-import { auth } from "../lib/firebase/Settings";
-import { ICardsFromFirestore } from "../Types/Types";
 
 interface Action {
   readonly type: "logIn" | "logOut" | "setDeckCard";
@@ -12,8 +10,6 @@ interface Action {
 export interface CurrentUser {
   readonly idUser: string;
   readonly isLogin: boolean;
-  readonly personalCards: ICardsFromFirestore;
-  readonly generalCards: ICardsFromFirestore;
 }
 function userReducer(state: CurrentUser, action: Action): CurrentUser {
   switch (action.type) {
@@ -23,13 +19,7 @@ function userReducer(state: CurrentUser, action: Action): CurrentUser {
         ...action.setUser,
         isLogin: true,
       };
-    case "setDeckCard":
-      return {
-        ...state,
-        ...action.setUser,
-      };
     case "logOut":
-      auth.signOut();
       return { ...state, isLogin: false, idUser: "" };
     default: {
       throw new Error(`Unhandled action type in AuthContext`);
@@ -51,8 +41,6 @@ const AuthProvider = ({ children }: { readonly children: ReactNode }) => {
   const currentUser: CurrentUser = {
     isLogin: false,
     idUser: "",
-    personalCards: {} as ICardsFromFirestore,
-    generalCards: {} as ICardsFromFirestore,
   };
   const [state, dispatch] = useReducer(userReducer, currentUser);
   const value = { state, dispatch };
