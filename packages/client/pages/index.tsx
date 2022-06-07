@@ -2,13 +2,13 @@
 //optimzie background by picture element
 import { Footer } from "src/Components/Footer/Footer";
 import { Navigation } from "src/Components/Navigation/Navigation";
-import { Button } from "src/Components/Button/Button";
 import { HomeAbout } from "src/Components/Pages/Home/HomeAbout/HomeAbout";
 import React from "react";
 import styles from "src/Pages/Home/Home.module.scss";
 import { Instruction } from "src/Components/Pages/Home/Instruction/Instruction";
 import { ListTechnologies } from "src/Components/Pages/Home/ListTechnologies/ListTechnologies";
 import { CirclesInfo } from "src/Components/Pages/Home/CirclesInfo/CirclesInfo";
+import Archon from "src/Components/Archon/Archon";
 
 export default function Home() {
   return (
@@ -27,9 +27,9 @@ export default function Home() {
           <h1 className={styles.heroTitle}>FlashCards</h1>
           <p className={styles.heroSubtitle}>Easy way to improve your skill...</p>
 
-          <Button size="normal" type={{ element: "a", href: "game" }}>
+          <Archon size="normal" href="game">
             Click For Play
-          </Button>
+          </Archon>
         </section>
       </header>
       <main>
@@ -50,9 +50,9 @@ export default function Home() {
         <section className={styles.bigQuestion}>
           <div className={styles.bigQuestionIcon}></div>
           <h3 className={styles.bigQuestionTitle}>Do You Wanna TRY ??</h3>
-          <Button size="big" type={{ element: "a", href: "game" }}>
+          <Archon size="big" href="game">
             Create Account
-          </Button>
+          </Archon>
         </section>
       </main>
       <Footer />

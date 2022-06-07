@@ -1,24 +1,23 @@
-import Link from "next/link";
-import { ButtonInterface } from "../../Types/Types";
+import { ButtonSize } from "../../Types/Types";
 import styles from "./Button.module.scss";
+import clsx from "clsx";
 
-function Button({ type, children, onClick, size }: ButtonInterface) {
+function Button({
+  children,
+  size,
+  secondary,
+  ...props
+}: JSX.IntrinsicElements["button"] & { readonly size: ButtonSize; readonly secondary?: boolean }) {
   const stylesButton = {
-    parent: styles[size + "Button"],
-    children: styles[size + "Front"],
+    parent: styles[`${size}Button`],
+    children: styles[`${size}Front`],
   };
-  if (typeof type === "object") {
-    return (
-      <Link href={`/${type.href}`}>
-        <a className={`${styles.button} ${stylesButton.parent}`}>
-          <span className={`${styles.front} ${stylesButton.children}`}>{children}</span>
-        </a>
-      </Link>
-    );
-  }
+  const buttonClass = !secondary ? styles.button : styles.buttonSecondary;
   return (
-    <button type={type} onClick={onClick} className={`${styles.button} ${stylesButton.parent}`}>
-      <span className={`${styles.front} ${stylesButton.children}`}>{children}</span>
+    <button className={`${buttonClass} ${stylesButton.parent}  `} {...props}>
+      <span className={`${styles.front} ${stylesButton.children} ${clsx(secondary && styles.frontSecondary)}`}>
+        {children}
+      </span>
     </button>
   );
 }

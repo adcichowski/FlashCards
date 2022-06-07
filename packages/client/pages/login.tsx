@@ -1,10 +1,5 @@
-import { Game } from "src/Pages/Game/Game";
 import { Form } from "src/Pages/Login/Form";
 
-export default function Registration() {
-  return (
-    <Game>
-      <Form type={"Login"} />;
-    </Game>
-  );
+export default function Login() {
+  return <Form />;
 }

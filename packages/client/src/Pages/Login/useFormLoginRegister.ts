@@ -11,7 +11,7 @@ function useFormLoginRegister({ type }: { readonly type: "Login" | "Register" })
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ readonly email: string; readonly password: string }>();
+  } = useForm<{ readonly email: string; readonly password: string; readonly username: string }>();
   const history = useHistory();
   const { dispatch } = useModalContext();
   const { dispatch: authDispatch, state } = useAuthContext();

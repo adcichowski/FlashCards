@@ -1,84 +1,79 @@
-.game {
+.wrapper {
   display: flex;
-  width: 100vw;
-  max-width: 1980px;
-  height: 100vh;
-  position: fixed;
+  padding: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.formLog {
-  margin: auto;
+.containerForm {
+  min-height: 400px;
   display: grid;
-  grid-template-rows: 40% 47% 13%;
-  width: 75%;
-  max-width: 45rem;
-  max-height: 65rem;
-  height: 70%;
-  background-color: #2b3361c9;
+  flex: 0 1 450px;
+  margin: 0 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: #9f1835;
   border-radius: 20px;
-  position: relative;
+  padding: 15px;
 }
 
 .formTitle {
-  font-size: 5.3rem;
+  font-size: clamp(3rem, 5vw, 4rem);
   text-align: center;
-  align-self: center;
-  justify-self: stretch;
-  &::after {
-    content: "";
-    display: block;
-
-    position: relative;
-    top: 3rem;
-    height: 7px;
-    background-color: #a31934;
-  }
+  position: relative;
+  text-shadow: 0px 4px rgba(0, 0, 0, 0.26);
 }
-.gameForm {
-  display: grid;
-  justify-items: center;
+.formSubtitle {
+  margin: 15px 0;
+  width: 75%;
+  justify-self: center;
 }
 
-.inputPassword,
-.inputEmail {
-  margin: 1rem 0 0 0.2rem;
-  font-size: 1.8rem;
-  color: var(--font-color-primary);
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 5px;
-  padding: 0.5rem;
-  font-weight: 700;
-}
-.inputPassword::placeholder,
-.inputEmail::placeholder {
-  color: var(--font-color-primary);
-}
-.formButtons {
-  margin: 1rem 0;
-  width: 100%;
+.formLabel {
+  max-width: 210px;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  @media screen and (max-width: 350px) {
-    flex-flow: column;
-    align-items: center;
-    gap: 20px;
-  }
+  flex-direction: column;
+  font-size: 1.7rem;
 }
-.errorInfo {
-  color: #fbc5c5;
-  width: 100%;
-  text-align: center;
+.formInput {
+  color: #000;
+  background-color: white;
+  padding: 4px;
+  margin: 2.2px;
+  font-size: 1.8rem;
 }
-.question {
-  align-self: flex-end;
-  font-weight: 300;
-  font-size: 1.9rem;
-  text-align: center;
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 20px;
+  text-align: start;
 }
-.questionType {
-  font-weight: 400;
+.questionForm {
+  margin: 20px 0;
+  row-gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+.archon {
   text-decoration: underline;
-  font-size: clamp(2rem, 2vw, 2.6rem);
+  cursor: pointer;
+  font-size: 1.7rem;
+}
+@media (max-height: 585px) {
+  .formLog {
+    width: clamp(500px, 90%, 800px);
+    display: flex;
+    column-gap: 40px;
+    &::after {
+      display: none;
+    }
+  }
+  .question {
+    width: 20%;
+  }
 }

@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html>
+    <Html style={{ height: "100%" }}>
       <Head>
         <link
           rel="preload"
@@ -32,8 +32,14 @@ export default function Document() {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <style>
+          {`
+            #__next { height: 100% }
+          `}
+        </style>
       </Head>
-      <body>
+
+      <body style={{ height: "100%" }}>
         <Main />
         <NextScript />
       </body>

@@ -16,6 +16,9 @@ export const inputValidation = {
       message: "Password must be at least 12 characters long, but smaller than 64 characters.",
     },
   },
+  username: {
+    required: { value: true, message: "Password is empty." },
+  },
 };
 
 export function getRandomMinMax(min: number, max: number) {

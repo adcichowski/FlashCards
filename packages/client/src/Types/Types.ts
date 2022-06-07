@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import { Technologies } from "../Components/Pages/Game/useAvaibleTechnologies";
 
 export type ITypeBoard = "personalCards" | "generalCards" | "favoriteCards";
@@ -33,12 +32,9 @@ export interface TechnologyProperty {
   readonly render: React.FunctionComponent;
   readonly fill: string;
 }
-export interface ButtonInterface {
-  readonly size: "big" | "small" | "normal";
-  readonly type: "submit" | "button" | { readonly element: "a"; readonly href: string };
-  readonly children: string;
-  readonly onClick?: MouseEventHandler<HTMLButtonElement>;
-}
+
+export type ButtonSize = "big" | "small" | "normal";
+
 export type ICardsFromFirestore = { readonly [key: string]: readonly ICard[] };
 export type Mutable<T> = {
   -readonly [P in keyof T]: T[P];

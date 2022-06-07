@@ -7,7 +7,7 @@ describe("test render BackButton component", () => {
   const fakeUrl = "/fake/path";
 
   test("After passed prop (pathTo) to component, should render archon element", () => {
-    render(<BackButton pathTo={fakeUrl} />, { wrapper: MemoryRouter });
+    render(<BackButton pathTo={fakeUrl} text={"Back"} />, { wrapper: MemoryRouter });
     const backButton = screen.getByRole("link");
     fireEvent.click(backButton);
     expect(backButton.closest("a")?.href).toBe(host + fakeUrl);
