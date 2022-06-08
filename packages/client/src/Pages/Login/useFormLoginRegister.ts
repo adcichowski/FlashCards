@@ -6,7 +6,7 @@ import { useModalContext } from "../../Context/ModalContext";
 import React from "react";
 import { changeMessageFromFirebase } from "../../Utils/Utils";
 
-function useFormLoginRegister({ type }: { readonly type: "Login" | "Register" }) {
+function useFormLoginRegister({ type }: { readonly type: string }) {
   const {
     register,
     handleSubmit,
