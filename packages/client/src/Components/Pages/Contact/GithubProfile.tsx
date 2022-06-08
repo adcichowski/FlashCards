@@ -1,15 +1,10 @@
-import { useFetcher, fetcher } from "../../Hooks/useFetcher";
 import Image from "next/image";
 import styles from "./GithubProfile.module.scss";
-interface GithubProfileProps {
+export interface GithubProfileProps {
   readonly html_url: string;
   readonly avatar_url: string;
 }
-function GithubProfile() {
-  const { data } = useFetcher<GithubProfileProps>(() =>
-    fetcher<GithubProfileProps>("https://api.github.com/users/adcichowski", {}),
-  );
-  if (!data) return null;
+function GithubProfile({ html_url, avatar_url }: GithubProfileProps) {
   return (
     <div className={styles.card}>
       <p className={styles.cardTitle}>Created By</p>
@@ -18,11 +13,11 @@ function GithubProfile() {
         width={100}
         height={100}
         className={styles.cardAvatar}
-        src="https://avatars.githubusercontent.com/u/71249791?v=4"
+        src={avatar_url ?? "https://avatars.githubusercontent.com/u/71249791?v=4"}
         alt="avatar"
       />
       <div className={styles.icons}>
-        <a className={`${styles.icon} ${styles.github}`} href={data.html_url}>
+        <a className={`${styles.icon} ${styles.github}`} href={html_url}>
           <span className={"sr-only"}>Github</span>
         </a>
 

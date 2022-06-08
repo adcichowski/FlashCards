@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ModalProvider>
         <AuthProvider>
           <CardProvider>
-            {process.env.NODE_ENV === "development" && <ReactQueryDevtools />}
+            {process.env.NODE_ENV === "development" && <ReactQueryDevtools position="top-left" />}
             <Component {...pageProps} />
           </CardProvider>
         </AuthProvider>

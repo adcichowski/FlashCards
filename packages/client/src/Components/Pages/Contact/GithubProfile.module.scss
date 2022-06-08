@@ -6,10 +6,6 @@
   display: grid;
   align-self: flex-end;
   text-shadow: 1px 1px 1px black;
-  @media screen and (max-width: 800px) {
-    bottom: 22rem;
-    height: 10rem;
-  }
 }
 .cardTitle {
   font-size: 1.9rem;
@@ -19,14 +15,9 @@
 }
 .cardAvatar {
   border-radius: 60px;
-  width: 10rem;
-  height: 10rem;
+  object-fit: contain;
   box-shadow: 0 0 0 1px #262541;
   box-shadow: 1px 1px 1px #262541;
-  @media screen and (max-width: 800px) {
-    width: 8rem;
-    height: 8rem;
-  }
 }
 .icons {
   display: flex;
@@ -38,12 +29,10 @@
   height: 40px;
 }
 .github {
-  background: url("../../../Assets/SocialIcons/github.svg") no-repeat
-    center/cover;
+  background: url("../../../Assets/SocialIcons/github.svg") no-repeat center/cover;
 }
 .linkedin {
   width: 44px;
   height: 44px;
-  background: url("../../../Assets/SocialIcons/linkedin.svg") no-repeat
-    center/contain;
+  background: url("../../../Assets/SocialIcons/linkedin.svg") no-repeat center/contain;
 }

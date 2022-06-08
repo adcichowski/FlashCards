@@ -2,16 +2,18 @@
   display: grid;
   align-items: center;
   justify-content: flex-end;
-  @media screen and (max-width: 952px) {
-    height: 100vh;
-  }
+}
+.wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 .contactBackground {
   content: "";
   top: 45%;
-  left: -10%;
-  width: 100rem;
-  height: 80rem;
+  left: -5%;
+  width: 70rem;
+  height: 60rem;
   position: absolute;
   background: url("../../Assets/Pages/Home/About/ThreeCards.png") no-repeat center/contain;
   z-index: -1;
@@ -26,7 +28,7 @@
   justify-self: center;
   align-self: center;
   @media screen and (max-width: 948px) {
-    margin-top: -15rem;
+    margin-top: 15rem;
     padding: 10px;
   }
 }
