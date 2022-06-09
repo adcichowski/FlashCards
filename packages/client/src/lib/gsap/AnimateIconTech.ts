@@ -1,4 +1,4 @@
-import { useAvaibleTechnologies } from "../../Components/Pages/Game/useAvaibleTechnologies";
+import { useAvaibleTechnologies } from "../../components/Pages/Game/useAvaibleTechnologies";
 import { ColorizeIcon } from "./ColorizeIcon";
 import gsap from "gsap";
 function AnimateIconTech(elements: HTMLDivElement) {

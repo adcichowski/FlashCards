@@ -4,7 +4,7 @@ import { Logo } from "../Logo/Logo";
 import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
 import { inputValidation } from "../../Utils/Utils";
-import { socialLinks, navigationLinks } from "../../Constants/Constants";
+import { socialLinks, navigationLinks } from "../../constats/Constants";
 
 function Footer() {
   const { register, handleSubmit, formState } = useForm<{ readonly email: string; readonly textarea: string }>();

@@ -20,7 +20,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "noEmit": true,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "resolveJsonModule": true
   }
 }

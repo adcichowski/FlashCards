@@ -1,15 +1,9 @@
+import React from "react";
+import { Navigation } from "src/components/Navigation/Navigation";
 import { Game } from "src/pages/game/components/BackgroundGame/BackgroundGame";
-import { Navigation } from "../src/components/Navigation/Navigation";
-import { GithubProfile, GithubProfileProps } from "../src/pages/contact/components/GithubProfile";
-import styles from "../src/Pages/Contact/Contact.module.scss";
-export async function getStaticProps() {
-  const responseData = await fetch("https://api.github.com/users/adcichowski");
-  const githubProfile = await responseData.json();
-  return {
-    props: { ...githubProfile },
-  };
-}
-export default function Contact({ githubProfile }: { readonly githubProfile: GithubProfileProps }) {
+import { GithubProfile } from "../components/GithubProfile";
+
+export function ContactPage() {
   return (
     <div className={styles.wrapper}>
       <Game>
@@ -26,4 +20,3 @@ export default function Contact({ githubProfile }: { readonly githubProfile: Git
     </div>
   );
 }
-Contact.displayName = "Contact";

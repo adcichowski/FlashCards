@@ -1,4 +1,4 @@
-import { useModalContext } from "../../Context/ModalContext";
+import { useModalContext } from "../../context/ModalContext";
 import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
 import Alert from "../../Assets/Modal/alert-circle.svg";

@@ -1,4 +1,4 @@
-import { Technologies } from "../Components/Pages/Game/useAvaibleTechnologies";
+import { Technologies } from "../components/Pages/Game/useAvaibleTechnologies";
 
 export type ITypeBoard = "personalCards" | "generalCards" | "favoriteCards";
 export interface UserData {

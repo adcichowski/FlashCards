@@ -1,4 +1,4 @@
-import { ButtonSize } from "../../Types/Types";
+import { ButtonSize } from "../../types/types";
 import styles from "./Button.module.scss";
 import clsx from "clsx";
 

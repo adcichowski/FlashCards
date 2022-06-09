@@ -1,18 +1,14 @@
-import { useAnimationGSAP } from "src/Components/Hooks/useAnimationGSAP";
-import { useAvaibleTechnologies } from "src/Components/Pages/Game/useAvaibleTechnologies";
-import { useCardContext } from "src/Context/CardContext";
+import { useAnimationGSAP } from "src/hooks/useAnimationGSAP";
+import { useAvaibleTechnologies } from "src/components/Pages/Game/useAvaibleTechnologies";
+import { useCardContext } from "src/context/CardContext";
 import { AnimateIconTech } from "src/lib/gsap/AnimateIconTech";
-import { useSendCardToDatabase } from "src/Pages/Game/AddCard/useSendCardToDatabase";
-import { useSetIdCard } from "src/Pages/Game/AddCard/useSetIdCard";
-import { ICard } from "src/Types/Types";
+import { ICard } from "src/types/types";
 import styles from "src/Pages/Game/AddCard/AddCard.module.scss";
-import { BackButton } from "src/Components/Button/BackButton/BackButton";
-import { Button } from "src/Components/Button/Button";
-import { CardByContext } from "src/Components/Pages/Game/CardByContext/CardByContext";
-import { Game } from "src/Pages/Game/Game";
+import { BackButton } from "src/components/Button/BackButton/BackButton";
+import { Button } from "src/components/Button/Button";
+import { CardByContext } from "src/pages/game/components/CardByContext/CardByContext";
+import { Game } from "src/pages/game/components/BackgroundGame/BackgroundGame";
 export default function AddCard() {
-  const { nameDatabase, setNameDatabase } = useSetIdCard();
-  const { sendCardToDatabase } = useSendCardToDatabase(nameDatabase);
   const { dispatch, state: stateCard } = useCardContext();
   const { avaibleTechnologies } = useAvaibleTechnologies();
   const { getElements } = useAnimationGSAP(AnimateIconTech);
@@ -78,28 +74,18 @@ export default function AddCard() {
             <div className={styles.inputsDeck}>
               <label className={styles.labelDeck}>
                 General Cards
-                <input
-                  className={styles.deckRadioInput}
-                  type="radio"
-                  name="board"
-                  onClick={() => setNameDatabase("generalCards")}
-                />
+                <input className={styles.deckRadioInput} type="radio" name="board" />
                 <div className={styles.deckRadioInputIcon}></div>
               </label>
               <label className={styles.labelDeck}>
                 Personal Cards
-                <input
-                  className={styles.deckRadioInput}
-                  type="radio"
-                  name="board"
-                  onClick={() => setNameDatabase("personalCards")}
-                />
+                <input className={styles.deckRadioInput} type="radio" name="board" />
                 <div className={styles.deckRadioInputIcon}></div>
               </label>
             </div>
           </div>
           <span>
-            <Button size="normal" type="button" onClick={sendCardToDatabase}>
+            <Button size="normal" type="button">
               Add Card
             </Button>
             <Button size="normal" type="button" onClick={() => dispatch({ type: "showCard" })}>
