@@ -10,7 +10,7 @@ import { capitalize, inputValidation } from "src/Utils/Utils";
 import { BackgroundGame } from "../../game/components/BackgroundGame/BackgroundGame";
 import styles from "./Form.module.scss";
 import { useFormLoginRegister } from "../hooks/useFormLoginRegister";
-import { Button } from "src/Components/Button/Button";
+import { Button } from "src/components/Button/Button";
 
 export function Form() {
   const router = useRouter();

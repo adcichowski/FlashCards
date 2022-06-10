@@ -4,7 +4,8 @@ import { AnimateIconTech } from "src/lib/gsap/AnimateIconTech";
 import { ICard } from "src/types/types";
 import styles from "AddCard.module.scss";
 import { BackButton } from "src/components/Button/BackButton/BackButton";
-import { Button } from "src/Components/Button/Button";
+import { Button } from "src/components/Button/Button";
+
 function AddCard() {
   const { dispatch, state: stateCard } = useCardContext();
   // const { avaibleTechnologies } = useAvaibleTechnologies();
