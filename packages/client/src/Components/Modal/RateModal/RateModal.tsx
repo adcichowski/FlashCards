@@ -1,7 +1,7 @@
 import { useModalContext } from "../../../context/ModalContext";
 import { Button } from "../../Button/Button";
 import styles from "../Modal.module.scss";
-import Star from "../../../Assets/Icons/star.svg";
+import Star from "./star.svg";
 function RateModal() {
   const { dispatch, state } = useModalContext();
 

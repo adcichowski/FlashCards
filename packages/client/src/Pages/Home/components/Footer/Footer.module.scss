@@ -21,8 +21,7 @@
     height: 100%;
     z-index: 1;
     right: -50%;
-    background: url("../../Assets/Pages/Home/Path\ 120.svg") no-repeat right /
-      cover;
+    background: url("/pages/home/footer-background.svg") no-repeat right / cover;
     @media screen and (max-width: 900px) {
       display: none;
     }
@@ -109,16 +108,13 @@
   margin: 0 1.2rem;
 }
 .twitter {
-  background: url("../../Assets/SocialIcons/twitter.svg") no-repeat
-    center/contain;
+  background: url("/icons/social/twitter.svg") no-repeat center/contain;
 }
 .linkedin {
   width: 3.5rem;
   height: 3.5rem;
-  background: url("../../Assets/SocialIcons/linkedin.svg") no-repeat
-    center/contain;
+  background: url("/icons/social/linkedin.svg") no-repeat center/contain;
 }
 .facebook {
-  background: url("../../Assets/SocialIcons/facebook.svg") no-repeat
-    center/contain;
+  background: url("/icons/social/facebook.svg") no-repeat center/contain;
 }

@@ -72,7 +72,7 @@
   }
   &::before {
     content: "";
-    background: url("../../Assets/Pages/Home/bigQuestionBg.svg") no-repeat center/contain;
+    background: url("/pages/home/bigQuestionBg.svg") no-repeat center/contain;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -86,7 +86,7 @@
   }
 }
 .bigQuestionIcon {
-  background: url("../../Assets/Pages/Home/crown-color.svg") no-repeat center/contain;
+  background: url("/icons/crown-color.svg") no-repeat center/contain;
   width: clamp(5rem, 10vw, 15rem);
   height: clamp(5rem, 10vw, 15rem);
 }

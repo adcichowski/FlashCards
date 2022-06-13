@@ -27,8 +27,7 @@
   align-items: center;
   justify-content: center;
   grid-area: text;
-  background: url("../../../../Assets/Pages/Home/CirclesWave.svg") no-repeat
-    right / contain;
+  background: url("/pages/home/CirclesWave.svg") no-repeat right / contain;
   @media screen and (max-width: 1050px) {
     background-color: var(--button--background);
     padding: 5rem 0;

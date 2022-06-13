@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 //optimzie background by picture element
-import { Footer } from "src/components/Footer/Footer";
+import { Footer } from "src/pages/home/components/Footer/Footer";
 import { Navigation } from "src/components/Navigation/Navigation";
 import React from "react";
 import styles from "src/Pages/Home/Home.module.scss";

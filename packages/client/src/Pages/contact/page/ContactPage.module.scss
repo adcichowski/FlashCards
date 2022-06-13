@@ -15,7 +15,7 @@
   width: 70rem;
   height: 60rem;
   position: absolute;
-  background: url("../../Assets/Pages/Home/About/ThreeCards.png") no-repeat center/contain;
+  background: url("/pages/home/ThreeCards.png") no-repeat center/contain;
   z-index: -1;
   @media screen and (max-width: 652px) {
     width: 60rem;
@@ -54,15 +54,15 @@
 .twitter {
   width: 30px;
   height: 30px;
-  background: url("../../Assets/SocialIcons/twitter.svg") no-repeat center/contain;
+  background: url("/icons/social/twitter.svg") no-repeat center/contain;
 }
 .facebook {
   width: 27px;
   height: 27px;
-  background: url("../../Assets/SocialIcons/facebook.svg") no-repeat center/contain;
+  background: url("/icons/social/facebook.svg") no-repeat center/contain;
 }
 .linkedin {
   width: 34px;
   height: 34px;
-  background: url("../../Assets/SocialIcons/linkedin.svg") no-repeat center/contain;
+  background: url("/icons/social/linkedin.svg") no-repeat center/contain;
 }

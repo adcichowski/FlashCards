@@ -1,12 +1,13 @@
 import React from "react";
 import { Navigation } from "src/components/Navigation/Navigation";
-import { Game } from "src/pages/game/components/BackgroundGame/BackgroundGame";
-import { GithubProfile } from "../components/GithubProfile";
+import { BackgroundGame } from "src/pages/game/components/BackgroundGame/BackgroundGame";
+import styles from "./ContactPage.module.scss";
+import { GithubProfile, GithubProfileProps } from "../components/GithubProfile";
 
-export function ContactPage() {
+export function ContactPage({ githubProfile }: { readonly githubProfile: GithubProfileProps }) {
   return (
     <div className={styles.wrapper}>
-      <Game>
+      <BackgroundGame>
         <Navigation />
         <div className={styles.contact}>
           <div className={styles.description}>
@@ -16,7 +17,7 @@ export function ContactPage() {
           <GithubProfile {...githubProfile} />
           <div className={styles.contactBackground}></div>
         </div>
-      </Game>
+      </BackgroundGame>
     </div>
   );
 }

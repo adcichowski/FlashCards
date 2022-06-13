@@ -1,8 +1,8 @@
 import { useModalContext } from "../../context/ModalContext";
 import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
-import Alert from "../../Assets/Modal/alert-circle.svg";
-import Check from "../../Assets/Modal/check-circle.svg";
+import Alert from "./alert-circle.svg";
+import Check from "./check-circle.svg";
 import { RateModal } from "./RateModal/RateModal";
 function Modal() {
   const { dispatch, state } = useModalContext();

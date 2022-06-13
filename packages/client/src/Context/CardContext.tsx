@@ -1,7 +1,7 @@
 import { ReactNode, useReducer } from "react";
 import { createContext, useContext } from "react";
 import { ICard } from "../types/types";
-import { getRandomMinMax } from "../Utils/Utils";
+import { getRandomMinMax } from "../utils/Utils";
 interface Action {
   readonly type:
     | "showCard"

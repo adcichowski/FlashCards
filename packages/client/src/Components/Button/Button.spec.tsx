@@ -17,12 +17,7 @@ describe("Test functionality Button component", () => {
 
   test("render archon element in component, and style assign for element", () => {
     const fakeUrl = "fake";
-    render(
-      <Button size="small" type={{ element: "a", href: fakeUrl }}>
-        Archon
-      </Button>,
-      { wrapper: MemoryRouter },
-    );
+    render(<Button size="small">Archon</Button>, { wrapper: MemoryRouter });
     const button = screen.getByRole("link");
     userEvent.click(button);
     expect(button.className).toHaveClass("button smallButton");

@@ -1,5 +1,5 @@
 import styles from "./CirclesInfo.module.scss";
-import CirclesSVG from "../../../../Assets/Pages/Home/CirclesAside.svg";
+import CirclesSVG from "./CirclesAside.svg";
 function CirclesInfo() {
   return (
     <section className={styles.circles}>

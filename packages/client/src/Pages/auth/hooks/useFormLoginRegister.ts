@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../../context/AuthContext";
 import { useModalContext } from "../../../context/ModalContext";
 import React from "react";
-import { changeMessageFromFirebase } from "../../../Utils/Utils";
+import { changeMessageFromFirebase } from "../../../utils/Utils";
 import { useRouter } from "next/router";
 
 function useFormLoginRegister({ type }: { readonly type: string }) {

@@ -6,7 +6,7 @@ import { BackButton } from "src/components/Button/BackButton/BackButton";
 
 import { Input } from "src/components/Input/Input";
 import { Modal } from "src/components/Modal/Modal";
-import { capitalize, inputValidation } from "src/Utils/Utils";
+import { capitalize, inputValidation } from "src/utils/Utils";
 import { BackgroundGame } from "../../game/components/BackgroundGame/BackgroundGame";
 import styles from "./Form.module.scss";
 import { useFormLoginRegister } from "../hooks/useFormLoginRegister";
