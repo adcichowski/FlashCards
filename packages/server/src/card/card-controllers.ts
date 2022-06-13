@@ -35,7 +35,7 @@ import type { InferType } from "yup";
  *        items:
  *         type: object
  *         properties:
- *          userName:
+ *          username:
  *           type: string
  *          rate:
  *           type: number
@@ -44,11 +44,12 @@ import type { InferType } from "yup";
 const scrapCard = ({
   id,
   question,
-  Subject,
   answer,
   User,
-  shapeId,
+  shape,
   Rate,
+  subject,
+  standard,
 }: InferPromise<typeof cardService["getAllCards"]>) => ({
   id,
   question,
@@ -59,17 +60,17 @@ const scrapCard = ({
       return prev + userRate.rate / Rate.length;
     }, 0).toFixed(2),
   },
-  section: Subject.Section.name,
-  subject: Subject.name,
-  createdBy: User.userName,
-  shapeId,
+  subject,
+  createdBy: User.username,
+  shape,
+  standard,
 });
 
 export const getAllCards = async (req: Request, res: Response) => {
   const subject = req.query.subject;
   if (typeof subject === "string") {
-    const cardBySubject = await cardService.getCardBySubject(subject);
-    return res.json(cardBySubject.map((card) => scrapCard(card)));
+    // const cardBySubject = await cardService.getCardBySubject(subject);
+    // return res.json(cardBySubject.map((card) => scrapCard(card)));
   }
   const allCards = await cardService.getAllCards();
   const scrapeData = allCards.map((card) => scrapCard(card));

@@ -12,7 +12,7 @@ const getFirstCardById = async (id: string) =>
       Rate: { include: { User: true } },
       User: {
         select: {
-          userName: true,
+          username: true,
         },
       },
     },
@@ -22,11 +22,11 @@ const getCardBySubject = async (subject: string) =>
   await prisma.card.findMany({
     where: { Subject: { name: subject } },
     include: {
-      Subject: { include: { Section: true } },
+      Standard: { select: { type: true } },
       Rate: { include: { User: true } },
       User: {
         select: {
-          userName: true,
+          username: true,
         },
       },
     },
@@ -36,10 +36,10 @@ const getAllCards = async () =>
   await prisma.card.findMany({
     include: {
       Subject: { include: { Section: true } },
-      Rate: { include: { User: { select: { userName: true } } } },
+      Rate: { include: { User: { select: { username: true } } } },
       User: {
         select: {
-          userName: true,
+          username: true,
         },
       },
     },
@@ -53,9 +53,10 @@ const createCard = async (card: InferType<typeof validateSchemaCard>) => {
         create: {
           question: card.question,
           answer: card.answer,
-          Shape: { connect: { shapeId: +card.shapeId } },
-          Subject: { connect: { id: +card.subjectId } },
+          Shape: { connect: { shape: +card.shape } },
+          Subject: { connect: { name: card.subject } },
           User: { connect: { id: +card.userId } },
+          Standard: { connect: {} },
         },
       },
       User: { connect: { id: +card.userId } },

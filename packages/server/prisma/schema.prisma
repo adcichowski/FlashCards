@@ -8,54 +8,56 @@ datasource db {
 }
 
 model Card {
-  id        Int     @id(map: "cards_pkey") @default(autoincrement())
-  subjectId Int
-  question  String  @db.VarChar(255)
-  answer    String  @db.VarChar(255)
-  userId    Int
-  shapeId   Int
-  Shape     Shape   @relation(fields: [shapeId], references: [shapeId], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_shapeid_fk")
-  Subject   Subject @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_subject_subject_id_fk")
-  User      User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_user_id_fk")
-  Rate      Rate[]
+  id       Int      @id(map: "card_pk") @unique(map: "card_id_uindex") @default(autoincrement())
+  question String?  @db.VarChar(255)
+  answer   String?  @db.VarChar(255)
+  userId   Int
+  standard String   @db.VarChar(16)
+  shape    Int?
+  subject  String?  @db.VarChar(16)
+  Shape    Shape?   @relation(fields: [shape], references: [shape], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_shape_fk")
+  Standard Standard @relation(fields: [standard], references: [type], onDelete: NoAction, onUpdate: NoAction, map: "card_standard_type_fk")
+  Subject  Subject? @relation(fields: [subject], references: [name], onDelete: NoAction, onUpdate: NoAction, map: "card_subject_name_fk")
+  User     User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_users_id_fk")
+  Rate     Rate[]
 }
 
 model Rate {
   userId Int
   cardId Int
   rate   Int
-  Card   Card @relation(fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_card_id_fkey")
-  User   User @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_user_id_fkey")
-
-  @@id([userId, cardId], map: "rate_card_pkey")
-}
-
-model Subject {
-  id        Int     @id(map: "technologies_pk") @default(autoincrement())
-  name      String  @db.VarChar(22)
-  sectionId Int
-  Section   Section @relation(fields: [sectionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "subject_section_id_fk")
-  Card      Card[]
-}
-
-model User {
-  id        Int       @id(map: "users_pkey") @default(autoincrement())
-  userName  String    @db.VarChar(50)
-  password  String    @db.VarChar(60)
-  email     String    @unique(map: "users_email_key") @db.VarChar(60)
-  createdOn DateTime  @default(now()) @db.Timestamp(6)
-  lastLogin DateTime? @db.Timestamp(6)
-  Card      Card[]
-  Rate      Rate[]
-}
-
-model Shape {
-  shapeId Int    @id(map: "shape_pk")
-  Card    Card[]
+  id     Int  @id(map: "rate_pk") @default(autoincrement())
+  Card   Card @relation(fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_id_fk")
+  User   User @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_users_id_fk")
 }
 
 model Section {
-  id      Int       @id(map: "section_pk") @default(autoincrement())
-  name    String    @db.VarChar(32)
+  name    String    @id(map: "section_pk") @db.VarChar(16)
   Subject Subject[]
+}
+
+model Shape {
+  shape Int    @id(map: "shape_pk") @default(autoincrement())
+  Card  Card[]
+}
+
+model Standard {
+  type String @id(map: "standard_pk") @db.VarChar(16)
+  Card Card[]
+}
+
+model Subject {
+  name    String  @unique(map: "subject_subject_uindex") @db.VarChar(16)
+  section String  @db.VarChar(16)
+  Section Section @relation(fields: [section], references: [name], onDelete: NoAction, onUpdate: NoAction, map: "subject_section_name_fk")
+  Card    Card[]
+}
+
+model User {
+  id       Int    @id(map: "users_pk") @unique(map: "users_id_uindex") @default(autoincrement())
+  username String @unique(map: "users_username_uindex") @db.VarChar(32)
+  email    String @unique(map: "users_email_uindex") @db.VarChar(32)
+  password String @unique(map: "users_password_uindex") @db.VarChar(60)
+  Card     Card[]
+  Rate     Rate[]
 }

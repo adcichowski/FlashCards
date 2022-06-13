@@ -7,7 +7,9 @@ import type { InferType } from "yup";
 
 const prisma = new PrismaClient();
 const createUser = async (user: InferType<typeof validateRegisterSchema>) => {
-  return await prisma.user.create({ data: user });
+  if (user.email && user.password && user.username) {
+    return await prisma.user.create({ data: user });
+  }
 };
 
 const getUser = async (
