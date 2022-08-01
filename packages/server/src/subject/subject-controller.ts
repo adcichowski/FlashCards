@@ -4,10 +4,10 @@ import type { Section, Subject } from "@prisma/client";
 import type { Response, Request } from "express";
 
 const scrapSubject = ({
-  name,
+  id,
   Section,
 }: Subject & { readonly Section: Section }) => ({
-  name,
+  id,
   section: Section.name,
 });
 

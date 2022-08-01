@@ -1,3 +1,4 @@
+import { difficulties } from "@prisma/client";
 import * as Yup from "yup";
 export const validateSchemaCard = Yup.object().shape({
   question: Yup.string().max(255).required(),
@@ -6,6 +7,9 @@ export const validateSchemaCard = Yup.object().shape({
   userId: Yup.string().required(),
   subject: Yup.string().max(16).required(),
   standard: Yup.string().max(16).required(),
+  difficulties: Yup.mixed<difficulties>()
+    .oneOf(Object.values(difficulties))
+    .required(),
 });
 
 /**

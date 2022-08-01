@@ -49,7 +49,6 @@ const scrapCard = ({
   shape,
   Rate,
   subject,
-  standard,
 }: InferPromise<typeof cardService["getAllCards"]>) => ({
   id,
   question,
@@ -63,7 +62,6 @@ const scrapCard = ({
   subject,
   createdBy: User.username,
   shape,
-  standard,
 });
 
 export const getAllCards = async (req: Request, res: Response) => {

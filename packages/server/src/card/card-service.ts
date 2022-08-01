@@ -6,7 +6,7 @@ import type { InferType } from "yup";
 const prisma = new PrismaClient();
 const getFirstCardById = async (id: string) =>
   await prisma.card.findFirst({
-    where: { id: +id },
+    where: { id: Number(id) },
     include: {
       Subject: { include: { Section: true } },
       Rate: { include: { User: true } },
@@ -20,9 +20,8 @@ const getFirstCardById = async (id: string) =>
 
 const getCardBySubject = async (subject: string) =>
   await prisma.card.findMany({
-    where: { Subject: { name: subject } },
+    where: { Subject: { id: subject } },
     include: {
-      Standard: { select: { type: true } },
       Rate: { include: { User: true } },
       User: {
         select: {
@@ -51,12 +50,12 @@ const createCard = async (card: InferType<typeof validateSchemaCard>) => {
       rate: 5,
       Card: {
         create: {
+          difficulties: card.difficulties,
           question: card.question,
           answer: card.answer,
-          Shape: { connect: { shape: +card.shape } },
-          Subject: { connect: { name: card.subject } },
-          User: { connect: { id: +card.userId } },
-          Standard: { connect: {} },
+          Shape: { connect: { id: Number(card.shape) } },
+          Subject: { connect: { id: card.subject } },
+          User: { connect: { id: Number(card.userId) } },
         },
       },
       User: { connect: { id: +card.userId } },
