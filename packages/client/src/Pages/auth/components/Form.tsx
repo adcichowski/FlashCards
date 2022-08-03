@@ -1,60 +1,78 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import { BackButton } from "src/components/Button/BackButton/BackButton";
 
 import { Input } from "src/components/Input/Input";
 import { Modal } from "src/components/Modal/Modal";
-import { capitalize, inputValidation } from "src/utils/Utils";
 import { BackgroundGame } from "../../game/components/BackgroundGame/BackgroundGame";
 import styles from "./Form.module.scss";
-import { useFormLoginRegister } from "../hooks/useFormLoginRegister";
-import { Button } from "src/components/Button/Button";
 
-export function Form() {
-  const router = useRouter();
-  const typePage = capitalize(router.pathname.split("/")[1]);
-  const isLoginPage = router.pathname.split("/")[1] === "login";
-  const hrefArchon = isLoginPage ? "/register" : "/login";
-  const { onSubmit, handleSubmit, register, errors } = useFormLoginRegister({
-    type: typePage,
+import { Button } from "src/components/Button/Button";
+import { LoginForm, RegisterForm } from "../hooks/useAuthMutation";
+import { UseMutationResult } from "react-query";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { validateLoginSchema, validateRegisterSchema } from "server/src/auth/auth-schema";
+
+type FormTypes = {
+  readonly register: { readonly username: string; readonly email: string; readonly password: string };
+  readonly login: { readonly email: string; readonly password: string };
+};
+
+export function Form({
+  typeForm,
+  mutation,
+  yupSchema,
+}: {
+  readonly typeForm: keyof FormTypes;
+  readonly mutation: UseMutationResult<Response, unknown, LoginForm | RegisterForm, unknown>;
+  readonly yupSchema: typeof validateLoginSchema | typeof validateRegisterSchema;
+}) {
+  const isLoginPage = typeForm === "login";
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormTypes[typeof typeForm]>({
+    resolver: yupResolver(yupSchema),
   });
+
   return (
     <BackgroundGame>
       <div className={styles.game}>
         <div className={`${styles.formLog} ${clsx(isLoginPage, styles.register)}`}>
           <BackButton pathTo="/" />
-          <h1 className={styles.formTitle}>{`${capitalize(typePage)} In`}</h1>
-
-          <form className={styles.gameForm} onSubmit={handleSubmit(onSubmit)}>
-            {!isLoginPage && (
+          <h1 className={styles.formTitle}>{`${typeForm} In`}</h1>
+          <form autoComplete="off" className={styles.gameForm} onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+            {"username" in yupSchema.fields && (
               <div className={styles.containerInput}>
                 <Input
-                  labelText="Username"
-                  {...register("username", inputValidation.username)}
+                  label="username"
+                  register={register}
                   className={styles.formInput}
                   labelClass={styles.formLabel}
                   autoComplete="off"
                 />
-                <span className={styles.errorInfo}>{errors.username?.message}</span>
+                <span className={styles.errorInfo}>{"username" in errors ? errors?.username?.message : ""}</span>
               </div>
             )}
             <div className={styles.containerInput}>
               <Input
-                labelText="Email"
-                {...register("email", inputValidation.email)}
+                label="email"
+                register={register}
                 className={styles.formInput}
                 labelClass={styles.formLabel}
                 autoComplete="off"
               />
 
-              <span className={styles.errorInfo}>{errors?.email?.message} </span>
+              <span className={styles.errorInfo}>{errors?.email?.message}</span>
             </div>
             <div className={styles.containerInput}>
               <Input
-                labelText="Password"
-                {...register("password", inputValidation.password)}
+                label="password"
+                register={register}
                 labelClass={styles.formLabel}
                 type="password"
                 className={styles.formInput}
@@ -62,15 +80,16 @@ export function Form() {
               />
               <span className={styles.errorInfo}>{errors.password?.message}</span>
             </div>
-
-            <Button size="normal" type="submit">
-              {typePage}
-            </Button>
+            <div className={styles.containerSubmit}>
+              <Button size="normal" type="submit">
+                {typeForm}
+              </Button>
+            </div>
           </form>
           <p className={styles.question}>
-            {typePage === "Login" ? "Haven't got an account?" : "Have account?"}{" "}
+            {isLoginPage ? "Haven't got an account?" : "Have account?"}{" "}
             <span className={styles.questionType}>
-              <Link href={hrefArchon}>{isLoginPage ? "Create Account" : "Login in"}</Link>
+              <Link href={isLoginPage ? "/register" : "/login"}>{isLoginPage ? "Create Account" : "Login in"}</Link>
             </span>
           </p>
         </div>

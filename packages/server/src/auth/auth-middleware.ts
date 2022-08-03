@@ -50,8 +50,8 @@ export const checkUserExist = async (
   next();
 };
 
-export const checkSession = (req: Request, _: Response, next: NextFunction) => {
+export const checkSession = (req: Request, res: Response) => {
   const session = req.session;
   console.log(session, "Session!");
-  next();
+  res.json({ id: "123" });
 };

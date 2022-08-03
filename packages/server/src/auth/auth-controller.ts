@@ -11,7 +11,7 @@ export const registerUser = async (req: Request, res: Response) => {
   const createdUser = await authService.createUser(user);
   if (createdUser) {
     const token = createTokenJWT(createdUser.id.toString());
-    res.cookie("jwt", token, { httpOnly: true, maxAge: MAX_AGE * 1000 });
+    res.cookie("jwt", token, { httpOnly: true, maxAge: MAX_AGE });
     res.status(201).send({ message: "User is register" });
   }
 };

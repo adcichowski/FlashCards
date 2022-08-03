@@ -3,7 +3,6 @@ import { Button } from "../../../../components/Button/Button";
 import { Logo } from "../../../../components/Logo/Logo";
 import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
-import { inputValidation } from "../../../../utils/Utils";
 import { socialLinks, navigationLinks } from "../../../../constats/Constants";
 
 function Footer() {
@@ -48,13 +47,7 @@ function Footer() {
         <p className={styles.formSubtitle}>We love got ideas</p>
         <label>
           <span className="sr-only">Email</span>
-          <input
-            id="email"
-            {...register("email", inputValidation.email)}
-            placeholder="Email"
-            type="text"
-            className={styles.formInput}
-          />
+          <input id="email" {...register("email")} placeholder="Email" type="text" className={styles.formInput} />
         </label>
         <span className={styles.formError}>{errors?.email?.message}</span>
         <label>

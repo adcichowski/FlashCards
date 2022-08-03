@@ -1,5 +1,6 @@
 .button,
 .buttonSecondary {
+  text-transform: capitalize;
   width: clamp(11rem, calc(4rem + 5vw), 12rem);
   height: clamp(4rem, calc(1rem + 5vw), 6rem);
   position: relative;
@@ -87,6 +88,11 @@
 }
 .bigFront {
   font-size: clamp(1.5rem, calc(1.5rem + 10vw), 2.4rem);
+}
+.bigFront::first-letter,
+.smallFront::first-letter,
+.normalFront::first-letter {
+  text-transform: uppercase;
 }
 .smallFront,
 .normalFront {

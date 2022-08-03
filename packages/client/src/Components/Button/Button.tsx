@@ -12,9 +12,9 @@ function Button({
     parent: styles[`${size}Button`],
     children: styles[`${size}Front`],
   };
-  const buttonClass = !secondary ? styles.button : styles.buttonSecondary;
+  const classToSet = !secondary ? styles.button : styles.buttonSecondary;
   return (
-    <button className={`${buttonClass} ${stylesButton.parent}  `} {...props}>
+    <button className={`${classToSet} ${stylesButton.parent}  `} {...props}>
       <span className={`${styles.front} ${stylesButton.children} ${clsx(secondary && styles.frontSecondary)}`}>
         {children}
       </span>
