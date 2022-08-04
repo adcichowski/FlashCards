@@ -13,7 +13,7 @@ import type { InferType } from "yup";
 
 export const checkThePassword = async (
   req: Request,
-  _: Response,
+  res: Response,
   next: NextFunction
 ) => {
   const requestParams: InferType<typeof validateLoginSchema> = req.body;
@@ -24,9 +24,10 @@ export const checkThePassword = async (
     requestParams.password,
     user.password
   );
+
   if (!isCorrectPass)
     return next(new HttpError(401, "Check email and password!"));
-  next();
+  res.status(200).send({ id: user.id });
 };
 export const hashThePassword = async (
   req: Request,
@@ -44,14 +45,7 @@ export const checkUserExist = async (
   next: NextFunction
 ) => {
   const user: InferType<typeof validateRegisterSchema> = req.body;
-  const isExistUser = await authService.getUser(user);
-  if (isExistUser) next(new HttpError(400, "User exist in database!"));
-
+  const userFromDb = await authService.getUser(user);
+  if (userFromDb) next(new HttpError(400, "User exist in database!"));
   next();
-};
-
-export const checkSession = (req: Request, res: Response) => {
-  const session = req.session;
-  console.log(session, "Session!");
-  res.json({ id: "123" });
 };

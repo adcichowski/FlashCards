@@ -4,7 +4,6 @@ import { reusableValidation } from "../utils/reusableValidation";
 
 import { registerUser } from "./auth-controller";
 import {
-  checkSession,
   checkThePassword,
   checkUserExist,
   hashThePassword,
@@ -37,8 +36,7 @@ const router = Router();
 router.post(
   "/sessions",
   reusableValidation(validateLoginSchema),
-  checkThePassword,
-  checkSession
+  checkThePassword
 );
 
 /**
