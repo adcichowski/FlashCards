@@ -23,7 +23,10 @@ import * as Yup from "yup";
  */
 
 export const validateRegisterSchema = Yup.object().shape({
-  email: Yup.string().max(64).required("Email is require!"),
+  email: Yup.string()
+    .max(64)
+    .required("Email is require!")
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "It's not email format"),
   password: Yup.string().max(64).min(12).required("Password is require!"),
   username: Yup.string().max(32).required("Username is require!"),
 });
@@ -48,6 +51,9 @@ export const validateRegisterSchema = Yup.object().shape({
  */
 
 export const validateLoginSchema = Yup.object().shape({
-  email: Yup.string().max(64).required("Email is require!"),
+  email: Yup.string()
+    .max(64)
+    .required("Email is require!")
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Change email format!"),
   password: Yup.string().max(64).min(12).required("Password is require!"),
 });

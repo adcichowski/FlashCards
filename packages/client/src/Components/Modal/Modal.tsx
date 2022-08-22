@@ -1,32 +1,31 @@
-import { useModalContext } from "../../context/ModalContext";
 import { Button } from "../Button/Button";
 import styles from "./Modal.module.scss";
 import Alert from "./alert-circle.svg";
 import Check from "./check-circle.svg";
-import { RateModal } from "./RateModal/RateModal";
-function Modal() {
-  const { dispatch, state } = useModalContext();
-  const handleClose = () => {
-    dispatch({ type: "closeModal" });
-  };
-  if (!state.isOpen) {
-    return null;
-  }
-  if (state.type === "rate") {
-    return <RateModal />;
-  }
-  return (
+
+import ReactDOM from "react-dom";
+
+import { useModalPortal } from "./useModalPortal";
+import { useModalContext } from "src/context/ModalContext";
+
+export function Modal() {
+  const { wrapperElement } = useModalPortal();
+  const { modal, setModal } = useModalContext();
+
+  if (!wrapperElement || !modal.isOpen) return null;
+
+  return ReactDOM.createPortal(
     <div className={styles.wrapper}>
       <div className={styles.modal}>
-        <p className={styles.modalTitle}>{state.type === "error" ? "Error" : "Success"}</p>
-        <div className={styles.modalIcon}>{state.type === "error" ? <Alert /> : <Check />}</div>
-        <p className={styles.modalText}>{state.message}</p>
-        <Button size="normal" type="button" onClick={handleClose}>
+        <p className={styles.modalTitle}>{modal.type === "error" ? "Error" : "Success"}</p>
+        <div className={styles.modalIcon}>{modal.type === "error" ? <Alert /> : <Check />}</div>
+        <p className={styles.modalText}>{modal.message}</p>
+        <Button size="normal" type="button" onClick={() => setModal((prev) => ({ ...prev, isOpen: !prev.isOpen }))}>
           Close
         </Button>
       </div>
-    </div>
+    </div>,
+    wrapperElement,
   );
 }
-export { Modal };
 Modal.displayName = "Modal";

@@ -18,17 +18,16 @@ export const checkThePassword = async (
 ) => {
   const requestParams: InferType<typeof validateLoginSchema> = req.body;
   const user = await authService.getUser({ email: requestParams.email });
-  if (!user) return next(new HttpError(404, "User not exist!"));
-
+  if (!user) return next(new HttpError(401, "Check email and password!"));
   const isCorrectPass = await Bcrypt.compare(
     requestParams.password,
     user.password
   );
-
   if (!isCorrectPass)
     return next(new HttpError(401, "Check email and password!"));
   res.status(200).send({ id: user.id });
 };
+
 export const hashThePassword = async (
   req: Request,
   _: Response,

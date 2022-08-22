@@ -6,6 +6,12 @@ import { AuthProvider } from "src/context/AuthContext";
 import { CardProvider } from "src/context/CardContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import dynamic from "next/dynamic";
+
+const ModalComponent = dynamic<{}>(() => import("src/components/Modal/Modal").then((module) => module.Modal), {
+  ssr: false,
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
   return (
@@ -17,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </CardProvider>
         </AuthProvider>
+        <ModalComponent />
       </ModalProvider>
     </QueryClientProvider>
   );

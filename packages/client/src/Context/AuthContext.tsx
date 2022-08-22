@@ -4,7 +4,7 @@ import { createContext, ReactNode } from "react";
 import { useContext } from "react";
 
 interface Action {
-  readonly type: "logIn" | "logOut" | "setDeckCard";
+  readonly type: "logIn" | "logOut";
   readonly setUser?: Omit<CurrentUser, "isLogin">;
 }
 export interface CurrentUser {

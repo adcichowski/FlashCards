@@ -40,6 +40,7 @@ export default function Document() {
       </Head>
 
       <body style={{ height: "100%" }}>
+        <div id="modal-root"></div>
         <Main />
         <NextScript />
       </body>

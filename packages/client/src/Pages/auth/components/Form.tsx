@@ -4,7 +4,7 @@ import React from "react";
 import { BackButton } from "src/components/Button/BackButton/BackButton";
 
 import { Input } from "src/components/Input/Input";
-import { Modal } from "src/components/Modal/Modal";
+
 import { BackgroundGame } from "../../game/components/BackgroundGame/BackgroundGame";
 import styles from "./Form.module.scss";
 
@@ -93,8 +93,6 @@ export function Form({
             </span>
           </p>
         </div>
-
-        <Modal />
       </div>
     </BackgroundGame>
   );
