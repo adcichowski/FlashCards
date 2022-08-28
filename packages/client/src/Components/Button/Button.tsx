@@ -1,6 +1,7 @@
-import { ButtonSize } from "../../types/types";
 import styles from "./Button.module.scss";
 import clsx from "clsx";
+
+type ButtonSize = "big" | "small" | "normal";
 
 function Button({
   children,

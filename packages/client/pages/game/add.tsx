@@ -1,47 +1,41 @@
 import { useAnimationGSAP } from "src/hooks/useAnimationGSAP";
-import { useAvaibleTechnologies } from "src/components/Pages/Game/useAvaibleTechnologies";
-import { useCardContext } from "src/context/CardContext";
 import { AnimateIconTech } from "src/lib/gsap/AnimateIconTech";
-import { ICard } from "src/types/types";
 import styles from "src/Pages/Game/AddCard/AddCard.module.scss";
 import { BackButton } from "src/components/Button/BackButton/BackButton";
 import { Button } from "src/components/Button/Button";
-import { CardByContext } from "src/pages/game/components/CardByContext/CardByContext";
-import { Game } from "src/pages/game/components/BackgroundGame/BackgroundGame";
+import { BackgroundGame } from "src/pages/game/components/BackgroundGame/BackgroundGame";
 export default function AddCard() {
-  const { dispatch, state: stateCard } = useCardContext();
-  const { avaibleTechnologies } = useAvaibleTechnologies();
   const { getElements } = useAnimationGSAP(AnimateIconTech);
-  const handleChangePartCard = (partOfCard: keyof ICard, changeTo: string | boolean) => {
-    dispatch({
-      type: "editCard",
-      setCard: {
-        ...stateCard,
-        [partOfCard]: changeTo,
-      },
-    });
-  };
+  // const handleChangePartCard = (partOfCard: keyof ICard, changeTo: string | boolean) => {
+  //   dispatch({
+  //     type: "editCard",
+  //     setCard: {
+  //       ...stateCard,
+  //       [partOfCard]: changeTo,
+  //     },
+  //   });
+  // };
 
-  const renderRadioButtons = Object.values(avaibleTechnologies).map(({ name, render: Component }) => (
-    <label key={name} className={styles.radioLabel}>
-      <span className="sr-only">{name}</span>
-      <input
-        className={styles.radioInput}
-        onClick={() => {
-          handleChangePartCard("technology", name);
-        }}
-        type="radio"
-        name="technology"
-      />
+  // const renderRadioButtons = Object.values(avaibleTechnologies).map(({ name, render: Component }) => (
+  //   <label key={name} className={styles.radioLabel}>
+  //     <span className="sr-only">{name}</span>
+  //     <input
+  //       className={styles.radioInput}
+  //       onClick={() => {
+  //         handleChangePartCard("technology", name);
+  //       }}
+  //       type="radio"
+  //       name="technology"
+  //     />
 
-      <div className={styles.radioIcon}>
-        <Component />
-      </div>
-    </label>
-  ));
+  //     <div className={styles.radioIcon}>
+  //       <Component />
+  //     </div>
+  //   </label>
+  // ));
 
   return (
-    <Game>
+    <BackgroundGame>
       <div className={styles.board}>
         <BackButton />
         <div className={styles.addTech}>
@@ -51,23 +45,23 @@ export default function AddCard() {
             <div className={styles.addTechTechnologies}>
               <span className={styles.formAddTechTitle}>Set Techology</span>
               <div ref={getElements} className={styles.listRadioTechnology}>
-                {renderRadioButtons}
+                {/* {renderRadioButtons} */}
               </div>
             </div>
             <label>
               <p>Question</p>
               <input
                 className={styles.textInput}
-                onChange={(e) => handleChangePartCard("question", e.currentTarget.value)}
+                // onChange={(e) => handleChangePartCard("question", e.currentTarget.value)}
               />
             </label>
             <label>
               <p>Answer</p>
               <textarea
                 className={`${styles.textInput} ${styles.textarea}`}
-                onChange={(e) => {
-                  handleChangePartCard("answer", e.currentTarget.value);
-                }}
+                // onChange={(e) => {
+                //   handleChangePartCard("answer", e.currentTarget.value);
+                // }}
               ></textarea>
             </label>
 
@@ -88,16 +82,14 @@ export default function AddCard() {
             <Button size="normal" type="button">
               Add Card
             </Button>
-            <Button size="normal" type="button" onClick={() => dispatch({ type: "showCard" })}>
+            <Button size="normal" type="button">
               Show Card
             </Button>
           </span>
         </div>
-        <div className={styles.card}>
-          <CardByContext isEdit />
-        </div>
+        <div className={styles.card}>{/* <CardByContext isEdit /> */}</div>
       </div>
-    </Game>
+    </BackgroundGame>
   );
 }
 AddCard.displayName = "AddCard";

@@ -3,9 +3,9 @@ import { Button } from "../../Button/Button";
 import styles from "../Modal.module.scss";
 import Star from "./star.svg";
 function RateModal() {
-  const { dispatch, state } = useModalContext();
+  const { modal, setModal } = useModalContext();
 
-  if (!state.isOpen) {
+  if (!modal.isOpen) {
     return null;
   }
   return (
@@ -22,7 +22,7 @@ function RateModal() {
         <span className={styles.rateNumber}>{"TODO: CHANGE FUNCTIONALITY"}</span>
         <p className={styles.modalText}>If the card overall will be smaller than 2 will be deleted!</p>
         <div className={styles.blockButton}>
-          <Button size="normal" type="button" onClick={() => dispatch({ type: "closeModal" })}>
+          <Button size="normal" type="button" onClick={() => setModal({ ...modal, isOpen: false })}>
             Close
           </Button>
           <Button size="normal" type="button">
