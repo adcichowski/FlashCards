@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { useCardContext } from "../../../../../context/CardContext";
-import { ICard } from "../../../../../types/types";
+import { useCardContext } from "src/context/CardContext";
+import { ICard } from "src/types/types";
 
 function useQuestionBoard() {
   const { dispatch, state } = useCardContext();

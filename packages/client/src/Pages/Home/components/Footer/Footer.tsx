@@ -3,7 +3,7 @@ import { Button } from "../../../../components/Button/Button";
 import { Logo } from "../../../../components/Logo/Logo";
 import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
-import { socialLinks, navigationLinks } from "../../../../constats/Constants";
+import { socialLinks, navigationLinks } from "../../../../constats/constants";
 
 function Footer() {
   const { register, handleSubmit, formState } = useForm<{ readonly email: string; readonly textarea: string }>();

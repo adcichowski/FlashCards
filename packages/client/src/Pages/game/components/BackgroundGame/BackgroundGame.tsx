@@ -1,16 +1,17 @@
-/* eslint-disable @next/next/no-img-element */
-// add picture element, increase light house
+import Image from "next/image";
 import styles from "./BackgroundGame.module.scss";
 
 function BackgroundGame({ children }: { readonly children: React.PropsWithChildren<{}> }) {
   return (
     <div className={styles.game}>
-      <picture tabIndex={-1}>
-        <source srcSet="/GameBackground/large.png" media="(min-width: 1080px)" />
-        <source srcSet="/GameBackground/medium.png" media="(min-width: 480px)" />
-        <source srcSet="/GameBackground/small.png" />
-        <img src="/GameBackground/small.png" alt="background" className={styles.background} />
-      </picture>
+      <Image
+        src={"/GameBackground/large.png"}
+        layout="fill"
+        width={4}
+        height={3}
+        alt=""
+        className={styles.background}
+      />
       {children}
     </div>
   );

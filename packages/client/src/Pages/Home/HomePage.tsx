@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-//optimzie background by picture element
+import Image from "next/image";
 import { Footer } from "src/pages/home/components/Footer/Footer";
 import { Navigation } from "src/components/Navigation/Navigation";
 import React from "react";
@@ -17,12 +16,21 @@ export function HomePage() {
         <div className={styles.heroNavigation}>
           <Navigation />
         </div>
-        <picture tabIndex={-1}>
-          <source srcSet="/HeroBackground/large.png" media="(min-width: 1080px)" />
-          <source srcSet="/HeroBackground/medium.png" media="(min-width: 480px)" />
-          <source srcSet="/HeroBackground/small.png" media="(max-width: 360px), (min-width:360px)" />
-          <img src="/HeroBackground/large.png" className={styles.heroBackground} alt="background" />
-        </picture>
+
+        <Image
+          src="/HeroBackground/large.png"
+          layout="fill"
+          priority
+          objectPosition="top"
+          width={16}
+          height={9}
+          tabIndex={-1}
+          quality={100}
+          objectFit="cover"
+          className={styles.heroBackground}
+          alt=""
+        />
+
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
           <p className={styles.heroSubtitle}>Easy way to improve your skill...</p>

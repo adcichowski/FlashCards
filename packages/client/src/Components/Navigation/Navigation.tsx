@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { Logo } from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import Link from "next/link";
-import { socialLinks, navigationLinks } from "../../constats/Constants";
+import { socialLinks, navigationLinks } from "../../constats/constants";
 import { useAuthContext } from "../../context/AuthContext";
 import { Button } from "../Button/Button";
 import { Hamburger } from "./Hamburger/Hamburger";
