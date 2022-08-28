@@ -4,12 +4,12 @@ import type { validateSchemaRate } from "./rate-schema";
 import type { InferType } from "yup";
 
 const prisma = new PrismaClient();
-const createRate = async ({
+const createRate = ({
   rate,
   userId,
   cardId,
 }: InferType<typeof validateSchemaRate>) => {
-  await prisma.rate.create({
+  return prisma.rate.create({
     data: {
       rate,
       User: { connect: { id: +userId } },
@@ -17,13 +17,9 @@ const createRate = async ({
     },
   });
 };
-const updateYourRate = async ({
-  cardId,
-  userId,
-  rate,
-}: InferType<typeof validateSchemaRate>) => {
-  return await prisma.rate.update({
-    where: { userId_cardId: { cardId, userId } },
+const updateYourRate = ({ rate }: InferType<typeof validateSchemaRate>) => {
+  return prisma.rate.update({
+    where: {},
     data: { rate },
   });
 };

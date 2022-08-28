@@ -1,8 +1,8 @@
 import { PrismaClient } from ".prisma/client";
 
 const prisma = new PrismaClient();
-const findManySubjects = async () => {
-  return await prisma.subject.findMany({
+const findManySubjects = () => {
+  return prisma.subject.findMany({
     include: { Section: true },
   });
 };

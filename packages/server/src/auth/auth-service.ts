@@ -6,15 +6,15 @@ import type { validateRegisterSchema } from "./auth-schema";
 import type { InferType } from "yup";
 
 const prisma = new PrismaClient();
-const createUser = async (user: InferType<typeof validateRegisterSchema>) => {
-  return await prisma.user.create({ data: user });
+const createUser = (user: InferType<typeof validateRegisterSchema>) => {
+  return prisma.user.create({ data: user });
 };
 
-const getUser = async (
+const getUser = (
   user: Pick<InferType<typeof validateRegisterSchema>, "email">
 ) => {
   logger.warn(user, "USER DANE");
-  return await prisma.user.findFirst({
+  return prisma.user.findFirst({
     where: { email: user.email },
   });
 };

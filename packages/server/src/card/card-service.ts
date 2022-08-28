@@ -4,8 +4,8 @@ import type { validateSchemaCard } from "./card-schema";
 import type { InferType } from "yup";
 
 const prisma = new PrismaClient();
-const getFirstCardById = async (id: string) =>
-  await prisma.card.findFirst({
+const getFirstCardById = (id: string) =>
+  prisma.card.findFirst({
     where: { id: Number(id) },
     include: {
       Subject: { include: { Section: true } },
@@ -18,8 +18,8 @@ const getFirstCardById = async (id: string) =>
     },
   });
 
-const getCardBySubject = async (subject: string) =>
-  await prisma.card.findMany({
+const getCardBySubject = (subject: string) =>
+  prisma.card.findMany({
     where: { Subject: { id: subject } },
     include: {
       Rate: { include: { User: true } },
@@ -31,8 +31,8 @@ const getCardBySubject = async (subject: string) =>
     },
   });
 
-const getAllCards = async () =>
-  await prisma.card.findMany({
+const getAllCards = () =>
+  prisma.card.findMany({
     include: {
       Subject: { include: { Section: true } },
       Rate: { include: { User: { select: { username: true } } } },
@@ -44,8 +44,8 @@ const getAllCards = async () =>
     },
   });
 
-const createCard = async (card: InferType<typeof validateSchemaCard>) => {
-  await prisma.rate.create({
+const createCard = (card: InferType<typeof validateSchemaCard>) => {
+  return prisma.rate.create({
     data: {
       rate: 5,
       Card: {
