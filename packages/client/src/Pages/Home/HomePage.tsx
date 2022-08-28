@@ -22,10 +22,7 @@ export function HomePage() {
           layout="fill"
           priority
           objectPosition="top"
-          width={16}
-          height={9}
           tabIndex={-1}
-          quality={100}
           objectFit="cover"
           className={styles.heroBackground}
           alt=""

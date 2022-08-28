@@ -14,10 +14,10 @@ export type RegisterForm = {
   readonly password: string;
 };
 
-type SuccessResponse = {
+export type SuccessResponse = {
   readonly id: string;
 };
-type ErrorResponse = {
+export type ErrorResponse = {
   readonly message: string;
   readonly code: string;
 };
@@ -32,18 +32,21 @@ export function useAuthMutation({ typeForm }: { readonly typeForm: "login" | "re
   const { setModal } = useModalContext();
   const { dispatch } = useAuthContext();
   const router = useRouter();
-  const mutation = useMutation((data) => axios.post<SuccessResponse>(`http://localhost:3003/${endpointUrl}`, data), {
-    onError(error: AxiosError<ErrorResponse>) {
-      const errorResponse = error.response?.data;
-      setModal({ message: errorResponse?.message, type: "error", isOpen: true });
-    },
+  const mutation = useMutation(
+    (data: LoginForm | RegisterForm) => axios.post<SuccessResponse>(`http://localhost:3003/${endpointUrl}`, data),
+    {
+      onError(error: AxiosError<ErrorResponse>) {
+        const errorResponse = error.response?.data;
+        setModal({ message: errorResponse?.message, type: "error", isOpen: true });
+      },
 
-    onSuccess: (response) => {
-      const idUser = response.data.id;
-      dispatch({ type: "logIn", setUser: { idUser } });
-      setModal({ message: MessagesForm[typeForm], type: "success", isOpen: true });
-      router.push("/game");
+      onSuccess: (response) => {
+        const idUser = response.data.id;
+        dispatch({ type: "logIn", setUser: { idUser } });
+        setModal({ message: MessagesForm[typeForm], type: "success", isOpen: true });
+        router.push("/game");
+      },
     },
-  });
+  );
   return mutation;
 }

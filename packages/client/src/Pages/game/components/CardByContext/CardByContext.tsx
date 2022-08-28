@@ -81,6 +81,6 @@
 // CardByContext.displayName = "CardByContext";
 import React from "react";
 
-export default function CardByContext() {
+export function CardByContext() {
   return <div>CardByContext</div>;
 }

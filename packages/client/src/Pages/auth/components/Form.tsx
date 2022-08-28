@@ -9,11 +9,12 @@ import { BackgroundGame } from "../../game/components/BackgroundGame/BackgroundG
 import styles from "./Form.module.scss";
 
 import { Button } from "src/components/Button/Button";
-import { LoginForm, RegisterForm } from "../hooks/useAuthMutation";
+import type { ErrorResponse, SuccessResponse } from "../hooks/useAuthMutation";
 import { UseMutationResult } from "react-query";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validateLoginSchema, validateRegisterSchema } from "server/src/auth/auth-schema";
+import { AxiosError, AxiosResponse } from "axios";
 
 type FormTypes = {
   readonly register: { readonly username: string; readonly email: string; readonly password: string };
@@ -26,7 +27,11 @@ export function Form({
   yupSchema,
 }: {
   readonly typeForm: keyof FormTypes;
-  readonly mutation: UseMutationResult<Response, unknown, LoginForm | RegisterForm, unknown>;
+  readonly mutation: UseMutationResult<
+    AxiosResponse<SuccessResponse, any>,
+    AxiosError<ErrorResponse, any>,
+    FormTypes["register"] | FormTypes["login"]
+  >;
   readonly yupSchema: typeof validateLoginSchema | typeof validateRegisterSchema;
 }) {
   const isLoginPage = typeForm === "login";

@@ -1,5 +1,5 @@
 import { BackButton } from "../../../../../components/Button/BackButton/BackButton";
-import { CardByContext } from "../../../components/CardByContext/CardByContext";
+import { CardByContext } from "src/pages/game/components/CardByContext/CardByContext";
 import styles from "./QuestionsBoard.module.scss";
 
 function QuestionsBoard() {
