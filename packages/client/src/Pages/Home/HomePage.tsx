@@ -40,12 +40,15 @@ export function HomePage() {
       <main>
         <HomeAbout />
         <article className={styles.firstSide}>
-          <picture tabIndex={-1}>
-            <source srcSet="/ShoeBackground/large.png" media="(min-width: 1080px)" />
-            <source srcSet="/ShoeBackground/medium.png" media="(min-width: 480px)" />
-            <source srcSet="/ShoeBackground/small.png" media="(max-width: 360px), (min-width:360px)" />
-            <img className={styles.shoeBackground} alt="background" />
-          </picture>
+          <Image
+            className={styles.shoeBackground}
+            src="/ShoeBackground/large.png"
+            alt=""
+            objectPosition="bottom"
+            layout="fill"
+            objectFit="cover"
+            tabIndex={-1}
+          />
 
           <Instruction />
 
@@ -64,4 +67,3 @@ export function HomePage() {
     </div>
   );
 }
-HomePage.displayName = "HomePage";

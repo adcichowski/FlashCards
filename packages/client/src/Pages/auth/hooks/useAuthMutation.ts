@@ -29,21 +29,22 @@ const MessagesForm = {
 
 export function useAuthMutation({ typeForm }: { readonly typeForm: "login" | "register" }) {
   const endpointUrl = typeForm === "login" ? "sessions" : "users";
-  const { setModal } = useModalContext();
+  const { openModal } = useModalContext();
   const { dispatch } = useAuthContext();
   const router = useRouter();
   const mutation = useMutation(
     (data: LoginForm | RegisterForm) => axios.post<SuccessResponse>(`http://localhost:3003/${endpointUrl}`, data),
     {
       onError(error: AxiosError<ErrorResponse>) {
+        if (error.isAxiosError) return openModal({ message: error.message, type: "error" });
         const errorResponse = error.response?.data;
-        setModal({ message: errorResponse?.message, type: "error", isOpen: true });
+        return openModal({ message: errorResponse?.message, type: "error" });
       },
 
       onSuccess: (response) => {
         const idUser = response.data.id;
         dispatch({ type: "logIn", setUser: { idUser } });
-        setModal({ message: MessagesForm[typeForm], type: "success", isOpen: true });
+        openModal({ message: MessagesForm[typeForm], type: "success" });
         router.push("/game");
       },
     },

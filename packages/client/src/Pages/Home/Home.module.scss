@@ -47,16 +47,9 @@
 }
 
 .shoeBackground {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  position: absolute;
   opacity: 0.6;
   z-index: -2;
-  @media screen and (max-width: 1068px) {
-    object-fit: cover;
-  }
+  user-select: none;
 }
 
 .bigQuestion {
