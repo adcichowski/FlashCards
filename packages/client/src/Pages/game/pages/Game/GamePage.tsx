@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useAuthContext } from "src/context/AuthContext";
 import { BackgroundGame } from "../../components/BackgroundGame/BackgroundGame";
 
@@ -7,8 +8,9 @@ export function GamePage() {
     state: { isLogin },
   } = useAuthContext();
   const router = useRouter();
-
-  if (!isLogin) router.replace("/login");
+  useEffect(() => {
+    if (!isLogin) router.replace("/login");
+  });
 
   return (
     <BackgroundGame>
