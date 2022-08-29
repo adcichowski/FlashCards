@@ -1,8 +1,8 @@
 import "../styles/settings.css";
 
 import type { AppProps } from "next/app";
-import { ModalProvider } from "src/context/ModalContext";
-import { AuthProvider } from "src/context/AuthContext";
+import { ModalProvider } from "../src/context/ModalContext";
+import { AuthProvider } from "../src/context/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import dynamic from "next/dynamic";
