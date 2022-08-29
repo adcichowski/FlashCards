@@ -1,11 +1,12 @@
 import "../styles/settings.css";
 
 import type { AppProps } from "next/app";
-import { ModalProvider } from "src/context/ModalContext";
+
 import { AuthProvider } from "src/context/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import dynamic from "next/dynamic";
+import { ModalProvider } from "../src/context/ModalContext";
 
 const ModalComponent = dynamic<{}>(() => import("src/components/Modal/Modal").then((module) => module.Modal), {
   ssr: false,
