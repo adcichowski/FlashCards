@@ -3,11 +3,7 @@ import { Router } from "express";
 import { reusableValidation } from "../utils/reusableValidation";
 
 import { registerUser } from "./auth-controller";
-import {
-  checkThePassword,
-  checkUserExist,
-  hashThePassword,
-} from "./auth-middleware";
+import { checkThePassword } from "./auth-middleware";
 import { validateLoginSchema, validateRegisterSchema } from "./auth-schema";
 
 const router = Router();
@@ -81,12 +77,6 @@ router.delete("/sessions/:id");
  *       401:
  *         description: User is exist in database
  */
-router.post(
-  "/users",
-  reusableValidation(validateRegisterSchema),
-  checkUserExist,
-  hashThePassword,
-  registerUser
-);
+router.post("/users", reusableValidation(validateRegisterSchema), registerUser);
 
 export { router as authRouter };
