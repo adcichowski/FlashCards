@@ -4,33 +4,11 @@ export default function Document() {
   return (
     <Html style={{ height: "100%" }}>
       <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          rel="preload"
-          href="/Fonts/kanit-black-webfont.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/Fonts/kanit-bold-webfont.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/Fonts/kanit-light-webfont.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/Fonts/kanit-medium-webfont.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
         />
         <style>
           {`
