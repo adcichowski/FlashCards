@@ -25,8 +25,7 @@
     ],
     "*.{json,md,yaml,yml,scss,css}": [
       "prettier --write"
-    ],
-    "*.js": "lerna run eslint --stream --cache --fix"
+    ]
   },
   "dependencies": {
     "@commitlint/config-conventional": "^16.2.1",
