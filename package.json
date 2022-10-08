@@ -2,8 +2,7 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/server",
-    "packages/client"
+    "apps/*"
   ],
   "devDependencies": {
     "commitizen": "^4.2.4",
