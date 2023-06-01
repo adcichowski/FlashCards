@@ -11,7 +11,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "ESNext",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "alwaysStrict": true,

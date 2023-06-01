@@ -1,6 +1,6 @@
 import Request from "supertest";
 
-import { app, server } from "../../src/server";
+import { app, server } from "../../src/server.js";
 
 describe("Card Router", () => {
   it("GET /cards", async () => {

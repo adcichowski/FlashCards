@@ -1,6 +1,7 @@
 import Jwt from "jsonwebtoken";
-import { HttpError } from "utils/error/httpError";
-import { hashTheValue } from "utils/utils";
+
+import { HttpError } from "../utils/error/httpError";
+import { hashTheValue } from "../utils/utils";
 
 import { authService } from "./auth-service";
 

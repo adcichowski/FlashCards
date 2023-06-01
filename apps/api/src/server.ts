@@ -4,8 +4,7 @@ import Cors from "cors";
 import Express from "express";
 import Session from "express-session";
 
-import { authRouter } from "../src/auth/auth-router";
-
+import { authRouter } from "./auth/auth-router";
 import { cardRouter } from "./card/card-router";
 import { routerSwagger } from "./docs/swagger";
 import { subjectRouter } from "./subject/subject-router";
