@@ -1,4 +1,7 @@
+import Fs from "fs";
+
 import { Router } from "express";
+import Yaml from "js-yaml";
 import SwaggerJSDoc from "swagger-jsdoc";
 import SwaggerUI from "swagger-ui-express";
 
@@ -37,6 +40,7 @@ const options: SwaggerJSDoc.Options = {
   ],
 };
 const swaggerSpec = SwaggerJSDoc(options);
+Fs.writeFileSync("schema.yaml", Yaml.dump(swaggerSpec));
 
 // Swagger page
 router.use("/docs", SwaggerUI.serve, SwaggerUI.setup(swaggerSpec));
