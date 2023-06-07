@@ -1,15 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { Footer } from "src/pages/home/components/Footer/Footer";
+import { Footer } from "src/views/home/components/Footer/Footer";
 import { Navigation } from "src/components/Navigation/Navigation";
 import React from "react";
-import styles from "src/Pages/Home/Home.module.scss";
+import styles from "./Home.module.scss";
 import Archon from "src/components/Archon/Archon";
-import { HomeAbout } from "src/pages/home/components/HomeAbout/HomeAbout";
-import { Instruction } from "src/pages/home/components/Instruction/Instruction";
-import { ListTechnologies } from "src/pages/home/components/ListTechnologies/ListTechnologies";
-import { CirclesInfo } from "src/pages/home/components/CirclesInfo/CirclesInfo";
+import { HomeAbout } from "src/views/home/components/HomeAbout/HomeAbout";
+import { Instruction } from "src/views/home/components/Instruction/Instruction";
+import { ListTechnologies } from "src/views/home/components/ListTechnologies/ListTechnologies";
+import { CirclesInfo } from "src/views/home/components/CirclesInfo/CirclesInfo";
 
 export function HomePage() {
   return (

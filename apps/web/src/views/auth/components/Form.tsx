@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { BackButton } from "src/components/Button/BackButton/BackButton";
 
-import { Input } from "src/components/Input/Input";
+// import { Input } from "src/components/Input/Input";
 
 import { BackgroundGame } from "../../game/components/BackgroundGame/BackgroundGame";
 import styles from "./Form.module.scss";
@@ -31,7 +31,7 @@ export function Form({
   const isLoginPage = typeForm === "login";
 
   const {
-    register,
+    // register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormTypes[typeof typeForm]>({
@@ -47,36 +47,36 @@ export function Form({
           <form autoComplete="off" className={styles.gameForm} onSubmit={handleSubmit((data) => mutation.mutate(data))}>
             {"username" in yupSchema.fields && (
               <div className={styles.containerInput}>
-                <Input
+                {/* <Input
                   label="username"
                   register={register}
                   className={styles.formInput}
                   labelClass={styles.formLabel}
                   autoComplete="off"
-                />
+                /> */}
                 <span className={styles.errorInfo}>{"username" in errors ? errors?.username?.message : ""}</span>
               </div>
             )}
             <div className={styles.containerInput}>
-              <Input
+              {/* <Input
                 label="email"
                 register={register}
                 className={styles.formInput}
                 labelClass={styles.formLabel}
                 autoComplete="off"
-              />
+              /> */}
 
               <span className={styles.errorInfo}>{errors?.email?.message}</span>
             </div>
             <div className={styles.containerInput}>
-              <Input
+              {/* <Input
                 label="password"
                 register={register}
                 labelClass={styles.formLabel}
                 type="password"
                 className={styles.formInput}
                 autoComplete="off"
-              />
+              /> */}
               <span className={styles.errorInfo}>{errors.password?.message}</span>
             </div>
             <div className={styles.containerSubmit}>

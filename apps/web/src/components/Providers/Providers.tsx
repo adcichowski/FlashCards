@@ -6,7 +6,7 @@ import { Modal } from "src/components/Modal/Modal";
 import { AuthProvider } from "src/context/AuthContext";
 import { ModalProvider } from "src/context/ModalContext";
 
-export default function Providers({ children }: { readonly children:  React.ReactNode }) {
+export function Providers({ children }: { readonly children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (

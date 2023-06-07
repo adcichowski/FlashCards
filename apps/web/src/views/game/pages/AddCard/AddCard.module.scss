@@ -129,22 +129,22 @@
   height: 70px;
 }
 
-.deckRadioInput {
-  background-image: url("../../../Assets/Icons/plus.svg") no-repeat;
-  appearance: none;
-  cursor: pointer;
-  position: absolute;
-  bottom: 9%;
-  left: 35%;
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  border: 1px solid white;
-  z-index: 1;
-}
-.deckRadioInput:checked {
-  z-index: 2;
-  position: absolute;
-  background: url("../../../Assets/Icons/check.svg") no-repeat center/contain,
-    #221f63;
-}
+// .deckRadioInput {
+//   background-image: url("../../../Assets/Icons/plus.svg") no-repeat;
+//   appearance: none;
+//   cursor: pointer;
+//   position: absolute;
+//   bottom: 9%;
+//   left: 35%;
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 5px;
+//   border: 1px solid white;
+//   z-index: 1;
+// }
+// .deckRadioInput:checked {
+//   z-index: 2;
+//   position: absolute;
+//   background: url("../../../Assets/Icons/check.svg") no-repeat center/contain,
+//     #221f63;
+// }

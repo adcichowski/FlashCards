@@ -1,6 +1,6 @@
 import { useAnimationGSAP } from "src/hooks/useAnimationGSAP";
 import { AnimateIconTech } from "src/lib/gsap/AnimateIconTech";
-import styles from "AddCard.module.scss";
+import styles from "./AddCard.module.scss";
 import { BackButton } from "src/components/Button/BackButton/BackButton";
 import { Button } from "src/components/Button/Button";
 
