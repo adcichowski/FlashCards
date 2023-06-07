@@ -1,4 +1,4 @@
-import { Providers } from "src/components/Providers/providers";
+import { Providers } from "src/components/Providers/Providers";
 import "../styles/settings.css";
 
 export const metadata = {
