@@ -46,18 +46,20 @@ function Navigation() {
           )}
         </div>
       ) : null}
-      <Hamburger handleClick={handleClick} />
-      <div className={styles.hideNav}>
-        <Logo />
-        <ul className={styles.navList}>{renderNavigationLinks}</ul>
-        {state.isLogin ? (
-          <Button size="normal" type="button" onClick={handleClickLogOut}>
-            Logout
-          </Button>
-        ) : (
-          <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
-        )}
-      </div>
+      <Hamburger isOpen={isOpen} handleClick={handleClick} />
+      {!isOpen && (
+        <div className={styles.hideNav}>
+          <Logo />
+          <ul className={styles.navList}>{renderNavigationLinks}</ul>
+          {state.isLogin ? (
+            <Button size="normal" type="button" onClick={handleClickLogOut}>
+              Logout
+            </Button>
+          ) : (
+            <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
+          )}
+        </div>
+      )}
     </nav>
   );
 }
