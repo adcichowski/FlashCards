@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Footer } from "src/pages/home/components/Footer/Footer";
 import { Navigation } from "src/components/Navigation/Navigation";
@@ -13,9 +15,7 @@ export function HomePage() {
   return (
     <div className={styles.homePage}>
       <header className={styles.header}>
-        <div className={styles.heroNavigation}>
-          <Navigation />
-        </div>
+        <Navigation />
 
         <Image
           src="/HeroBackground/large.png"

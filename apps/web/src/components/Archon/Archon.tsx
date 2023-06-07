@@ -10,10 +10,8 @@ export default function Archon({
     children: styles[`${size}Front`],
   };
   return (
-    <Link href={`/${props.href}`}>
-      <a className={`${styles.button} ${stylesButton.parent}`}>
-        <span className={`${styles.front} ${stylesButton.children}`}>{props.children}</span>
-      </a>
+    <Link href={`/${props.href}`} className={`${styles.button} ${stylesButton.parent}`}>
+      <span className={`${styles.front} ${stylesButton.children}`}>{props.children}</span>
     </Link>
   );
 }

@@ -1,0 +1,16 @@
+.input {
+  align-self: stretch;
+  font-size: 1.8rem;
+  color: var(--font-color-primary);
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 8px;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, calc(0.6rem + 1vw), 1.9rem);
+}
+
+.input::placeholder {
+  color: var(--font-color-primary);
+}

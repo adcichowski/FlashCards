@@ -1,0 +1,16 @@
+.textarea {
+  padding: 8px;
+  height: 50px;
+  resize: none;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, calc(0.6rem + 1vw), 1.9rem);
+
+}
+
+.textarea::placeholder {
+  color: var(--font-color-primary);
+}

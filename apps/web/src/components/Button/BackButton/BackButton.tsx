@@ -9,13 +9,11 @@ function BackButton({ pathTo, text = "back" }: { readonly pathTo?: string; reado
   return (
     <>
       {pathTo ? (
-        <Link passHref href={pathTo}>
-          <a href={pathTo} className={styles.backButton}>
-            {text}
-          </a>
+        <Link href={pathTo} className={styles.backButton}>
+          {text}
         </Link>
       ) : (
-        <button className={styles.backButton} onClick={handleClickBack}></button>
+        <button aria-label="back" className={styles.backButton} onClick={handleClickBack}></button>
       )}
     </>
   );

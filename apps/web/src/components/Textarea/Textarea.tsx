@@ -1,26 +1,26 @@
 import React, { ForwardedRef } from "react";
-import styles from "./Input.module.scss";
-export const Input = React.forwardRef(
+import styles from "./Textarea.module.scss";
+export const Textarea = React.forwardRef(
   (
     {
       label,
       labelClass,
       ...props
-    }: JSX.IntrinsicElements["input"] & {
+    }: JSX.IntrinsicElements["textarea"] & {
       readonly label: string;
       readonly labelClass?: string;
     },
-    ref: ForwardedRef<HTMLInputElement>,
+    ref: ForwardedRef<HTMLTextAreaElement>,
   ) => {
     return (
       <>
         <label htmlFor={props.name} className={labelClass}>
           {label}
         </label>
-        <input type="text" {...props} ref={ref} className={styles.input} />
+        <textarea maxLength={255} {...props} ref={ref} className={styles.textarea} />
       </>
     );
   },
 );
 
-Input.displayName = "Input";
+Textarea.displayName = "Textarea";

@@ -12,10 +12,10 @@
 .circlesSvg {
   justify-self: flex-start;
   min-width: 80%;
-  margin-top: -2rem;
   grid-area: svg;
   @media screen and (max-width: 1050px) {
-    min-width: 100%;
+    justify-self: center;
+    margin-top: 20px;
   }
 }
 .circlesText {

@@ -1,3 +1,4 @@
+"use client";
 import { useState, useCallback } from "react";
 import { Logo } from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
@@ -16,8 +17,8 @@ function Navigation() {
   const handleClick = () => setOpen(!isOpen);
   const renderNavigationLinks = navigationLinks.map((element) => (
     <li key={element.name} className={!isOpen ? styles.navItem : styles.navItemOpen}>
-      <Link href={element.path} passHref>
-        <a className={styles.navItem}>{element.name}</a>
+      <Link href={element.path} className={styles.navItem}>
+        {element.name}
       </Link>
     </li>
   ));
@@ -31,25 +32,11 @@ function Navigation() {
     </li>
   ));
   return (
-    <nav>
-      <div className={styles.nav}>
-        {isOpen ? (
-          <div className={styles.bodyMenu}>
-            <Logo />
-            <ul className={styles.menuList}>{renderNavigationLinks}</ul>
-            {state.isLogin ? (
-              <Button size="normal" type="button" onClick={handleClickLogOut}>
-                Logout
-              </Button>
-            ) : (
-              <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
-            )}
-          </div>
-        ) : null}
-        <Hamburger handleClick={handleClick} />
-        <div className={styles.hideNav}>
+    <nav className={styles.nav}>
+      {isOpen ? (
+        <div className={styles.bodyMenu}>
           <Logo />
-          <ul className={styles.navList}>{renderNavigationLinks}</ul>
+          <ul className={styles.menuList}>{renderNavigationLinks}</ul>
           {state.isLogin ? (
             <Button size="normal" type="button" onClick={handleClickLogOut}>
               Logout
@@ -58,6 +45,18 @@ function Navigation() {
             <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
           )}
         </div>
+      ) : null}
+      <Hamburger handleClick={handleClick} />
+      <div className={styles.hideNav}>
+        <Logo />
+        <ul className={styles.navList}>{renderNavigationLinks}</ul>
+        {state.isLogin ? (
+          <Button size="normal" type="button" onClick={handleClickLogOut}>
+            Logout
+          </Button>
+        ) : (
+          <ul className={styles.menuSocial}>{renderSocialLinks}</ul>
+        )}
       </div>
     </nav>
   );

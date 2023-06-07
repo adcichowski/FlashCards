@@ -1,9 +1,11 @@
 import Link from "next/link";
-import { Button } from "../../../../components/Button/Button";
-import { Logo } from "../../../../components/Logo/Logo";
+import { Button } from "src/components/Button/Button";
+import { Logo } from "src/components/Logo/Logo";
 import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
-import { socialLinks, navigationLinks } from "../../../../constats/constants";
+import { navigationLinks } from "src/constats/constants";
+import { Input } from "src/components/Input/Input";
+import { Textarea } from "src/components/Textarea/Textarea";
 
 function Footer() {
   const { register, handleSubmit, formState } = useForm<{ readonly email: string; readonly textarea: string }>();
@@ -18,17 +20,8 @@ function Footer() {
               {navigationLinks.map((element) => (
                 <li key={element.name}>
                   <Link href={element.path}>
-                    <a className={styles.link}>{element.name}</a>
+                    <span className={styles.link}>{element.name}</span>
                   </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className={styles.listSocial}>
-              {socialLinks.map((socialName) => (
-                <li key={socialName}>
-                  <a href={`https://${socialName}.com`} className={`${styles[socialName]}`}>
-                    <span className="sr-only">{socialName}</span>
-                  </a>
                 </li>
               ))}
             </ul>
@@ -45,15 +38,13 @@ function Footer() {
       <form className={styles.footerForm} onSubmit={() => handleSubmit}>
         <h3 className={styles.formTitle}>Send Us</h3>
         <p className={styles.formSubtitle}>We love got ideas</p>
-        <label>
-          <span className="sr-only">Email</span>
-          <input id="email" {...register("email")} placeholder="Email" type="text" className={styles.formInput} />
-        </label>
+
+        <Input label="Email" placeholder="Email" labelClass="sr-only" {...register("email")} />
+
         <span className={styles.formError}>{errors?.email?.message}</span>
-        <label>
-          <span className="sr-only"> Your idea</span>
-          <textarea {...register("textarea")} maxLength={255} placeholder="Your idea" className={styles.formTextarea} />
-        </label>
+
+        <Textarea label="Your idea" labelClass="sr-only" {...register("textarea")} placeholder="Your idea" />
+
         <Button size="normal" type="submit">
           Send ideas
         </Button>

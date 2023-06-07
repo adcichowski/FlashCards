@@ -1,8 +1,9 @@
+.nav {
+  margin: 0 auto;
+}
 .hideNav {
-  height: 20rem;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   @media screen and (max-width: 950px) {
     display: none;
   }
@@ -61,7 +62,7 @@
 
 .menuSocial {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row;
   justify-content: space-around;
   gap: 5px;
 }

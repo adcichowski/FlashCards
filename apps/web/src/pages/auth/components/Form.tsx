@@ -87,9 +87,9 @@ export function Form({
           </form>
           <p className={styles.question}>
             {isLoginPage ? "Haven't got an account?" : "Have account?"}{" "}
-            <span className={styles.questionType}>
+            <div className={styles.questionType}>
               <Link href={isLoginPage ? "/register" : "/login"}>{isLoginPage ? "Create Account" : "Login in"}</Link>
-            </span>
+            </div>
           </p>
         </div>
       </div>

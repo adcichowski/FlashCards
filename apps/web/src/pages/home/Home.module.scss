@@ -1,17 +1,7 @@
-.hero {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
-.heroNavigation {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  z-index: 10;
-}
+
 .header {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   max-height: 1280px;
   flex-direction: column;
   display: flex;
@@ -86,6 +76,6 @@
   height: clamp(5rem, 10vw, 15rem);
 }
 .bigQuestionTitle {
-  margin: -1rem 0 3rem 0;
-  font-size: clamp(3rem, 7vw, 10rem);
+  margin: 30px 0;
+  font-size: clamp(3rem, calc(5vw + 1rem), 7rem);
 }
