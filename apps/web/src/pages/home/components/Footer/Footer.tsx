@@ -3,7 +3,7 @@ import { Button } from "src/components/Button/Button";
 import { Logo } from "src/components/Logo/Logo";
 import styles from "./Footer.module.scss";
 import { useForm } from "react-hook-form";
-import { navigationLinks } from "src/constats/constants";
+import { navigationLinks } from "src/constants/constants";
 import { Input } from "src/components/Input/Input";
 import { Textarea } from "src/components/Textarea/Textarea";
 
