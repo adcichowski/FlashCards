@@ -5,26 +5,26 @@ export const validateSchemaRate = Yup.object().shape({
   cardId: Yup.number().required(),
 });
 
-/**
- * @openapi
- * components:
- *  schemas:
- *   CreateRateInput:
- *    type: object
- *    required:
- *     - rate
- *     - userId
- *     - cardId
- *    properties:
- *     rate:
- *      type: number
- *      maximum: 5
- *      minimum: 1
- *      required: true
- *     userId:
- *      type: number
- *      required: true
- *     cardId:
- *      type: number
- *      required: true
- */
+// /**
+//  * @openapi
+//  * components:
+//  *  schemas:
+//  *   CreateRateInput:
+//  *    type: object
+//  *    required:
+//  *     - rate
+//  *     - userId
+//  *     - cardId
+//  *    properties:
+//  *     rate:
+//  *      type: number
+//  *      maximum: 5
+//  *      minimum: 1
+//  *      required: true
+//  *     userId:
+//  *      type: number
+//  *      required: true
+//  *     cardId:
+//  *      type: number
+//  *      required: true
+//  */

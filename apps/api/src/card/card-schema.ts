@@ -16,7 +16,7 @@ export const validateSchemaCard = Yup.object().shape({
  * @openapi
  * components:
  *  schemas:
- *   CreateCardInput:
+ *   CreateCard:
  *    type: object
  *    required:
  *     - question

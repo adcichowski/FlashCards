@@ -1,4 +1,3 @@
-import "dotenv";
 import Bcrypt from "bcrypt";
 
 export function getEnv(name: string) {

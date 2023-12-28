@@ -1,37 +1,25 @@
 import Fs from "fs";
+import { resolve } from "path";
 
 import { Router } from "express";
 import Yaml from "js-yaml";
 import SwaggerJSDoc from "swagger-jsdoc";
-import SwaggerUI from "swagger-ui-express";
-
-import { logger } from "../utils/logger";
+import { getEnv } from "utils/utils";
 
 import type { Request, Response } from "express";
 
 const router = Router();
 
-const options: SwaggerJSDoc.Options = {
-  definition: {
-    openapi: "3.0.0",
+const options: SwaggerJSDoc.OAS3Options = {
+  swaggerDefinition: {
+    servers: [{ url: `random.local:${getEnv("PORT")}` }],
+    openapi: "3.1.0",
+    security: [],
     info: {
+      license: { name: "MIT", url: "https://www.mit.edu/~amini/LICENSE.md" },
       title: "REST API Docs",
       version: "0.0.1",
     },
-    components: {
-      securitySchemas: {
-        bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-        },
-      },
-    },
-    security: [
-      {
-        bearerAuth: [],
-      },
-    ],
   },
   apis: [
     "./src/*/*-router.ts",
@@ -40,15 +28,15 @@ const options: SwaggerJSDoc.Options = {
   ],
 };
 const swaggerSpec = SwaggerJSDoc(options);
-Fs.writeFileSync("schema.yaml", Yaml.dump(swaggerSpec));
+Fs.writeFileSync("openapi.yaml", Yaml.dump(swaggerSpec));
 
 // Swagger page
-router.use("/docs", SwaggerUI.serve, SwaggerUI.setup(swaggerSpec));
-
+router.use("/", (_, res) => {
+  res.sendFile(resolve("redoc-static.html"));
+});
 // Docs in JSON format
 router.get("/docs.json", (_: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
-logger.info(`Docs available at http://localhost:${process.env.PORT}/docs`);
 export { router as routerSwagger };

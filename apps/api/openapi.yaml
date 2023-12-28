@@ -1,0 +1,124 @@
+servers:
+  - url: random.local:4001
+openapi: 3.1.0
+security: []
+info:
+  license:
+    name: MIT
+    url: https://www.mit.edu/~amini/LICENSE.md
+  title: REST API Docs
+  version: 0.0.1
+paths:
+  /cards:
+    get:
+      operationId: getCards
+      summary: Get all cards
+      tags:
+        - Card
+      description: Recive cards from database
+      responses:
+        '200':
+          description: App is up and running
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCard'
+              example:
+                id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+                question: What values can we change?
+                answer: >-
+                  We can easily change let and var, but we should use it less
+                  than const
+                rates:
+                  list:
+                    - username: Artak
+                      rate: '4'
+                    - username: Gelis
+                      rate: '2'
+                  overall: 3
+        '400':
+          description: Problem with server
+    post:
+      operationId: createCard
+      tags:
+        - Card
+      description: Create Card
+      summary: Create Card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCard'
+      responses:
+        '200':
+          description: Successfully create card
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCard'
+              example:
+                id: desbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+        '400':
+          description: Problem with server
+components:
+  schemas:
+    GetCard:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        shapeId:
+          type: number
+          default: 1
+        createdBy:
+          type: string
+        subject:
+          type: string
+        section:
+          type: string
+        rates:
+          type: object
+          properties:
+            overall:
+              type: number
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  rate:
+                    type: number
+    CreateCard:
+      type: object
+      required:
+        - question
+        - answer
+        - shapeId
+        - userId
+        - subjectId
+        - rate
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        shapeId:
+          type: number
+          default: 1
+        userId:
+          type: number
+        subjectId:
+          type: number
+        rate:
+          type: object
+          readOnly: true
+          properties:
+            userId:
+              type: number
+            rate:
+              type: number
+tags: []

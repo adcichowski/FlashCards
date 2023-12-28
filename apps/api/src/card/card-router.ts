@@ -11,92 +11,61 @@ const router = Router();
  * @openapi
  * /cards:
  *  get:
+ *     operationId: getCards
+ *     summary: Get all cards
  *     tags:
  *     - Card
  *     description: Recive cards from database
  *     responses:
  *       200:
  *         description: App is up and running
+ *         content:
+ *           application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/GetCard'
+ *            example:
+ *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *             question: 'What values can we change?'
+ *             answer: 'We can easily change let and var, but we should use it less than const'
+ *             rates:
+ *               list:
+ *                 - username: 'Artak'
+ *                   rate: '4'
+ *                 - username: 'Gelis'
+ *                   rate: '2'
+ *               overall: 3
+ *       400:
+ *         description: Problem with server
  */
 router.get("/cards", isAvaibleSubject, getAllCards);
 
-/**
- * @openapi
- * /cards:
- *  get:
- *     tags:
- *     - Cards
- *     summary: Get cards
- *     description: Recive cards from database
- *     parameters:
- *      - name: "subject"
- *        in: "query"
- *        description: "Card subject that need to be considered for filter"
- *        type: "array"
- *        items:
- *         type: "string"
- *         enum:
- *          - "available"
- *          - "pending"
- *          - "sold"
- *     responses:
- *       200:
- *         description: App is up and running
- *       400:
- *         description: "Invalid Subject supplied"
- *       404:
- *         description: "Cards not found"
- */
-router.get("/cards", isAvaibleSubject);
-
-/**
- * @openapi
- * /cards/{cardId}:
- *  get:
- *     tags:
- *     - Cards
- *     summary: Find card by ID
- *     description: Return a single card
- *     parameters:
- *     - name: cardId
- *       in: path
- *       description: ID of card to return
- *       required: true
- *       type: integer
- *       format: int64
- *     responses:
- *       200:
- *         description: Return list cards
- *         content:
- *         application/json:
- *            schema:
- *              $ref: '#/components/schemas/GetCard'
- *       400:
- *         description: Invalid ID supplied
- *       404:
- *         description: Card not found
- *
- */
 router.get("/cards/:id", getCardById);
 
 /**
  * @openapi
  * /cards:
  *  post:
- *    tags:
- *    - Cards
- *    summary: Create card
- *    consumes:
- *    - "application/x-www-form-urlencoded"
- *    produces:
- *    - "application/json"
- *    parameters:
- *    - in: "body"
- *      name: "body"
- *      description: "Card object that needs to be added to the store"
- *      required: true
- *      schema:
- *        $ref: "#/components/schemas/CreateCardInput"
+ *     operationId: createCard
+ *     tags:
+ *     - Card
+ *     description: Create Card
+ *     summary: Create Card
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateCard'
+ *     responses:
+ *       200:
+ *         description: Successfully create card
+ *         content:
+ *           application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/GetCard'
+ *            example:
+ *             cardId: 'desbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *       400:
+ *         description: Problem with server
  */
 router.post("/cards", reusableValidation(validateSchemaCard), postCreateCard);
 export { router as cardRouter };

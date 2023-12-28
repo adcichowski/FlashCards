@@ -1,7 +1,7 @@
 import { cardService } from "./card-service";
 
-import type { InferPromise } from "../types/utility";
 import type { validateSchemaCard } from "./card-schema";
+import type { InferPromise } from "../types/utility";
 import type { Response, Request } from "express";
 import type { InferType } from "yup";
 
@@ -49,7 +49,7 @@ const scrapCard = ({
   shape,
   Rate,
   subject,
-}: InferPromise<typeof cardService["getAllCards"]>) => ({
+}: InferPromise<(typeof cardService)["getAllCards"]>) => ({
   id,
   question,
   answer,
