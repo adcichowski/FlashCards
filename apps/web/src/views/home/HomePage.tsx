@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { Footer } from "src/views/home/components/Footer/Footer";
 import { Navigation } from "src/components/Navigation/Navigation";
@@ -18,12 +16,9 @@ export function HomePage() {
         <Navigation />
 
         <Image
-          src="/HeroBackground/large.png"
-          layout="fill"
-          priority
-          objectPosition="top"
+          src="/heroBackground.png"
           tabIndex={-1}
-          objectFit="cover"
+          fill
           className={styles.heroBackground}
           alt=""
         />
@@ -42,11 +37,9 @@ export function HomePage() {
         <article className={styles.firstSide}>
           <Image
             className={styles.shoeBackground}
-            src="/ShoeBackground/large.png"
+            src="/shoeBackground.png"
             alt=""
-            objectPosition="bottom"
-            layout="fill"
-            objectFit="cover"
+            fill
             tabIndex={-1}
           />
 

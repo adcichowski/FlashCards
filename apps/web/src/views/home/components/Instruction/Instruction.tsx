@@ -1,3 +1,4 @@
+"use client";
 import FrontCard from "./FrontCardR";
 import BackCard from "./BackCardR";
 

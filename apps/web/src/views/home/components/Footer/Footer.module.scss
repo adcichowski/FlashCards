@@ -25,57 +25,7 @@
     }
   }
 }
-.footerForm {
-  width: 50%;
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-flow: column;
-  row-gap: 7px;
-  margin: 15px 0;
-  @media screen and (max-width: 1100px) {
-    grid-row: 1/2;
-  }
-}
-.formTitle {
-  font-size: clamp(2.5rem, calc(2.5rem + 2vw), 8rem);
-}
 
-.formError {
-  width: 90%;
-}
-.footerArticle {
-  padding: 5px;
-  align-self: stretch;
-  justify-self: stretch;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 10px;
-  justify-items: center;
-  align-items: center;
-  row-gap: 5px;
-  position: relative;
-  z-index: 2;
-
-  @media screen and (max-width: 1100px) {
-    align-self: center;
-    justify-self: center;
-  }
-}
-.articleSection {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  row-gap: 30px;
-  @media screen and (max-width: 1100px) {
-    display: none;
-  }
-}
-
-.footerForm > button {
-  align-self: end;
-}
 .listLinks {
   display: flex;
   column-gap: 5px;

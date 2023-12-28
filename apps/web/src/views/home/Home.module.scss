@@ -1,27 +1,21 @@
 .header {
   position: relative;
-  min-height: 100vh;
-  max-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  width: 100%;
+  height: 100dvh;
   align-items: center;
 }
 .hero {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 .heroBackground {
-  top: 0;
-  left: 0;
   object-fit: cover;
   object-position: top;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  user-select: none;
   z-index: -20;
 }
 
@@ -44,6 +38,7 @@
   opacity: 0.6;
   z-index: -2;
   user-select: none;
+  object-position: bottom;
 }
 
 .bigQuestion {
