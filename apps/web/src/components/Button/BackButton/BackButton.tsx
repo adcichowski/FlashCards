@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import styles from "./BackButton.module.scss";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 function BackButton({ pathTo, text = "back" }: { readonly pathTo?: string; readonly text?: string }) {
   const router = useRouter();

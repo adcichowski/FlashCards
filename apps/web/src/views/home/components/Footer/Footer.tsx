@@ -28,7 +28,7 @@ function Footer() {
           <small className={styles.right}>Term of Service</small>
           <small className={styles.right}>Privacy Policy</small>
         </div>
-        <small className={styles.copyright}>&copy; 2021 FlashCards, All rights is us</small>
+        <small className={styles.copyright}>&copy; 2024 Adam Cichowski</small>
       </div>
       <FooterForm />
     </footer>
