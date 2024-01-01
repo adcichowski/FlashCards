@@ -19,13 +19,19 @@ type FormTypes = {
 
 export function Form({
   typeForm,
-  mutation,
+  serverAction,
   yupSchema,
-}: {
-  readonly typeForm: keyof FormTypes;
-  readonly mutation: () => void;
-  readonly yupSchema: typeof validateLoginSchema | typeof validateRegisterSchema;
-}) {
+}:
+  | {
+      readonly typeForm: "register";
+      readonly serverAction: (data: { email: string; username: string; password: string }) => void;
+      readonly yupSchema: typeof validateRegisterSchema;
+    }
+  | {
+      readonly typeForm: "login";
+      readonly serverAction: (data: { email: string; password: string }) => void;
+      readonly yupSchema: typeof validateLoginSchema;
+    }) {
   const isLoginPage = typeForm === "login";
 
   const {
@@ -36,12 +42,20 @@ export function Form({
     resolver: yupResolver(yupSchema),
   });
 
+  const onSubmit = handleSubmit((v) => {
+    if (typeForm === "login") {
+      serverAction(v);
+    }
+    if (typeForm === "register" && "username" in v) {
+      serverAction(v);
+    }
+  });
   return (
     <div className={styles.game}>
       <div className={`${styles.formLog} ${clsx(isLoginPage, styles.register)}`}>
         <BackButton pathTo="/" />
         <h1 className={styles.formTitle}>{`${typeForm} In`}</h1>
-        <form autoComplete="off" className={styles.gameForm} onSubmit={handleSubmit(() => {})}>
+        <form autoComplete="off" className={styles.gameForm} onSubmit={onSubmit}>
           {"username" in yupSchema.fields && (
             <div className={styles.containerInput}>
               <Input
