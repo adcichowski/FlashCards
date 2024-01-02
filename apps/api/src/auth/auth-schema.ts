@@ -22,14 +22,18 @@ import * as Yup from "yup";
 //  *      maximum: 32
 //  */
 
-export const validateRegisterSchema = Yup.object().shape({
+export const validateRegisterSchema = Yup.object({
   email: Yup.string()
     .max(64)
     .required("Email is require!")
     .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "It's not email format"),
   password: Yup.string().max(64).min(12).required("Password is require!"),
   username: Yup.string().max(32).required("Username is require!"),
-});
+}).required();
+
+export type TypeRegisterSchema = Readonly<
+  Yup.InferType<typeof validateRegisterSchema>
+>;
 
 // /**
 //  * @openapi
@@ -50,10 +54,12 @@ export const validateRegisterSchema = Yup.object().shape({
 //  *      minimum: 12
 //  */
 
-export const validateLoginSchema = Yup.object().shape({
+export const validateLoginSchema = Yup.object({
   email: Yup.string()
     .max(64)
     .required("Email is require!")
     .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Change email format!"),
   password: Yup.string().max(64).min(12).required("Password is require!"),
-});
+}).required();
+
+export type TypeLoginSchema = Yup.InferType<typeof validateLoginSchema>;

@@ -57,7 +57,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetCard'
               example:
-                id: desbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+                cardId: desbdddf7-ad12-46cf-9e7c-c83ec7231ad3
         '400':
           description: Problem with server
 components:

@@ -25,9 +25,10 @@ export const registerUser = async (
     if (createdUser) {
       const token = createTokenJWT(createdUser.id.toString());
       res.cookie("jwt", token, { httpOnly: true, maxAge: MAX_AGE });
-      res.status(201).send({ message: "User is register" });
+      res.status(201).send({ userId: createdUser.id });
     }
   } catch (error) {
+    console.log(error);
     next(new HttpError(400, "Email is used!"));
   }
 };
@@ -36,5 +37,5 @@ export const createTokenJWT = (id: string) => {
   const { SECRET_SESSION } = process.env;
   if (!SECRET_SESSION) return new Error("Secret Session is not set!");
 
-  Jwt.sign({ id }, SECRET_SESSION, { expiresIn: MAX_AGE });
+  return Jwt.sign({ id }, SECRET_SESSION, { expiresIn: MAX_AGE });
 };
