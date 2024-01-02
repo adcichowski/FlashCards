@@ -18,6 +18,6 @@ export const fetcher = async <T>({
     },
   });
 
-  const data = (await res.json()) as T;
+  const data = (await res.json()) as T | undefined;
   return data;
 };

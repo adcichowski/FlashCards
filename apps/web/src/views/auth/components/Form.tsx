@@ -24,7 +24,11 @@ export function Form({
 }:
   | {
       readonly typeForm: "register";
-      readonly serverAction: (data: { email: string; username: string; password: string }) => void;
+      readonly serverAction: (data: {
+        email: string;
+        username: string;
+        password: string;
+      }) => Promise<{ userId: string } | undefined>;
       readonly yupSchema: typeof validateRegisterSchema;
     }
   | {
@@ -47,7 +51,7 @@ export function Form({
       serverAction(v);
     }
     if (typeForm === "register" && "username" in v) {
-      serverAction(v);
+      const res = serverAction(v);
     }
   });
   return (
@@ -58,34 +62,18 @@ export function Form({
         <form autoComplete="off" className={styles.gameForm} onSubmit={onSubmit}>
           {"username" in yupSchema.fields && (
             <div className={styles.containerInput}>
-              <Input
-                {...register("username")}
-                className={styles.formInput}
-                labelClass={styles.formLabel}
-                autoComplete="off"
-              />
-              <span className={styles.errorInfo}>{"username" in errors ? errors?.username?.message : ""}</span>
+              <Input {...register("username")} labelClass={styles.formLabel} autoComplete="off" />
+              <div className={styles.errorInfo}>{"username" in errors ? errors?.username?.message : ""}</div>
             </div>
           )}
           <div className={styles.containerInput}>
-            <Input
-              {...register("email")}
-              className={styles.formInput}
-              labelClass={styles.formLabel}
-              autoComplete="off"
-            />
+            <Input {...register("email")} labelClass={styles.formLabel} autoComplete="off" />
 
-            <span className={styles.errorInfo}>{errors?.email?.message}</span>
+            <div className={styles.errorInfo}>{errors?.email?.message}</div>
           </div>
           <div className={styles.containerInput}>
-            <Input
-              {...register("password")}
-              labelClass={styles.formLabel}
-              type="password"
-              className={styles.formInput}
-              autoComplete="off"
-            />
-            <span className={styles.errorInfo}>{errors.password?.message}</span>
+            <Input {...register("password")} labelClass={styles.formLabel} type="password" autoComplete="off" />
+            <div className={clsx(styles.errorInfo, styles.errorInfoPassword)}>{errors.password?.message}</div>
           </div>
           <div className={styles.containerSubmit}>
             <Button size="normal" type="submit">
