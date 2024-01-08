@@ -6,8 +6,9 @@ import type { InferType } from "yup";
 const prisma = new PrismaClient();
 const getFirstCardById = (id: string) =>
   prisma.card.findFirst({
-    where: { id: Number(id) },
+    where: { id },
     include: {
+      Shape: { select: { shape: true } },
       Subject: { include: { Section: true } },
       Rate: { include: { User: true } },
       User: {
@@ -22,6 +23,7 @@ const getCardBySubject = (subject: string) =>
   prisma.card.findMany({
     where: { Subject: { id: subject } },
     include: {
+      Shape: { select: { shape: true } },
       Rate: { include: { User: true } },
       User: {
         select: {
@@ -34,6 +36,7 @@ const getCardBySubject = (subject: string) =>
 const getAllCards = () =>
   prisma.card.findMany({
     include: {
+      Shape: { select: { shape: true } },
       Subject: { include: { Section: true } },
       Rate: { include: { User: { select: { username: true } } } },
       User: {
@@ -53,12 +56,12 @@ const createCard = (card: InferType<typeof validateSchemaCard>) => {
           difficulties: card.difficulties,
           question: card.question,
           answer: card.answer,
-          Shape: { connect: { id: Number(card.shape) } },
+          Shape: { connect: { id: card.shape } },
           Subject: { connect: { id: card.subject } },
-          User: { connect: { id: Number(card.userId) } },
+          User: { connect: { id: card.userId } },
         },
       },
-      User: { connect: { id: +card.userId } },
+      User: { connect: { id: card.userId } },
     },
   });
 };

@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { v4 } from "uuid";
-import { logger } from "../utils/logger";
 
 import type { RegisterUser } from "./types";
 
@@ -11,7 +10,6 @@ const createUser = (user: RegisterUser) => {
 };
 
 const getUser = (user: Pick<RegisterUser, "email">) => {
-  logger.warn(user, "USER DANE");
   return prisma.user.findFirst({
     where: { email: user.email },
   });

@@ -9,6 +9,27 @@ info:
   title: REST API Docs
   version: 0.0.1
 paths:
+  /auth:
+    post:
+      operationId: loginTo
+      summary: Get token
+      tags:
+        - Session
+      description: Get new token in login
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                userId:
+                  type: string
+                  format: uuid
+                token:
+                  type: string
+              example:
+                userId: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+        '400':
+          description: Problem with server
   /cards:
     get:
       operationId: getCards
@@ -62,6 +83,15 @@ paths:
           description: Problem with server
 components:
   schemas:
+    GetToken:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        token:
+          type: string
+          format: JWT
     GetCard:
       type: object
       properties:

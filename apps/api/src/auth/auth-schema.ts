@@ -28,7 +28,7 @@ export const validateRegisterSchema = Yup.object({
     .required("Email is require!")
     .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "It's not email format"),
   password: Yup.string().max(64).min(12).required("Password is require!"),
-  username: Yup.string().max(32).required("Username is require!"),
+  username: Yup.string().min(4).max(32).required("Username is require!"),
 }).required();
 
 export type TypeRegisterSchema = Readonly<

@@ -1,5 +1,3 @@
-import Jwt from "jsonwebtoken";
-
 import { HttpError } from "../utils/error/httpError";
 import { hashTheValue } from "../utils/utils";
 
@@ -8,8 +6,22 @@ import { authService } from "./auth-service";
 import type { validateRegisterSchema } from "./auth-schema";
 import type { Response, Request, NextFunction } from "express";
 import type { InferType } from "yup";
+import { createTokenJWT } from "./tokenJWT";
 
-const MAX_AGE = 24 * 60 * 60;
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *   GetToken:
+ *    type: object
+ *    properties:
+ *     userId:
+ *      type: string
+ *      format: uuid
+ *     token:
+ *      type: string
+ *      format: JWT
+ */
 
 export const registerUser = async (
   req: Request,
@@ -23,19 +35,11 @@ export const registerUser = async (
       password: await hashTheValue(user.password),
     });
     if (createdUser) {
-      const token = createTokenJWT(createdUser.id.toString());
-      res.cookie("jwt", token, { httpOnly: true, maxAge: MAX_AGE });
-      res.status(201).send({ userId: createdUser.id });
+      const token = createTokenJWT(createdUser.id);
+
+      res.status(201).send({ userId: createdUser.id, token });
     }
   } catch (error) {
-    console.log(error);
-    next(new HttpError(400, "Email is used!"));
+    next(new HttpError(400, "Email or username is used!"));
   }
-};
-
-export const createTokenJWT = (id: string) => {
-  const { SECRET_SESSION } = process.env;
-  if (!SECRET_SESSION) return new Error("Secret Session is not set!");
-
-  return Jwt.sign({ id }, SECRET_SESSION, { expiresIn: MAX_AGE });
 };

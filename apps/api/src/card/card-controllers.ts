@@ -46,9 +46,9 @@ const scrapCard = ({
   question,
   answer,
   User,
-  shape,
+  Shape: { shape },
   Rate,
-  subject,
+  subjectId,
 }: InferPromise<(typeof cardService)["getAllCards"]>) => ({
   id,
   question,
@@ -59,7 +59,7 @@ const scrapCard = ({
       return prev + userRate.rate / Rate.length;
     }, 0).toFixed(2),
   },
-  subject,
+  subjectId,
   createdBy: User.username,
   shape,
 });
