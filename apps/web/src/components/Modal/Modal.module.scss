@@ -1,4 +1,5 @@
 .wrapper {
+  color: var(--font-color-primary);
   z-index: 25;
   top: 0;
   position: fixed;
@@ -19,11 +20,7 @@
   height: 80%;
   padding: 10px;
   border-radius: 5%;
-  background: linear-gradient(
-    228deg,
-    rgba(43, 51, 97, 1) 9%,
-    rgba(42, 27, 43, 1) 159%
-  );
+  background: linear-gradient(228deg, rgba(43, 51, 97, 1) 9%, rgba(42, 27, 43, 1) 159%);
 }
 .modalTitle {
   font-size: clamp(2rem, calc(3rem + 2vw), 7rem);

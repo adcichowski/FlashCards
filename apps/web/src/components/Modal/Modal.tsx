@@ -15,7 +15,7 @@ export function Modal() {
   if (!wrapperElement || !modal.isOpen) return null;
 
   return ReactDOM.createPortal(
-    <div className={styles.wrapper}>
+    <dialog className={styles.wrapper}>
       <div className={styles.modal}>
         <p className={styles.modalTitle}>{modal.type === "error" ? "Error" : "Success"}</p>
         <div className={styles.modalIcon}>{modal.type === "error" ? <Alert /> : <Check />}</div>
@@ -24,7 +24,7 @@ export function Modal() {
           Close
         </Button>
       </div>
-    </div>,
+    </dialog>,
     wrapperElement,
   );
 }

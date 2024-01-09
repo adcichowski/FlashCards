@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validateLoginSchema, validateRegisterSchema } from "server/src/auth/auth-schema";
 import { Input } from "src/components/Input/Input";
+import { useModalContext } from "src/context/ModalContext";
 
 type FormTypes = {
   readonly register: { readonly username: string; readonly email: string; readonly password: string };
@@ -28,7 +29,7 @@ export function Form({
         email: string;
         username: string;
         password: string;
-      }) => Promise<{ userId: string } | undefined>;
+      }) => Promise<{ userId: string } | { message: string }>;
       readonly yupSchema: typeof validateRegisterSchema;
     }
   | {
@@ -37,7 +38,7 @@ export function Form({
       readonly yupSchema: typeof validateLoginSchema;
     }) {
   const isLoginPage = typeForm === "login";
-
+  const { openModal } = useModalContext();
   const {
     register,
     handleSubmit,
@@ -46,12 +47,16 @@ export function Form({
     resolver: yupResolver(yupSchema),
   });
 
-  const onSubmit = handleSubmit((v) => {
+  const onSubmit = handleSubmit(async (v) => {
     if (typeForm === "login") {
       serverAction(v);
     }
     if (typeForm === "register" && "username" in v) {
-      const res = serverAction(v);
+      const res = await serverAction(v);
+
+      "userId" in res
+        ? openModal({ message: "Successfully create user!", type: "success" })
+        : openModal({ message: res.message, type: "error" });
     }
   });
   return (
@@ -61,20 +66,18 @@ export function Form({
         <h1 className={styles.formTitle}>{`${typeForm} In`}</h1>
         <form autoComplete="off" className={styles.gameForm} onSubmit={onSubmit}>
           {"username" in yupSchema.fields && (
-            <div className={styles.containerInput}>
+            <InputWrapper error={"username" in errors ? errors?.username?.message : ""}>
               <Input {...register("username")} labelClass={styles.formLabel} autoComplete="off" />
-              <div className={styles.errorInfo}>{"username" in errors ? errors?.username?.message : ""}</div>
-            </div>
+            </InputWrapper>
           )}
-          <div className={styles.containerInput}>
+          <InputWrapper error={errors.email?.message}>
             <Input {...register("email")} labelClass={styles.formLabel} autoComplete="off" />
+          </InputWrapper>
 
-            <div className={styles.errorInfo}>{errors?.email?.message}</div>
-          </div>
-          <div className={styles.containerInput}>
+          <InputWrapper isPasswordInput error={errors.password?.message}>
             <Input {...register("password")} labelClass={styles.formLabel} type="password" autoComplete="off" />
-            <div className={clsx(styles.errorInfo, styles.errorInfoPassword)}>{errors.password?.message}</div>
-          </div>
+          </InputWrapper>
+
           <div className={styles.containerSubmit}>
             <Button size="normal" type="submit">
               {typeForm}
@@ -91,3 +94,20 @@ export function Form({
     </div>
   );
 }
+
+const InputWrapper = ({
+  error = "",
+  children,
+  isPasswordInput,
+}: {
+  error?: string;
+  children: JSX.Element;
+  isPasswordInput?: boolean;
+}) => {
+  return (
+    <div className={styles.containerInput}>
+      {children}
+      <div className={clsx(styles.errorInfo, isPasswordInput && styles.errorInfoPassword)}>{error}</div>
+    </div>
+  );
+};

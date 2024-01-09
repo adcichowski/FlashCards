@@ -1,15 +1,20 @@
 .backButton {
   position: absolute;
   z-index: 10;
-  width: 4rem;
-  height: 4rem;
+  width: 40px;
+  height: 40px;
   left: 6%;
   border: none;
   cursor: pointer;
   top: 3.5%;
   font-size: 0;
   background: url("/icons/first-arrow.svg") no-repeat center;
+  @media screen and (max-width: 950px) {
+    width: 30px;
+    height: 30px;
+  }
 }
+
 .backButton:hover {
   fill: #a31934;
 }
