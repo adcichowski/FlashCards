@@ -16,11 +16,13 @@ export const authOptions = {
 
       async authorize(credentials) {
         if (!credentials) return null;
+
         const res = await fetcher<{ userId: string; token: string }>({
-          body: credentials,
-          endpoint: "/auth",
+          body: { email: credentials.email, password: credentials.password },
+          endpoint: "auth",
           method: "POST",
         });
+        console.log(res);
         if (res.userId) {
           return { email: credentials.email, id: res.userId };
         }
@@ -28,7 +30,7 @@ export const authOptions = {
       },
     }),
   ],
-  pages: { signIn: "/account" },
+  pages: { signIn: "/login", error: "/login" },
 } satisfies NextAuthOptions;
 
 const handler = NextAuth(authOptions);

@@ -42,6 +42,7 @@ export function Form({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormTypes[typeof typeForm]>({
     resolver: yupResolver(yupSchema),
@@ -54,9 +55,12 @@ export function Form({
     if (typeForm === "register" && "username" in v) {
       const res = await serverAction(v);
 
-      "userId" in res
-        ? openModal({ message: "Successfully create user!", type: "success" })
-        : openModal({ message: res.message, type: "error" });
+      if ("userId" in res) {
+        reset();
+        return openModal({ message: "Successfully create user!", type: "success" });
+      }
+
+      return openModal({ message: res.message, type: "error" });
     }
   });
   return (

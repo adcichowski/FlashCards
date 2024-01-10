@@ -4,15 +4,14 @@ import { Logo } from "../Logo/Logo";
 import styles from "./Navigation.module.scss";
 import Link from "next/link";
 import { socialLinks, navigationLinks } from "src/constants/constants";
-import { useAuthContext } from "../../context/AuthContext";
 import { Button } from "../Button/Button";
 import { Hamburger } from "./Hamburger/Hamburger";
 
 function Navigation() {
-  const { state, dispatch } = useAuthContext();
+  const isLogin = false;
   const handleClickLogOut = useCallback(() => {
-    dispatch({ type: "logOut" });
-  }, [dispatch]);
+    // dispatch({ type: "logOut" });
+  }, []);
   const [isOpen, setOpen] = useState(false);
   const handleClick = () => setOpen(!isOpen);
   const renderNavigationLinks = navigationLinks.map((element) => (
@@ -37,7 +36,7 @@ function Navigation() {
         <div className={styles.bodyMenu}>
           <Logo />
           <ul className={styles.menuList}>{renderNavigationLinks}</ul>
-          {state.isLogin ? (
+          {isLogin ? (
             <Button size="normal" type="button" onClick={handleClickLogOut}>
               Logout
             </Button>
@@ -51,7 +50,7 @@ function Navigation() {
         <div className={styles.hideNav}>
           <Logo />
           <ul className={styles.navList}>{renderNavigationLinks}</ul>
-          {state.isLogin ? (
+          {isLogin ? (
             <Button size="normal" type="button" onClick={handleClickLogOut}>
               Logout
             </Button>

@@ -11,13 +11,12 @@ export const fetcher = async <T>({
 }) => {
   const res = await fetch(`http://localhost:4001/${endpoint}`, {
     method,
-    body: JSON.stringify(body),
+    body: method !== "GET" ? JSON.stringify(body) : undefined,
     headers: {
       "Content-Type": "application/json",
       ...headers,
     },
   });
-
   const data = (await res.json()) as T;
   return data;
 };

@@ -10,7 +10,7 @@ export function LoginPage() {
       <Form
         typeForm="login"
         serverAction={(data) => {
-          signIn("credentials", data);
+          signIn("credentials", { ...data, callbackUrl: "/game", redirect: true });
         }}
         yupSchema={validateLoginSchema}
       />
