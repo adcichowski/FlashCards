@@ -13,15 +13,11 @@ export function HomePage() {
   return (
     <div className={styles.homePage}>
       <header className={styles.header}>
-        <Navigation />
+        <div className={styles.positionNavigation}>
+          <Navigation />
+        </div>
 
-        <Image
-          src="/heroBackground.png"
-          tabIndex={-1}
-          fill
-          className={styles.heroBackground}
-          alt=""
-        />
+        <Image src="/heroBackground.png" tabIndex={-1} fill className={styles.heroBackground} alt="" />
 
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>FlashCards</h1>
@@ -35,13 +31,7 @@ export function HomePage() {
       <main>
         <HomeAbout />
         <article className={styles.firstSide}>
-          <Image
-            className={styles.shoeBackground}
-            src="/shoeBackground.png"
-            alt=""
-            fill
-            tabIndex={-1}
-          />
+          <Image className={styles.shoeBackground} src="/shoeBackground.png" alt="" fill tabIndex={-1} />
 
           <Instruction />
 

@@ -2,9 +2,9 @@ import React from "react";
 import { Navigation } from "src/components/Navigation/Navigation";
 import { BackgroundGame } from "src/views/game/components/BackgroundGame/BackgroundGame";
 import styles from "./ContactPage.module.scss";
-import { GithubProfile, GithubProfileProps } from "../components/GithubProfile";
+import { GithubProfile } from "../components/GithubProfile";
 
-export function ContactPage({ githubProfile }: { readonly githubProfile: GithubProfileProps }) {
+export function ContactPage() {
   return (
     <div className={styles.wrapper}>
       <BackgroundGame>
@@ -15,7 +15,7 @@ export function ContactPage({ githubProfile }: { readonly githubProfile: GithubP
               <h1 className={styles.descriptionTitle}>Thanks for your interest in FlashCards</h1>
               <p className={styles.descriptionText}>if you wanna extend this project, message to me. </p>
             </div>
-            <GithubProfile {...githubProfile} />
+            <GithubProfile />
             <div className={styles.contactBackground}></div>
           </div>
         </>

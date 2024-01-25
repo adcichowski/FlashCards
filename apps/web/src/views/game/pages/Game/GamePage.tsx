@@ -1,19 +1,25 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+"use client";
+import React, { useState } from "react";
+import { TabMenu } from "primereact/tabmenu";
+import { AutoComplete, AutoCompleteChangeEvent } from "primereact/autocomplete";
 import { BackgroundGame } from "../../components/BackgroundGame/BackgroundGame";
+import styles from "./GamePage.module.scss";
+
+const items = [
+  { label: "Cards", icon: "pi pi-fw pi-home" },
+  { label: "Articles", icon: "pi pi-fw pi-calendar" },
+  { label: "Exercises", icon: "pi pi-fw pi-pencil" },
+];
 
 export function GamePage() {
-  // const {
-  //   state: { isLogin },
-  // } = useAuthContext();
-  // const router = useRouter();
-  // useEffect(() => {
-  //   if (!isLogin) router.replace("/login");
-  // });
+  const [value, setValue] = useState("");
 
   return (
-    <BackgroundGame>
-      <h1>There will be cards to choose</h1>
-    </BackgroundGame>
+    <div className={styles.wrapper}>
+      <form role="search">
+        <AutoComplete value={value} onChange={(e) => setValue(e.value)} />
+      </form>
+      <TabMenu model={items} />
+    </div>
   );
 }
