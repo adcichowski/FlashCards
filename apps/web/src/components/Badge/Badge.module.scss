@@ -2,7 +2,18 @@
   border-radius: 7px;
   padding: 2px 6px;
   margin: auto;
+  width: max-content;
   font-size: 1.2rem;
+  background-color: currentColor;
+}
+
+.text {
   color: black;
-  background-color: #dfdfdf;
+}
+.outline > .text{
+  color: white
+}
+.outline{
+  background-color: transparent;
+  border:1px solid white;
 }

@@ -31,7 +31,18 @@ export function HomePage() {
       <main>
         <HomeAbout />
         <article className={styles.firstSide}>
-          <Image className={styles.shoeBackground} src="/shoeBackground.png" alt="" fill tabIndex={-1} />
+          <Image
+            className={styles.shoeBackground}
+            src="/shoeBackground.png"
+            alt=""
+            fill
+            priority={false}
+            quality={100}
+            style={{
+              objectFit: "contain",
+            }}
+            tabIndex={-1}
+          />
 
           <Instruction />
 

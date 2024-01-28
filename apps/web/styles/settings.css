@@ -1,5 +1,7 @@
 :root {
   --font-color-primary: #e9e9e9;
+  --tab-active: #a31934;
+  --tab-hover: #dc7c7c;
   --bg-color-input: #ab1100;
   --bg-article-primary: #221f63;
   --color--underscore: #a31934;
@@ -10,20 +12,23 @@
   --focus--input: #7b0019;
 }
 
-
+.radix-themes {
+  --default-font-family: var(--sans);
+}
 
 *,
 *::before,
 *::after {
+  font-family: inherit;
   margin: 0;
   padding: 0;
-  font-family: '';
 }
 html,
 body {
   height: 100%;
 }
 html {
+  font-family: var(--font-kanit);
   font-size: 10px;
   width: 100%;
   color: var(--font-color-primary);
