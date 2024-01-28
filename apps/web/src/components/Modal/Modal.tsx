@@ -12,7 +12,7 @@ export function Modal() {
   const { wrapperElement } = useModalPortal();
   const { modal, setModal } = useModalContext();
 
-  if (!wrapperElement || !modal.isOpen) return null;
+  if (!wrapperElement || !modal.isOpen) return <></>;
 
   return ReactDOM.createPortal(
     <dialog className={styles.wrapper}>

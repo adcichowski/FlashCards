@@ -9,18 +9,21 @@
   --hamburger--back: #c93434;
   --focus--input: #7b0019;
 }
+
+
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
+  font-family: '';
 }
 html,
 body {
   height: 100%;
 }
 html {
-  font-family: "Kanit", sans-serif;
   font-size: 10px;
   width: 100%;
   color: var(--font-color-primary);
@@ -29,7 +32,6 @@ html {
 body {
   display: grid;
   margin: 0 auto;
-  grid-template-columns: 1fr;
   width: 100%;
   max-width: 1920px;
   background-color: var(--bg-article-primary);
