@@ -4,12 +4,12 @@ import styles from "./GamePage.module.scss";
 import TabsPanel, { TabChildType } from "src/components/TabsPanel/TabsPanel";
 import Badge from "src/components/Badge/Badge";
 import { useCombobox } from "downshift";
-import { MultipleSelectTech } from "../../components/MultiSelectTech/MultiSelectTech";
+import { MultiSelectTech } from "../../components/MultiSelectTech/MultiSelectTech";
 const tabs = [
   {
     header: (
-      <div className={styles.tabHeaderWrapper}>
-        Cards <Badge value={368} />
+      <div className={styles.tabHeader}>
+        Cards <Badge>368</Badge>
       </div>
     ),
     content: <>There will be cards</>,
@@ -17,8 +17,8 @@ const tabs = [
   },
   {
     header: (
-      <div className={styles.tabHeaderWrapper}>
-        Articles <Badge value={18} />{" "}
+      <div className={styles.tabHeader}>
+        Articles <Badge variant="outline">18</Badge>{" "}
       </div>
     ),
     content: <>There will be articles</>,
@@ -26,8 +26,8 @@ const tabs = [
   },
   {
     header: (
-      <div className={styles.tabHeaderWrapper}>
-        Exercises <Badge value={1} />
+      <div className={styles.tabHeader}>
+        Exercises <Badge>1</Badge>
       </div>
     ),
     content: <>There will be exercises</>,
@@ -38,8 +38,10 @@ const tabs = [
 export function GamePage() {
   return (
     <div className={styles.wrapper}>
-      <MultipleSelectTech />
-      <TabsPanel tabs={tabs} />
+      <MultiSelectTech />
+      <div className={styles.tabPanelWrapper}>
+        <TabsPanel tabs={tabs} />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,31 @@
+.multiSelectParent {
+  width: 400px;
+  position: relative;
+}
+.multiSelectLabel {
+  font-size: 2rem;
+}
+.multiSelectInput {
+  width: 100%;
+  border-radius: 5px;
+  padding: 6px 3px;
+  border: none;
+  background-color: #d9d9d9;
+}
+
+.selectedList {
+  margin-top: 4px;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  text-transform: capitalize;
+}
+.searchList {
+  text-transform: capitalize;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #221f63;
+  width: 100%;
+}

@@ -10,7 +10,7 @@ export default function GameLayout({ children }: { readonly children: React.Reac
   return (
     <BackgroundGame>
       <Navigation />
-      <div>{children}</div>
+      {children}
     </BackgroundGame>
   );
 }

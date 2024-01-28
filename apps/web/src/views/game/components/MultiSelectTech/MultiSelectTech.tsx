@@ -1,127 +1,140 @@
-//@ts-nocheck
-import { useMultipleSelection, useSelect } from "downshift"
-import Badge from "src/components/Badge/Badge"
+import { useCombobox, useMultipleSelection, useSelect } from "downshift";
+import React from "react";
+import Badge from "src/components/Badge/Badge";
+import styles from "./MultiSelectTech.module.scss";
+const books = [
+  { id: "tech-1", title: "database" },
+  { id: "tech-2", title: "relational sql" },
+  { id: "tech-4", title: "frontend" },
+  { id: "tech-5", title: "react" },
+  { id: "tech-6", title: "javascript" },
+  { id: "tech-7", title: "react native" },
+];
 
-const techs = [
-  {id: 'tech-1',  subject:'database' },
-  {id: 'tech-2',  title: 'relational sql'},
-  {id: 'tech-3',  title: 'nosql'},
-  {id: 'tech-4',  title: 'frontend'},
-  {id: 'tech-5',  title: 'react'},
-  {id: 'tech-6',  title: 'javascript'},
-  {id: 'tech-7',  title: 'react native'},
-]
-function gettechsFilter(selectedItems) {
-  return function techsFilter(tech) {
-    return selectedItems.indexOf(tech) < 0
-  }
+function getFilteredBooks(selectedItems: { id: string; title: string }[], inputValue: string | undefined) {
+  return books.filter((book) => {
+    return book.title.includes(inputValue ? inputValue?.toLowerCase() : "");
+  });
 }
-export function MultipleSelectTech() {
-
-  function MultipleSelect() {
-    const {
-      getSelectedItemProps,
-      getDropdownProps,
-      addSelectedItem,
-      removeSelectedItem,
+export function MultiSelectTech() {
+  function MultipleComboBox() {
+    const [inputValue, setInputValue] = React.useState<string | undefined>("");
+    const [selectedItems, setSelectedItems] = React.useState<{ id: string; title: string }[]>([]);
+    const items = React.useMemo(() => getFilteredBooks(selectedItems, inputValue), [selectedItems, inputValue]);
+    const { getSelectedItemProps, getDropdownProps, removeSelectedItem } = useMultipleSelection({
       selectedItems,
-    } = useMultipleSelection({initialSelectedItems: [techs[0], techs[1]]})
-    const items = techs.filter(gettechsFilter(selectedItems))
-    const {
-      isOpen,
-      selectedItem,
-      getToggleButtonProps,
-      getLabelProps,
-      getMenuProps,
-      highlightedIndex,
-      getItemProps,
-    } = useSelect({
-      selectedItem: null,
-      defaultHighlightedIndex: 0, // after selection, highlight the first item.
-      items,
-      stateReducer: (state, actionAndChanges) => {
-        const {changes, type} = actionAndChanges
+      onStateChange({ selectedItems: newSelectedItems, type }) {
+        if (!newSelectedItems) return;
         switch (type) {
-          case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:
-          case useSelect.stateChangeTypes.ToggleButtonKeyDownSpaceButton:
-          case useSelect.stateChangeTypes.ItemClick:
+          case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownBackspace:
+          case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
+          case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
+          case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
+            setSelectedItems(newSelectedItems);
+            break;
+          default:
+            break;
+        }
+      },
+    });
+    const { isOpen, getLabelProps, getMenuProps, getInputProps, getItemProps } = useCombobox({
+      items,
+      itemToString(item) {
+        return item ? item.title : "";
+      },
+      defaultHighlightedIndex: 0, // after selection, highlight the first item.
+      selectedItem: null,
+      inputValue,
+      stateReducer(state, actionAndChanges) {
+        const { changes, type } = actionAndChanges;
+
+        switch (type) {
+          case useCombobox.stateChangeTypes.InputKeyDownEnter:
+          case useCombobox.stateChangeTypes.ItemClick:
             return {
               ...changes,
               isOpen: true, // keep the menu open after selection.
               highlightedIndex: 0, // with the first option highlighted.
-            }
-        }
-        return changes
-      },
-      onStateChange: ({type, selectedItem: newSelectedItem}) => {
-        switch (type) {
-          case useSelect.stateChangeTypes.ToggleButtonKeyDownEnter:
-          case useSelect.stateChangeTypes.ToggleButtonKeyDownSpaceButton:
-          case useSelect.stateChangeTypes.ItemClick:
-          case useSelect.stateChangeTypes.ToggleButtonBlur:
-            if (newSelectedItem) {
-              addSelectedItem(newSelectedItem)
-            }
-            break
+            };
           default:
-            break
+            return changes;
         }
       },
-    })
+      onStateChange({ inputValue: newInputValue, type, selectedItem: newSelectedItem }) {
+        switch (type) {
+          case useCombobox.stateChangeTypes.InputKeyDownEnter:
+          case useCombobox.stateChangeTypes.ItemClick:
+          case useCombobox.stateChangeTypes.InputBlur:
+            if (newSelectedItem) {
+              setSelectedItems([...selectedItems, newSelectedItem]);
+              setInputValue("");
+            }
+            break;
+
+          case useCombobox.stateChangeTypes.InputChange:
+            setInputValue(newInputValue);
+            break;
+          default:
+            break;
+        }
+      },
+    });
 
     return (
-      <div >
-        <div >
-          <label  {...getLabelProps()}>
-            Pick some techs:
+      <div className={styles.multiSelectParent}>
+        <div>
+          <label className={styles.multiSelectLabel} {...getLabelProps()}>
+            Technologies
           </label>
           <div>
-            {selectedItems.map(function renderSelectedItem(
-              selectedItemForRender,
-              index,
-            ) {
-              return (
-                <div
-
-                  key={`selected-item-${index}`}
-                  {...getSelectedItemProps({
-                    selectedItem: selectedItemForRender,
-                    index,
-                  })}
-                  >
-                  <Badge value={selectedItemForRender.title}/>
-
-
-                </div>
-              )
-            })}
-            <div
-              {...getToggleButtonProps(
-                getDropdownProps({preventKeyAction: isOpen}),
-              )}
-            >
-              <Badge value='+ add subject' variant="outline"/>
-            </div>
+            <input
+              className={styles.multiSelectInput}
+              {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
+            />
+            {/* <button aria-label="toggle menu" {...getToggleButtonProps()}>
+              &#8595;
+            </button> */}
           </div>
         </div>
-        <ul
-          className={`absolute w-inherit bg-white mt-1 shadow-md max-h-80 overflow-scroll p-0 z-10 ${
-            !(isOpen && items.length) && 'hidden'
-          }`}
-          {...getMenuProps()}
-        >
+        <ul className={styles.searchList} {...getMenuProps()}>
           {isOpen &&
-            items.map((item, index) => (
+            items
+              .filter((item) => item && !selectedItems.map((v) => v.id).includes(item.id))
+              .map((item, index) => (
+                <li key={`${item.title}${index}`} {...getItemProps({ item, index })}>
+                  <Badge>{item.title}</Badge>
+                </li>
+              ))}
+        </ul>
+        <ul className={styles.selectedList}>
+          {selectedItems.map((selectedItemForRender, index) => {
+            return (
               <li
-                key={`${item.value}${index}`}
-                {...getItemProps({item, index})}
+                key={selectedItemForRender.id}
+                {...getSelectedItemProps({
+                  selectedItem: selectedItemForRender,
+                  index,
+                })}
               >
-                <span>{item.title}</span>
+                <Badge key={`selected-item-${index}`}>
+                  <div>
+                    {selectedItemForRender.title}
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeSelectedItem(selectedItemForRender);
+                      }}
+                    >
+                      &#10005;
+                    </span>
+                  </div>
+                </Badge>
               </li>
-            ))}
+            );
+          })}
         </ul>
       </div>
-    )
+    );
   }
-  return <MultipleSelect />
+  return <MultipleComboBox />;
 }

@@ -1,8 +1,18 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 600px));
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  justify-content: space-around;
 }
-.tabHeaderWrapper {
+.tabPanelWrapper {
+  width: 100%;
+  flex-basis: 900px;
+}
+
+.tabHeader {
   display: flex;
   gap: 10px;
+  flex-wrap: nowrap;
 }
