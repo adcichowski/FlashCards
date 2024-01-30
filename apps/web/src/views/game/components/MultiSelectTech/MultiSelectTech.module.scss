@@ -5,16 +5,20 @@
 .multiSelectLabel {
   font-size: 2rem;
 }
-.multiSelectInput {
+.multiSelectInputWrapper {
   width: 100%;
   border-radius: 5px;
-  padding: 6px 3px;
   border: none;
   background-color: #d9d9d9;
 }
-
+.multiSelectInput {
+  background-color: transparent;
+  border: none;
+  min-width: 30px;
+  flex-grow: 1;
+}
 .selectedList {
-  margin-top: 4px;
+  padding: 4px 8px;
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -25,7 +29,8 @@
   text-transform: capitalize;
   position: absolute;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   background-color: #221f63;
   width: 100%;
 }
