@@ -16,3 +16,8 @@
   gap: 10px;
   flex-wrap: nowrap;
 }
+.selectableSections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

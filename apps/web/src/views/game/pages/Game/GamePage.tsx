@@ -5,6 +5,7 @@ import TabsPanel, { TabChildType } from "src/components/TabsPanel/TabsPanel";
 import Badge from "src/components/Badge/Badge";
 import { useCombobox } from "downshift";
 import { MultiSelectTech } from "../../components/MultiSelectTech/MultiSelectTech";
+import { SectionsListGame } from "../../components/SectionsListGame/SectionsListGame";
 const tabs = [
   {
     header: (
@@ -38,8 +39,18 @@ const tabs = [
 export function GamePage() {
   return (
     <div className={styles.wrapper}>
-      <MultiSelectTech />
-      <div className={styles.tabPanelWrapper}>
+      <div className={styles.selectableSections}>
+        <SectionsListGame
+          sections={[
+            { id: "1", label: "frontend" },
+            { id: "2", label: "backend" },
+            { id: "3", label: "mobile" },
+          ]}
+        />
+        <MultiSelectTech />
+      </div>
+      <div>
+        <div className={styles.tabPanelWrapper}></div>
         <TabsPanel tabs={tabs} />
       </div>
     </div>

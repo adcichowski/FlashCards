@@ -1,0 +1,33 @@
+.radioGroupRoot {
+  display: flex;
+  gap: 20px;
+}
+.heading {
+  font-weight: 500;
+}
+.radioLogo {
+  width: auto;
+  height: 40px;
+  stroke-width: 2px;
+}
+.radioLabel::first-letter {
+  text-transform: uppercase;
+}
+.wrapperRadio {
+  background-color: #382f61d2;
+  border-radius: 10px;
+  border: 1px solid white;
+  width: 105px;
+  height: 105px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapperRadio[data-state="checked"] {
+  background-color: #382f619b;
+  border: 1px solid #da7688;
+  box-shadow: inset 1px 1px 9px #af5061;
+}
