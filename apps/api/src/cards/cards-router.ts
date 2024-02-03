@@ -1,10 +1,10 @@
 import { Router } from "express";
 
-import { isAvaibleSubject } from "../subject/subject-middleware";
+// import { isAvaibleSubject } from "../section/sections-middleware";
 import { reusableValidation } from "../utils/reusableValidation";
 
-import { getAllCards, getCardById, postCreateCard } from "./card-controllers";
-import { validateSchemaCard } from "./card-schema";
+import { getAllCards, getCardById, postCreateCard } from "./cards-controllers";
+import { validateSchemaCard } from "./cards-schema";
 
 const router = Router();
 /**
@@ -37,7 +37,7 @@ const router = Router();
  *       400:
  *         description: Problem with server
  */
-router.get("/cards", isAvaibleSubject, getAllCards);
+router.get("/cards", getAllCards);
 
 router.get("/cards/:id", getCardById);
 

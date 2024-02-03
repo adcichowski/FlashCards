@@ -1,16 +1,14 @@
-import { PrismaClient } from "@prisma/client";
 import { v4 } from "uuid";
 
 import type { RegisterUser } from "./types";
-
-const prisma = new PrismaClient();
+import { prisma } from "../../libs/prisma/constants";
 
 const createUser = (user: RegisterUser) => {
-  return prisma.user.create({ data: { ...user, id: v4() } });
+  return prisma.users.create({ data: { ...user, id: v4() } });
 };
 
 const getUser = (user: Pick<RegisterUser, "email">) => {
-  return prisma.user.findFirst({
+  return prisma.users.findFirst({
     where: { email: user.email },
   });
 };

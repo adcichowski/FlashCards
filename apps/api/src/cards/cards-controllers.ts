@@ -1,6 +1,6 @@
-import { cardService } from "./card-service";
+import { cardService } from "./cards-service";
 
-import type { validateSchemaCard } from "./card-schema";
+import type { validateSchemaCard } from "./cards-schema";
 import type { InferPromise } from "../types/utility";
 import type { Response, Request } from "express";
 import type { InferType } from "yup";
@@ -45,22 +45,22 @@ const scrapCard = ({
   id,
   question,
   answer,
-  User,
-  Shape: { shape },
-  Rate,
+  Users,
+  Shapes: { shape },
+  Rates,
   subjectId,
 }: InferPromise<(typeof cardService)["getAllCards"]>) => ({
   id,
   question,
   answer,
   rate: {
-    list: Rate.map(({ rate, User }) => ({ rate, ...User })),
-    overall: Rate.reduce((prev, userRate) => {
-      return prev + userRate.rate / Rate.length;
+    list: Rates.map(({ rate, Users }) => ({ rate, ...Users })),
+    overall: Rates.reduce((prev, userRate) => {
+      return prev + userRate.rate / Rates.length;
     }, 0).toFixed(2),
   },
   subjectId,
-  createdBy: User.username,
+  createdBy: Users.username,
   shape,
 });
 

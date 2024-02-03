@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Card {
+model Cards {
   id           String       @id(map: "card_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   question     String?      @db.VarChar(255)
   answer       String?      @db.VarChar(255)
@@ -15,48 +15,63 @@ model Card {
   subjectId    String       @db.Uuid
   userId       String       @db.Uuid
   shapeId      String       @db.Uuid
-  Shape        Shape        @relation(fields: [shapeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_id_fk")
-  Subject      Subject      @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_subject_id_fk")
-  User         User         @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_users_id_fk")
-  Rate         Rate[]
+  Shapes       Shapes       @relation(fields: [shapeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_id_fk")
+  Subjects     Subjects     @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_subject_id_fk")
+  Users        Users        @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_users_id_fk")
+  Rates        Rates[]
 }
 
-model Rate {
+model Rates {
   rate   Int
   id     String @id(map: "rate_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId String @db.Uuid
   cardId String @db.Uuid
-  Card   Card   @relation(fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_id_fk")
-  User   User   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_users_id_fk")
+  Cards  Cards  @relation(fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_id_fk")
+  Users  Users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_users_id_fk")
 }
 
-model Section {
-  name      String  @db.VarChar(16)
-  id        String  @id(map: "section_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  subjectId String  @db.Uuid
-  Subject   Subject @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "section_subject_id_fk")
+model Sections {
+  name      String   @db.VarChar(16)
+  id        String   @id(map: "section_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subjectId String   @db.Uuid
+  Subjects  Subjects @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "section_subject_id_fk")
 }
 
-model Shape {
-  id    String @id(map: "shape_pk") @unique(map: "shape_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  shape Int    @unique(map: "shape_shape_uindex")
-  Card  Card[]
+model Shapes {
+  id    String  @id(map: "shape_pk") @unique(map: "shape_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  shape Int     @unique(map: "shape_shape_uindex")
+  Cards Cards[]
 }
 
-model Subject {
-  id      String    @id(map: "subject_pk") @unique(map: "subject_subject_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  section String    @db.VarChar(16)
-  Card    Card[]
-  Section Section[]
+model Subjects {
+  id                    String                  @id(map: "subject_pk") @unique(map: "subject_subject_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                  String                  @db.VarChar(32)
+  Cards                 Cards[]
+  Sections              Sections[]
+  Technologies_Subjects Technologies_Subjects[]
 }
 
-model User {
-  id       String @id(map: "users_pk") @unique(map: "users_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  username String @unique(map: "users_username_uindex") @db.VarChar(32)
-  email    String @unique(map: "users_email_uindex") @db.VarChar(32)
-  password String @unique(map: "users_password_uindex") @db.VarChar(60)
-  Card     Card[]
-  Rate     Rate[]
+model Technologies {
+  id                    String                  @unique(map: "technologies_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                  String                  @db.VarChar(32)
+  Technologies_Subjects Technologies_Subjects[]
+}
+
+model Technologies_Subjects {
+  id             String       @id(map: "technologies_subjects_pk") @unique(map: "technologies_subjects_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subjectId      String       @db.Uuid
+  technologiesId String       @db.Uuid
+  Technologies   Technologies @relation(fields: [technologiesId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologiesId_technologies__id_fk")
+  Subjects       Subjects     @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologies_subjects_id_fk")
+}
+
+model Users {
+  id       String  @id(map: "users_pk") @unique(map: "users_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username String  @unique(map: "users_username_uindex") @db.VarChar(32)
+  email    String  @unique(map: "users_email_uindex") @db.VarChar(32)
+  password String  @unique(map: "users_password_uindex") @db.VarChar(60)
+  Cards    Cards[]
+  Rates    Rates[]
 }
 
 enum difficulties {

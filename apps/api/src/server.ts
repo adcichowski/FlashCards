@@ -7,7 +7,7 @@ import Session from "express-session";
 import { authRouter } from "./auth/auth-router";
 import { cardRouter } from "./card/card-router";
 import { routerSwagger } from "./docs/swagger";
-import { subjectRouter } from "./subject/subject-router";
+import { sectionsRouter } from "./section/sections-router";
 import { errorHandler } from "./utils/error/errorHandler";
 import { logger } from "./utils/logger";
 import { getEnv } from "./utils/utils";
@@ -33,7 +33,7 @@ app.use(
   })
 );
 
-app.use(subjectRouter, cardRouter, authRouter, routerSwagger);
+app.use(sectionsRouter, cardRouter, authRouter, routerSwagger);
 app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(getEnv("PORT"), () => {
