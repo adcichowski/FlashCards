@@ -54,15 +54,16 @@ model Subjects {
 model Technologies {
   id                    String                  @unique(map: "technologies_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name                  String                  @db.VarChar(32)
+  Articles_Technologies Articles_Technologies[]
   Technologies_Subjects Technologies_Subjects[]
 }
 
 model Technologies_Subjects {
-  id             String       @id(map: "technologies_subjects_pk") @unique(map: "technologies_subjects_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  subjectId      String       @db.Uuid
-  technologiesId String       @db.Uuid
-  Technologies   Technologies @relation(fields: [technologiesId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologiesId_technologies__id_fk")
-  Subjects       Subjects     @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologies_subjects_id_fk")
+  id           String       @id(map: "technologies_subjects_pk") @unique(map: "technologies_subjects_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subjectId    String       @db.Uuid
+  technologyId String       @db.Uuid
+  Technologies Technologies @relation(fields: [technologyId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologiesId_technologies__id_fk")
+  Subjects     Subjects     @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologies_subjects_id_fk")
 }
 
 model Users {
@@ -72,6 +73,22 @@ model Users {
   password String  @unique(map: "users_password_uindex") @db.VarChar(60)
   Cards    Cards[]
   Rates    Rates[]
+}
+
+model Articles {
+  id                    String                  @id(map: "articles_pk") @unique(map: "articles_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                 String                  @db.VarChar
+  description           String                  @db.VarChar
+  imageSrc              String
+  Articles_Technologies Articles_Technologies[]
+}
+
+model Articles_Technologies {
+  id           String       @id(map: "articles_technologies_pk") @unique(map: "articles_technologies_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  technologyId String       @db.Uuid
+  articleId    String       @db.Uuid
+  Articles     Articles     @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_technologies_articles_id_fk")
+  Technologies Technologies @relation(fields: [technologyId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_technologies_technologies_id_fk")
 }
 
 enum difficulties {
