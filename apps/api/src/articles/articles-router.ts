@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { serviceArticles } from "./articles-service";
-import { getAllArticles } from "./articles-controllers";
+import * as cheerio from "cheerio";
+import { createArticle, getAllArticles } from "./articles-controllers";
+import { checkArticleExist } from "./articles-middleware";
 const router = Router();
 /**
  * @openapi
- * /cards:
+ * /articles:
  *  get:
  *     operationId: getArticle
  *     summary: Get all articles
@@ -25,6 +26,30 @@ const router = Router();
  *       400:
  *         description: Problem with server
  */
+// router.get("/articles", getAllArticles);
+
 router.get("/articles", getAllArticles);
+
+/**
+ * @openapi
+ * /articles:
+ *  get:
+ *     operationId: createArticle
+ *     summary: Create article
+ *     tags:
+ *     - Article
+ *     description: Create article based on meta tags
+ *     responses:
+ *       200:
+ *         description: Create article
+ *         content:
+ *           application/json:
+ *            example:
+ *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *       400:
+ *         description: Problem with server
+ */
+
+router.post("/articles", checkArticleExist, createArticle);
 
 export { router as articlesRouter };

@@ -78,8 +78,8 @@ model Users {
 model Articles {
   id                    String                  @id(map: "articles_pk") @unique(map: "articles_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title                 String                  @db.VarChar
-  description           String                  @db.VarChar
   imageSrc              String
+  url                   String                  @unique(map: "articles_url_uindex")
   Articles_Technologies Articles_Technologies[]
 }
 

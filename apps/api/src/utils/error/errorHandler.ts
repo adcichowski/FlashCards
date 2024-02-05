@@ -10,7 +10,8 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  if (err) {
+  console.log(err)
+
     logger.error(err.message || "Error!");
     if (err instanceof HttpError) {
       return res.status(err.statusCode).json({
@@ -22,7 +23,4 @@ export const errorHandler = (
     return res
       .status(HttpStatusCode.BadRequest)
       .json({ name: "Error", message: err.message });
-  }
-
-  next();
 };

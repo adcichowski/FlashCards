@@ -1,7 +1,7 @@
 import BodyParser from "body-parser";
 import CookieParser from "cookie-parser";
 import Cors from "cors";
-import Express from "express";
+import Express, { NextFunction, Response, Request } from "express";
 import Session from "express-session";
 
 import { authRouter } from "./auth/auth-router";
@@ -12,6 +12,7 @@ import { errorHandler } from "./utils/error/errorHandler";
 import { logger } from "./utils/logger";
 import { getEnv } from "./utils/utils";
 import { articlesRouter } from "articles/articles-router";
+import { HttpError } from "utils/error/httpError";
 
 export const app = Express();
 
@@ -43,3 +44,7 @@ const server = app.listen(getEnv("PORT"), () => {
   `);
 });
 export { server };
+
+process.on("uncaughtException", (error) => {
+  console.error(error);
+});
