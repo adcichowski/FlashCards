@@ -1,40 +1,48 @@
 "use client";
-import React, { Fragment, createElement, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styles from "./GamePage.module.scss";
 import TabsPanel, { TabChildType } from "src/components/TabsPanel/TabsPanel";
 import Badge from "src/components/Badge/Badge";
-import { useCombobox } from "downshift";
 import { MultiSelectTech } from "../../components/MultiSelectTech/MultiSelectTech";
 import { SectionsListGame } from "../../components/SectionsListGame/SectionsListGame";
+import { fetcher } from "src/utils/fetcher";
+import { CardsTab } from "./tabs/Cards/CardsTab";
+import { ArticlesTab } from "./tabs/Articles/ArticlesTab";
+import { ExercisesTab } from "./tabs/Exercises/ExercisesTab";
+
 const tabs = [
-  {
-    header: (
-      <div className={styles.tabHeader}>
-        Cards <Badge>368</Badge>
-      </div>
-    ),
-    content: <>There will be cards</>,
-    value: "cards",
-  },
   {
     header: (
       <div className={styles.tabHeader}>
         Articles <Badge variant="outline">18</Badge>{" "}
       </div>
     ),
-    content: <>There will be articles</>,
+    content: <ArticlesTab />,
     value: "articles",
   },
   {
     header: (
       <div className={styles.tabHeader}>
-        Exercises <Badge>1</Badge>
+        Cards <Badge variant="outline">368</Badge>
       </div>
     ),
-    content: <>There will be exercises</>,
+    content: <CardsTab />,
+    value: "cards",
+  },
+  {
+    header: (
+      <div className={styles.tabHeader}>
+        Exercises <Badge variant="outline">1</Badge>
+      </div>
+    ),
+    content: <ExercisesTab />,
     value: "exercises",
   },
-] satisfies TabChildType[];
+].map((tab) => ({
+  ...tab,
+  header: <div className={styles.tabHeader}>{tab.header}</div>,
+  content: <div className={styles.tabContent}>{tab.content}</div>,
+})) satisfies TabChildType[];
 
 export function GamePage() {
   return (
@@ -48,9 +56,12 @@ export function GamePage() {
           ]}
         />
         <MultiSelectTech />
+        {/* <input type="text" onChange={(e) => setText(e.currentTarget.value)} />
+        <button type="submit" onClick={handleOnClick}>
+          Submit
+        </button> */}
       </div>
-      <div>
-        <div className={styles.tabPanelWrapper}></div>
+      <div className={styles.tabPanelWrapper}>
         <TabsPanel tabs={tabs} />
       </div>
     </div>

@@ -9,7 +9,7 @@ export const fetcher = async <T>({
   readonly method: "POST" | "PUT" | "GET" | "DELETE";
   readonly headers?: { readonly "Content-Type"?: string };
 }) => {
-  const res = await fetch(`http://localhost:4001/${endpoint}`, {
+  const res = await fetch(`http://localhost:3001/${endpoint}`, {
     method,
     body: method !== "GET" ? JSON.stringify(body) : undefined,
     headers: {

@@ -129,7 +129,7 @@ export function MultiSelectTech() {
       <ul className={styles.searchList} {...getMenuProps()}>
         {isOpen &&
           items
-            .filter((item) => item && !selectedItems.map((v) => v.id).includes(item.id))
+            .filter((item) => !selectedItems.map((v) => v.id).includes(item.id))
             .map((item, index) => (
               <li key={`${item.title}${index}`} {...getItemProps({ item, index })}>
                 {item.title}

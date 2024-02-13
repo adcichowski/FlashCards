@@ -22,8 +22,8 @@
   margin: 0 5px;
 }
 .smallButton {
-  width: clamp(3rem, calc(3rem + 5vw), 6rem);
-  height: clamp(2rem, calc(3rem + 3vw), 3.5rem);
+  width: 90px;
+  height: 40px;
   text-align: center;
 }
 .button::before,
