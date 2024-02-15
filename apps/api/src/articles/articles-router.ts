@@ -2,6 +2,8 @@ import { Router } from "express";
 import * as cheerio from "cheerio";
 import { createArticle, getAllArticles } from "./articles-controllers";
 import { checkArticleExist } from "./articles-middleware";
+import { reusableValidation } from "utils/reusableValidation";
+import { articleUrlReq } from "./articles-schema";
 const router = Router();
 /**
  * @openapi
@@ -50,6 +52,11 @@ router.get("/articles", getAllArticles);
  *         description: Problem with server
  */
 
-router.post("/articles", checkArticleExist, createArticle);
+router.post(
+  "/articles",
+  reusableValidation(articleUrlReq),
+  checkArticleExist,
+  createArticle
+);
 
 export { router as articlesRouter };

@@ -9,6 +9,47 @@ info:
   title: REST API Docs
   version: 0.0.1
 paths:
+  /articles:
+    get:
+      operationId: createArticle
+      summary: Create article
+      tags:
+        - Article
+      description: Create article based on meta tags
+      responses:
+        '200':
+          description: Create article
+          content:
+            application/json:
+              example:
+                id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+                title: PostgreSQL
+                description: The worlds most advanced open source database.
+                imageSrc: https://www.postgresql.org/media/img/about/press/elephant.png
+                url: https://www.postgresql.org/
+        '400':
+          description: Problem with server
+  /auth:
+    post:
+      operationId: loginTo
+      summary: Get token
+      tags:
+        - Session
+      description: Get new token in login
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                userId:
+                  type: string
+                  format: uuid
+                token:
+                  type: string
+              example:
+                userId: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+        '400':
+          description: Problem with server
   /cards:
     get:
       operationId: getCards
@@ -21,12 +62,10 @@ paths:
           description: App is up and running
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/GetCard'
               example:
                 id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
-                title: PostgreSQL
-                description: The worlds most advanced open source database.
-                imageSrc: https://www.postgresql.org/media/img/about/press/elephant.png
-                url: https://www.postgresql.org/
                 question: What values can we change?
                 answer: >-
                   We can easily change let and var, but we should use it less
@@ -38,8 +77,6 @@ paths:
                     - username: Gelis
                       rate: '2'
                   overall: 3
-              schema:
-                $ref: '#/components/schemas/GetCard'
         '400':
           description: Problem with server
     post:
@@ -62,27 +99,6 @@ paths:
                 $ref: '#/components/schemas/GetCard'
               example:
                 cardId: desbdddf7-ad12-46cf-9e7c-c83ec7231ad3
-        '400':
-          description: Problem with server
-  /auth:
-    post:
-      operationId: loginTo
-      summary: Get token
-      tags:
-        - Session
-      description: Get new token in login
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                userId:
-                  type: string
-                  format: uuid
-                token:
-                  type: string
-              example:
-                userId: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
         '400':
           description: Problem with server
 components:

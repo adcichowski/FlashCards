@@ -1,16 +1,16 @@
 import type { NextFunction, Request, Response } from "express";
 import { serviceArticles } from "./articles-service";
 import { HttpError } from "utils/error/httpError";
+import { articleUrlReq } from "./articles-schema";
+import { InferType } from "yup";
 export const checkArticleExist = async (
-  _req: Request<unknown, unknown, { url: string }>,
+  req: Request<{}, {}, InferType<typeof articleUrlReq>>,
   _res: Response,
   next: NextFunction
 ) => {
-  const existSameArticle = await serviceArticles.getArticleByUrl(
-    "https://www.joshwcomeau.com/css/interactive-guide-to-grid/"
-  );
+  const existSameArticle = await serviceArticles.getArticleByUrl(req.body.url);
   if (existSameArticle) {
-    next(new HttpError(400, "Article exist with same url"));
+    next(new HttpError(400, "article exist with same url"));
   }
   next();
 };

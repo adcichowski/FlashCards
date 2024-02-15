@@ -8,6 +8,7 @@ const createArticle = async (article: {
   imageSrc: string;
   url: string;
   title: string;
+  author?: string;
 }) => {
   return await prisma.articles.create({
     data: article,
