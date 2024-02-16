@@ -60,6 +60,7 @@
   background: #12183c;
 }
 .front {
+  box-sizing: content-box;
   display: flex;
   font-weight: 600;
   align-items: center;

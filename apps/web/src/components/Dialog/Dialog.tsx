@@ -5,12 +5,17 @@ export const Dialog = ({
   children,
   title,
   trigger,
+  manage,
 }: {
   children: JSX.Element;
   title: string;
   trigger: JSX.Element;
+  manage?: {
+    open: boolean;
+    onOpenChange: () => void;
+  };
 }) => (
-  <DialogRadix.Root>
+  <DialogRadix.Root modal={true} {...manage}>
     <DialogRadix.Trigger asChild>{trigger}</DialogRadix.Trigger>
     <DialogRadix.Portal>
       <DialogRadix.Overlay className={styles.overlay} />

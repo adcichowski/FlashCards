@@ -1,14 +1,15 @@
-export const fetcher = async <T>({
-  endpoint,
-  method,
-  body,
-  headers,
-}: {
-  readonly endpoint: string;
-  readonly body: Record<string, unknown>;
-  readonly method: "POST" | "PUT" | "GET" | "DELETE";
-  readonly headers?: { readonly "Content-Type"?: string };
-}) => {
+export const fetcher = async <T>(
+  endpoint: string,
+  {
+    method,
+    body,
+    headers,
+  }: {
+    readonly body?: Record<string, unknown>;
+    readonly method: "POST" | "PUT" | "GET" | "DELETE";
+    readonly headers?: { readonly "Content-Type"?: string };
+  },
+) => {
   const res = await fetch(`http://localhost:3001/${endpoint}`, {
     method,
     body: method !== "GET" ? JSON.stringify(body) : undefined,

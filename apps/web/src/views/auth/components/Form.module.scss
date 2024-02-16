@@ -40,29 +40,6 @@
   gap: 5px;
 }
 
-.formLabel {
-  text-transform: capitalize;
-  display: flex;
-  flex-flow: column;
-  margin-bottom: 1.2px;
-}
-.input::placeholder {
-  color: var(--font-color-primary);
-}
-
-.errorInfo {
-  color: #fbc5c5;
-  text-align: left;
-  min-height: 18.5px;
-  margin-top: 2px;
-  max-width: 190px;
-}
-.errorInfoPassword {
-  min-height: 37px;
-}
-.errorInfo::first-letter {
-  text-transform: uppercase;
-}
 .question {
   margin-bottom: 20px;
   font-weight: 300;

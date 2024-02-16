@@ -14,18 +14,15 @@
     0 1px 0 0 currentColor;
 }
 .tabsTrigger:hover {
-  cursor: pointer;
-  color: var(--tab-hover);
   box-shadow:
-    inset 0 -1px 0 0 currentColor,
-    0 1px 0 0 currentColor;
+    inset 0 -1px 0 0 var(--tab-hover),
+    0 1px 0 0 var(--tab-hover);
 }
 
 .tabsTrigger[data-state="active"] {
-  color: var(--tab-active);
   box-shadow:
-    inset 0 -1px 0 0 currentColor,
-    0 1px 0 0 currentColor;
+    inset 0 -1px 0 0 var(--tab-active),
+    0 1px 0 0 var(--tab-active);
 }
 
 .tabsRoot {

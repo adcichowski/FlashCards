@@ -4,20 +4,21 @@ export const Input = React.forwardRef(
   (
     {
       label,
-      labelClass,
+      error,
       ...props
     }: JSX.IntrinsicElements["input"] & {
       readonly label?: string;
-      readonly labelClass?: string;
+      readonly error?: string;
     },
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
       <>
-        <label htmlFor={props.name} className={labelClass}>
-          {label || props.name}
+        <label htmlFor={props.name} className={styles.label}>
+          <span>{label || props.name}</span>
+          <input type="text" {...props} ref={ref} className={styles.input} />
         </label>
-        <input type="text" {...props} ref={ref} className={styles.input} />
+        <p className={styles.errorInfo}>{error || ""}</p>
       </>
     );
   },

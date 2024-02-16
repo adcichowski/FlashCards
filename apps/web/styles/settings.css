@@ -10,15 +10,13 @@
   --hamburger--front: #05ff6d;
   --hamburger--back: #c93434;
   --focus--input: #7b0019;
-}
-
-.radix-themes {
-  --default-font-family: var(--sans);
+  --primary-error-color: #fbc5c5;
 }
 
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   font-family: inherit;
   margin: 0;
   padding: 0;

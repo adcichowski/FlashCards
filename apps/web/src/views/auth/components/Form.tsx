@@ -70,17 +70,15 @@ export function Form({
         <h1 className={styles.formTitle}>{`${typeForm} In`}</h1>
         <form autoComplete="off" className={styles.gameForm} onSubmit={onSubmit}>
           {"username" in yupSchema.fields && (
-            <InputWrapper error={"username" in errors ? errors?.username?.message : ""}>
-              <Input {...register("username")} labelClass={styles.formLabel} autoComplete="off" />
-            </InputWrapper>
+            <Input
+              {...register("username")}
+              error={"username" in errors ? errors?.username?.message : ""}
+              autoComplete="off"
+            />
           )}
-          <InputWrapper error={errors.email?.message}>
-            <Input {...register("email")} labelClass={styles.formLabel} autoComplete="off" />
-          </InputWrapper>
+          <Input error={errors.email?.message} {...register("email")} autoComplete="off" />
 
-          <InputWrapper isPasswordInput error={errors.password?.message}>
-            <Input {...register("password")} labelClass={styles.formLabel} type="password" autoComplete="off" />
-          </InputWrapper>
+          <Input {...register("password")} error={errors.password?.message} type="password" autoComplete="off" />
 
           <div className={styles.containerSubmit}>
             <Button size="normal" type="submit">

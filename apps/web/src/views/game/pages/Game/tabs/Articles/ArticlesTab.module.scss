@@ -3,11 +3,16 @@
   display: flex;
   align-items: center;
   gap: 2px;
+  font-size: 1.6rem;
+  color: var(--font-color-primary);
 }
 
 .buttonSaveArticle {
+  border: 1px solid white;
+  padding: 3px;
   cursor: pointer;
 }
+
 .inputUrl {
   width: 100%;
   height: 100%;
@@ -15,13 +20,36 @@
 }
 
 .inputUrl {
-  color: #0000007a;
+  color: #000000d3;
   padding: 5px;
+  font-size: 1.6rem;
   background: linear-gradient(#d6d5dd, #b7b6bd);
 }
 
 .buttonWrapper {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
+}
+
+.articleList {
+  margin-top: 20px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.articleWrapper {
+  border: 0.5px solid white;
+  padding: 5px;
+  display: flex;
+}
+
+.articleImg {
+  width: 200px;
+  height: auto;
+}
+
+.articleHeading {
+  font-weight: 500;
 }

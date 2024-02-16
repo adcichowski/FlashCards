@@ -14,7 +14,7 @@ const tabs = [
   {
     header: (
       <div className={styles.tabHeader}>
-        Articles <Badge variant="outline">18</Badge>{" "}
+        Articles <Badge>18</Badge>{" "}
       </div>
     ),
     content: <ArticlesTab />,
@@ -23,7 +23,7 @@ const tabs = [
   {
     header: (
       <div className={styles.tabHeader}>
-        Cards <Badge variant="outline">368</Badge>
+        Cards <Badge>368</Badge>
       </div>
     ),
     content: <CardsTab />,
@@ -32,7 +32,7 @@ const tabs = [
   {
     header: (
       <div className={styles.tabHeader}>
-        Exercises <Badge variant="outline">1</Badge>
+        Exercises <Badge>1</Badge>
       </div>
     ),
     content: <ExercisesTab />,
