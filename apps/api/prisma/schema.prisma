@@ -78,8 +78,11 @@ model Users {
 model Articles {
   id                    String                  @id(map: "articles_pk") @unique(map: "articles_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title                 String                  @db.VarChar
-  imageSrc              String
+  imageSrc              String?
   url                   String                  @unique(map: "articles_url_uindex")
+  isVerified            Boolean?                @default(false)
+  author                String?                 @db.VarChar(32)
+  Articles_Tags         Articles_Tags[]
   Articles_Technologies Articles_Technologies[]
 }
 
@@ -89,6 +92,20 @@ model Articles_Technologies {
   articleId    String       @db.Uuid
   Articles     Articles     @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_technologies_articles_id_fk")
   Technologies Technologies @relation(fields: [technologyId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_technologies_technologies_id_fk")
+}
+
+model Articles_Tags {
+  id        String    @id(map: "articles_tags_pk") @unique(map: "articles_tags_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tagId     String    @db.Uuid
+  articleId String?   @db.Uuid
+  Articles  Articles? @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_tags_articleId_id_fk")
+  Tags      Tags      @relation(fields: [tagId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_tags_tagId_fk")
+}
+
+model Tags {
+  id            String          @id(map: "tags_pk") @unique(map: "tags_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String          @db.VarChar(32)
+  Articles_Tags Articles_Tags[]
 }
 
 enum difficulties {

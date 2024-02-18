@@ -2,7 +2,7 @@ import type { Response, Request } from "express";
 import { serviceArticles } from "./articles-service";
 import * as cheerio from "cheerio";
 
-import { articleSchema, articleUrlReq } from "./articles-schema";
+import { createArticleSchema, articleUrlReq } from "./articles-schema";
 import { getErrorMessage } from "utils/error/errorValidation";
 import { InferType } from "yup";
 
@@ -23,14 +23,53 @@ export const createArticle = async (
   const text = await articleRes.text();
   const dom = cheerio.load(text);
   const { url } = req.body;
+  const parsedUrl = new URL(url);
+  const imageSrc = dom('meta[property="og:image"]').attr("content");
+  const isCorrectImageSrc = imageSrc?.startsWith("https://");
+
   const generatedArticle = {
-    imageSrc: dom('meta[property="og:image"]').attr("content"),
+    imageSrc: isCorrectImageSrc
+      ? imageSrc
+      : `https://${parsedUrl.host}${imageSrc}`,
     title: dom("title").text(),
     url,
   };
 
   try {
-    const securedArticle = articleSchema.validateSync(generatedArticle);
+    const securedArticle = createArticleSchema.validateSync(generatedArticle);
+    const createdArticle = await serviceArticles.createArticle(securedArticle);
+    return res.send({ id: createdArticle.id });
+  } catch (error) {
+    return res.status(400).send({ message: getErrorMessage(error) });
+  }
+};
+
+export const editArticle = async (
+  req: Request<{}, {}, InferType<typeof articleUrlReq>>,
+  res: Response
+) => {
+  const articleRes = await fetch(req.body.url, { method: "GET" });
+
+  if (!articleRes.ok) {
+    return res.status(404).send({ message: "problem during fetching" });
+  }
+  const text = await articleRes.text();
+  const dom = cheerio.load(text);
+  const { url } = req.body;
+  const parsedUrl = new URL(url);
+  const imageSrc = dom('meta[property="og:image"]').attr("content");
+  const isCorrectImageSrc = imageSrc?.startsWith("https://");
+
+  const generatedArticle = {
+    imageSrc: isCorrectImageSrc
+      ? imageSrc
+      : `https://${parsedUrl.host}${imageSrc}`,
+    title: dom("title").text(),
+    url,
+  };
+
+  try {
+    const securedArticle = createArticleSchema.validateSync(generatedArticle);
     const createdArticle = await serviceArticles.createArticle(securedArticle);
     return res.send({ id: createdArticle.id });
   } catch (error) {

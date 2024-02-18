@@ -10,9 +10,9 @@ const router = Router();
  * /articles:
  *  get:
  *     operationId: getArticle
- *     summary: Get all articles
+ *     summary: Get articles
  *     tags:
- *     - Card
+ *     - Articles
  *     description: Response article from database
  *     responses:
  *       200:
@@ -35,11 +35,11 @@ router.get("/articles", getAllArticles);
 /**
  * @openapi
  * /articles:
- *  get:
+ *  post:
  *     operationId: createArticle
  *     summary: Create article
  *     tags:
- *     - Article
+ *     - Articles
  *     description: Create article based on meta tags
  *     responses:
  *       200:
@@ -59,4 +59,35 @@ router.post(
   createArticle
 );
 
+/**
+ * @openapi
+ * /articles/{articleId}:
+ *  put:
+ *     operationId: editArticle
+ *     summary: Edit article
+ *     parameters:
+ *       - in: path
+ *         name: articleId
+ *         schema:
+ *           type: uuid
+ *         required: true
+ *     tags:
+ *     - Articles
+ *     description: Edit article field
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *            example:
+ *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *       400:
+ *         description: Problem with server
+ */
+
+router.put(
+  "/articles",
+  reusableValidation(articleUrlReq),
+  checkArticleExist,
+  createArticle
+);
 export { router as articlesRouter };

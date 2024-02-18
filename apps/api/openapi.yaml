@@ -11,14 +11,14 @@ info:
 paths:
   /articles:
     get:
-      operationId: createArticle
-      summary: Create article
+      operationId: getArticle
+      summary: Get articles
       tags:
-        - Article
-      description: Create article based on meta tags
+        - Articles
+      description: Response article from database
       responses:
         '200':
-          description: Create article
+          description: App is up and running
           content:
             application/json:
               example:
@@ -27,6 +27,42 @@ paths:
                 description: The worlds most advanced open source database.
                 imageSrc: https://www.postgresql.org/media/img/about/press/elephant.png
                 url: https://www.postgresql.org/
+        '400':
+          description: Problem with server
+    post:
+      operationId: createArticle
+      summary: Create article
+      tags:
+        - Articles
+      description: Create article based on meta tags
+      responses:
+        '200':
+          description: Create article
+          content:
+            application/json:
+              example:
+                id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+        '400':
+          description: Problem with server
+  /articles/{articleId}:
+    put:
+      operationId: editArticle
+      summary: Edit article
+      parameters:
+        - in: path
+          name: articleId
+          schema:
+            type: uuid
+          required: true
+      tags:
+        - Articles
+      description: Edit article field
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
         '400':
           description: Problem with server
   /auth:
