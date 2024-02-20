@@ -8,9 +8,9 @@ export const metadata = {
 
 export default function GameLayout({ children }: { readonly children: React.ReactNode }) {
   return (
-    <BackgroundGame>
+    <>
       <Navigation />
       {children}
-    </BackgroundGame>
+    </>
   );
 }

@@ -11,10 +11,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaEditArticle, schemaSaveArticle } from "./schema/articleSchemas";
 import Image from "next/image";
 import { useGetArticles } from "./hooks/useGetArticles";
+import { Input } from "src/components/Input/Input";
+import { useEditArticle } from "./hooks/useEditArticle";
+type ArticlePropType = {
+  author?: string;
+  title: string;
+  imageSrc: string;
+  url: string;
+};
+
 export function ArticlesTab() {
   const { mutate, data } = useSaveArticle();
   const { data: articlesData } = useGetArticles();
-  console.log(articlesData?.articles);
   return (
     <div>
       <Dialog
@@ -50,11 +58,7 @@ const FormSaveArticle = ({ mutate }: { mutate: (data: { url: string }) => void }
   });
   return (
     <form onSubmit={onSubmit} className={styles.articleForm}>
-      <label className="sr-only" htmlFor="urlArticle">
-        Url to article
-      </label>
-      <input {...register("url")} placeholder="https://" name="url" type="text" className={styles.inputUrl} />
-      <p className={styles.errorInfo}>{formState.errors.url?.message || " "}</p>
+      <Input {...register("url")} error={formState.errors.url?.message} />
       <div className={styles.buttonWrapper}>
         <Button type="submit" size="small">
           Get Article
@@ -64,40 +68,28 @@ const FormSaveArticle = ({ mutate }: { mutate: (data: { url: string }) => void }
   );
 };
 
-// const FormEditArticle = () => {
-//   const { formState, register, handleSubmit } = useForm({
-//     resolver: yupResolver(schemaEditArticle),
-//   });
-//   const onSubmit = handleSubmit(async (data) => {
-//     await mutate(data);
-//   });
-//   return (
-//     <form onSubmit={onSubmit} className={styles.articleForm}>
-//       <label className="sr-only" htmlFor="url">
-//         Url to article
-//       </label>
-//       <input {...register("url")} placeholder="https://" name="url" type="text" className={styles.inputUrl} />
-//       <p className={styles.errorInfo}>{formState.errors.url?.message || " "}</p>
-//       <div className={styles.buttonWrapper}>
-//         <Button type="submit" size="small">
-//           Get Article
-//         </Button>
-//       </div>
-//     </form>
-//   );
-// };
+const FormEditArticle = ({ article }: { article: ArticlePropType }) => {
+  const { mutate, data } = useEditArticle();
+  const { formState, register, handleSubmit } = useForm({
+    resolver: yupResolver(schemaEditArticle),
+  });
+  const onSubmit = handleSubmit(async (data) => {
+    await mutate(data);
+  });
 
-const Article = ({
-  author,
-  imageSrc,
-  title,
-  url,
-}: {
-  author?: string;
-  title: string;
-  imageSrc: string;
-  url: string;
-}) => {
+  return (
+    <form onSubmit={onSubmit} className={styles.articleForm}>
+      <Input {...register("url")} error={formState.errors.url?.message} />
+      <div className={styles.buttonWrapper}>
+        <Button type="submit" size="small">
+          Get Article
+        </Button>
+      </div>
+    </form>
+  );
+};
+
+const Article = ({ author, imageSrc, title, url }: ArticlePropType) => {
   return (
     <Link href={url}>
       <article className={styles.articleWrapper}>

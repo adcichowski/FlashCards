@@ -1,32 +1,27 @@
 .nav {
-  top: 0;
-  position: relative;
-  width: 100%;
-  margin: 25px 0px;
-  z-index: 20;
+  margin-top: 15px;
 }
 .hideNav {
   display: flex;
   align-items: center;
-  margin: 0 60px;
+  justify-content: space-around;
+  width: 100%;
   @media screen and (max-width: 950px) {
     display: none;
   }
 }
 .navList {
+  max-width: 800px;
   flex-grow: 1;
   display: flex;
   justify-content: space-around;
 }
 .navItem {
   font-weight: 600;
-  font-size: clamp(2rem, calc(0.5vw + 1.6rem), 5rem);
+  font-size: 2rem;
   @media screen and (max-width: 950px) {
     margin: 9rem 0;
     font-weight: 600;
-  }
-  &Open {
-    font-size: clamp(2rem, calc(2vw + 1.6rem), 5rem);
   }
 }
 

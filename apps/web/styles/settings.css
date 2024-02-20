@@ -33,11 +33,13 @@ html {
 }
 
 body {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   width: 100%;
   max-width: 1920px;
-  background-color: var(--bg-article-primary);
+  background: rgb(34, 31, 99);
+  background: linear-gradient(90deg, rgba(34, 31, 99, 1) 0%, rgba(48, 28, 89, 1) 100%);
   font-size: 1.6rem;
 }
 a {
