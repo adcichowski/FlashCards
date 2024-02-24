@@ -1,12 +1,17 @@
 .wrapper {
+  width: 100%;
+  max-width: 980px;
   display: flex;
+  margin: 80px auto;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 0px 10px 0px;
   row-gap: 30px;
 }
-.tabPanelWrapper {
-  flex-basis: 800px;
+
+.selectTechnologies {
+  width: 100%;
+  flex-grow: 1;
 }
 
 .tabHeader {
@@ -16,9 +21,4 @@
 }
 .tabContent {
   margin-top: 10px;
-}
-.selectableSections {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }

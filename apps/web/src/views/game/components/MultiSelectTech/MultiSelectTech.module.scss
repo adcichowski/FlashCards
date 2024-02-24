@@ -1,5 +1,4 @@
 .multiSelectParent {
-  width: 400px;
   position: relative;
 }
 .multiSelectLabel {
@@ -18,7 +17,7 @@
   flex-grow: 1;
 }
 .selectedList {
-  padding: 4px 8px;
+  padding: 6px 10px;
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;

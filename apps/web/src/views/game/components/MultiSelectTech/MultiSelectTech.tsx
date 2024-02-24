@@ -84,7 +84,7 @@ export function MultiSelectTech() {
   return (
     <div className={styles.multiSelectParent}>
       <div>
-        <label className={styles.multiSelectLabel} {...getLabelProps()}>
+        <label className="sr-only" {...getLabelProps()}>
           Technologies
         </label>
         <div className={styles.multiSelectInputWrapper}>
