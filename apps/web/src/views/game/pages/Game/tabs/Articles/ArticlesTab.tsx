@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useGetArticles } from "./hooks/useGetArticles";
 import { Input } from "src/components/Input/Input";
 import { useEditArticle } from "./hooks/useEditArticle";
+import { ArticlesTable } from "./components/ArticlesTable";
 type ArticlePropType = {
   author?: string;
   title: string;
@@ -38,13 +39,7 @@ export function ArticlesTab() {
         children={data ? <h1>Tutaj będzie formularz z edycją</h1> : <FormSaveArticle mutate={mutate} />}
         title={"Save Article"}
       />
-      <ul className={styles.articleList}>
-        {articlesData?.articles?.map((article) => (
-          <li key={article.id}>
-            <Article {...article} />
-          </li>
-        ))}
-      </ul>
+      <ArticlesTable />
     </div>
   );
 }

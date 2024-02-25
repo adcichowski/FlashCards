@@ -7,6 +7,7 @@ export type QueryArticleData = {
   url: string;
   imageSrc: string;
   title: string;
+  createdAt: number;
 };
 
 export function useGetArticles() {

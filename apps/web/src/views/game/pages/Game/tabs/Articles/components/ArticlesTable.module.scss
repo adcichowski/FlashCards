@@ -1,0 +1,26 @@
+.table {
+  margin-top: 30px;
+  width: 100%;
+  font-size: 1.6rem;
+  border-collapse: collapse;
+}
+.tableHead {
+  border-bottom: 1px solid white;
+}
+
+.header {
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-align: left;
+}
+.header::first-letter {
+  text-transform: uppercase;
+}
+
+.row {
+  padding: 5px;
+  cursor: pointer;
+}
+.row:hover {
+  background-color: rgba(180, 180, 180, 0.474);
+}
