@@ -3,25 +3,46 @@ import React from "react";
 import styles from "./ArticlesTable.module.scss";
 import { useGetArticles } from "../hooks/useGetArticles";
 import { convertDate } from "../../../utils/date";
+import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, ArrowBigDown } from "lucide-react";
+import clsx from "clsx";
 type Article = {
   title: string;
   author: string | undefined;
   createdAt: number | undefined;
+  rate: number;
+  url: string;
 };
 
 const columnHelper = createColumnHelper<Article>();
 
 const columns = [
   columnHelper.accessor("title", {
-    cell: (info) => info.getValue(),
+    cell: (info) => (
+      <a href={info.row.original.url} className={styles.linkTitle}>
+        {info.getValue()} <LinkIcon className={styles.linkIcon} />
+      </a>
+    ),
     footer: (info) => info.column.id,
-    size: 10,
+  }),
+
+  columnHelper.accessor("rate", {
+    cell: (info) => (
+      <div className={styles.rateWrapper}>
+        <button>
+          <ArrowBigUpIcon className={clsx(styles.rateIcon, styles.increase)} />
+        </button>
+        {info.getValue()}
+        <button>
+          <ArrowBigDownIcon className={clsx(styles.rateIcon, styles.decrease)} />
+        </button>
+      </div>
+    ),
+    footer: (info) => info.column.id,
   }),
 
   columnHelper.accessor("author", {
     header: "Author",
     cell: (info) => info.renderValue(),
-    size: 200,
     footer: (info) => info.column.id,
   }),
   columnHelper.accessor("createdAt", {
@@ -35,13 +56,12 @@ const columns = [
 
 export function ArticlesTable() {
   const { data } = useGetArticles();
-
+  console.log(data);
   const table = useReactTable({
     data: data?.articles || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  if (!data) return <>No data</>;
 
   return (
     <table className={styles.table}>
@@ -49,7 +69,7 @@ export function ArticlesTable() {
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id} className={styles.headerGroup}>
             {headerGroup.headers.map((header) => (
-              <th key={header.id} className={styles.header}>
+              <th key={header.id} className={clsx(styles.header, styles[header.id])}>
                 {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
               </th>
             ))}

@@ -16,11 +16,58 @@
 .header::first-letter {
   text-transform: uppercase;
 }
-
-.row {
-  padding: 5px;
-  cursor: pointer;
+.title {
+  width: 450px;
 }
-.row:hover {
-  background-color: rgba(180, 180, 180, 0.474);
+.linkTitle:hover {
+  text-decoration: underline;
+}
+
+.rate {
+  width: 100px;
+}
+.author {
+  width: 200px;
+}
+.createdAt {
+  width: 145px;
+}
+.row {
+  position: relative;
+}
+.linkTitle:hover .linkIcon {
+  opacity: 100%;
+}
+.linkIcon {
+  transition: opacity 0.15s;
+  opacity: 40%;
+  width: 12px;
+  transform: translateY(-5px);
+  height: auto;
+}
+.rowCell {
+  margin: 0 20px;
+  padding: 10px;
+  padding-left: 0px;
+}
+
+.rateWrapper {
+  display: flex;
+}
+.rateIcon {
+  width: 25px;
+  height: auto;
+  opacity: 40%;
+  margin: auto;
+  transition: opacity 0.2s;
+  color: #3e2f69;
+}
+.rateIcon:hover {
+  opacity: 100%;
+}
+.increase:hover {
+  color: #34c972;
+}
+.decrease:hover {
+  color: #f52b26;
 }
