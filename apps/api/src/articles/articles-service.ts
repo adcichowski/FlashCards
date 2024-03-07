@@ -3,10 +3,27 @@ import { prisma } from "../../libs/prisma/constants";
 const getArticles = async () => {
   return await prisma.articles.findMany({
     select: {
-      imageSrc: true,
+      Articles_Rates: true,
       author: true,
       title: true,
       id: true,
+      imageSrc: true,
+      url: true,
+      createdAt: true,
+    },
+  });
+};
+
+const getVerifedArticles = async () => {
+  return await prisma.articles.findMany({
+    select: {
+      Articles_Rates: true,
+      author: true,
+      title: true,
+      id: true,
+      imageSrc: true,
+      url: true,
+      createdAt: true,
     },
     where: {
       isVerified: true,
@@ -17,6 +34,8 @@ const getArticles = async () => {
 const createArticle = async ({
   title,
   url,
+  author,
+  imageSrc,
 }: {
   imageSrc?: string;
   url: string;
@@ -24,7 +43,7 @@ const createArticle = async ({
   author?: string;
 }) => {
   return await prisma.articles.create({
-    data: { title, url },
+    data: { title, url, author, imageSrc },
   });
 };
 
@@ -35,4 +54,9 @@ const getArticleByUrl = async (urlScrappedWeb: string) => {
     },
   });
 };
-export const serviceArticles = { getArticles, createArticle, getArticleByUrl };
+export const serviceArticles = {
+  getArticles,
+  createArticle,
+  getArticleByUrl,
+  getVerifedArticles,
+};

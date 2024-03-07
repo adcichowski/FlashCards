@@ -1,7 +1,7 @@
 import BodyParser from "body-parser";
 import CookieParser from "cookie-parser";
 import Cors from "cors";
-import Express, { NextFunction, Response, Request } from "express";
+import Express from "express";
 import Session from "express-session";
 
 import { authRouter } from "./auth/auth-router";
@@ -12,7 +12,7 @@ import { errorHandler } from "./utils/error/errorHandler";
 import { logger } from "./utils/logger";
 import { getEnv } from "./utils/utils";
 import { articlesRouter } from "articles/articles-router";
-import { HttpError } from "utils/error/httpError";
+import { checkAuthUser } from "auth/auth-middleware";
 
 export const app = Express();
 
@@ -25,17 +25,15 @@ app.use(
   })
 );
 app.use(CookieParser());
-const TIME_SESSION = 1000 * 60 * 60 * 24;
-app.use(
-  Session({
-    secret: getEnv("SECRET_SESSION"),
-    saveUninitialized: true,
-    cookie: { maxAge: TIME_SESSION },
-    resave: false,
-  })
-);
 
-app.use(sectionsRouter, articlesRouter, cardRouter, authRouter, routerSwagger);
+app.use(
+  checkAuthUser,
+  sectionsRouter,
+  articlesRouter,
+  cardRouter,
+  authRouter,
+  routerSwagger
+);
 app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(getEnv("PORT"), () => {

@@ -1,12 +1,11 @@
 import { HttpError } from "../utils/error/httpError";
 import { hashTheValue } from "../utils/utils";
 
-import { authService } from "./auth-service";
-
 import type { validateRegisterSchema } from "./auth-schema";
 import type { Response, Request, NextFunction } from "express";
 import type { InferType } from "yup";
 import { createTokenJWT } from "./tokenJWT";
+import { userService } from "user/user-services";
 
 /**
  * @openapi
@@ -30,12 +29,15 @@ export const registerUser = async (
 ) => {
   const user: InferType<typeof validateRegisterSchema> = req.body;
   try {
-    const createdUser = await authService.createUser({
+    const createdUser = await userService.createUser({
       ...user,
       password: await hashTheValue(user.password),
     });
     if (createdUser) {
-      const token = createTokenJWT(createdUser.id);
+      const token = createTokenJWT({
+        userId: createdUser.id,
+        role: createdUser.role,
+      });
 
       res.status(201).send({ userId: createdUser.id, token });
     }

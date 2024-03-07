@@ -44,54 +44,33 @@ model Shapes {
 }
 
 model Subjects {
-  id                    String                  @id(map: "subject_pk") @unique(map: "subject_subject_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name                  String                  @db.VarChar(32)
-  Cards                 Cards[]
-  Sections              Sections[]
-  Technologies_Subjects Technologies_Subjects[]
-}
-
-model Technologies {
-  id                    String                  @unique(map: "technologies_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name                  String                  @db.VarChar(32)
-  Articles_Technologies Articles_Technologies[]
-  Technologies_Subjects Technologies_Subjects[]
-}
-
-model Technologies_Subjects {
-  id           String       @id(map: "technologies_subjects_pk") @unique(map: "technologies_subjects_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  subjectId    String       @db.Uuid
-  technologyId String       @db.Uuid
-  Technologies Technologies @relation(fields: [technologyId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologiesId_technologies__id_fk")
-  Subjects     Subjects     @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "technologies_subjects_id_fk")
+  id       String     @id(map: "subject_pk") @unique(map: "subject_subject_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name     String     @db.VarChar(32)
+  Cards    Cards[]
+  Sections Sections[]
 }
 
 model Users {
-  id       String  @id(map: "users_pk") @unique(map: "users_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  username String  @unique(map: "users_username_uindex") @db.VarChar(32)
-  email    String  @unique(map: "users_email_uindex") @db.VarChar(32)
-  password String  @unique(map: "users_password_uindex") @db.VarChar(60)
-  Cards    Cards[]
-  Rates    Rates[]
+  id             String           @id(map: "users_pk") @unique(map: "users_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username       String           @unique(map: "users_username_uindex") @db.VarChar(32)
+  email          String           @unique(map: "users_email_uindex") @db.VarChar(32)
+  password       String           @unique(map: "users_password_uindex") @db.VarChar(60)
+  role           roles            @default(user)
+  Articles_Rates Articles_Rates[]
+  Cards          Cards[]
+  Rates          Rates[]
 }
 
 model Articles {
-  id                    String                  @id(map: "articles_pk") @unique(map: "articles_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title                 String                  @db.VarChar
-  imageSrc              String?
-  url                   String                  @unique(map: "articles_url_uindex")
-  isVerified            Boolean?                @default(false)
-  author                String?                 @db.VarChar(32)
-  Articles_Tags         Articles_Tags[]
-  Articles_Technologies Articles_Technologies[]
-}
-
-model Articles_Technologies {
-  id           String       @id(map: "articles_technologies_pk") @unique(map: "articles_technologies_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  technologyId String       @db.Uuid
-  articleId    String       @db.Uuid
-  Articles     Articles     @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_technologies_articles_id_fk")
-  Technologies Technologies @relation(fields: [technologyId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_technologies_technologies_id_fk")
+  id             String           @id(map: "articles_pk") @unique(map: "articles_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title          String           @db.VarChar
+  url            String           @unique(map: "articles_url_uindex")
+  isVerified     Boolean          @default(false)
+  author         String?          @db.VarChar(32)
+  imageSrc       String?          @db.VarChar
+  createdAt      Int?
+  Articles_Rates Articles_Rates[]
+  Articles_Tags  Articles_Tags[]
 }
 
 model Articles_Tags {
@@ -104,12 +83,27 @@ model Articles_Tags {
 
 model Tags {
   id            String          @id(map: "tags_pk") @unique(map: "tags_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name          String          @db.VarChar(32)
+  name          String          @unique(map: "tags_name_uindex") @db.VarChar(32)
   Articles_Tags Articles_Tags[]
+}
+
+model Articles_Rates {
+  id        String   @id(map: "articles_rates_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  rate      Int
+  userId    String   @db.Uuid
+  articleId String   @db.Uuid
+  Articles  Articles @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "article_id_rate_fk")
+  Users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_rates_users_id_fk")
 }
 
 enum difficulties {
   Junior
   Mid
   Senior
+}
+
+enum roles {
+  admin
+  moderator
+  user
 }

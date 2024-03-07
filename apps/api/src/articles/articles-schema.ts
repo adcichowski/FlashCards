@@ -11,8 +11,6 @@ export const articleUrlReq = Yup.object().shape({
 });
 
 export const editArticleSchema = Yup.object({
-  title: Yup.string().label("Title").required(`Provided url don't have title`),
-  imageSrc: Yup.string()
-    .required(`Provided url don't have meta og:img`)
-    .label("Image"),
+  imageSrc: Yup.string().optional(),
+  author: Yup.string().optional(),
 });
