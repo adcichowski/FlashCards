@@ -56,7 +56,6 @@ const columns = [
 
 export function ArticlesTable() {
   const { data } = useGetArticles();
-  console.log(data);
   const table = useReactTable({
     data: data?.articles || [],
     columns,

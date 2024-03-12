@@ -7,9 +7,11 @@ type MutationSaveArticleVariables = {
 
 type MutationSaveArticleData = {
   id: string;
+  url: string;
   title: string;
-  author?: string;
-  imageSrc: string;
+  createdAt: number | undefined;
+  author: string | undefined;
+  tags: string[] | undefined;
 };
 export function useSaveArticle() {
   const mutation = useMutation<MutationSaveArticleData, { message: string }, MutationSaveArticleVariables>({

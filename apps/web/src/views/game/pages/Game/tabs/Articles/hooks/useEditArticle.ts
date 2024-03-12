@@ -4,19 +4,21 @@ import { fetcher } from "src/utils/fetcher";
 type MutationSaveArticleVariables = {
   title: string;
   author?: string;
-  imageSrc: string;
+  createdAt?: string;
+  tags?: string[];
 };
 
 type MutationSaveArticleData = {
   id: string;
   title: string;
   author?: string;
-  imageSrc: string;
+  createdAt?: string;
+  tags?: string[];
 };
 
-export function useEditArticle() {
+export function useEditArticle({ articleId }: { articleId: string }) {
   const mutation = useMutation<MutationSaveArticleData, { message: string }, MutationSaveArticleVariables>({
-    mutationKey: ["saveArticle"],
+    mutationKey: ["editArticle", articleId],
     mutationFn: async (data) => {
       const res = await fetcher<MutationSaveArticleData>("articles", {
         method: "PUT",

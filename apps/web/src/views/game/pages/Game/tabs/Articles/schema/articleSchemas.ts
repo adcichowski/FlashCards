@@ -8,6 +8,9 @@ export const schemaSaveArticle = yup
 export const schemaEditArticle = yup.object({
   author: yup.string().optional(),
   title: yup.string().required(),
-  imageSrc: yup.string().required(),
+  createdAt: yup.number(),
   url: yup.string().url().required(),
+  tags: yup.array(yup.string().required()),
 });
+
+type x = yup.InferType<typeof schemaEditArticle>;

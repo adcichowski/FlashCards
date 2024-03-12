@@ -7,7 +7,7 @@ export const fetcher = async <T>(
   }: {
     readonly body?: Record<string, unknown>;
     readonly method: "POST" | "PUT" | "GET" | "DELETE";
-    readonly headers?: { readonly "Content-Type"?: string };
+    readonly headers?: Record<string, unknown>;
   },
 ) => {
   const res = await fetch(`http://localhost:3001/${endpoint}`, {

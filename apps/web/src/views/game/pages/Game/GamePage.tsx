@@ -7,6 +7,7 @@ import { MultiSelectTech } from "../../components/MultiSelectTech/MultiSelectTec
 import { CardsTab } from "./tabs/Cards/CardsTab";
 import { ArticlesTab } from "./tabs/Articles/ArticlesTab";
 import { ExercisesTab } from "./tabs/Exercises/ExercisesTab";
+import { useSession } from "next-auth/react";
 
 const tabs = [
   {
@@ -31,6 +32,7 @@ const tabs = [
 })) satisfies TabChildType[];
 
 export function GamePage() {
+  const s = useSession();
   return (
     <div className={styles.wrapper}>
       <div className={styles.selectTechnologies}>

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useFetch } from "src/hooks/useFetch";
 import { fetcher } from "src/utils/fetcher";
 
 export type QueryArticleData = {
@@ -12,12 +13,16 @@ export type QueryArticleData = {
 };
 
 export function useGetArticles() {
-  const query = useQuery<{ articles: QueryArticleData[] }, { message: string }>({
+  const secureFetch = useFetch();
+  const query = useQuery<{ articles: QueryArticleData[] } | undefined, { message: string }>({
     queryKey: ["getArticles"],
     queryFn: async () => {
-      const articles = fetcher<{ articles: QueryArticleData[] }>("articles", { method: "GET" });
-      return articles;
+      if (secureFetch) {
+        const articles = await secureFetch<{ articles: QueryArticleData[] }>("articles", { method: "GET" });
+        return articles;
+      }
     },
+    enabled: Boolean(secureFetch),
   });
   return query;
 }
