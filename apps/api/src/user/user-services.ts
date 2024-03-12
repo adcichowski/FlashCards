@@ -15,4 +15,10 @@ const getUser = (user: Pick<RegisterUser, "email">) => {
   });
 };
 
-export const userService = { hasPermission, createUser, getUser };
+const getUserById = (id: string) => {
+  return prisma.users.findFirst({
+    where: { id },
+  });
+};
+
+export const userService = { hasPermission, createUser, getUser, getUserById };

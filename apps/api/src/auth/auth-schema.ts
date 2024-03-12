@@ -63,3 +63,10 @@ export const validateLoginSchema = Yup.object({
 }).required();
 
 export type TypeLoginSchema = Yup.InferType<typeof validateLoginSchema>;
+
+export const validateTokenSchema = Yup.object({
+  userId: Yup.string().uuid().required(),
+  role: Yup.string().required(),
+});
+
+export type TypeTokenSchema = Yup.InferType<typeof validateLoginSchema>;

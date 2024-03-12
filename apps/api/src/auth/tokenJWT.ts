@@ -1,5 +1,5 @@
-import { roles } from "@prisma/client";
 import Jwt from "jsonwebtoken";
+import { validateTokenSchema } from "./auth-schema";
 
 const MAX_AGE = 24 * 60 * 60;
 
@@ -11,5 +11,7 @@ export const createTokenJWT = (user: { userId: string; role: string }) => {
 };
 
 export const decodeJWT = (jwt: string) => {
-  return Jwt.decode(jwt);
+  const decodedJwt = Jwt.decode(jwt);
+
+  return validateTokenSchema.validateSync(decodedJwt);
 };

@@ -2,11 +2,14 @@ import Bcrypt from "bcrypt";
 
 import { HttpError } from "../utils/error/httpError";
 
-import type { validateRegisterSchema } from "./auth-schema";
+import {
+  validateTokenSchema,
+  type validateRegisterSchema,
+} from "./auth-schema";
 import type { RegisterUser } from "../user/types";
 import type { NextFunction, Request, Response } from "express";
 import type { InferType } from "yup";
-import { createTokenJWT } from "./tokenJWT";
+import { createTokenJWT, decodeJWT } from "./tokenJWT";
 import { userService } from "user/user-services";
 
 export const checkThePassword = async (
@@ -19,10 +22,8 @@ export const checkThePassword = async (
   const isCorrectPass = await Bcrypt.compare(req.body.password, user.password);
   if (!isCorrectPass)
     return next(new HttpError(401, "Check email and password!"));
-  res.status(200).send({
-    userId: user.id,
-    token: createTokenJWT({ userId: user.id, role: user.role }),
-  });
+  const token = createTokenJWT({ userId: user.id, role: user.role });
+  res.status(200).send({ userId: user.id, token });
 };
 
 export const checkUserExist = async (
@@ -32,8 +33,8 @@ export const checkUserExist = async (
 ) => {
   const user: InferType<typeof validateRegisterSchema> = req.body;
   const userFromDb = await userService.getUser(user);
-  if (userFromDb) next(new HttpError(400, "Email or username is used!"));
-  next();
+  if (userFromDb) return next(new HttpError(400, "Email or username is used!"));
+  return next();
 };
 
 export const checkAuthUser = async (
@@ -41,6 +42,16 @@ export const checkAuthUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.cookies, "TUTAJ BĘDĄ LOCALS");
-  next();
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return next(new HttpError(401, "Token is not sended"));
+
+  try {
+    const { userId, role } = decodeJWT(token);
+    const userFromDb = await userService.getUserById(userId);
+    if (!userFromDb) return next(new HttpError(400, "User not exist"));
+    res.locals.user = { userId, role };
+    return next();
+  } catch (error) {
+    return next(new HttpError(400, "Invalid token"));
+  }
 };

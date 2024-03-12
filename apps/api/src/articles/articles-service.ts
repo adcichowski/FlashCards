@@ -1,6 +1,6 @@
 import { prisma } from "../../libs/prisma/constants";
 
-const getArticles = async () => {
+const getAllArticles = async () => {
   return await prisma.articles.findMany({
     select: {
       Articles_Rates: true,
@@ -14,7 +14,7 @@ const getArticles = async () => {
   });
 };
 
-const getVerifedArticles = async () => {
+const getVerifiedArticles = async () => {
   return await prisma.articles.findMany({
     select: {
       Articles_Rates: true,
@@ -55,8 +55,8 @@ const getArticleByUrl = async (urlScrappedWeb: string) => {
   });
 };
 export const serviceArticles = {
-  getArticles,
+  getAllArticles,
   createArticle,
   getArticleByUrl,
-  getVerifedArticles,
+  getVerifiedArticles,
 };

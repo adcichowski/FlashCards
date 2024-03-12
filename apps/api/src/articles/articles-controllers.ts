@@ -6,15 +6,17 @@ import { createArticleSchema, articleUrlReq } from "./articles-schema";
 import { getErrorMessage } from "utils/error/errorValidation";
 import { InferType } from "yup";
 import { mapperArticles } from "./articles-mappers";
-import { userService } from "user/user-services";
-import { decodeJWT } from "auth/tokenJWT";
 
 export const getAllArticles = async (req: Request, res: Response) => {
-  // const user = decodeJWT(req.cookies.)
-  // if(await userService.hasPermission())
-  const articles = mapperArticles(await serviceArticles.getArticles());
+  if (res.locals.user.role === "admin") {
+    const articles = mapperArticles(await serviceArticles.getAllArticles());
 
-  res.json({ articles });
+    return res.status(200).json({ articles });
+  }
+  const verifiedArticles = mapperArticles(
+    await serviceArticles.getVerifiedArticles()
+  );
+  return res.status(200).json({ articles: verifiedArticles });
 };
 
 export const createArticle = async (

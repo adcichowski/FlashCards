@@ -27,11 +27,11 @@ app.use(
 app.use(CookieParser());
 
 app.use(
+  authRouter,
   checkAuthUser,
   sectionsRouter,
   articlesRouter,
   cardRouter,
-  authRouter,
   routerSwagger
 );
 app.use(errorHandler);
