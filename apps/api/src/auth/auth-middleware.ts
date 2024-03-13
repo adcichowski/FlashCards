@@ -49,7 +49,7 @@ export const checkAuthUser = async (
     const { userId, role } = decodeJWT(token);
     const userFromDb = await userService.getUserById(userId);
     if (!userFromDb) return next(new HttpError(400, "User not exist"));
-    res.locals.user = { userId, role };
+    res.locals.user = { id: userId, role };
     return next();
   } catch (error) {
     return next(new HttpError(400, "Invalid token"));

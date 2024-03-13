@@ -54,9 +54,57 @@ const getArticleByUrl = async (urlScrappedWeb: string) => {
     },
   });
 };
+
+export const createRateForArticle = async ({
+  rate,
+  articleId,
+  userId,
+}: {
+  articleId: string;
+  rate: number;
+  userId: string;
+}) => {
+  return await prisma.articles_Rates.create({
+    data: {
+      articleId,
+      userId,
+      rate,
+    },
+  });
+};
+
+export const changeRateForArticle = async ({
+  rate,
+  rateId,
+}: {
+  rate: number;
+  rateId: string;
+}) => {
+  return await prisma.articles_Rates.update({
+    data: { rate },
+    where: { id: rateId },
+  });
+};
+
+const findOrThrowRateForArticle = async ({
+  userId,
+  articleId,
+}: {
+  userId: string;
+  articleId: string;
+}) => {
+  return await prisma.articles_Rates.findFirstOrThrow({
+    where: {
+      userId,
+      articleId,
+    },
+  });
+};
+
 export const serviceArticles = {
   getAllArticles,
   createArticle,
   getArticleByUrl,
   getVerifiedArticles,
+  findOrThrowRateForArticle,
 };

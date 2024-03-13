@@ -14,3 +14,7 @@ export const editArticleSchema = Yup.object({
   imageSrc: Yup.string().optional(),
   author: Yup.string().optional(),
 });
+
+export const rateArticle = Yup.object({
+  rate: Yup.number().min(-1).max(1).required(),
+});

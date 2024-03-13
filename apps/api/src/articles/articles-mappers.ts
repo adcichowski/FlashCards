@@ -13,8 +13,18 @@ type ArticlesMapperParam = {
   createdAt: number | null;
 }[];
 
-export const mapperArticles = (articles: ArticlesMapperParam) =>
-  articles.map(({ Articles_Rates, ...article }) => ({
-    rate: Articles_Rates.reduce((prev, v) => prev + v.rate, 0),
-    ...article,
-  }));
+export const mapperArticles = ({
+  userId,
+  articles,
+}: {
+  articles: ArticlesMapperParam;
+  userId: string;
+}) =>
+  articles.map(({ Articles_Rates, ...article }) => {
+    const userRate = Articles_Rates.find((v) => v.userId === userId);
+    return {
+      rate: Articles_Rates.reduce((prev, v) => prev + v.rate, 0),
+      yourRate: userRate ? { id: userRate.id, rate: userRate.rate } : null,
+      ...article,
+    };
+  });

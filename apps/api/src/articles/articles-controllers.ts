@@ -7,15 +7,19 @@ import { getErrorMessage } from "utils/error/errorValidation";
 import { InferType } from "yup";
 import { mapperArticles } from "./articles-mappers";
 
-export const getAllArticles = async (req: Request, res: Response) => {
+export const getAllArticles = async (_req: Request, res: Response) => {
   if (res.locals.user.role === "admin") {
-    const articles = mapperArticles(await serviceArticles.getAllArticles());
+    const articles = mapperArticles({
+      articles: await serviceArticles.getAllArticles(),
+      userId: res.locals.user.id,
+    });
 
     return res.status(200).json({ articles });
   }
-  const verifiedArticles = mapperArticles(
-    await serviceArticles.getVerifiedArticles()
-  );
+  const verifiedArticles = mapperArticles({
+    articles: await serviceArticles.getVerifiedArticles(),
+    userId: res.locals.user.id,
+  });
   return res.status(200).json({ articles: verifiedArticles });
 };
 
@@ -51,3 +55,5 @@ export const createArticle = async (
     return res.status(400).send({ message: getErrorMessage(error) });
   }
 };
+
+export const createRateForArticle = () => {};
