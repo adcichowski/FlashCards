@@ -20,15 +20,12 @@
   width: 450px;
 }
 .rate {
-  padding-left: 8px;
+  margin-left: 12px;
 }
 .linkTitle:hover {
   text-decoration: underline;
 }
 
-.rate {
-  width: 100px;
-}
 .author {
   width: 200px;
 }
@@ -52,7 +49,10 @@
   padding: 10px;
   padding-left: 0px;
 }
-
+.rateNumber {
+  min-width: 12px;
+  text-align: center;
+}
 .rateWrapper {
   display: flex;
 }
@@ -64,12 +64,12 @@
   transition: opacity 0.2s;
   color: #3e2f69;
 }
-.rateIcon:hover {
-  opacity: 100%;
-}
+
+.activeIncrease,
 .increase:hover {
   color: #34c972;
 }
+.activeDecrease,
 .decrease:hover {
   color: #f52b26;
 }

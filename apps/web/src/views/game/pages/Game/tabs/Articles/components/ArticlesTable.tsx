@@ -9,7 +9,13 @@ type Article = {
   title: string;
   author: string | undefined;
   createdAt: number | undefined;
-  rate: number;
+  rate: {
+    sum: number;
+  };
+  yourRated?: {
+    rate: number;
+    id: string;
+  };
   url: string;
 };
 
@@ -25,18 +31,27 @@ const columns = [
     footer: (info) => info.column.id,
   }),
 
-  columnHelper.accessor("rate", {
-    cell: (info) => (
-      <div className={styles.rateWrapper}>
-        <button>
-          <ArrowBigUpIcon className={clsx(styles.rateIcon, styles.increase)} />
-        </button>
-        {info.getValue()}
-        <button>
-          <ArrowBigDownIcon className={clsx(styles.rateIcon, styles.decrease)} />
-        </button>
-      </div>
-    ),
+  columnHelper.accessor("rate.sum", {
+    header: () => <div className={styles.rate}>Rate</div>,
+    cell: ({ getValue, row }) => {
+      const { yourRated } = row.original;
+      console.log(yourRated);
+      return (
+        <div className={styles.rateWrapper}>
+          <button>
+            <ArrowBigUpIcon
+              className={clsx(styles.rateIcon, styles.increase, yourRated?.rate === 1 && styles.activeIncrease)}
+            />
+          </button>
+          <div className={styles.rateNumber}> {getValue()}</div>
+          <button>
+            <ArrowBigDownIcon
+              className={clsx(styles.rateIcon, styles.decrease, yourRated?.rate === -1 && styles.activeDecrease)}
+            />
+          </button>
+        </div>
+      );
+    },
     footer: (info) => info.column.id,
   }),
 
