@@ -1,10 +1,9 @@
 type ArticlesMapperParam = {
-  Articles_Rates: {
-    id: string;
-    rate: number;
-    userId: string;
-    articleId: string;
-  }[];
+  Articles_Rates:
+    | {
+        id: string;
+      }[]
+    | [];
   title: string;
   imageSrc: string | null;
   url: string;
@@ -13,18 +12,27 @@ type ArticlesMapperParam = {
   createdAt: number | null;
 }[];
 
+type SumRatePerArticleType = {
+  _sum: { rate: number | null };
+  articleId: string;
+}[];
+
 export const mapperArticles = ({
-  userId,
   articles,
+  sumRatesPerArticle,
 }: {
+  sumRatesPerArticle: SumRatePerArticleType;
   articles: ArticlesMapperParam;
-  userId: string;
 }) =>
   articles.map(({ Articles_Rates, ...article }) => {
-    const userRate = Articles_Rates.find((v) => v.userId === userId);
+    const sumRatesInArticle = sumRatesPerArticle.find(
+      (sum) => sum.articleId === article.id
+    );
     return {
-      rate: Articles_Rates.reduce((prev, v) => prev + v.rate, 0),
-      yourRate: userRate ? { id: userRate.id, rate: userRate.rate } : null,
+      rate: {
+        sum: sumRatesInArticle?._sum.rate || 0,
+      },
+      yourRated: Articles_Rates[0],
       ...article,
     };
   });

@@ -1,9 +1,17 @@
 import { prisma } from "../../libs/prisma/constants";
 
-const getAllArticles = async () => {
+const getAllArticles = async (userId: string) => {
   return await prisma.articles.findMany({
     select: {
-      Articles_Rates: true,
+      Articles_Rates: {
+        select: {
+          id: true,
+          rate: true,
+        },
+        where: {
+          userId,
+        },
+      },
       author: true,
       title: true,
       id: true,
@@ -14,10 +22,18 @@ const getAllArticles = async () => {
   });
 };
 
-const getVerifiedArticles = async () => {
+const getVerifiedArticles = async (userId: string) => {
   return await prisma.articles.findMany({
     select: {
-      Articles_Rates: true,
+      Articles_Rates: {
+        select: {
+          id: true,
+          rate: true,
+        },
+        where: {
+          userId,
+        },
+      },
       author: true,
       title: true,
       id: true,
@@ -101,10 +117,20 @@ const findOrThrowRateForArticle = async ({
   });
 };
 
+const getSumRatesPerArticle = async () => {
+  return await prisma.articles_Rates.groupBy({
+    by: ["articleId", "id"],
+    _sum: {
+      rate: true,
+    },
+  });
+};
+
 export const serviceArticles = {
   getAllArticles,
   createArticle,
   getArticleByUrl,
   getVerifiedArticles,
   findOrThrowRateForArticle,
+  getSumRatesPerArticle,
 };

@@ -10,17 +10,16 @@ import { mapperArticles } from "./articles-mappers";
 export const getAllArticles = async (_req: Request, res: Response) => {
   if (res.locals.user.role === "admin") {
     const articles = mapperArticles({
-      articles: await serviceArticles.getAllArticles(),
-      userId: res.locals.user.id,
+      sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
+      articles: await serviceArticles.getAllArticles(res.locals.user.id),
     });
-
     return res.status(200).json({ articles });
   }
-  const verifiedArticles = mapperArticles({
-    articles: await serviceArticles.getVerifiedArticles(),
-    userId: res.locals.user.id,
+  const articles = mapperArticles({
+    sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
+    articles: await serviceArticles.getVerifiedArticles(res.locals.user.id),
   });
-  return res.status(200).json({ articles: verifiedArticles });
+  return res.status(200).json({ articles });
 };
 
 export const createArticle = async (
