@@ -1,9 +1,13 @@
 import { Router } from "express";
 import * as cheerio from "cheerio";
 import { createArticle, getAllArticles } from "./articles-controllers";
-import { checkArticleExist } from "./articles-middleware";
+import { checkArticleExist, checkIsUserRate } from "./articles-middleware";
 import { reusableValidation } from "utils/reusableValidation";
-import { articleUrlReq } from "./articles-schema";
+import { articleUrlReq, deleteRateArticleSchema } from "./articles-schema";
+import {
+  createRateArticle,
+  deleteRateArticle,
+} from "./articles-rates/articles-rates-controllers";
 const router = Router();
 /**
  * @openapi
@@ -90,4 +94,14 @@ router.put(
   checkArticleExist,
   createArticle
 );
+
+router.post("/articles/:articleId/rates", createRateArticle);
+
+router.delete(
+  "/articles/:articleId/rates",
+  reusableValidation(deleteRateArticleSchema),
+  checkIsUserRate,
+  deleteRateArticle
+);
+
 export { router as articlesRouter };

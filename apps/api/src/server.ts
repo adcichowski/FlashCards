@@ -27,12 +27,12 @@ app.use(
 app.use(CookieParser());
 
 app.use(
+  routerSwagger,
   authRouter,
   checkAuthUser,
   sectionsRouter,
   articlesRouter,
-  cardRouter,
-  routerSwagger
+  cardRouter
 );
 app.use(errorHandler);
 app.disable("x-powered-by");

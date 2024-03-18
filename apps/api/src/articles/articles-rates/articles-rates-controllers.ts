@@ -1,0 +1,40 @@
+import {
+  articleUrlReq,
+  deleteRateArticleSchema,
+  rateArticleSchema,
+} from "articles/articles-schema";
+import { InferType } from "yup";
+import { Request, Response } from "express";
+import * as serviceArticles from "articles/articles-service";
+
+export const createRateArticle = async (
+  req: Request<{ articleId: string }, {}, InferType<typeof rateArticleSchema>>,
+  res: Response
+) => {
+  const { rate } = req.body;
+  const articleId = req.params.articleId;
+  const userId = res.locals.user.id;
+  const createdRate = await serviceArticles.createRateForArticle({
+    articleId,
+    rate,
+    userId,
+  });
+  res.status(200).send(createdRate);
+};
+
+export const deleteRateArticle = async (
+  req: Request<
+    { articleId: string },
+    {},
+    InferType<typeof deleteRateArticleSchema>
+  >,
+  res: Response
+) => {
+  const { rateId } = req.body;
+  const articleId = req.params.articleId;
+  await serviceArticles.removeRateFromArticle({
+    articleId,
+    rateId,
+  });
+  res.status(200).send();
+};

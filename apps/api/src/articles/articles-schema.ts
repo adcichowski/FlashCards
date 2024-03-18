@@ -6,7 +6,7 @@ export const createArticleSchema = Yup.object({
   author: Yup.string().optional(),
 }).required();
 
-export const articleUrlReq = Yup.object().shape({
+export const articleUrlReq = Yup.object({
   url: Yup.string().url().required(),
 });
 
@@ -15,6 +15,10 @@ export const editArticleSchema = Yup.object({
   author: Yup.string().optional(),
 });
 
-export const rateArticle = Yup.object({
+export const rateArticleSchema = Yup.object({
   rate: Yup.number().min(-1).max(1).required(),
+});
+
+export const deleteRateArticleSchema = Yup.object({
+  rateId: Yup.string().uuid().required(),
 });

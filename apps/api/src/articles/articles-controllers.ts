@@ -1,7 +1,6 @@
 import type { Response, Request } from "express";
-import { serviceArticles } from "./articles-service";
 import * as cheerio from "cheerio";
-
+import * as serviceArticles from "./articles-service";
 import { createArticleSchema, articleUrlReq } from "./articles-schema";
 import { getErrorMessage } from "utils/error/errorValidation";
 import { InferType } from "yup";
@@ -13,6 +12,7 @@ export const getAllArticles = async (_req: Request, res: Response) => {
       sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
       articles: await serviceArticles.getAllArticles(res.locals.user.id),
     });
+
     return res.status(200).json({ articles });
   }
   const articles = mapperArticles({
@@ -54,5 +54,3 @@ export const createArticle = async (
     return res.status(400).send({ message: getErrorMessage(error) });
   }
 };
-
-export const createRateForArticle = () => {};

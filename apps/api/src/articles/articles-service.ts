@@ -1,6 +1,6 @@
 import { prisma } from "../../libs/prisma/constants";
 
-const getAllArticles = async (userId: string) => {
+export const getAllArticles = async (userId: string) => {
   return await prisma.articles.findMany({
     select: {
       Articles_Rates: {
@@ -22,7 +22,7 @@ const getAllArticles = async (userId: string) => {
   });
 };
 
-const getVerifiedArticles = async (userId: string) => {
+export const getVerifiedArticles = async (userId: string) => {
   return await prisma.articles.findMany({
     select: {
       Articles_Rates: {
@@ -47,7 +47,7 @@ const getVerifiedArticles = async (userId: string) => {
   });
 };
 
-const createArticle = async ({
+export const createArticle = async ({
   title,
   url,
   author,
@@ -63,7 +63,7 @@ const createArticle = async ({
   });
 };
 
-const getArticleByUrl = async (urlScrappedWeb: string) => {
+export const getArticleByUrl = async (urlScrappedWeb: string) => {
   return await prisma.articles.findFirst({
     where: {
       url: urlScrappedWeb,
@@ -80,13 +80,14 @@ export const createRateForArticle = async ({
   rate: number;
   userId: string;
 }) => {
-  return await prisma.articles_Rates.create({
+  const createdRate = await prisma.articles_Rates.create({
     data: {
       articleId,
       userId,
       rate,
     },
   });
+  return { rateId: createdRate.id };
 };
 
 export const changeRateForArticle = async ({
@@ -102,7 +103,19 @@ export const changeRateForArticle = async ({
   });
 };
 
-const findOrThrowRateForArticle = async ({
+export const removeRateFromArticle = async ({
+  articleId,
+  rateId,
+}: {
+  rateId: string;
+  articleId: string;
+}) => {
+  return await prisma.articles_Rates.delete({
+    where: { id: rateId, articleId },
+  });
+};
+
+export const findOrThrowRateForArticle = async ({
   userId,
   articleId,
 }: {
@@ -117,7 +130,7 @@ const findOrThrowRateForArticle = async ({
   });
 };
 
-const getSumRatesPerArticle = async () => {
+export const getSumRatesPerArticle = async () => {
   return await prisma.articles_Rates.groupBy({
     by: ["articleId", "id"],
     _sum: {
@@ -126,11 +139,16 @@ const getSumRatesPerArticle = async () => {
   });
 };
 
-export const serviceArticles = {
-  getAllArticles,
-  createArticle,
-  getArticleByUrl,
-  getVerifiedArticles,
-  findOrThrowRateForArticle,
-  getSumRatesPerArticle,
+export const getRateArticleByRateId = async ({
+  rateId,
+  userId,
+}: {
+  rateId: string;
+  userId: string;
+}) => {
+  return await prisma.articles_Rates.findFirst({
+    where: {
+      id: rateId,
+    },
+  });
 };
