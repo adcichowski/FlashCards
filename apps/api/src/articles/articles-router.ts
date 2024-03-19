@@ -1,9 +1,13 @@
 import { Router } from "express";
-import * as cheerio from "cheerio";
 import { createArticle, getAllArticles } from "./articles-controllers";
-import { checkArticleExist, checkIsUserRate } from "./articles-middleware";
-import { reusableValidation } from "utils/reusableValidation";
-import { articleUrlReq, deleteRateArticleSchema } from "./articles-schema";
+import * as yup from "yup";
+import {
+  checkArticleExist,
+  checkArticleExistFromParams,
+  checkIsUserRate,
+} from "./articles-middleware";
+import { reusableValidation, validationParams } from "utils/reusableValidation";
+import { articleUrlReq, createRateArticleSchema } from "./articles-schema";
 import {
   createRateArticle,
   deleteRateArticle,
@@ -95,11 +99,17 @@ router.put(
   createArticle
 );
 
-router.post("/articles/:articleId/rates", createRateArticle);
-
-router.delete(
+router.post(
   "/articles/:articleId/rates",
-  reusableValidation(deleteRateArticleSchema),
+  validationParams(["articleId"]),
+  reusableValidation(createRateArticleSchema),
+  createRateArticle
+);
+
+router.delete<{ articleId: string; rateId: string }>(
+  "/articles/:articleId/rates/:rateId",
+  validationParams(["rateId", "articleId"]),
+  checkArticleExistFromParams,
   checkIsUserRate,
   deleteRateArticle
 );

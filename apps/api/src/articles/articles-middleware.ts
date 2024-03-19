@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import * as serviceArticles from "./articles-service";
 import { HttpError } from "utils/error/httpError";
-import { articleUrlReq, deleteRateArticleSchema } from "./articles-schema";
+import { articleUrlReq } from "./articles-schema";
 import { InferType } from "yup";
 export const checkArticleExist = async (
   req: Request<{}, {}, InferType<typeof articleUrlReq>>,
@@ -16,16 +16,30 @@ export const checkArticleExist = async (
 };
 
 export const checkIsUserRate = async (
-  req: Request<{}, {}, InferType<typeof deleteRateArticleSchema>>,
+  req: Request<{ rateId: string; articleId: string }>,
   _res: Response,
   next: NextFunction
 ) => {
   const existRateArticle = await serviceArticles.getRateArticleByRateId({
-    rateId: req.body.rateId,
+    rateId: req.params.rateId,
     userId: _res.locals.user.id,
   });
   if (existRateArticle) {
     next(new HttpError(400, "rate not exist"));
+  }
+  next();
+};
+
+export const checkArticleExistFromParams = async (
+  req: Request<{ articleId: string }>,
+  _res: Response,
+  next: NextFunction
+) => {
+  const ratedArticle = await serviceArticles.getArticleById(
+    req.params.articleId
+  );
+  if (!ratedArticle) {
+    next(new HttpError(400, "rated article not exist"));
   }
   next();
 };

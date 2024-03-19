@@ -71,6 +71,14 @@ export const getArticleByUrl = async (urlScrappedWeb: string) => {
   });
 };
 
+export const getArticleById = async (articleId: string) => {
+  return await prisma.articles.findFirst({
+    where: {
+      id: articleId,
+    },
+  });
+};
+
 export const createRateForArticle = async ({
   rate,
   articleId,
@@ -149,6 +157,7 @@ export const getRateArticleByRateId = async ({
   return await prisma.articles_Rates.findFirst({
     where: {
       id: rateId,
+      userId,
     },
   });
 };

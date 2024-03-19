@@ -2,7 +2,7 @@ import { getErrorMessage } from "./error/errorValidation";
 import { HttpError } from "./error/httpError";
 
 import type { NextFunction, Request, Response } from "express";
-import type Yup from "yup";
+import Yup from "yup";
 import type { ObjectShape } from "yup/lib/object";
 
 export const reusableValidation =
@@ -11,6 +11,21 @@ export const reusableValidation =
     try {
       const value = await schema.validate(req.body);
       Object.assign(req, value);
+      return next();
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      return next(new HttpError(400, errorMessage));
+    }
+  };
+
+export const validationParams =
+  <T extends string[]>(availableParams: T) =>
+  async (req: Request, _: Response, next: NextFunction) => {
+    try {
+      const generatedSchema = availableParams.reduce((pre, init) => {
+        return { ...pre, [init]: Yup.string().uuid().required().label(init) };
+      }, {});
+      await Yup.object(generatedSchema).validate(req.params);
       return next();
     } catch (error) {
       const errorMessage = getErrorMessage(error);

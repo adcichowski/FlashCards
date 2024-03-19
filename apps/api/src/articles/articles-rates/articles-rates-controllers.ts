@@ -1,14 +1,14 @@
-import {
-  articleUrlReq,
-  deleteRateArticleSchema,
-  rateArticleSchema,
-} from "articles/articles-schema";
+import { createRateArticleSchema } from "articles/articles-schema";
 import { InferType } from "yup";
 import { Request, Response } from "express";
 import * as serviceArticles from "articles/articles-service";
 
 export const createRateArticle = async (
-  req: Request<{ articleId: string }, {}, InferType<typeof rateArticleSchema>>,
+  req: Request<
+    { articleId: string },
+    {},
+    InferType<typeof createRateArticleSchema>
+  >,
   res: Response
 ) => {
   const { rate } = req.body;
@@ -23,15 +23,10 @@ export const createRateArticle = async (
 };
 
 export const deleteRateArticle = async (
-  req: Request<
-    { articleId: string },
-    {},
-    InferType<typeof deleteRateArticleSchema>
-  >,
+  req: Request<{ articleId: string; rateId: string }>,
   res: Response
 ) => {
-  const { rateId } = req.body;
-  const articleId = req.params.articleId;
+  const { articleId, rateId } = req.params;
   await serviceArticles.removeRateFromArticle({
     articleId,
     rateId,

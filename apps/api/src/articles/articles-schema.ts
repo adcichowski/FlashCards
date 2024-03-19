@@ -15,7 +15,8 @@ export const editArticleSchema = Yup.object({
   author: Yup.string().optional(),
 });
 
-export const rateArticleSchema = Yup.object({
+export const createRateArticleSchema = Yup.object({
+  articleId: Yup.string().uuid().required(),
   rate: Yup.number().min(-1).max(1).required(),
 });
 
