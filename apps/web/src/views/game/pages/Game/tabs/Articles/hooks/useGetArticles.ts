@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useFetch } from "src/hooks/useFetch";
-import { fetcher } from "src/utils/fetcher";
 
 export type QueryArticleData = {
   id: string;

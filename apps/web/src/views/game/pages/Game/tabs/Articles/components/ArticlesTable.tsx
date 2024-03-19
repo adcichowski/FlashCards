@@ -5,7 +5,9 @@ import { useGetArticles } from "../hooks/useGetArticles";
 import { convertDate } from "../../../utils/date";
 import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, ArrowBigDown } from "lucide-react";
 import clsx from "clsx";
+import { useCreateRateForArticle } from "../hooks/useCreateRateForArticle";
 type Article = {
+  id: string;
   title: string;
   author: string | undefined;
   createdAt: number | undefined;
@@ -21,56 +23,68 @@ type Article = {
 
 const columnHelper = createColumnHelper<Article>();
 
-const columns = [
-  columnHelper.accessor("title", {
-    cell: (info) => (
-      <a href={info.row.original.url} className={styles.linkTitle}>
-        {info.getValue()} <LinkIcon className={styles.linkIcon} />
-      </a>
-    ),
-    footer: (info) => info.column.id,
-  }),
+const useArticleColumns = () => {
+  const mutation = useCreateRateForArticle();
 
-  columnHelper.accessor("rate.sum", {
-    header: () => <div className={styles.rate}>Rate</div>,
-    cell: ({ getValue, row }) => {
-      const { yourRated } = row.original;
-      console.log(yourRated);
-      return (
-        <div className={styles.rateWrapper}>
-          <button>
-            <ArrowBigUpIcon
-              className={clsx(styles.rateIcon, styles.increase, yourRated?.rate === 1 && styles.activeIncrease)}
-            />
-          </button>
-          <div className={styles.rateNumber}> {getValue()}</div>
-          <button>
-            <ArrowBigDownIcon
-              className={clsx(styles.rateIcon, styles.decrease, yourRated?.rate === -1 && styles.activeDecrease)}
-            />
-          </button>
-        </div>
-      );
-    },
-    footer: (info) => info.column.id,
-  }),
+  const handleRateArticle = (action: { articleId: string; rate: number }) => {
+    mutation.mutate(action);
+  };
+  return [
+    columnHelper.accessor("title", {
+      cell: (info) => (
+        <a href={info.row.original.url} className={styles.linkTitle}>
+          {info.getValue()} <LinkIcon className={styles.linkIcon} />
+        </a>
+      ),
+      footer: (info) => info.column.id,
+    }),
 
-  columnHelper.accessor("author", {
-    header: "Author",
-    cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
-  }),
-  columnHelper.accessor("createdAt", {
-    header: "Created At",
-    cell: (cell) => {
-      const timestamp = cell.getValue();
-      return <>{timestamp ? convertDate(timestamp) : "N/A"}</>;
-    },
-  }),
-];
+    columnHelper.accessor("rate.sum", {
+      header: () => <div className={styles.rate}>Rate</div>,
+      cell: ({ getValue, row }) => {
+        const { yourRated } = row.original;
+        console.log(yourRated);
+        return (
+          <div className={styles.rateWrapper}>
+            <button
+              onClick={() => {
+                handleRateArticle({ articleId: row.original.id, rate: 1 });
+              }}
+            >
+              <ArrowBigUpIcon
+                className={clsx(styles.rateIcon, styles.increase, yourRated?.rate === 1 && styles.activeIncrease)}
+              />
+            </button>
+            <div className={styles.rateNumber}> {getValue()}</div>
+            <button>
+              <ArrowBigDownIcon
+                className={clsx(styles.rateIcon, styles.decrease, yourRated?.rate === -1 && styles.activeDecrease)}
+              />
+            </button>
+          </div>
+        );
+      },
+      footer: (info) => info.column.id,
+    }),
+
+    columnHelper.accessor("author", {
+      header: "Author",
+      cell: (info) => info.renderValue(),
+      footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("createdAt", {
+      header: "Created At",
+      cell: (cell) => {
+        const timestamp = cell.getValue();
+        return <>{timestamp ? convertDate(timestamp) : "N/A"}</>;
+      },
+    }),
+  ];
+};
 
 export function ArticlesTable() {
   const { data } = useGetArticles();
+  const columns = useArticleColumns();
   const table = useReactTable({
     data: data?.articles || [],
     columns,

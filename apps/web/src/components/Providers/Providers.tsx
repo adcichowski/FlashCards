@@ -5,7 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import { Modal } from "src/components/Modal/Modal";
 import { ModalProvider } from "src/context/ModalContext";
 
-const client = new QueryClient();
+export const client = new QueryClient();
+
 export function Providers({ children }: { readonly children: React.ReactNode }) {
   return (
     <SessionProvider>
