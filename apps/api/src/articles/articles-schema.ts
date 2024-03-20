@@ -20,6 +20,6 @@ export const createRateArticleSchema = Yup.object({
   rate: Yup.number().min(-1).max(1).required(),
 });
 
-export const deleteRateArticleSchema = Yup.object({
-  rateId: Yup.string().uuid().required(),
+export const editRateArticleSchema = Yup.object({
+  rate: Yup.number().min(-1).max(1).required(),
 });

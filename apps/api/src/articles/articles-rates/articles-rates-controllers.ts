@@ -33,3 +33,15 @@ export const deleteRateArticle = async (
   });
   res.status(200).send();
 };
+
+export const changeRateArticle = async (
+  req: Request<{ articleId: string; rateId: string }>,
+  res: Response
+) => {
+  const { rateId } = req.params;
+  await serviceArticles.changeRateForArticle({
+    rate: req.body.rate,
+    rateId,
+  });
+  res.status(200).send();
+};

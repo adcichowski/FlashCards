@@ -20,11 +20,11 @@ export const checkIsUserRate = async (
   _res: Response,
   next: NextFunction
 ) => {
-  const existRateArticle = await serviceArticles.getRateArticleByRateId({
+  const rate = await serviceArticles.getRateArticleByRateId({
     rateId: req.params.rateId,
     userId: _res.locals.user.id,
   });
-  if (existRateArticle) {
+  if (!rate) {
     next(new HttpError(400, "rate not exist"));
   }
   next();
@@ -39,6 +39,21 @@ export const checkArticleExistFromParams = async (
     req.params.articleId
   );
   if (!ratedArticle) {
+    next(new HttpError(400, "rated article not exist"));
+  }
+  next();
+};
+
+export const checkRateExistFromParams = async (
+  req: Request<{ rateId: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  const article = await serviceArticles.getRateArticleByRateId({
+    rateId: req.params.rateId,
+    userId: res.locals.user.id,
+  });
+  if (!article) {
     next(new HttpError(400, "rated article not exist"));
   }
   next();

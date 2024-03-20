@@ -7,8 +7,13 @@ import {
   checkIsUserRate,
 } from "./articles-middleware";
 import { reusableValidation, validationParams } from "utils/reusableValidation";
-import { articleUrlReq, createRateArticleSchema } from "./articles-schema";
 import {
+  articleUrlReq,
+  createRateArticleSchema,
+  editRateArticleSchema,
+} from "./articles-schema";
+import {
+  changeRateArticle,
   createRateArticle,
   deleteRateArticle,
 } from "./articles-rates/articles-rates-controllers";
@@ -93,10 +98,11 @@ router.post(
  */
 
 router.put(
-  "/articles",
-  reusableValidation(articleUrlReq),
-  checkArticleExist,
-  createArticle
+  "/articles/:articleId/rates/:rateId",
+  validationParams(["articleId", "rateId"]),
+  reusableValidation(editRateArticleSchema),
+  checkIsUserRate,
+  changeRateArticle
 );
 
 router.post(
