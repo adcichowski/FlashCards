@@ -5,7 +5,8 @@ import { useGetArticles } from "../hooks/useGetArticles";
 import { convertDate } from "../../../utils/date";
 import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, ArrowBigDown } from "lucide-react";
 import clsx from "clsx";
-import { useCreateRateForArticle } from "../hooks/useCreateRateForArticle";
+import { toast } from "sonner";
+import { useManageRateArticle } from "../hooks/useManageRateArticle";
 type Article = {
   id: string;
   title: string;
@@ -24,11 +25,6 @@ type Article = {
 const columnHelper = createColumnHelper<Article>();
 
 const useArticleColumns = () => {
-  const mutation = useCreateRateForArticle();
-
-  const handleRateArticle = (action: { articleId: string; rate: number }) => {
-    mutation.mutate(action);
-  };
   return [
     columnHelper.accessor("title", {
       cell: (info) => (
@@ -43,20 +39,20 @@ const useArticleColumns = () => {
       header: () => <div className={styles.rate}>Rate</div>,
       cell: ({ getValue, row }) => {
         const { yourRated } = row.original;
-        console.log(yourRated);
+        const { handleRateArticle } = useManageRateArticle({
+          articleId: row.original.id,
+          rateId: yourRated?.id,
+          yourRated: yourRated?.rate,
+        });
         return (
           <div className={styles.rateWrapper}>
-            <button
-              onClick={() => {
-                handleRateArticle({ articleId: row.original.id, rate: 1 });
-              }}
-            >
+            <button onClick={() => handleRateArticle({ rate: 1 })}>
               <ArrowBigUpIcon
                 className={clsx(styles.rateIcon, styles.increase, yourRated?.rate === 1 && styles.activeIncrease)}
               />
             </button>
-            <div className={styles.rateNumber}> {getValue()}</div>
-            <button>
+            <div className={styles.rateNumber}>{getValue()}</div>
+            <button onClick={() => handleRateArticle({ rate: -1 })}>
               <ArrowBigDownIcon
                 className={clsx(styles.rateIcon, styles.decrease, yourRated?.rate === -1 && styles.activeDecrease)}
               />

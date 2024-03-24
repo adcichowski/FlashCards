@@ -15,6 +15,8 @@ export const getAllArticles = async (_req: Request, res: Response) => {
 
     return res.status(200).json({ articles });
   }
+  const x = await serviceArticles.getSumRatesPerArticle();
+  console.log({ x });
   const articles = mapperArticles({
     sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
     articles: await serviceArticles.getVerifiedArticles(res.locals.user.id),

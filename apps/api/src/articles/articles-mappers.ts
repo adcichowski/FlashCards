@@ -28,7 +28,7 @@ export const mapperArticles = ({
     const sumRatesInArticle = sumRatesPerArticle.find(
       (sum) => sum.articleId === article.id
     );
-    console.log(Articles_Rates);
+    console.log(sumRatesInArticle);
     return {
       rate: {
         sum: sumRatesInArticle?._sum.rate || 0,

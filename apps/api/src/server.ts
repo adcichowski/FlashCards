@@ -2,7 +2,6 @@ import BodyParser from "body-parser";
 import CookieParser from "cookie-parser";
 import Cors from "cors";
 import Express from "express";
-import Session from "express-session";
 
 import { authRouter } from "./auth/auth-router";
 import { cardRouter } from "./cards/cards-router";

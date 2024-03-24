@@ -20,7 +20,7 @@ export const checkIsUserRate = async (
   _res: Response,
   next: NextFunction
 ) => {
-  const rate = await serviceArticles.getRateArticleByRateId({
+  const rate = await serviceArticles.getRateArticle({
     rateId: req.params.rateId,
     userId: _res.locals.user.id,
   });
@@ -49,12 +49,32 @@ export const checkRateExistFromParams = async (
   res: Response,
   next: NextFunction
 ) => {
-  const article = await serviceArticles.getRateArticleByRateId({
+  const rateArticle = await serviceArticles.getRateArticle({
     rateId: req.params.rateId,
     userId: res.locals.user.id,
   });
-  if (!article) {
+  if (!rateArticle) {
     next(new HttpError(400, "rated article not exist"));
+  }
+  next();
+};
+
+export const blockSecondRate = async (
+  req: Request<{ articleId: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  const rateArticle = await serviceArticles.findUserRateForArticle({
+    articleId: req.params.articleId,
+    userId: res.locals.user.id,
+  });
+  if (rateArticle) {
+    next(
+      new HttpError(
+        400,
+        "can't create second rate for this article, should update the rate"
+      )
+    );
   }
   next();
 };

@@ -22,6 +22,7 @@
     "react-hook-form": "^7.49.2",
     "sass": "^1.49.9",
     "sharp": "^0.33.2",
+    "sonner": "^1.4.41",
     "web-vitals": "^3.5.1"
   },
   "scripts": {

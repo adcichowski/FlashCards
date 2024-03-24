@@ -8,19 +8,19 @@ export const errorHandler = (
   err: HttpError | Error,
   _: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
-  console.log(err)
+  console.log(err);
 
-    logger.error(err.message || "Error!");
-    if (err instanceof HttpError) {
-      return res.status(err.statusCode).json({
-        name: err.name,
-        message: err.message,
-        body: err.body,
-      });
-    }
-    return res
-      .status(HttpStatusCode.BadRequest)
-      .json({ name: "Error", message: err.message });
+  logger.error(err.message || "Error!");
+  if (err instanceof HttpError) {
+    return res.status(err.statusCode).json({
+      name: err.name,
+      message: err.message,
+      body: err.body,
+    });
+  }
+  return res
+    .status(HttpStatusCode.BadRequest)
+    .json({ name: "Error", message: err.message });
 };

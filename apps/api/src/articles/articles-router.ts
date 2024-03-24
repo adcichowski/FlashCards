@@ -2,6 +2,7 @@ import { Router } from "express";
 import { createArticle, getAllArticles } from "./articles-controllers";
 import * as yup from "yup";
 import {
+  blockSecondRate,
   checkArticleExist,
   checkArticleExistFromParams,
   checkIsUserRate,
@@ -109,6 +110,7 @@ router.post(
   "/articles/:articleId/rates",
   validationParams(["articleId"]),
   reusableValidation(createRateArticleSchema),
+  blockSecondRate,
   createRateArticle
 );
 
