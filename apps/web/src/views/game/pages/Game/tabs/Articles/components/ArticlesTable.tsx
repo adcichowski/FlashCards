@@ -1,12 +1,12 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ArticlesTable.module.scss";
 import { useGetArticles } from "../hooks/useGetArticles";
 import { convertDate } from "../../../utils/date";
 import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, ArrowBigDown } from "lucide-react";
 import clsx from "clsx";
-import { toast } from "sonner";
 import { useManageRateArticle } from "../hooks/useManageRateArticle";
+import { ReusablePagination } from "src/components/Pagination/Pagination";
 type Article = {
   id: string;
   title: string;
@@ -88,29 +88,32 @@ export function ArticlesTable() {
   });
 
   return (
-    <table className={styles.table}>
-      <thead className={styles.tableHead}>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id} className={styles.headerGroup}>
-            {headerGroup.headers.map((header) => (
-              <th key={header.id} className={clsx(styles.header, styles[header.id])}>
-                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id} className={styles.row}>
-            {row.getVisibleCells().map((cell) => (
-              <td className={styles.rowCell} key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <section>
+      <table className={styles.table}>
+        <thead className={styles.tableHead}>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id} className={styles.headerGroup}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} className={clsx(styles.header, styles[header.id])}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id} className={styles.row}>
+              {row.getVisibleCells().map((cell) => (
+                <td className={styles.rowCell} key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <ReusablePagination />
+    </section>
   );
 }
