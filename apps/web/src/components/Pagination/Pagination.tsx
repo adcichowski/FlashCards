@@ -22,28 +22,39 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  disabled?: boolean;
   href: LinkProps["href"];
 } & Omit<React.ComponentProps<"a">, "href" | "ref">;
 
 const PaginationLink = ({ className, isActive, ...props }: PaginationLinkProps) => (
   <Link
     aria-current={isActive ? "page" : undefined}
-    className={clsx(className || styles.paginationNumberLink)}
+    className={clsx(className || styles.paginationNumberLink, isActive && styles.activeLink)}
     {...props}
   />
 );
 PaginationLink.displayName = "PaginationLink";
 
-const PaginationPrevious = (props: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink aria-label="Go to previous page" className={styles.paginationLink} {...props}>
+const PaginationPrevious = ({ disabled, ...props }: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to previous page"
+    aria-disabled={disabled}
+    className={clsx(styles.paginationLink, disabled && styles.disabled)}
+    {...props}
+  >
     <ChevronLeft className={styles.paginationIcon} />
     <span>Previous</span>
   </PaginationLink>
 );
 PaginationPrevious.displayName = "PaginationPrevious";
 
-const PaginationNext = (props: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink aria-label="Go to next page" className={styles.paginationLink} {...props}>
+const PaginationNext = ({ disabled, ...props }: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label="Go to next page"
+    aria-disabled={disabled}
+    className={clsx(styles.paginationLink, disabled && styles.disabled)}
+    {...props}
+  >
     <span>Next</span>
     <ChevronRight className={styles.paginationIcon} />
   </PaginationLink>
@@ -60,16 +71,19 @@ PaginationEllipsis.displayName = "PaginationEllipsis";
 
 const ReusablePagination = () => {
   const paginateItems = usePagination({ pages: 20 });
-  console.log(paginateItems);
   return (
     <Pagination>
       <PaginationContent>
-        {paginateItems.map((item) => (
+        {paginateItems.map(({ type, page, selected, ...props }) => (
           <PaginationItem>
-            {item.type === "previous" && <PaginationPrevious href={{ query: { page: item.page } }} />}
-            {item.type === "next" && <PaginationNext href={{ query: { page: item.page } }} />}
-            {item.type === "ellipsis" && <PaginationEllipsis />}
-            {item.type === "page" && <PaginationLink href={{ query: { page: item.page } }}>{item.page}</PaginationLink>}
+            {type === "previous" && <PaginationPrevious href={{ query: { page: page } }} {...props} />}
+            {type === "next" && <PaginationNext href={{ query: { page: page } }} {...props} />}
+            {type === "ellipsis" && <PaginationEllipsis {...props} />}
+            {type === "page" && (
+              <PaginationLink href={{ query: { page: page } }} isActive={selected} {...props}>
+                {page}
+              </PaginationLink>
+            )}
           </PaginationItem>
         ))}
       </PaginationContent>

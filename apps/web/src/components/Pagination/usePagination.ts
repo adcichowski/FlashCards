@@ -4,7 +4,7 @@ const range = (start: number, end: number) => {
   const length = end - start + 1;
   return Array.from({ length }, (_, i) => start + i);
 };
-const SIBLING_COUNT = 2;
+const SIBLING_COUNT = 1;
 const BOUNDARY_COUNT = 1;
 export const usePagination = ({ pages }: { pages: number }) => {
   const page = Number(useSearchParams().get("page")) || 1;
@@ -58,18 +58,18 @@ export const usePagination = ({ pages }: { pages: number }) => {
   console.log(itemList);
   return itemList.map((item) =>
     typeof item === "number"
-      ? {
+      ? ({
           type: "page",
           selected: page === item,
-          "aria-current": item === page ? "true" : undefined,
+          "aria-current": item === page ? "page" : undefined,
           page: item,
-        }
-      : {
+        } as const)
+      : ({
           type: item,
           selected: false,
           page: buttonPage({ type: item, page }),
           disabled: (item === "next" && page >= pages) || (item === "previous" && page <= 1),
-        },
+        } as const),
   );
 };
 

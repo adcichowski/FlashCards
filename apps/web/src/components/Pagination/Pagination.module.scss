@@ -16,7 +16,7 @@
 }
 .paginationNumberLink {
   padding: 5px 10px;
-  border: 0.3px solid rgba(255, 255, 255, 0.267);
+  border: 0.3px solid transparent;
 }
 .paginationIcon {
   width: 16px;
@@ -41,4 +41,15 @@
   display: flex;
   width: 100%;
   justify-content: center;
+}
+
+.disabled,
+.disabled:hover {
+  opacity: 70%;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+.activeLink {
+  background-color: rgba(255, 255, 255, 0.09);
+  border: 0.3px solid rgba(255, 255, 255, 0.267);
 }
