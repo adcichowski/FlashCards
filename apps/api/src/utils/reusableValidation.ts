@@ -23,7 +23,7 @@ export const validationParams =
   async (req: Request, _: Response, next: NextFunction) => {
     try {
       const generatedSchema = availableParams.reduce((pre, init) => {
-        return { ...pre, [init]: Yup.string().uuid().required().label(init) };
+        return { ...pre, [init]: schemaBasedOnParamName(init) };
       }, {});
       await Yup.object(generatedSchema).validate(req.params);
       return next();
@@ -32,3 +32,13 @@ export const validationParams =
       return next(new HttpError(400, errorMessage));
     }
   };
+
+const schemaBasedOnParamName = (name: string) => {
+  switch (name) {
+    case "page":
+      return Yup.number().optional().label(name);
+
+    default:
+      return Yup.string().uuid().required().label(name);
+  }
+};

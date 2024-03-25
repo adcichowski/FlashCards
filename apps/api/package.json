@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@commitlint/config-conventional": "^18.4.3",
-    "@prisma/client": "^5.9.1",
+    "@prisma/client": "^5.11.0",
     "@redocly/cli": "^1.6.0",
     "@types/swagger-jsdoc": "^6.0.4",
     "bcrypt": "^5.0.1",
@@ -36,6 +36,7 @@
     "pino": "^7.9.1",
     "pino-pretty": "^7.5.4",
     "prettier": "^3.1.1",
+    "prisma": "^5.11.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.3.0",
     "typescript": "4.9.5",

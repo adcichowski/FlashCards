@@ -1,3 +1,5 @@
+import { generatePagination } from "utils/pagination";
+
 type ArticlesMapperParam = {
   Articles_Rates:
     | {
@@ -13,27 +15,31 @@ type ArticlesMapperParam = {
 }[];
 
 type SumRatePerArticleType = {
-  _sum: { rate: number | null };
+  _sum: { rate?: number | null } | undefined;
   articleId: string;
 }[];
 
 export const mapperArticles = ({
   articles,
-  sumRatesPerArticle,
+  ratesArticles,
+  total,
 }: {
-  sumRatesPerArticle: SumRatePerArticleType;
+  ratesArticles: SumRatePerArticleType;
   articles: ArticlesMapperParam;
-}) =>
-  articles.map(({ Articles_Rates, ...article }) => {
-    const sumRatesInArticle = sumRatesPerArticle.find(
+  total:number
+}) =>{
+
+  const mappedArticles = articles.map(({ Articles_Rates, ...article }) => {
+    const sumRatesInArticle = ratesArticles.find(
       (sum) => sum.articleId === article.id
-    );
-    console.log(sumRatesInArticle);
-    return {
-      rate: {
-        sum: sumRatesInArticle?._sum.rate || 0,
-      },
-      yourRated: Articles_Rates[0],
-      ...article,
-    };
-  });
+      );
+      return {
+        rate: {
+          sum: sumRatesInArticle?._sum?.rate || 0,
+        },
+        yourRated: Articles_Rates[0],
+        ...article,
+      };
+    });
+return {articles:mappedArticles,...generatePagination(total)}
+  }

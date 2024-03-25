@@ -4,24 +4,20 @@ import * as serviceArticles from "./articles-service";
 import { createArticleSchema, articleUrlReq } from "./articles-schema";
 import { getErrorMessage } from "utils/error/errorValidation";
 import { InferType } from "yup";
-import { mapperArticles } from "./articles-mappers";
 
 export const getAllArticles = async (_req: Request, res: Response) => {
   if (res.locals.user.role === "admin") {
-    const articles = mapperArticles({
-      sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
-      articles: await serviceArticles.getAllArticles(res.locals.user.id),
-    });
-
-    return res.status(200).json({ articles });
+    const articles = await serviceArticles.getAllArticles({
+        userId: res.locals.user.id,
+        page: _req.query.page as string,
+      })
+    return res.status(200).json(articles);
   }
-  const x = await serviceArticles.getSumRatesPerArticle();
-  console.log({ x });
-  const articles = mapperArticles({
-    sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
-    articles: await serviceArticles.getVerifiedArticles(res.locals.user.id),
-  });
-  return res.status(200).json({ articles });
+  // const articles = mapperArticles({
+  //   sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
+  //   articles: await serviceArticles.getVerifiedArticles(res.locals.user.id),
+  // });
+  return res.status(200).json({ articles:[] });
 };
 
 export const createArticle = async (

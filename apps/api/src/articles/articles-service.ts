@@ -1,25 +1,46 @@
 import { prisma } from "../../libs/prisma/constants";
-
-export const getAllArticles = async (userId: string) => {
-  return await prisma.articles.findMany({
-    select: {
-      Articles_Rates: {
-        select: {
-          id: true,
-          rate: true,
-        },
-        where: {
-          userId,
-        },
+import { putBoundaryPagination } from "utils/pagination";
+import { mapperArticles } from "./articles-mappers";
+export const getAllArticles = async ({
+  userId,
+  page,
+}: {
+  userId: string;
+  page: string | undefined;
+}) => {
+  const [ratesArticles, articles, totalArticles] = await prisma.$transaction([
+    prisma.articles_Rates.groupBy({
+      by: ["articleId"],
+      _sum: {
+        rate: true,
       },
-      author: true,
-      title: true,
-      id: true,
-      imageSrc: true,
-      url: true,
-      createdAt: true,
-    },
-  });
+      orderBy: undefined
+    }),
+    prisma.articles.findMany({
+      ...putBoundaryPagination(page),
+      select: {
+        Articles_Rates: {
+          select: {
+            id: true,
+            rate: true,
+          },
+          where: {
+            userId,
+          },
+        },
+        author: true,
+        title: true,
+        id: true,
+        imageSrc: true,
+        url: true,
+        createdAt: true,
+      },
+    }),
+    prisma.articles.count(),
+  ]);
+  return mapperArticles({
+    articles,ratesArticles,total:totalArticles
+  })
 };
 
 export const getVerifiedArticles = async (userId: string) => {
