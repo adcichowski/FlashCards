@@ -50,6 +50,7 @@ PaginationPrevious.displayName = "PaginationPrevious";
 
 const PaginationNext = ({ disabled, ...props }: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
+    //TODO: Pagination Link should be disable
     aria-label="Go to next page"
     aria-disabled={disabled}
     className={clsx(styles.paginationLink, disabled && styles.disabled)}
@@ -69,8 +70,8 @@ const PaginationEllipsis = ({ className, ...props }: React.ComponentProps<"span"
 );
 PaginationEllipsis.displayName = "PaginationEllipsis";
 
-const ReusablePagination = () => {
-  const paginateItems = usePagination({ pages: 20 });
+const ReusablePagination = ({ pages }: { pages: number }) => {
+  const paginateItems = usePagination({ pages });
   return (
     <Pagination>
       <PaginationContent>

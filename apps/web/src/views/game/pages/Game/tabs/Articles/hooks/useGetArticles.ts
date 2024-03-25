@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 import { useFetch } from "src/hooks/useFetch";
 
 export type QueryArticleData = {
+  articles:{
   id: string;
   author: string;
   url: string;
@@ -15,15 +17,20 @@ export type QueryArticleData = {
     id: string;
   };
   createdAt: number;
-};
+}[],
+pages:number,
+}
 
 export function useGetArticles() {
   const secureFetch = useFetch();
-  const query = useQuery<{ articles: QueryArticleData[] } | undefined, { message: string }>({
-    queryKey: ["getArticles"],
+  const page = Number(useSearchParams().get("page"));
+  const query = useQuery<QueryArticleData | undefined, { message: string }>({
+    queryKey: ["getArticles", page],
     queryFn: async () => {
       if (secureFetch) {
-        const articles = await secureFetch<{ articles: QueryArticleData[] }>("articles", { method: "GET" });
+        const articles = await secureFetch<QueryArticleData>(`articles?page=${page}`, {
+          method: "GET",
+        });
         return articles;
       }
     },

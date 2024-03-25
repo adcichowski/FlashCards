@@ -113,7 +113,7 @@ export function ArticlesTable() {
           ))}
         </tbody>
       </table>
-      <ReusablePagination />
+      {data?.pages && <ReusablePagination pages={data.pages} />}
     </section>
   );
 }
