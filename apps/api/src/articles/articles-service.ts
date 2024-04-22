@@ -14,11 +14,12 @@ export const getAllArticles = async ({
       _sum: {
         rate: true,
       },
-      orderBy: undefined
+      orderBy: undefined,
     }),
     prisma.articles.findMany({
       ...putBoundaryPagination(page),
-      select: {
+      include: {
+        
         Articles_Rates: {
           select: {
             id: true,
@@ -28,20 +29,29 @@ export const getAllArticles = async ({
             userId,
           },
         },
-        author: true,
-        title: true,
-        id: true,
-        imageSrc: true,
-        url: true,
-        createdAt: true,
+        Articles_Tags: {
+          select: {
+            Tags: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        
       },
+      
     }),
     prisma.articles.count(),
   ]);
+
   return mapperArticles({
-    articles,ratesArticles,total:totalArticles
-  })
+    articles,
+    ratesArticles,
+    total: totalArticles,
+  });
 };
+export const getTagsPerArticle = () => {};
 
 export const getVerifiedArticles = async (userId: string) => {
   return await prisma.articles.findMany({

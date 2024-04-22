@@ -13,3 +13,5 @@ export async function hashTheValue(value: string | Buffer) {
   const salt = await Bcrypt.genSalt();
   return await Bcrypt.hash(value, salt);
 }
+
+export const isProd = getEnv("NODE_ENV") === "production";

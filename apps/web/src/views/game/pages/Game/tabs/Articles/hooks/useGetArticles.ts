@@ -3,23 +3,24 @@ import { useSearchParams } from "next/navigation";
 import { useFetch } from "src/hooks/useFetch";
 
 export type QueryArticleData = {
-  articles:{
-  id: string;
-  author: string;
-  url: string;
-  imageSrc: string;
-  title: string;
-  rate: {
-    sum: number;
-  };
-  yourRated: {
-    rate: number;
+  articles: {
+    tags: string[];
     id: string;
-  };
-  createdAt: number;
-}[],
-pages:number,
-}
+    author: string;
+    url: string;
+    imageSrc: string;
+    title: string;
+    rate: {
+      sum: number;
+    };
+    yourRated: {
+      rate: number;
+      id: string;
+    };
+    createdAt: number;
+  }[];
+  pages: number;
+};
 
 export function useGetArticles() {
   const secureFetch = useFetch();
@@ -31,6 +32,7 @@ export function useGetArticles() {
         const articles = await secureFetch<QueryArticleData>(`articles?page=${page}`, {
           method: "GET",
         });
+        console.log(articles);
         return articles;
       }
     },

@@ -1,17 +1,21 @@
 import { generatePagination } from "utils/pagination";
 
-type ArticlesMapperParam = {
-  Articles_Rates:
-    | {
-        id: string;
-      }[]
-    | [];
-  title: string;
-  imageSrc: string | null;
+type ArticlesMapperParamType = {
   url: string;
-  author: string | null;
   id: string;
+  title: string;
+  author: string | null;
+  imageSrc: string | null;
   createdAt: number | null;
+  Articles_Rates: {
+    id: string;
+    rate: number;
+  }[];
+  Articles_Tags: {
+    Tags: {
+      name: string;
+    };
+  }[];
 }[];
 
 type SumRatePerArticleType = {
@@ -25,21 +29,21 @@ export const mapperArticles = ({
   total,
 }: {
   ratesArticles: SumRatePerArticleType;
-  articles: ArticlesMapperParam;
-  total:number
-}) =>{
-
+  articles: ArticlesMapperParamType;
+  total: number;
+}) => {
   const mappedArticles = articles.map(({ Articles_Rates, ...article }) => {
     const sumRatesInArticle = ratesArticles.find(
       (sum) => sum.articleId === article.id
-      );
-      return {
-        rate: {
-          sum: sumRatesInArticle?._sum?.rate || 0,
-        },
-        yourRated: Articles_Rates[0],
-        ...article,
-      };
-    });
-return {articles:mappedArticles,...generatePagination(total)}
-  }
+    );
+    return {
+      rate: {
+        sum: sumRatesInArticle?._sum?.rate || 0,
+      },
+      yourRated: Articles_Rates[0],
+      tags: [],
+      ...article,
+    };
+  });
+  return { articles: mappedArticles, ...generatePagination(total) };
+};

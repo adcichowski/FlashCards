@@ -1,7 +1,6 @@
 import { toast } from "sonner";
 import { useCreateRateForArticle } from "./useCreateRateForArticle";
 import { useUpdateRateForArticle } from "./useUpdateRateForArticle";
-import { MouseEventHandler } from "react";
 export const useManageRateArticle = ({
   articleId,
   rateId,
@@ -19,12 +18,12 @@ export const useManageRateArticle = ({
 
     if (rateId) {
       toast.promise(mutateUpdateRate({ articleId, rate: logicOfRating, rateId }), {
-        success: "Successfully update rate",
+        success: "Successfully update rate article",
       });
     }
     if (!rateId) {
       toast.promise(mutateCreateRate({ articleId, rate }), {
-        success: "Successfully create rate for article",
+        success: "Successfully rate article",
       });
     }
   };

@@ -9,11 +9,12 @@ export const getAllArticles = async (_req: Request, res: Response) => {
   if (res.locals.user.role === "admin") {
     const articles = await serviceArticles.getAllArticles({
         userId: res.locals.user.id,
-        page: _req.query.page as string,
+        page:_req.query.page as string
+     //TODO   page: _req.query.page as string, - THERE SHOULDNT BE ASSERTION
       })
     return res.status(200).json(articles);
   }
-  // const articles = mapperArticles({
+  //TODO:  const articles = mapperArticles({
   //   sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
   //   articles: await serviceArticles.getVerifiedArticles(res.locals.user.id),
   // });

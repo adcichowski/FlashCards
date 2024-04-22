@@ -1,4 +1,4 @@
-const STALE_NUMBER_TAKEN = 2;
+const STALE_NUMBER_TAKEN = 10;
 
 export const putBoundaryPagination = (page: string | undefined) => {
   const pageNumber = Number(page) || 1;
@@ -9,4 +9,6 @@ export const putBoundaryPagination = (page: string | undefined) => {
   };
 };
 
-export const generatePagination = (total:number) =>({pages:Math.ceil(total/STALE_NUMBER_TAKEN)})
+export const generatePagination = (total: number) => ({
+  pages: Math.ceil(total / STALE_NUMBER_TAKEN),
+});

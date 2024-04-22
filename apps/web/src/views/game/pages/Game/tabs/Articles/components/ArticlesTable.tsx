@@ -1,5 +1,5 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./ArticlesTable.module.scss";
 import { useGetArticles } from "../hooks/useGetArticles";
 import { convertDate } from "../../../utils/date";
@@ -10,6 +10,7 @@ import { ReusablePagination } from "src/components/Pagination/Pagination";
 type Article = {
   id: string;
   title: string;
+  tags: string[];
   author: string | undefined;
   createdAt: number | undefined;
   rate: {
@@ -75,6 +76,11 @@ const useArticleColumns = () => {
         return <>{timestamp ? convertDate(timestamp) : "N/A"}</>;
       },
     }),
+    columnHelper.accessor("tags", {
+      header: "tags",
+      cell: (info) => info.renderValue(),
+      footer: (info) => info.column.id,
+    }),
   ];
 };
 
@@ -88,7 +94,7 @@ export function ArticlesTable() {
   });
 
   return (
-    <section>
+    <section className={styles.sectionTable}>
       <table className={styles.table}>
         <thead className={styles.tableHead}>
           {table.getHeaderGroups().map((headerGroup) => (

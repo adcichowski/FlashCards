@@ -2,7 +2,6 @@ import * as React from "react";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import styles from "./Pagination.module.scss";
 import Link, { LinkProps } from "next/link";
-import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import { usePagination } from "./usePagination";
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
@@ -26,20 +25,27 @@ type PaginationLinkProps = {
   href: LinkProps["href"];
 } & Omit<React.ComponentProps<"a">, "href" | "ref">;
 
-const PaginationLink = ({ className, isActive, ...props }: PaginationLinkProps) => (
-  <Link
-    aria-current={isActive ? "page" : undefined}
-    className={clsx(className || styles.paginationNumberLink, isActive && styles.activeLink)}
-    {...props}
-  />
-);
+const PaginationLink = ({ className, isActive, ...props }: PaginationLinkProps) => {
+  if (props.disabled) {
+    return (
+      <button
+        aria-current={isActive ? "page" : undefined}
+        className={clsx(className || styles.paginationNumberLink, isActive && styles.activeLink)}
+        type="button"
+      >
+        {props.children}
+      </button>
+    );
+  }
+  return <Link className={clsx(className || styles.paginationNumberLink, isActive && styles.activeLink)} {...props} />;
+};
 PaginationLink.displayName = "PaginationLink";
 
-const PaginationPrevious = ({ disabled, ...props }: React.ComponentProps<typeof PaginationLink>) => (
+const PaginationPrevious = (props: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
     aria-label="Go to previous page"
-    aria-disabled={disabled}
-    className={clsx(styles.paginationLink, disabled && styles.disabled)}
+    aria-disabled={props.disabled}
+    className={clsx(styles.paginationLink, props.disabled && styles.disabled)}
     {...props}
   >
     <ChevronLeft className={styles.paginationIcon} />
@@ -48,12 +54,11 @@ const PaginationPrevious = ({ disabled, ...props }: React.ComponentProps<typeof 
 );
 PaginationPrevious.displayName = "PaginationPrevious";
 
-const PaginationNext = ({ disabled, ...props }: React.ComponentProps<typeof PaginationLink>) => (
+const PaginationNext = (props: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink
-    //TODO: Pagination Link should be disable
     aria-label="Go to next page"
-    aria-disabled={disabled}
-    className={clsx(styles.paginationLink, disabled && styles.disabled)}
+    aria-disabled={props.disabled}
+    className={clsx(styles.paginationLink, props.disabled && styles.disabled)}
     {...props}
   >
     <span>Next</span>

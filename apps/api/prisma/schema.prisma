@@ -74,11 +74,11 @@ model Articles {
 }
 
 model Articles_Tags {
-  id        String    @id(map: "articles_tags_pk") @unique(map: "articles_tags_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tagId     String    @db.Uuid
-  articleId String?   @db.Uuid
-  Articles  Articles? @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_tags_articleId_id_fk")
-  Tags      Tags      @relation(fields: [tagId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_tags_tagId_fk")
+  id        String   @id(map: "articles_tags_pk") @unique(map: "articles_tags_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tagId     String   @db.Uuid
+  articleId String   @db.Uuid
+  Articles  Articles @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_tags_articleId_id_fk")
+  Tags      Tags     @relation(fields: [tagId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_tags_tagId_fk")
 }
 
 model Tags {
