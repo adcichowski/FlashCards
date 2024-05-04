@@ -8,7 +8,7 @@ export type QueryArticleData = {
     id: string;
     author: string;
     url: string;
-    imageSrc: string;
+    faviconUrl: string;
     title: string;
     rate: {
       sum: number;

@@ -31,7 +31,25 @@
   height: auto;
 }
 
-.articleHeading {
-  font-size: 1.6rem;
+.articleFigure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  gap: 20px;
+  font-weight: 400;
+  margin: 30px;
+  border: 1px solid white;
+  padding: 10px;
+}
+
+.articleTitle {
+  text-align: center;
+  font-size: 1.4rem;
   font-weight: 500;
+}
+.articleForm {
+  max-width: 350px;
+  margin: auto;
+  margin: 30px auto 10px auto;
 }

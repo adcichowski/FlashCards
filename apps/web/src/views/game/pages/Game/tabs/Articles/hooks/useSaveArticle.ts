@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { useFetch } from "src/hooks/useFetch";
 import { fetcher } from "src/utils/fetcher";
 
 type MutationSaveArticleVariables = {
@@ -12,16 +13,20 @@ type MutationSaveArticleData = {
   createdAt: number | undefined;
   author: string | undefined;
   tags: string[] | undefined;
+  faviconUrl: string | undefined;
 };
 export function useSaveArticle() {
-  const mutation = useMutation<MutationSaveArticleData, { message: string }, MutationSaveArticleVariables>({
+  const secureFetch = useFetch();
+  const mutation = useMutation<MutationSaveArticleData | undefined, { message: string }, MutationSaveArticleVariables>({
     mutationKey: ["saveArticle"],
     mutationFn: async (data) => {
-      const res = await fetcher<MutationSaveArticleData>("articles", {
-        method: "POST",
-        body: data,
-      });
-      return res;
+      if (secureFetch) {
+        const res = await secureFetch<MutationSaveArticleData>("articles", {
+          method: "POST",
+          body: data,
+        });
+        return res;
+      }
     },
   });
   return mutation;

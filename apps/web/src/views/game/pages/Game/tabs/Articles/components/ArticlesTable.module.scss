@@ -16,9 +16,18 @@
 .header::first-letter {
   text-transform: uppercase;
 }
+.faviconUrl {
+  width: 40px;
+}
 .title {
   width: 470px;
 }
+.figureTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .rate {
   margin-left: 12px;
 }
@@ -29,9 +38,7 @@
 .author {
   width: 200px;
 }
-.createdAt {
-  width: 145px;
-}
+
 .row {
   position: relative;
 }

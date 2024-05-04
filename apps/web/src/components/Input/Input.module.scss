@@ -26,3 +26,9 @@
 .errorInfo::first-letter {
   text-transform: uppercase;
 }
+
+.oneLine {
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}

@@ -81,7 +81,7 @@ const ReusablePagination = ({ pages }: { pages: number }) => {
     <Pagination>
       <PaginationContent>
         {paginateItems.map(({ type, page, selected, ...props }) => (
-          <PaginationItem>
+          <PaginationItem key={page}>
             {type === "previous" && <PaginationPrevious href={{ query: { page: page } }} {...props} />}
             {type === "next" && <PaginationNext href={{ query: { page: page } }} {...props} />}
             {type === "ellipsis" && <PaginationEllipsis {...props} />}

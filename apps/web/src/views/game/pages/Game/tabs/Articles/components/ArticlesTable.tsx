@@ -1,5 +1,6 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import React from "react";
+import Image from "next/image";
 import styles from "./ArticlesTable.module.scss";
 import { useGetArticles } from "../hooks/useGetArticles";
 import { convertDate } from "../../../utils/date";
@@ -9,6 +10,7 @@ import { useManageRateArticle } from "../hooks/useManageRateArticle";
 import { ReusablePagination } from "src/components/Pagination/Pagination";
 type Article = {
   id: string;
+  faviconUrl: string | undefined;
   title: string;
   tags: string[];
   author: string | undefined;
@@ -29,9 +31,17 @@ const useArticleColumns = () => {
   return [
     columnHelper.accessor("title", {
       cell: (info) => (
-        <a href={info.row.original.url} className={styles.linkTitle}>
-          {info.getValue()} <LinkIcon className={styles.linkIcon} />
-        </a>
+        <figure className={styles.figureTitle}>
+          {info.row.original.faviconUrl && (
+            <Image width={30} alt="" height={30} src={info.row.original.faviconUrl} className={styles.linkTitle} />
+          )}
+
+          <figcaption>
+            <a href={info.row.original.url} className={styles.linkTitle}>
+              {info.getValue()} <LinkIcon className={styles.linkIcon} />
+            </a>
+          </figcaption>
+        </figure>
       ),
       footer: (info) => info.column.id,
     }),
@@ -64,20 +74,14 @@ const useArticleColumns = () => {
       footer: (info) => info.column.id,
     }),
 
-    columnHelper.accessor("author", {
-      header: "Author",
+    columnHelper.accessor("tags", {
+      header: "tags",
       cell: (info) => info.renderValue(),
       footer: (info) => info.column.id,
     }),
-    columnHelper.accessor("createdAt", {
-      header: "Created At",
-      cell: (cell) => {
-        const timestamp = cell.getValue();
-        return <>{timestamp ? convertDate(timestamp) : "N/A"}</>;
-      },
-    }),
-    columnHelper.accessor("tags", {
-      header: "tags",
+
+    columnHelper.accessor("author", {
+      header: "Author",
       cell: (info) => info.renderValue(),
       footer: (info) => info.column.id,
     }),

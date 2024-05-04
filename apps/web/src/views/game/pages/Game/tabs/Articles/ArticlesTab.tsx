@@ -19,6 +19,7 @@ type ArticlePropType = {
   title: string;
   createdAt: number | undefined;
   url: string;
+  faviconUrl: string | undefined;
 };
 
 export function ArticlesTab() {
@@ -72,27 +73,29 @@ const FormEditArticle = ({ article: { id, ...article } }: { article: ArticleProp
   const onSubmit = handleSubmit(async (data) => {
     // await mutate(data);
   });
-
+  console.log(article.faviconUrl);
   return (
-    <form onSubmit={onSubmit} className={styles.articleForm}>
-      <Article {...article} />
-      <Input {...register("url")} error={formState.errors.url?.message} />
-      <Input {...register("author")} error={formState.errors.url?.message} />
+    <section>
+      <figure className={styles.articleFigure}>
+        <img
+          src={article.faviconUrl}
+          style={{ width: "40px", height: "40px" }}
+          alt={`favicon article ${article.title}`}
+        />
+        <figcaption className={styles.articleTitle}>{article.title}</figcaption>
+      </figure>
 
-      <div className={styles.buttonWrapper}>
-        <Button type="submit" size="small">
-          Get Article
-        </Button>
-      </div>
-    </form>
-  );
-};
+      <form onSubmit={onSubmit} className={styles.articleForm}>
+        <div className={styles.inputAuthor}>
+          <Input oneLine {...register("author")} error={formState.errors.url?.message} />
+        </div>
 
-const Article = ({ author, title }: { author?: string; title: string; tag?: string[] }) => {
-  return (
-    <article className={styles.articleWrapper}>
-      <h2 className={styles.articleHeading}>{title}</h2>
-      <p className={styles.articleAuthor}>{author}</p>
-    </article>
+        <div className={styles.buttonWrapper}>
+          <Button type="submit" size="small">
+            Set Article
+          </Button>
+        </div>
+      </form>
+    </section>
   );
 };
