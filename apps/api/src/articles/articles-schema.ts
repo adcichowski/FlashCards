@@ -1,9 +1,12 @@
 import * as Yup from "yup";
 export const createArticleSchema = Yup.object({
-  title: Yup.string().label("Title").required(`Provided url don't have title`),
-  imageSrc: Yup.string().optional().label("Image"),
+  title: Yup.string()
+    .label("Title")
+    .required(`Provided url don't have title or first heading`),
+  faviconUrl: Yup.string().optional().label("Favicon Url"),
   url: Yup.string().required().label("Url"),
-  author: Yup.string().optional(),
+  author: Yup.string().optional().label("Author"),
+  heading: Yup.string().optional().label("Heading"),
 }).required();
 
 export const articleUrlReq = Yup.object({

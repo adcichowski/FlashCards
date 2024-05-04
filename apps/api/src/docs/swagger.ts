@@ -31,12 +31,8 @@ const swaggerSpec = SwaggerJSDoc(options);
 Fs.writeFileSync("openapi.yaml", Yaml.dump(swaggerSpec));
 
 // Swagger page
-router.use("/docs", (_, res) => {
+router.get("/", (_, res) => {
   res.sendFile(resolve("redoc-static.html"));
 });
-// Docs in JSON format
-router.get("/docs.json", (_: Request, res: Response) => {
-  res.setHeader("Content-Type", "application/json");
-  res.send(swaggerSpec);
-});
+
 export { router as routerSwagger };

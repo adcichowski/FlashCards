@@ -19,7 +19,6 @@ export const getAllArticles = async ({
     prisma.articles.findMany({
       ...putBoundaryPagination(page),
       include: {
-        
         Articles_Rates: {
           select: {
             id: true,
@@ -38,9 +37,7 @@ export const getAllArticles = async ({
             },
           },
         },
-        
       },
-      
     }),
     prisma.articles.count(),
   ]);
@@ -68,7 +65,7 @@ export const getVerifiedArticles = async (userId: string) => {
       author: true,
       title: true,
       id: true,
-      imageSrc: true,
+      faviconUrl: true,
       url: true,
       createdAt: true,
     },
@@ -82,15 +79,15 @@ export const createArticle = async ({
   title,
   url,
   author,
-  imageSrc,
+  faviconUrl,
 }: {
-  imageSrc?: string;
+  faviconUrl?: string;
   url: string;
   title: string;
   author?: string;
 }) => {
   return await prisma.articles.create({
-    data: { title, url, author, imageSrc },
+    data: { title, url, author, faviconUrl },
   });
 };
 

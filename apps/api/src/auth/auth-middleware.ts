@@ -43,6 +43,7 @@ export const checkAuthUser = async (
   next: NextFunction
 ) => {
   const token = req.headers.authorization?.split(" ")[1];
+
   if (!token) return next(new HttpError(401, "Token is not sended"));
 
   try {

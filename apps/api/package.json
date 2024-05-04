@@ -6,11 +6,11 @@
   "main": "index.js",
   "scripts": {
     "docker": "docker run -d --rm --name postgres -e POSTGRES_USER=user -e POSTGRES_PASSWORD=pass -e -p 5432:5432 postgres",
-    "dev": "tsx ./src/server.ts",
+    "start": "tsx ./src/server.ts",
     "test": "jest",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
     "pre-commit": "eslint . --fix",
-    "predev": "npx @redocly/cli build-docs openapi.yaml"
+    "prestart": "npx @redocly/cli build-docs openapi.yaml"
   },
   "author": "Adam Cichowski",
   "license": "MIT",
@@ -60,6 +60,7 @@
     "@types/uuid": "^9.0.7",
     "body-parser": "^1.20.0",
     "dot-env": "^0.0.1",
+    "dotenv": "^16.4.5",
     "express-jwt": "^7.4.3",
     "jest": "^28.0.3",
     "js-yaml": "^4.1.0",

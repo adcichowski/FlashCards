@@ -8,17 +8,17 @@ import { InferType } from "yup";
 export const getAllArticles = async (_req: Request, res: Response) => {
   if (res.locals.user.role === "admin") {
     const articles = await serviceArticles.getAllArticles({
-        userId: res.locals.user.id,
-        page:_req.query.page as string
-     //TODO   page: _req.query.page as string, - THERE SHOULDNT BE ASSERTION
-      })
+      userId: res.locals.user.id,
+      page: _req.query.page as string,
+      //TODO:   page: _req.query.page as string, - THERE SHOULDNT BE ASSERTION
+    });
     return res.status(200).json(articles);
   }
   //TODO:  const articles = mapperArticles({
   //   sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
   //   articles: await serviceArticles.getVerifiedArticles(res.locals.user.id),
   // });
-  return res.status(200).json({ articles:[] });
+  return res.status(200).json({ articles: [] });
 };
 
 export const createArticle = async (
@@ -34,17 +34,13 @@ export const createArticle = async (
   const dom = cheerio.load(text);
   const { url } = req.body;
   const parsedUrl = new URL(url);
-  const imageSrc = dom('meta[property="og:image"]').attr("content");
-  const isCorrectImageSrc = imageSrc?.startsWith("https://");
 
   const generatedArticle = {
-    imageSrc: isCorrectImageSrc
-      ? imageSrc
-      : `https://${parsedUrl.host}${imageSrc}`,
-    title: dom("h1").text(),
+    faviconUrl: `https://${parsedUrl.host}${dom('link[rel*="icon"]').attr("href")}`,
+    title: dom("title").text(),
+    heading: dom("h1").text(),
     url,
   };
-
   try {
     const securedArticle = createArticleSchema.validateSync(generatedArticle);
     const createdArticle = await serviceArticles.createArticle(securedArticle);

@@ -5,7 +5,7 @@ type ArticlesMapperParamType = {
   id: string;
   title: string;
   author: string | null;
-  imageSrc: string | null;
+  faviconUrl: string | null;
   createdAt: number | null;
   Articles_Rates: {
     id: string;
