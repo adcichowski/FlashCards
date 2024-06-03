@@ -3,25 +3,31 @@ import React from "react";
 import Badge from "src/components/Badge/Badge";
 import styles from "./MultiSelectTech.module.scss";
 import { badges } from "src/components/Badge/constants";
-const books = [
-  { id: "tech-1", title: "database" },
-  { id: "tech-2", title: "relational sql" },
-  { id: "tech-4", title: "frontend" },
-  { id: "tech-5", title: "react" },
-  { id: "tech-6", title: "javascript" },
-  { id: "tech-7", title: "react native" },
-];
-
-function getFilteredBooks(selectedItems: { id: string; title: string }[], inputValue: string | undefined) {
-  return books.filter((book) => {
-    return book.title.includes(inputValue ? inputValue?.toLowerCase() : "");
-  });
+import clsx from "clsx";
+import { useGetTags } from "./hooks/useGetTags";
+import { renderTechsIcon } from "./constants/techs";
+import CancelIcon from "public/icons/cancel.svg";
+function getFilteredTags(
+  selectedItems: { id: string; name: string }[],
+  inputValue: string | undefined,
+  tags: { name: string; id: string }[] | undefined,
+) {
+  if (!tags) return [];
+  return tags
+    .filter((tag) => !selectedItems.map((v) => v.id).includes(tag.id))
+    .filter((tag) => {
+      return tag.name.includes(inputValue ? inputValue?.toLowerCase() : "");
+    });
 }
 
-export function MultiSelectTech() {
+export function MultiSelectTech(props: { name: string; id: string }) {
+  const { data } = useGetTags();
   const [inputValue, setInputValue] = React.useState<string | undefined>("");
-  const [selectedItems, setSelectedItems] = React.useState<{ id: string; title: string }[]>([]);
-  const items = React.useMemo(() => getFilteredBooks(selectedItems, inputValue), [selectedItems, inputValue]);
+  const [selectedItems, setSelectedItems] = React.useState<{ id: string; name: string }[]>([]);
+  const items = React.useMemo(
+    () => getFilteredTags(selectedItems, inputValue, data?.tags),
+    [selectedItems, inputValue],
+  );
   const { getSelectedItemProps, getDropdownProps, removeSelectedItem } = useMultipleSelection({
     selectedItems,
     onStateChange({ selectedItems: newSelectedItems, type }) {
@@ -41,9 +47,9 @@ export function MultiSelectTech() {
   const { isOpen, getLabelProps, getMenuProps, getInputProps, getItemProps } = useCombobox({
     items,
     itemToString(item) {
-      return item ? item.title : "";
+      return item ? item.name : "";
     },
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
+    defaultHighlightedIndex: 1, // after selection, highlight the first item.
     selectedItem: null,
     inputValue,
     stateReducer(state, actionAndChanges) {
@@ -83,58 +89,55 @@ export function MultiSelectTech() {
 
   return (
     <div className={styles.multiSelectParent}>
-      <div>
-        <label className="sr-only" {...getLabelProps()}>
-          Technologies
-        </label>
-        <div className={styles.multiSelectInputWrapper}>
-          <div className={styles.selectedList}>
-            {selectedItems.map((selectedItemForRender, index) => {
-              return (
-                <div
+      <div className={styles.multiSelectInputWrapper}>
+        <div className={styles.selectedList}>
+          {selectedItems.map((selectedItemForRender, index) => {
+            return (
+              <div
+                className={styles.wrapperBadge}
+                key={selectedItemForRender.id}
+                {...getSelectedItemProps({
+                  selectedItem: selectedItemForRender,
+                  index,
+                })}
+              >
+                <Badge
+                  name={selectedItemForRender.name.toLowerCase().split(" ").join("_")}
                   key={selectedItemForRender.id}
-                  {...getSelectedItemProps({
-                    selectedItem: selectedItemForRender,
-                    index,
-                  })}
                 >
-                  <Badge
-                    color={
-                      badges?.[selectedItemForRender.title.toLowerCase().split(" ").join("_") as keyof typeof badges]
-                    }
-                    key={`selected-item-${index}`}
-                  >
-                    <div>
-                      {selectedItemForRender.title}
-                      <span
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          removeSelectedItem(selectedItemForRender);
-                        }}
-                      >
-                        &#10005;
-                      </span>
-                    </div>
-                  </Badge>
-                </div>
-              );
-            })}
-            <input
-              className={styles.multiSelectInput}
-              {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
-            />
-          </div>
+                  <div className={styles.selectedItem}>
+                    {selectedItemForRender.name}
+                    <button
+                      className={styles.cancelIcon}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeSelectedItem(selectedItemForRender);
+                      }}
+                    >
+                      <CancelIcon />
+                    </button>
+                  </div>
+                </Badge>
+              </div>
+            );
+          })}
+          <input
+            className={styles.multiSelectInput}
+            {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
+            {...props}
+          />
         </div>
       </div>
-      <ul className={styles.searchList} {...getMenuProps()}>
+
+      <ul className={clsx(styles.searchList, !(isOpen && items.length) && styles.hidden)} {...getMenuProps()}>
         {isOpen &&
-          items
-            .filter((item) => !selectedItems.map((v) => v.id).includes(item.id))
-            .map((item, index) => (
-              <li key={`${item.title}${index}`} {...getItemProps({ item, index })}>
-                {item.title}
-              </li>
-            ))}
+          items.map((item, index) => (
+            <li className={styles.searchItem} key={item.id}>
+              <button {...getItemProps({ item, index })} className={styles.searchItemButton}>
+                {item.name}
+              </button>
+            </li>
+          ))}
       </ul>
     </div>
   );

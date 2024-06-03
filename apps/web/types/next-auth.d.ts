@@ -5,6 +5,7 @@ declare module "next-auth" {
     readonly id: string;
     readonly email: string;
     readonly token: string;
+    readonly role: string;
   }
   interface Session {
     readonly role: string;

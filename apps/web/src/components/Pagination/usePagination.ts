@@ -39,8 +39,8 @@ export const usePagination = ({ pages }: { pages: number }) => {
     ...(siblingsStart > BOUNDARY_COUNT + 2
       ? ["ellipsis"]
       : BOUNDARY_COUNT + 1 < pages - BOUNDARY_COUNT
-      ? [BOUNDARY_COUNT + 1]
-      : []),
+        ? [BOUNDARY_COUNT + 1]
+        : []),
 
     // Sibling pages
     ...range(siblingsStart, siblingsEnd),
@@ -49,13 +49,12 @@ export const usePagination = ({ pages }: { pages: number }) => {
     ...(siblingsEnd < pages - BOUNDARY_COUNT - 1
       ? ["ellipsis"]
       : pages - BOUNDARY_COUNT > BOUNDARY_COUNT
-      ? [pages - BOUNDARY_COUNT]
-      : []),
+        ? [pages - BOUNDARY_COUNT]
+        : []),
     ...endPages,
     ...(pages ? [] : ["next"]),
     ...["next"],
   ];
-  console.log(itemList);
   return itemList.map((item) =>
     typeof item === "number"
       ? ({

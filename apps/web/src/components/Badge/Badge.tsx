@@ -1,18 +1,23 @@
 import React from "react";
 import styles from "./Badge.module.scss";
 import clsx from "clsx";
+import NotFoundIcon from "public/icons/technology/not-found.svg";
+import { techs } from "src/views/game/components/MultiSelectTech/constants/techs";
 
 export default function Badge({
   children,
   variant,
-  color,
+  name,
 }: {
+  name: string;
   children: string | number | JSX.Element;
   variant?: "outline";
-  color?: string;
 }) {
+  const Tech = techs[name as keyof typeof techs];
+
   return (
-    <div style={{ backgroundColor: color }} className={clsx(styles.badge, variant && styles[variant])}>
+    <div className={clsx(styles.badge, variant && styles[variant])}>
+      <div className={styles.icon}>{Tech ? <Tech.Icon /> : <NotFoundIcon />}</div>
       <div className={styles.text}>{children}</div>
     </div>
   );

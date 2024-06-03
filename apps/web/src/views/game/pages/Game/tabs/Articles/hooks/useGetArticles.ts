@@ -4,7 +4,7 @@ import { useFetch } from "src/hooks/useFetch";
 
 export type QueryArticleData = {
   articles: {
-    tags: string[];
+    tags: { name: string; id: string }[];
     id: string;
     author: string;
     url: string;
@@ -32,7 +32,6 @@ export function useGetArticles() {
         const articles = await secureFetch<QueryArticleData>(`articles?page=${page}`, {
           method: "GET",
         });
-        console.log(articles);
         return articles;
       }
     },

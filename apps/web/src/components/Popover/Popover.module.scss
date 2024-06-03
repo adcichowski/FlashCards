@@ -1,0 +1,37 @@
+.content {
+  z-index: 50;
+  width: 288px; /* Equivalent to w-72 */
+  border-radius: 8px; /* Equivalent to rounded-md */
+  border-width: 1px;
+  background-color: var(--popover-bg); /* Replace with actual bg-popover value */
+  padding: 16px; /* Equivalent to p-4 */
+  color: var(--popover-foreground); /* Replace with actual text-popover-foreground value */
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Equivalent to shadow-md */
+  outline: none;
+}
+
+.content[data-state="open"] {
+  animation: fadeInZoomIn 0.2s ease-out forwards;
+}
+
+.content[data-state="closed"] {
+  animation: fadeOutZoomOut 0.2s ease-in forwards;
+}
+
+.content[data-side="bottom"] {
+  animation: slideInFromTop 0.2s ease-out forwards;
+}
+
+.content[data-side="left"] {
+  animation: slideInFromRight 0.2s ease-out forwards;
+}
+
+.content[data-side="right"] {
+  animation: slideInFromLeft 0.2s ease-out forwards;
+}
+
+.content[data-side="top"] {
+  animation: slideInFromBottom 0.2s ease-out forwards;
+}

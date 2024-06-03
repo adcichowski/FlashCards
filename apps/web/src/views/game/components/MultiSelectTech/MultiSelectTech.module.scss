@@ -1,5 +1,6 @@
 .multiSelectParent {
   position: relative;
+  z-index: 10;
 }
 .multiSelectLabel {
   font-size: 2rem;
@@ -7,6 +8,7 @@
 .multiSelectInputWrapper {
   width: 100%;
   border-radius: 5px;
+  padding: 10px;
   border: none;
   background-color: #d9d9d9;
 }
@@ -16,20 +18,70 @@
   min-width: 30px;
   flex-grow: 1;
 }
+.wrapperBadge {
+  display: flex;
+}
 .selectedList {
-  padding: 6px 10px;
+  font-size: 2rem;
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
+  color: white;
   text-transform: capitalize;
 }
 .searchList {
   text-transform: capitalize;
   position: absolute;
   display: flex;
+  margin-top: 10px;
   flex-direction: column;
   align-items: flex-start;
   background-color: #221f63;
   width: 100%;
+}
+
+.searchItem {
+  position: relative;
+  width: 100%;
+  padding: 7px 0 7px 10px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.searchItem:hover::before {
+  content: "";
+  background-color: #c93434;
+  position: absolute;
+  width: 1px;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.searchItem:hover {
+  cursor: pointer;
+  background-color: #343086;
+}
+
+.cancelIcon {
+  width: 10px;
+  margin-left: 5px;
+  height: 10px;
+}
+
+.cancelIcon {
+  cursor: pointer;
+  color: #c93434;
+}
+
+.searchItemButton {
+  width: 100%;
+  text-align: left;
+}
+
+.searchItemButton::first-letter {
+  text-transform: capitalize;
+}
+
+.hidden {
+  visibility: hidden;
 }

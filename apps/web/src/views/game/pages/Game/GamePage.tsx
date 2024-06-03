@@ -32,11 +32,10 @@ const tabs = [
 })) satisfies TabChildType[];
 
 export function GamePage() {
-  const s = useSession();
   return (
     <div className={styles.wrapper}>
       <div className={styles.selectTechnologies}>
-        <MultiSelectTech />
+        <MultiSelectTech id="technologies" name="technologies" />
       </div>
       <div className={styles.tabPanelWrapper}>
         <TabsPanel tabs={tabs} />

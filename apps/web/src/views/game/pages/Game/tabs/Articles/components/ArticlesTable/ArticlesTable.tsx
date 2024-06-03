@@ -1,18 +1,22 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import React from "react";
 import Image from "next/image";
+import { MessageCircleXIcon, ShieldQuestionIcon, SquarePen, SquarePenIcon } from "lucide-react";
 import styles from "./ArticlesTable.module.scss";
-import { useGetArticles } from "../hooks/useGetArticles";
-import { convertDate } from "../../../utils/date";
-import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, ArrowBigDown } from "lucide-react";
+import { useGetArticles } from "../../hooks/useGetArticles";
+import { convertDate } from "../../../../utils/date";
+import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, CircleXIcon } from "lucide-react";
 import clsx from "clsx";
-import { useManageRateArticle } from "../hooks/useManageRateArticle";
+import { useManageRateArticle } from "../../hooks/useManageRateArticle";
 import { ReusablePagination } from "src/components/Pagination/Pagination";
+import Badge from "src/components/Badge/Badge";
+import { RowAction } from "../../../../components/RowAction/RowAction";
+import { useSession } from "next-auth/react";
 type Article = {
   id: string;
   faviconUrl: string | undefined;
   title: string;
-  tags: string[];
+  tags: { id: string; name: string }[];
   author: string | undefined;
   createdAt: number | undefined;
   rate: {
@@ -26,8 +30,9 @@ type Article = {
 };
 
 const columnHelper = createColumnHelper<Article>();
-
-const useArticleColumns = () => {
+const useColumns = () => {
+  const session = useSession();
+  const isAdmin = session.data?.user?.role === "admin";
   return [
     columnHelper.accessor("title", {
       cell: (info) => (
@@ -38,7 +43,7 @@ const useArticleColumns = () => {
 
           <figcaption>
             <a href={info.row.original.url} className={styles.linkTitle}>
-              {info.getValue()} <LinkIcon className={styles.linkIcon} />
+              <span dangerouslySetInnerHTML={{ __html: info.getValue() }} /> <LinkIcon className={styles.linkIcon} />
             </a>
           </figcaption>
         </figure>
@@ -75,22 +80,65 @@ const useArticleColumns = () => {
     }),
 
     columnHelper.accessor("tags", {
-      header: "tags",
-      cell: (info) => info.renderValue(),
+      header: "Tags",
+      cell: ({ row }) => (
+        <ul className={styles.rowTags}>
+          {row.original.tags.map((tag) => (
+            <li key={tag.id}>
+              <Badge key={tag.id} name={tag.name}>
+                {tag.name}
+              </Badge>
+            </li>
+          ))}
+        </ul>
+      ),
       footer: (info) => info.column.id,
     }),
-
-    columnHelper.accessor("author", {
-      header: "Author",
-      cell: (info) => info.renderValue(),
-      footer: (info) => info.column.id,
-    }),
+    ...(isAdmin
+      ? [
+          columnHelper.display({
+            id: "actions",
+            cell: () => (
+              <RowAction
+                trigger="Action"
+                label="Article"
+                items={[
+                  {
+                    name: "edit",
+                    render: (
+                      <button className={styles.buttonAction}>
+                        <SquarePenIcon />
+                        Edit
+                      </button>
+                    ),
+                  },
+                  {
+                    name: "Verify",
+                    render: (
+                      <button className={styles.buttonAction}>
+                        <ShieldQuestionIcon /> Verify
+                      </button>
+                    ),
+                  },
+                  {
+                    name: "Verify",
+                    render: (
+                      <button className={clsx(styles.buttonAction, styles.buttonDelete)}>
+                        <CircleXIcon /> Delete
+                      </button>
+                    ),
+                  },
+                ]}
+              />
+            ),
+          }),
+        ]
+      : []),
   ];
 };
-
 export function ArticlesTable() {
   const { data } = useGetArticles();
-  const columns = useArticleColumns();
+  const columns = useColumns();
   const table = useReactTable({
     data: data?.articles || [],
     columns,
@@ -115,7 +163,7 @@ export function ArticlesTable() {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className={styles.row}>
               {row.getVisibleCells().map((cell) => (
-                <td className={styles.rowCell} key={cell.id}>
+                <td className={clsx(styles.rowCell, styles[cell.column.id])} key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

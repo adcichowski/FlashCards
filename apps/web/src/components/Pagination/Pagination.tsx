@@ -37,7 +37,13 @@ const PaginationLink = ({ className, isActive, ...props }: PaginationLinkProps) 
       </button>
     );
   }
-  return <Link className={clsx(className || styles.paginationNumberLink, isActive && styles.activeLink)} {...props} />;
+  return (
+    <Link
+      scroll={false}
+      className={clsx(className || styles.paginationNumberLink, isActive && styles.activeLink)}
+      {...props}
+    />
+  );
 };
 PaginationLink.displayName = "PaginationLink";
 
@@ -81,7 +87,7 @@ const ReusablePagination = ({ pages }: { pages: number }) => {
     <Pagination>
       <PaginationContent>
         {paginateItems.map(({ type, page, selected, ...props }) => (
-          <PaginationItem key={page}>
+          <PaginationItem key={`${type} ${page}`}>
             {type === "previous" && <PaginationPrevious href={{ query: { page: page } }} {...props} />}
             {type === "next" && <PaginationNext href={{ query: { page: page } }} {...props} />}
             {type === "ellipsis" && <PaginationEllipsis {...props} />}

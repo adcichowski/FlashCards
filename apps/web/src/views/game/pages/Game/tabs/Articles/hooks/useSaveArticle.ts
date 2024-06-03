@@ -10,6 +10,7 @@ type MutationSaveArticleData = {
   id: string;
   url: string;
   title: string;
+  heading: string;
   createdAt: number | undefined;
   author: string | undefined;
   tags: string[] | undefined;

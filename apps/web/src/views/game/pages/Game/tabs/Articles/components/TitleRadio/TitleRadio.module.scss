@@ -1,0 +1,34 @@
+.item {
+  display: grid;
+  width: min-content;
+  gap: 10px;
+}
+.groupItem {
+  aspect-ratio: 4/4;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  border: 1px solid white;
+}
+
+.radioGroup {
+  display: grid;
+  gap: 2px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item > [data-state="checked"] {
+  background-color: rgba(81, 40, 40, 0.34);
+  border-radius: 10px;
+}
+.circleIcon {
+  width: 10px;
+  position: relative;
+  top: -5px;
+  color: currentColor;
+  fill: currentColor;
+}

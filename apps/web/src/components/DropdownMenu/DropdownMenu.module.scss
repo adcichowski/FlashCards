@@ -1,0 +1,224 @@
+.subTrigger {
+  display: flex;
+  padding: 6px 8px;
+  align-items: center;
+  border-radius: 2px;
+  outline-style: none;
+  font-size: 1.6rem;
+  line-height: 20px;
+  cursor: default;
+  user-select: none;
+}
+
+.subContent {
+  z-index: 50;
+  min-width: 128px;
+  overflow: hidden;
+  border-radius: 6px;
+  border-width: 1px;
+  background-color: rgb(77, 103, 176);
+  padding: 4px;
+  color: var(--popover-foreground);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+:is(.subContent, .menuContent)[data-state="open"] {
+  animation: fadeInZoomIn 0.2s ease-out forwards;
+}
+:is(.subContent, .menuContent)[data-state="closed"] {
+  animation: fadeOutZoomOut 0.2s ease-in forwards;
+}
+:is(.subContent, .menuContent)[data-side="bottom"] {
+  animation: slideInFromTop 0.2s ease-out forwards;
+}
+:is(.subContent, .menuContent)[data-side="left"] {
+  animation: slideInFromRight 0.2s ease-out forwards;
+}
+:is(.subContent, .menuContent)[data-side="right"] {
+  animation: slideInFromLeft 0.2s ease-out forwards;
+}
+:is(.subContent, .menuContent)[data-side="top"] {
+  animation: slideInFromBottom 0.2s ease-out forwards;
+}
+
+.menuContent {
+  z-index: 50;
+  min-width: 128px;
+  overflow: hidden;
+  border-radius: 6px;
+  border-width: 1px;
+  background-color: rgb(48, 28, 89, 1);
+  padding: 4px;
+  color: var(--popover-foreground);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.item {
+  position: relative;
+  display: flex;
+  cursor: default;
+  user-select: none;
+  align-items: center;
+  border-radius: 4px;
+  margin: 8px 0px;
+  padding: 4px 8px;
+  font-size: 14px;
+  outline: none;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+.item:focus {
+  background-color: #ce7cdc53;
+  color: var(--accent-foreground);
+}
+
+.item[data-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.checkboxItem {
+  position: relative;
+  display: flex;
+  cursor: default;
+  user-select: none;
+  align-items: center;
+  border-radius: 4px;
+  padding: 6px 8px 6px 32px;
+  font-size: 1.4rem;
+  outline: none;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+  &:focus {
+    background-color: var(--accent-bg);
+    color: var(--accent-foreground);
+  }
+
+  &[data-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.radioItem {
+  position: relative;
+  display: flex;
+  cursor: default;
+  user-select: none;
+  align-items: center;
+  border-radius: 4px;
+  padding: 6px 32px 6px 8px; /* Equivalent to rounded-sm */
+  font-size: 1.4rem; /* Equivalent to text-sm */
+  outline: none;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+.radioItem:focus {
+  background-color: var(--accent-bg);
+  color: var(--accent-foreground);
+}
+
+.radioItem[data-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.radioItem > span {
+  position: absolute;
+  left: 8px;
+  display: flex;
+  height: 15px;
+  width: 15px;
+  align-items: center;
+  justify-items: center;
+}
+
+.label {
+  margin: 8px 4px;
+  padding: 4px 0px;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.shortcut {
+  margin-left: auto;
+  opacity: 60;
+}
+
+.separator {
+  margin: -4px 4px;
+  height: 1px;
+  background-color: white;
+}
+
+@keyframes fadeInZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutZoomOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
