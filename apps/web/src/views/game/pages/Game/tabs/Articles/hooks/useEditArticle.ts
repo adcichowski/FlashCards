@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { client } from "src/components/Providers/Providers";
 import { fetcher } from "src/utils/fetcher";
 
 type MutationSaveArticleVariables = {
@@ -26,6 +27,7 @@ export function useEditArticle({ articleId }: { articleId: string }) {
       });
       return res;
     },
+    onSuccess: () => client.invalidateQueries({ queryKey: ["getArticles"] }),
   });
   return mutation;
 }

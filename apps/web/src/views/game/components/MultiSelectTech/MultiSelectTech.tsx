@@ -1,12 +1,13 @@
 import { useCombobox, useMultipleSelection, useSelect } from "downshift";
-import React from "react";
+import React, { useMemo } from "react";
 import Badge from "src/components/Badge/Badge";
 import styles from "./MultiSelectTech.module.scss";
-import { badges } from "src/components/Badge/constants";
 import clsx from "clsx";
 import { useGetTags } from "./hooks/useGetTags";
-import { renderTechsIcon } from "./constants/techs";
 import CancelIcon from "public/icons/cancel.svg";
+import Link from "next/link";
+import { useGetSelectedTags } from "./hooks/useGetSelectedTags";
+
 function getFilteredTags(
   selectedItems: { id: string; name: string }[],
   inputValue: string | undefined,
@@ -21,23 +22,20 @@ function getFilteredTags(
 }
 
 export function MultiSelectTech(props: { name: string; id: string }) {
+  const { selectedTags, tagsFromParams, addTagToParams, removeTagFromParams } = useGetSelectedTags();
   const { data } = useGetTags();
   const [inputValue, setInputValue] = React.useState<string | undefined>("");
-  const [selectedItems, setSelectedItems] = React.useState<{ id: string; name: string }[]>([]);
   const items = React.useMemo(
-    () => getFilteredTags(selectedItems, inputValue, data?.tags),
-    [selectedItems, inputValue],
+    () => getFilteredTags(selectedTags, inputValue, data?.tags),
+    [selectedTags, inputValue, data],
   );
-  const { getSelectedItemProps, getDropdownProps, removeSelectedItem } = useMultipleSelection({
-    selectedItems,
+  const { getSelectedItemProps, getDropdownProps } = useMultipleSelection({
+    selectedItems: selectedTags,
     onStateChange({ selectedItems: newSelectedItems, type }) {
+      console.log("hi");
       if (!newSelectedItems) return;
       switch (type) {
-        case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownBackspace:
-        case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
-        case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
         case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
-          setSelectedItems(newSelectedItems);
           break;
         default:
           break;
@@ -73,7 +71,6 @@ export function MultiSelectTech(props: { name: string; id: string }) {
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
           if (newSelectedItem) {
-            setSelectedItems([...selectedItems, newSelectedItem]);
             setInputValue("");
           }
           break;
@@ -86,12 +83,12 @@ export function MultiSelectTech(props: { name: string; id: string }) {
       }
     },
   });
-
+  console.log(tagsFromParams, selectedTags);
   return (
     <div className={styles.multiSelectParent}>
       <div className={styles.multiSelectInputWrapper}>
         <div className={styles.selectedList}>
-          {selectedItems.map((selectedItemForRender, index) => {
+          {selectedTags.map((selectedItemForRender, index) => {
             return (
               <div
                 className={styles.wrapperBadge}
@@ -107,15 +104,15 @@ export function MultiSelectTech(props: { name: string; id: string }) {
                 >
                   <div className={styles.selectedItem}>
                     {selectedItemForRender.name}
-                    <button
-                      className={styles.cancelIcon}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeSelectedItem(selectedItemForRender);
+                    <Link
+                      href={{
+                        query: {
+                          tags: removeTagFromParams(selectedItemForRender),
+                        },
                       }}
                     >
-                      <CancelIcon />
-                    </button>
+                      <CancelIcon className={styles.cancelIcon} />
+                    </Link>
                   </div>
                 </Badge>
               </div>
@@ -129,13 +126,17 @@ export function MultiSelectTech(props: { name: string; id: string }) {
         </div>
       </div>
 
-      <ul className={clsx(styles.searchList, !(isOpen && items.length) && styles.hidden)} {...getMenuProps()}>
+      <ul className={clsx(styles.searchList)} {...getMenuProps()}>
         {isOpen &&
-          items.map((item, index) => (
-            <li className={styles.searchItem} key={item.id}>
-              <button {...getItemProps({ item, index })} className={styles.searchItemButton}>
-                {item.name}
-              </button>
+          items.map((tag, index) => (
+            <li className={styles.searchItem} key={tag.id}>
+              <Link
+                href={{ query: { tags: addTagToParams(tag) } }}
+                {...getItemProps({ item: tag, index })}
+                className={styles.searchItemButton}
+              >
+                {tag.name}
+              </Link>
             </li>
           ))}
       </ul>

@@ -12,6 +12,7 @@ import { ReusablePagination } from "src/components/Pagination/Pagination";
 import Badge from "src/components/Badge/Badge";
 import { RowAction } from "../../../../components/RowAction/RowAction";
 import { useSession } from "next-auth/react";
+import { useDeleteArticle } from "../../hooks/useDeleteArticle";
 type Article = {
   id: string;
   faviconUrl: string | undefined;
@@ -31,6 +32,7 @@ type Article = {
 
 const columnHelper = createColumnHelper<Article>();
 const useColumns = () => {
+  const { mutate: mutateDeleteArticle, isPending } = useDeleteArticle();
   const session = useSession();
   const isAdmin = session.data?.user?.role === "admin";
   return [
@@ -98,7 +100,7 @@ const useColumns = () => {
       ? [
           columnHelper.display({
             id: "actions",
-            cell: () => (
+            cell: ({ row }) => (
               <RowAction
                 trigger="Action"
                 label="Article"
@@ -121,9 +123,14 @@ const useColumns = () => {
                     ),
                   },
                   {
-                    name: "Verify",
+                    name: "Delete",
                     render: (
-                      <button className={clsx(styles.buttonAction, styles.buttonDelete)}>
+                      <button
+                        aria-disabled={isPending}
+                        disabled={isPending}
+                        onClick={() => mutateDeleteArticle({ articleId: row.original.id })}
+                        className={clsx(styles.buttonAction, styles.buttonDelete)}
+                      >
                         <CircleXIcon /> Delete
                       </button>
                     ),

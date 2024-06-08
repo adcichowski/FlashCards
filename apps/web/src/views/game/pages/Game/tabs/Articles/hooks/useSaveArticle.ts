@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
+import { client } from "src/components/Providers/Providers";
 import { useFetch } from "src/hooks/useFetch";
-import { fetcher } from "src/utils/fetcher";
 
 type MutationSaveArticleVariables = {
   url: string;
@@ -29,6 +29,7 @@ export function useSaveArticle() {
         return res;
       }
     },
+    onSuccess: () => client.invalidateQueries({ queryKey: ["getArticles"] }),
   });
   return mutation;
 }

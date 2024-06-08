@@ -24,7 +24,7 @@ export const RowAction = ({
 
   return (
     <div ref={ref}>
-      <DropdownMenu onOpenChange={setOpen} open={open}>
+      <DropdownMenu onOpenChange={setOpen} modal={false} open={open}>
         <DropdownMenuTrigger>
           <div className={styles.triggerWrapper}>
             Action
