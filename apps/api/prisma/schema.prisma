@@ -67,7 +67,7 @@ model Articles {
   url            String           @unique(map: "articles_url_uindex")
   isVerified     Boolean          @default(false)
   author         String?          @db.VarChar(32)
-  faviconUrl     String?          @db.VarChar(128)
+  faviconUrl     String?          @db.VarChar
   createdAt      Int?
   Articles_Rates Articles_Rates[]
   Articles_Tags  Articles_Tags[]

@@ -10,15 +10,16 @@ export const getAllArticles = async (_req: Request, res: Response) => {
     const articles = await serviceArticles.getAllArticles({
       userId: res.locals.user.id,
       page: _req.query.page as string,
-      //TODO:   page: _req.query.page as string, - THERE SHOULDNT BE ASSERTION
+      tags: res.locals.tags,
     });
     return res.status(200).json(articles);
   }
-  //TODO:  const articles = mapperArticles({
-  //   sumRatesPerArticle: await serviceArticles.getSumRatesPerArticle(),
-  //   articles: await serviceArticles.getVerifiedArticles(res.locals.user.id),
-  // });
-  return res.status(200).json({ articles: [] });
+  const articles = await serviceArticles.getVerifiedArticles({
+    userId: res.locals.user.id,
+    page: _req.query.page as string,
+    tags: res.locals.tags,
+  });
+  return res.status(200).json(articles);
 };
 
 export const createArticle = async (
@@ -33,11 +34,14 @@ export const createArticle = async (
   const text = await articleRes.text();
   const dom = cheerio.load(text);
   const { url } = req.body;
-  const parsedUrl = new URL(url);
+  const host = new URL(url).host;
 
+  const iconUrl = dom('link[rel*="icon"]') || dom('link[rel*="shortcut icon"]');
   const generatedArticle = {
-    faviconUrl: `https://${parsedUrl.host}${dom('link[rel*="icon"]').attr("href")}`,
-    title: dom("title").text(),
+    faviconUrl: iconUrl.attr("href")?.startsWith("/")
+      ? `https://${host}${iconUrl.attr("href")}`
+      : iconUrl.attr("href"),
+    title: dom("title").first().text(),
     heading: dom("h1").text(),
     url,
   };
@@ -47,5 +51,18 @@ export const createArticle = async (
     return res.send(createdArticle);
   } catch (error) {
     return res.status(400).send({ message: getErrorMessage(error) });
+  }
+};
+
+export const deleteArticle = async (
+  req: Request<{ articleId: string }>,
+  res: Response
+) => {
+  try {
+    await serviceArticles.deleteArticle(req.params.articleId);
+    return res.status(200).send({ message: "correct deleted article" });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: "problem during delete article" });
   }
 };

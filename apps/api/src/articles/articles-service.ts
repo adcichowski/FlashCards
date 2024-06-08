@@ -1,12 +1,16 @@
 import { prisma } from "../../libs/prisma/constants";
 import { putBoundaryPagination } from "utils/pagination";
 import { mapperArticles } from "./articles-mappers";
+import { generateFilterByTags } from "./articles-tags/utils/utils";
 export const getAllArticles = async ({
   userId,
   page,
+  tags,
 }: {
+  verified?: boolean;
   userId: string;
   page: string | undefined;
+  tags: string[] | undefined;
 }) => {
   const [ratesArticles, articles, totalArticles] = await prisma.$transaction([
     prisma.articles_Rates.groupBy({
@@ -29,49 +33,86 @@ export const getAllArticles = async ({
           },
         },
         Articles_Tags: {
-          select: {
+          include: {
             Tags: {
               select: {
+                id: true,
                 name: true,
               },
             },
           },
         },
       },
+      where: generateFilterByTags(tags),
     }),
-    prisma.articles.count(),
+    prisma.articles.count({
+      where: generateFilterByTags(tags),
+    }),
   ]);
-
   return mapperArticles({
-    articles,
+    articles: articles,
     ratesArticles,
     total: totalArticles,
   });
 };
-export const getTagsPerArticle = () => {};
 
-export const getVerifiedArticles = async (userId: string) => {
-  return await prisma.articles.findMany({
-    select: {
-      Articles_Rates: {
-        select: {
-          id: true,
-          rate: true,
+export const getVerifiedArticles = async ({
+  userId,
+  page,
+  tags,
+}: {
+  verified?: boolean;
+  userId: string;
+  page: string | undefined;
+  tags: string[] | undefined;
+}) => {
+  const [ratesArticles, articles, totalArticles] = await prisma.$transaction([
+    prisma.articles_Rates.groupBy({
+      by: ["articleId"],
+      _sum: {
+        rate: true,
+      },
+      orderBy: undefined,
+    }),
+    prisma.articles.findMany({
+      ...putBoundaryPagination(page),
+      include: {
+        Articles_Rates: {
+          select: {
+            id: true,
+            rate: true,
+          },
+          where: {
+            userId,
+          },
         },
-        where: {
-          userId,
+        Articles_Tags: {
+          include: {
+            Tags: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
         },
       },
-      author: true,
-      title: true,
-      id: true,
-      faviconUrl: true,
-      url: true,
-      createdAt: true,
-    },
-    where: {
-      isVerified: true,
-    },
+      where: {
+        ...generateFilterByTags(tags),
+        isVerified: true,
+      },
+    }),
+    prisma.articles.count({
+      where: {
+        ...generateFilterByTags(tags),
+        isVerified: true,
+      },
+    }),
+  ]);
+  return mapperArticles({
+    articles: articles,
+    ratesArticles,
+    total: totalArticles,
   });
 };
 
@@ -188,4 +229,16 @@ export const getRateArticle = async ({
       userId,
     },
   });
+};
+
+export const deleteArticle = async (articleId: string) => {
+  await prisma.$transaction([
+    prisma.articles_Rates.deleteMany({ where: { articleId } }),
+    prisma.articles_Tags.deleteMany({ where: { articleId } }),
+    prisma.articles.delete({
+      where: {
+        id: articleId,
+      },
+    }),
+  ]);
 };

@@ -3,15 +3,14 @@ import CookieParser from "cookie-parser";
 import Cors from "cors";
 import Express from "express";
 
-import { authRouter } from "./auth/auth-router";
 import { cardRouter } from "./cards/cards-router";
 import { routerSwagger } from "./docs/swagger";
-import { sectionsRouter } from "./section/sections-router";
+import { tagsRouter } from "./tags/tags-router";
 import { errorHandler } from "./utils/error/errorHandler";
 import { logger } from "./utils/logger";
 import { getEnv } from "./utils/utils";
 import { articlesRouter } from "articles/articles-router";
-import { checkAuthUser } from "auth/auth-middleware";
+import { authRouter } from "auth/auth-router";
 
 export const app = Express();
 
@@ -25,14 +24,7 @@ app.use(
 );
 app.use(CookieParser());
 
-app.use(
-  routerSwagger,
-  authRouter,
-  checkAuthUser,
-  sectionsRouter,
-  articlesRouter,
-  cardRouter
-);
+app.use(routerSwagger, authRouter, tagsRouter, articlesRouter, cardRouter);
 app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(getEnv("PORT"), () => {

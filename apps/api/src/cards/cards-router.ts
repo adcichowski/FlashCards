@@ -5,8 +5,11 @@ import { reusableValidation } from "../utils/reusableValidation";
 
 import { getAllCards, getCardById, postCreateCard } from "./cards-controllers";
 import { validateSchemaCard } from "./cards-schema";
+import { checkAuthUser } from "auth/auth-middleware";
 
 const router = Router();
+router.use("/cards", checkAuthUser);
+
 /**
  * @openapi
  * /cards:

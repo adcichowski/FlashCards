@@ -6,8 +6,6 @@ import Yaml from "js-yaml";
 import SwaggerJSDoc from "swagger-jsdoc";
 import { getEnv } from "utils/utils";
 
-import type { Request, Response } from "express";
-
 const router = Router();
 
 const options: SwaggerJSDoc.OAS3Options = {

@@ -1,8 +1,13 @@
 import { Router } from "express";
-import { createArticle, getAllArticles } from "./articles-controllers";
+import {
+  createArticle,
+  deleteArticle,
+  getAllArticles,
+} from "./articles-controllers";
 import * as yup from "yup";
 import {
   blockSecondRate,
+  checkAdminAccess,
   checkArticleExist,
   checkArticleExistFromParams,
   checkIsUserRate,
@@ -18,7 +23,12 @@ import {
   createRateArticle,
   deleteRateArticle,
 } from "./articles-rates/articles-rates-controllers";
+import { checkAuthUser } from "auth/auth-middleware";
+import { setUpTagsFilter } from "./articles-tags/articlesTags-middleware";
+
 const router = Router();
+router.use("/articles", checkAuthUser);
+
 /**
  * @openapi
  * /articles:
@@ -44,7 +54,7 @@ const router = Router();
  */
 // router.get("/articles", getAllArticles);
 
-router.get("/articles", getAllArticles);
+router.get("/articles", setUpTagsFilter, getAllArticles);
 
 /**
  * @openapi
@@ -112,6 +122,13 @@ router.post(
   reusableValidation(createRateArticleSchema),
   blockSecondRate,
   createRateArticle
+);
+
+router.delete<{ articleId: string }>(
+  "/articles/:articleId",
+  validationParams(["articleId"]),
+  checkAdminAccess,
+  deleteArticle
 );
 
 router.delete<{ articleId: string; rateId: string }>(

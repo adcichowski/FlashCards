@@ -78,3 +78,15 @@ export const blockSecondRate = async (
   }
   next();
 };
+
+export const checkAdminAccess = (
+  _req: Request<{ articleId: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  const role = res.locals.user.role;
+  if (role !== "admin") {
+    next(new HttpError(403, "you don't have access to do this thing"));
+  }
+  next();
+};
