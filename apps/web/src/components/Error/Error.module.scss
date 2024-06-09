@@ -1,0 +1,23 @@
+.errorWrapper {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 250px;
+  margin: auto;
+}
+
+.iconWrapper {
+  width: min-content;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+.icon {
+  stroke-width: 1.5px;
+  width: 100px;
+  height: auto;
+}

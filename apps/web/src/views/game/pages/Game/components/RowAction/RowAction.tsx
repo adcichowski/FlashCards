@@ -11,7 +11,6 @@ import { useClickOutside } from "src/hooks/useClickOutside";
 import styles from "./RowAction.module.scss";
 import { ChevronDown, ChevronUp } from "lucide-react";
 export const RowAction = ({
-  label,
   trigger,
   items,
 }: {
@@ -27,7 +26,7 @@ export const RowAction = ({
       <DropdownMenu onOpenChange={setOpen} modal={false} open={open}>
         <DropdownMenuTrigger>
           <div className={styles.triggerWrapper}>
-            Action
+            {trigger}
             {open ? <ChevronUp className={styles.triggerIcon} /> : <ChevronDown className={styles.triggerIcon} />}
           </div>
         </DropdownMenuTrigger>

@@ -32,7 +32,6 @@ export function MultiSelectTech(props: { name: string; id: string }) {
   const { getSelectedItemProps, getDropdownProps } = useMultipleSelection({
     selectedItems: selectedTags,
     onStateChange({ selectedItems: newSelectedItems, type }) {
-      console.log("hi");
       if (!newSelectedItems) return;
       switch (type) {
         case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
@@ -86,6 +85,8 @@ export function MultiSelectTech(props: { name: string; id: string }) {
   console.log(tagsFromParams, selectedTags);
   return (
     <div className={styles.multiSelectParent}>
+      <p {...getLabelProps()}>Search By Tags:</p>
+
       <div className={styles.multiSelectInputWrapper}>
         <div className={styles.selectedList}>
           {selectedTags.map((selectedItemForRender, index) => {

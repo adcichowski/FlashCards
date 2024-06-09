@@ -13,6 +13,8 @@ import Badge from "src/components/Badge/Badge";
 import { RowAction } from "../../../../components/RowAction/RowAction";
 import { useSession } from "next-auth/react";
 import { useDeleteArticle } from "../../hooks/useDeleteArticle";
+import Error from "src/components/Error/Error";
+import { Loading } from "src/components/Loading/Loading";
 type Article = {
   id: string;
   faviconUrl: string | undefined;
@@ -151,34 +153,39 @@ export function ArticlesTable() {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
+  const isLoading = true;
+  if (isLoading) return <Loading />;
   return (
     <section className={styles.sectionTable}>
-      <table className={styles.table}>
-        <thead className={styles.tableHead}>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className={styles.headerGroup}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className={clsx(styles.header, styles[header.id])}>
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className={styles.row}>
-              {row.getVisibleCells().map((cell) => (
-                <td className={clsx(styles.rowCell, styles[cell.column.id])} key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {data?.pages && <ReusablePagination pages={data.pages} />}
+      {data?.articles.length ? (
+        <table className={styles.table}>
+          <thead className={styles.tableHead}>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id} className={styles.headerGroup}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className={clsx(styles.header, styles[header.id])}>
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id} className={styles.row}>
+                {row.getVisibleCells().map((cell) => (
+                  <td className={clsx(styles.rowCell, styles[cell.column.id])} key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <Error error="Not found any article" />
+      )}
+      {data?.pages ? <ReusablePagination pages={data.pages} /> : <></>}
     </section>
   );
 }

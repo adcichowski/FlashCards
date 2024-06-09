@@ -22,14 +22,7 @@
 .title {
   width: 470px;
 }
-.rate_sum {
-  width: 80px;
-}
-.tags {
-  text-align: center;
-  min-width: 120px;
-  width: 320px;
-}
+
 .figureTitle {
   display: flex;
   align-items: center;
@@ -38,6 +31,7 @@
 
 .rate {
   max-width: 10px;
+  text-align: center;
 }
 
 .linkTitle:hover {

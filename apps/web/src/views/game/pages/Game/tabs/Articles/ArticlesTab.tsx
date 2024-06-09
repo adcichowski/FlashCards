@@ -10,6 +10,7 @@ import { schemaSaveArticle } from "./schema/articleSchemas";
 import { Input } from "src/components/Input/Input";
 import { ArticlesTable } from "./components/ArticlesTable/ArticlesTable";
 import { FormEditArticle } from "./components/FormEditArticle/FormEditArticle";
+import { MultiSelectTech } from "src/views/game/components/MultiSelectTech/MultiSelectTech";
 export type ArticlePropType = {
   id: string;
   heading: string;
@@ -25,7 +26,8 @@ export function ArticlesTab() {
   const { mutate, data: savedArticle } = useSaveArticle();
 
   return (
-    <div>
+    <>
+      <MultiSelectTech id="technologies" name="technologies" />
       <Dialog
         trigger={
           <button className={styles.buttonSaveArticle}>
@@ -37,8 +39,9 @@ export function ArticlesTab() {
         children={savedArticle ? <FormEditArticle article={savedArticle} /> : <FormSaveArticle mutate={mutate} />}
         title={savedArticle ? "Saved Article" : "Save Article"}
       />
+
       <ArticlesTable />
-    </div>
+    </>
   );
 }
 

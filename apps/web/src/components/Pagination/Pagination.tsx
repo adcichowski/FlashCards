@@ -4,6 +4,7 @@ import styles from "./Pagination.module.scss";
 import Link, { LinkProps } from "next/link";
 import clsx from "clsx";
 import { usePagination } from "./usePagination";
+import { useSearchParams } from "next/navigation";
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav role="navigation" aria-label="pagination" className={styles.pagination} {...props} />
 );
@@ -83,16 +84,17 @@ PaginationEllipsis.displayName = "PaginationEllipsis";
 
 const ReusablePagination = ({ pages }: { pages: number }) => {
   const paginateItems = usePagination({ pages });
+  const tags = useSearchParams().get("tags");
   return (
     <Pagination>
       <PaginationContent>
         {paginateItems.map(({ type, page, selected, ...props }) => (
           <PaginationItem key={`${type} ${page}`}>
-            {type === "previous" && <PaginationPrevious href={{ query: { page: page } }} {...props} />}
-            {type === "next" && <PaginationNext href={{ query: { page: page } }} {...props} />}
+            {type === "previous" && <PaginationPrevious href={{ query: { page: page, tags } }} {...props} />}
+            {type === "next" && <PaginationNext href={{ query: { page: page, tags } }} {...props} />}
             {type === "ellipsis" && <PaginationEllipsis {...props} />}
             {type === "page" && (
-              <PaginationLink href={{ query: { page: page } }} isActive={selected} {...props}>
+              <PaginationLink href={{ query: { page: page, tags } }} isActive={selected} {...props}>
                 {page}
               </PaginationLink>
             )}
