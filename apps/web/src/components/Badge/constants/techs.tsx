@@ -1,3 +1,5 @@
+//Remember put not found icon if some badge not have assigned icon.
+
 import CSS3Icon from "public/icons/technology/css3.svg";
 import VueIcon from "public/icons/technology/vue.svg";
 import TsIcon from "public/icons/technology/typescript.svg";

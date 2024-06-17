@@ -1,19 +1,23 @@
-.multiSelectParent {
+.multiSelectSearch {
+  display: flex;
+  align-items: center;
+  gap: 3px;
   margin: 8px 0px;
   position: relative;
-  z-index: 10;
+  z-index: 9;
+  justify-content: stretch;
 }
-.multiSelectLabel {
-  font-size: 2rem;
-}
-.multiSelectInputWrapper {
+
+.searchInputWrapper {
+  max-height: 108px;
+  overflow-y: auto;
   width: 100%;
   border-radius: 5px;
   padding: 10px;
   border: none;
-  background-color: #d9d9d9;
+  background-image: linear-gradient(rgb(214, 213, 221), rgb(183, 182, 189));
 }
-.multiSelectInput {
+.searchInput {
   background-color: transparent;
   border: none;
   min-width: 30px;
@@ -35,9 +39,8 @@
   text-transform: capitalize;
   position: absolute;
   display: flex;
-  margin-top: 10px;
+  top: 100%;
   flex-direction: column;
-  align-items: flex-start;
   background-color: #221f63;
   width: 100%;
 }
@@ -45,9 +48,6 @@
 .searchItem {
   position: relative;
   width: 100%;
-  padding: 7px 0 7px 10px;
-  max-height: 500px;
-  overflow-y: auto;
 }
 .searchItem:hover::before {
   content: "";
@@ -75,12 +75,10 @@
 }
 
 .searchItemButton {
+  padding: 7px 0 7px 10px;
+  display: block;
+  height: 100%;
   width: 100%;
-  text-align: left;
-}
-
-.searchItemButton::first-letter {
-  text-transform: capitalize;
 }
 
 .hidden {

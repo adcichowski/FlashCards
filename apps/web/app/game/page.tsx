@@ -1,4 +1,4 @@
-import { GamePage } from "src/views/game/pages/Game/GamePage";
+import { GamePage } from "src/views/game/GamePage";
 
 export default function Page() {
   return <GamePage />;

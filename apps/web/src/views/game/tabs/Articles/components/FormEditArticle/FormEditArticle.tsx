@@ -7,9 +7,11 @@ import styles from "./FormEditArticle.module.scss";
 import { Input } from "src/components/Input/Input";
 import { ArticlePropType } from "../../ArticlesTab";
 import { TitleRadio } from "../TitleRadio/TitleRadio";
-import { MultiSelectTech } from "src/views/game/components/MultiSelectTech/MultiSelectTech";
+import { MultiSelectField } from "src/views/game/components/MultiSelectTags/MultiSelectTags";
+import { useGetTags } from "src/views/game/components/SearchByTags/hooks/useGetTags";
 export const FormEditArticle = ({ article: { id, ...article } }: { article: ArticlePropType }) => {
   const { mutate, data } = useEditArticle({ articleId: id });
+  const { data: dataTags } = useGetTags();
   const { formState, register, handleSubmit, control, getValues, watch } = useForm({
     resolver: yupResolver(schemaEditArticle),
     defaultValues: { ...article, titleType: "title" },
@@ -17,6 +19,8 @@ export const FormEditArticle = ({ article: { id, ...article } }: { article: Arti
   const onSubmit = handleSubmit(async (data) => {
     // await mutate(data);
   });
+  const x = watch();
+
   const titleType = watch("titleType");
   return (
     <section>
@@ -35,9 +39,9 @@ export const FormEditArticle = ({ article: { id, ...article } }: { article: Arti
           <legend>Modify Article</legend>
           <TitleRadio name="titleType" control={control} />
           <div className={styles.inputAuthor}>
-            <Input oneLine {...register("author")} error={formState.errors.url?.message} />
+            <Input oneLine {...register("author")} error={formState.errors.author?.message} />
           </div>
-          <MultiSelectTech showLabel />
+          <MultiSelectField name="tags" control={control} items={dataTags?.tags} />
           <div className={styles.buttonWrapper}>
             <Button type="submit" size="small">
               Set Article

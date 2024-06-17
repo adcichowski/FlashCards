@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useFetch } from "src/hooks/useFetch";
-import { useGetSelectedTags } from "src/views/game/components/MultiSelectTech/hooks/useGetSelectedTags";
+import { useGetSelectedTags } from "src/views/game/components/SearchByTags/hooks/useGetSelectedTags";
 
 export type QueryArticleData = {
   articles: {

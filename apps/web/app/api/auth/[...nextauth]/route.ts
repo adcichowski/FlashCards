@@ -16,12 +16,12 @@ const handler = NextAuth({
       async authorize(credentials) {
         if (!credentials) return null;
 
-        const res = await fetcher<{ userId: string; token: string }>("auth", {
+        const res = await fetcher<{ userId: string; token: string; role: string }>("auth", {
           body: { email: credentials.email, password: credentials.password },
           method: "POST",
         });
         if (res.userId) {
-          return { email: credentials.email, id: res.userId, token: res.token };
+          return { email: credentials.email, id: res.userId, token: res.token, role: res.role };
         }
         return null;
       },

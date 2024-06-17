@@ -1,0 +1,81 @@
+.search {
+  margin: 8px 0px;
+  position: relative;
+  z-index: 9;
+}
+
+.searchInputWrapper {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  background-image: linear-gradient(rgb(214, 213, 221), rgb(183, 182, 189));
+}
+.searchInput {
+  background-color: transparent;
+  border: none;
+  min-width: 30px;
+  flex-grow: 1;
+}
+.wrapperBadge {
+  display: flex;
+}
+.selectedList {
+  font-size: 2rem;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  color: white;
+  text-transform: capitalize;
+}
+.searchList {
+  text-transform: capitalize;
+  position: absolute;
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  background-color: #221f63;
+  width: 100%;
+}
+
+.searchItem {
+  position: relative;
+  width: 100%;
+}
+.searchItem:hover::before {
+  content: "";
+  background-color: #c93434;
+  position: absolute;
+  width: 1px;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.searchItem:hover {
+  cursor: pointer;
+  background-color: #343086;
+}
+
+.cancelIcon {
+  width: 10px;
+  margin-left: 5px;
+  height: 10px;
+}
+
+.cancelIcon {
+  cursor: pointer;
+  color: #c93434;
+}
+
+.searchItemButton {
+  padding: 7px 0 7px 10px;
+
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+}

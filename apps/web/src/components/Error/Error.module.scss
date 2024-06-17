@@ -13,8 +13,10 @@
 .textWrapper {
   display: flex;
   flex-direction: column;
-
   justify-content: center;
+}
+.textWrapper > span {
+  font-size: 2.2rem;
 }
 .icon {
   stroke-width: 1.5px;

@@ -2,7 +2,7 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { useGetTags } from "./useGetTags";
 
-type TagType = { name: string };
+export type TagType = { name: string };
 export const useGetSelectedTags = () => {
   const tagsFromParams = useSearchParams().get("tags")?.split(",") || [];
   const { data } = useGetTags();

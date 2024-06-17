@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Badge.module.scss";
 import clsx from "clsx";
 import NotFoundIcon from "public/icons/technology/not-found.svg";
-import { techs } from "src/views/game/components/MultiSelectTech/constants/techs";
+import { techs } from "./constants/techs";
 
 export default function Badge({
   children,

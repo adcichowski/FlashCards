@@ -5,7 +5,7 @@ import TabsPanel, { TabChildType } from "src/components/TabsPanel/TabsPanel";
 import { CardsTab } from "./tabs/Cards/CardsTab";
 import { ArticlesTab } from "./tabs/Articles/ArticlesTab";
 import { ExercisesTab } from "./tabs/Exercises/ExercisesTab";
-import { ClubIcon, ListTodoIcon, SquareLibraryIcon } from "lucide-react";
+import { ClubIcon, HammerIcon, ListTodoIcon, SquareLibraryIcon } from "lucide-react";
 const tabs = [
   {
     header: (
@@ -28,7 +28,7 @@ const tabs = [
   {
     header: (
       <div className={styles.tabHeader}>
-        <ListTodoIcon /> Exercises
+        <HammerIcon /> Tools
       </div>
     ),
     content: <ExercisesTab />,

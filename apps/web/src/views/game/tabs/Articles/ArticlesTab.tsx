@@ -10,12 +10,12 @@ import { schemaSaveArticle } from "./schema/articleSchemas";
 import { Input } from "src/components/Input/Input";
 import { ArticlesTable } from "./components/ArticlesTable/ArticlesTable";
 import { FormEditArticle } from "./components/FormEditArticle/FormEditArticle";
-import { MultiSelectTech } from "src/views/game/components/MultiSelectTech/MultiSelectTech";
+import { SearchByTags } from "src/views/game/components/SearchByTags/SearchByTags";
 export type ArticlePropType = {
   id: string;
   heading: string;
   author: string | undefined;
-  tags: string[] | undefined;
+  tags: { name: string; id: string }[] | undefined;
   title: string;
   createdAt: number | undefined;
   url: string;
@@ -27,7 +27,7 @@ export function ArticlesTab() {
 
   return (
     <>
-      <MultiSelectTech id="technologies" name="technologies" />
+      <SearchByTags />
       <Dialog
         trigger={
           <button className={styles.buttonSaveArticle}>

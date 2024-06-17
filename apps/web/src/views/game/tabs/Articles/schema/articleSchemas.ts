@@ -9,9 +9,5 @@ export const schemaEditArticle = yup.object({
   author: yup.string().optional(),
   title: yup.string().required(),
   titleType: yup.string().oneOf(["title", "heading"]).required(),
-  createdAt: yup.number(),
-  url: yup.string().url().required(),
-  tags: yup.array(yup.string().required()),
+  tags: yup.array(yup.object({ id: yup.string().required(), name: yup.string().required() }).required()),
 });
-
-type x = yup.InferType<typeof schemaEditArticle>;

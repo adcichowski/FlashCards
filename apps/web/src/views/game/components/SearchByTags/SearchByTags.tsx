@@ -1,28 +1,17 @@
 import { useCombobox, useMultipleSelection, useSelect } from "downshift";
-import React, { useMemo } from "react";
+import React from "react";
 import Badge from "src/components/Badge/Badge";
-import styles from "./MultiSelectTech.module.scss";
+import styles from "./SearchByTags.module.scss";
 import clsx from "clsx";
 import { useGetTags } from "./hooks/useGetTags";
 import CancelIcon from "public/icons/cancel.svg";
 import Link from "next/link";
 import { useGetSelectedTags } from "./hooks/useGetSelectedTags";
+import { getFilteredTags } from "../../utils/utils";
 
-function getFilteredTags(
-  selectedItems: { id: string; name: string }[],
-  inputValue: string | undefined,
-  tags: { name: string; id: string }[] | undefined,
-) {
-  if (!tags) return [];
-  return tags
-    .filter((tag) => !selectedItems.map((v) => v.id).includes(tag.id))
-    .filter((tag) => {
-      return tag.name.includes(inputValue ? inputValue?.toLowerCase() : "");
-    });
-}
+export function SearchByTags() {
+  const { selectedTags, addTagToParams, removeTagFromParams } = useGetSelectedTags();
 
-export function MultiSelectTech(props: { name: string; id: string }) {
-  const { selectedTags, tagsFromParams, addTagToParams, removeTagFromParams } = useGetSelectedTags();
   const { data } = useGetTags();
   const [inputValue, setInputValue] = React.useState<string | undefined>("");
   const items = React.useMemo(
@@ -82,12 +71,10 @@ export function MultiSelectTech(props: { name: string; id: string }) {
       }
     },
   });
-  console.log(tagsFromParams, selectedTags);
   return (
-    <div className={styles.multiSelectParent}>
+    <div className={styles.search}>
       <p {...getLabelProps()}>Search By Tags:</p>
-
-      <div className={styles.multiSelectInputWrapper}>
+      <div className={styles.searchInputWrapper}>
         <div className={styles.selectedList}>
           {selectedTags.map((selectedItemForRender, index) => {
             return (
@@ -119,28 +106,25 @@ export function MultiSelectTech(props: { name: string; id: string }) {
               </div>
             );
           })}
-          <input
-            className={styles.multiSelectInput}
-            {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
-            {...props}
-          />
+          <input className={styles.searchInput} {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))} />
         </div>
       </div>
 
-      <ul className={clsx(styles.searchList)} {...getMenuProps()}>
-        {isOpen &&
-          items.map((tag, index) => (
+      {isOpen && (
+        <ul className={clsx(styles.searchList)} {...getMenuProps()}>
+          {items.map((tag, index) => (
             <li className={styles.searchItem} key={tag.id}>
               <Link
+                className={styles.searchItemButton}
                 href={{ query: { tags: addTagToParams(tag) } }}
                 {...getItemProps({ item: tag, index })}
-                className={styles.searchItemButton}
               >
                 {tag.name}
               </Link>
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 }
