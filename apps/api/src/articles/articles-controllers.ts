@@ -1,9 +1,13 @@
 import type { Response, Request } from "express";
 import * as cheerio from "cheerio";
 import * as serviceArticles from "./articles-service";
-import { createArticleSchema, articleUrlReq } from "./articles-schema";
+import {
+  createArticleSchema,
+  articleUrlReq,
+  editArticleSchema,
+} from "./articles-schema";
 import { getErrorMessage } from "utils/error/errorValidation";
-import { InferType } from "yup";
+import { InferType, ValidationError } from "yup";
 
 export const getAllArticles = async (_req: Request, res: Response) => {
   if (res.locals.user.role === "admin") {
@@ -64,5 +68,26 @@ export const deleteArticle = async (
   } catch (error) {
     console.log(error);
     return res.status(400).send({ message: "problem during delete article" });
+  }
+};
+
+export const editArticle = async (
+  req: Request<{ articleId: string }>,
+  res: Response
+) => {
+  try {
+    const securedArticle = editArticleSchema.validateSync(req.body);
+
+    await serviceArticles.editArticle({
+      articleId: req.params.articleId,
+      ...securedArticle,
+    });
+
+    return res.status(200).send({ message: "correct update article" });
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return res.status(400).send({ message: error.message });
+    }
+    return res.status(400).send({ message: "problem during update article" });
   }
 };

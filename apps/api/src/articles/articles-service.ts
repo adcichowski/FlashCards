@@ -2,6 +2,8 @@ import { prisma } from "../../libs/prisma/constants";
 import { putBoundaryPagination } from "utils/pagination";
 import { mapperArticles } from "./articles-mappers";
 import { generateFilterByTags } from "./articles-tags/utils/utils";
+import { InferType } from "yup";
+import { editArticleSchema } from "./articles-schema";
 export const getAllArticles = async ({
   userId,
   page,
@@ -239,6 +241,46 @@ export const deleteArticle = async (articleId: string) => {
       where: {
         id: articleId,
       },
+    }),
+  ]);
+};
+
+export const editArticle = async ({
+  articleId,
+  ...editDataArticle
+}: InferType<typeof editArticleSchema> & { articleId: string }) => {
+  const articleTags = await prisma.articles_Tags.findMany({
+    where: { articleId },
+  });
+
+  const receivedTags = editDataArticle.tags?.map((tag) => tag.id) || [];
+  const tagsFromDatabase = articleTags.map((v) => v.tagId);
+  const uniqTags = [...new Set([...receivedTags, ...tagsFromDatabase])];
+
+  const actionPerTag = uniqTags.reduce<{ deleted: string[]; added: string[] }>(
+    (prev, v) => {
+      if (!receivedTags.includes(v) && tagsFromDatabase.includes(v)) {
+        return { ...prev, deleted: [...prev.deleted, v] };
+      }
+      if (receivedTags.includes(v) && !tagsFromDatabase.includes(v)) {
+        return { ...prev, added: [...prev.added, v] };
+      }
+      return prev;
+    },
+    {
+      deleted: [],
+      added: [],
+    }
+  );
+
+  await prisma.$transaction([
+    prisma.articles_Tags.deleteMany({
+      where: {
+        OR: actionPerTag.deleted.map((tagId) => ({ tagId })),
+      },
+    }),
+    prisma.articles_Tags.createMany({
+      data: actionPerTag.added.map((tagId) => ({ articleId, tagId })),
     }),
   ]);
 };

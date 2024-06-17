@@ -14,6 +14,7 @@ type ArticlesMapperParamType = {
   Articles_Tags: {
     Tags: {
       name: string;
+      id: string;
     };
   }[];
 }[];

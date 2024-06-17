@@ -16,6 +16,7 @@ import { reusableValidation, validationParams } from "utils/reusableValidation";
 import {
   articleUrlReq,
   createRateArticleSchema,
+  editArticleSchema,
   editRateArticleSchema,
 } from "./articles-schema";
 import {
@@ -81,6 +82,38 @@ router.post(
   reusableValidation(articleUrlReq),
   checkArticleExist,
   createArticle
+);
+
+/**
+ * @openapi
+ * /articles/{articleId}:
+ *  put:
+ *     operationId: editArticle
+ *     summary: Edit article
+ *     parameters:
+ *       - in: path
+ *         name: articleId
+ *         schema:
+ *           type: uuid
+ *         required: true
+ *     tags:
+ *     - Articles
+ *     description: Edit article field
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *            example:
+ *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *       400:
+ *         description: Problem with server
+ */
+
+router.put(
+  "/article/:articleId",
+  checkArticleExist,
+  checkAdminAccess,
+  reusableValidation(editArticleSchema)
 );
 
 /**

@@ -58,8 +58,8 @@ export const validateLoginSchema = Yup.object({
   email: Yup.string()
     .max(64)
     .required("Email is require!")
-    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Change email format!"),
-  password: Yup.string().max(64).min(12).required("Password is require!"),
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, "Change email format"),
+  password: Yup.string().max(64).min(12).required("Password is require"),
 }).required();
 
 export type TypeLoginSchema = Yup.InferType<typeof validateLoginSchema>;

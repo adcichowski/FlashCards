@@ -14,8 +14,13 @@ export const articleUrlReq = Yup.object({
 });
 
 export const editArticleSchema = Yup.object({
-  imageSrc: Yup.string().optional(),
   author: Yup.string().optional(),
+  tags: Yup.array(
+    Yup.object({
+      id: Yup.string().required(),
+      name: Yup.string().required(),
+    }).required()
+  ),
 });
 
 export const createRateArticleSchema = Yup.object({
