@@ -143,11 +143,33 @@ export const getArticleByUrl = async (urlScrappedWeb: string) => {
 };
 
 export const getArticleById = async (articleId: string) => {
-  return await prisma.articles.findFirst({
+  const article = await prisma.articles.findFirst({
+    include: {
+      Articles_Tags: {
+        include: {
+          Tags: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
+    },
     where: {
       id: articleId,
     },
   });
+  if (!article) return;
+  return {
+    id: article.id,
+    url: article.url,
+    title: article.title,
+    faviconUrl: article.faviconUrl,
+    isVerified: article.isVerified,
+    author: article.author,
+    tags: article.Articles_Tags.map((v) => v.Tags),
+  };
 };
 
 export const createRateForArticle = async ({

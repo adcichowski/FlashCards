@@ -91,3 +91,17 @@ export const editArticle = async (
     return res.status(400).send({ message: "problem during update article" });
   }
 };
+
+export const getArticleById = async (
+  req: Request<{ articleId: string }>,
+  res: Response
+) => {
+  try {
+    const article = await serviceArticles.getArticleById(req.params.articleId);
+    return res.status(200).send({ article });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ message: `problem to get ${req.params.articleId} article` });
+  }
+};

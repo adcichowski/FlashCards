@@ -2,7 +2,9 @@ import { Router } from "express";
 import {
   createArticle,
   deleteArticle,
+  getArticleById,
   getAllArticles,
+  editArticle,
 } from "./articles-controllers";
 import * as yup from "yup";
 import {
@@ -53,9 +55,34 @@ router.use("/articles", checkAuthUser);
  *       400:
  *         description: Problem with server
  */
-// router.get("/articles", getAllArticles);
 
 router.get("/articles", setUpTagsFilter, getAllArticles);
+
+/**
+ * @openapi
+ * /articles:
+ *  post:
+ *     operationId: createArticle
+ *     summary: Create article
+ *     tags:
+ *     - Articles
+ *     description: Create article based on meta tags
+ *     responses:
+ *       200:
+ *         description: Create article
+ *         content:
+ *           application/json:
+ *            example:
+ *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *       400:
+ *         description: Problem with server
+ */
+
+router.get(
+  "/articles/:articleId",
+  validationParams(["articleId"]),
+  getArticleById
+);
 
 /**
  * @openapi
@@ -110,10 +137,10 @@ router.post(
  */
 
 router.put(
-  "/article/:articleId",
-  checkArticleExist,
+  "/articles/:articleId",
   checkAdminAccess,
-  reusableValidation(editArticleSchema)
+  reusableValidation(editArticleSchema),
+  editArticle
 );
 
 /**
