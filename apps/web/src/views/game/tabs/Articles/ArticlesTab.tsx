@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ArticlesTab.module.scss";
 import { Dialog } from "src/components/Dialog/Dialog";
 import { Button } from "src/components/Button/Button";
@@ -13,10 +13,10 @@ import { FormEditArticle } from "./components/FormEditArticle/FormEditArticle";
 import { SearchByTags } from "src/views/game/components/SearchByTags/SearchByTags";
 export type ArticlePropType = {
   id: string;
-  heading: string;
   author: string | undefined;
   tags: { name: string; id: string }[] | undefined;
   title: string;
+  heading: string;
   createdAt: number | undefined;
   url: string;
   faviconUrl: string | undefined;
@@ -24,11 +24,17 @@ export type ArticlePropType = {
 
 export function ArticlesTab() {
   const { mutate, data: savedArticle } = useSaveArticle();
-
+  const [editArticle, setEditArticle] = useState<{ id: string } | undefined>(undefined);
   return (
     <>
       <SearchByTags />
       <Dialog
+        manage={{
+          open: !!editArticle,
+          onOpenChange: () => {
+            setEditArticle(undefined);
+          },
+        }}
         trigger={
           <button className={styles.buttonSaveArticle}>
             <div className={styles.badgeWrapperInsider}>
@@ -36,11 +42,11 @@ export function ArticlesTab() {
             </div>
           </button>
         }
-        children={savedArticle ? <FormEditArticle article={savedArticle} /> : <FormSaveArticle mutate={mutate} />}
-        title={savedArticle ? "Saved Article" : "Save Article"}
+        children={editArticle ? <FormEditArticle id={editArticle?.id} /> : <FormSaveArticle mutate={mutate} />}
+        title={editArticle ? "Edit Article" : "Save Article"}
       />
 
-      <ArticlesTable />
+      <ArticlesTable selectEditArticle={(article: { id: string }) => setEditArticle(article)} />
     </>
   );
 }

@@ -116,7 +116,7 @@ export function MultiSelect<T extends FieldValues>(props: {
                 >
                   <div className={styles.selectedItem}>
                     {selectedItemForRender.name}
-                    <button onClick={() => handleUnselect(selectedItemForRender)}>
+                    <button onClick={() => handleUnselect(selectedItemForRender)} type="button">
                       <CancelIcon className={styles.cancelIcon} />
                     </button>
                   </div>
@@ -131,7 +131,7 @@ export function MultiSelect<T extends FieldValues>(props: {
         {isOpen &&
           items?.map((tag, index) => (
             <li className={styles.searchItem} key={tag.id}>
-              <button className={styles.searchItemButton} {...getItemProps({ item: tag, index })}>
+              <button className={styles.searchItemButton} {...getItemProps({ item: tag, index })} type="button">
                 {tag.name}
               </button>
             </li>

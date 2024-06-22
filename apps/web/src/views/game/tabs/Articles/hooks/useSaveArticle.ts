@@ -6,14 +6,13 @@ type MutationSaveArticleVariables = {
   url: string;
 };
 
-type MutationSaveArticleData = {
+export type MutationSaveArticleData = {
   id: string;
   url: string;
   title: string;
-  heading: string;
   createdAt: number | undefined;
   author: string | undefined;
-  tags: string[] | undefined;
+  tags: { name: string; id: string }[] | undefined;
   faviconUrl: string | undefined;
 };
 export function useSaveArticle() {

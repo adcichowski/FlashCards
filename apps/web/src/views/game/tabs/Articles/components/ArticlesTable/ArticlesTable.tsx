@@ -1,10 +1,9 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import React from "react";
 import Image from "next/image";
-import { MessageCircleXIcon, ShieldQuestionIcon, SquarePen, SquarePenIcon } from "lucide-react";
+import { ShieldQuestionIcon, SquarePenIcon } from "lucide-react";
 import styles from "./ArticlesTable.module.scss";
 import { useGetArticles } from "../../hooks/useGetArticles";
-import { convertDate } from "../../../../utils/date";
 import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, CircleXIcon } from "lucide-react";
 import clsx from "clsx";
 import { useManageRateArticle } from "../../hooks/useManageRateArticle";
@@ -33,7 +32,7 @@ type Article = {
 };
 
 const columnHelper = createColumnHelper<Article>();
-const useColumns = () => {
+const useColumns = ({ selectEditArticle }: { selectEditArticle: (article: { id: string }) => void }) => {
   const { mutate: mutateDeleteArticle, isPending } = useDeleteArticle();
   const session = useSession();
   const isAdmin = session.data?.user?.role === "admin";
@@ -110,7 +109,10 @@ const useColumns = () => {
                   {
                     name: "edit",
                     render: (
-                      <button className={styles.buttonAction}>
+                      <button
+                        onClick={() => selectEditArticle({ id: row.original.id })}
+                        className={styles.buttonAction}
+                      >
                         <SquarePenIcon />
                         Edit
                       </button>
@@ -145,9 +147,9 @@ const useColumns = () => {
       : []),
   ];
 };
-export function ArticlesTable() {
+export function ArticlesTable({ selectEditArticle }: { selectEditArticle: (article: { id: string }) => void }) {
   const { data, isLoading } = useGetArticles();
-  const columns = useColumns();
+  const columns = useColumns({ selectEditArticle });
   const table = useReactTable({
     data: data?.articles || [],
     columns,

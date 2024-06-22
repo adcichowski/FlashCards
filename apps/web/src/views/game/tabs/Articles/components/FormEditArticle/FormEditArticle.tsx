@@ -9,38 +9,43 @@ import { ArticlePropType } from "../../ArticlesTab";
 import { TitleRadio } from "../TitleRadio/TitleRadio";
 import { MultiSelectField } from "src/views/game/components/MultiSelectTags/MultiSelectTags";
 import { useGetTags } from "src/views/game/components/SearchByTags/hooks/useGetTags";
-export const FormEditArticle = ({ article: { id, ...article } }: { article: ArticlePropType }) => {
-  const { mutate, data } = useEditArticle({ articleId: id });
+import { useGetArticles } from "../../hooks/useGetArticles";
+import { useGetArticle } from "../../hooks/useGetArticle";
+import { Loading } from "src/components/Loading/Loading";
+export const FormEditArticle = ({ id }: { id?: string }) => {
+  const { mutate, data, isPending } = useEditArticle({ articleId: id });
+  const articleData = useGetArticle({ id }).data?.article;
   const { data: dataTags } = useGetTags();
   const { formState, register, handleSubmit, control, getValues, watch } = useForm({
     resolver: yupResolver(schemaEditArticle),
-    defaultValues: { ...article, titleType: "title" },
+    values: {
+      author: articleData?.author || "",
+      tags: articleData?.tags || [],
+      title: articleData?.title || "",
+      titleType: "title",
+    },
   });
-  const onSubmit = handleSubmit(async (data) => {
-    // await mutate(data);
+  const onSubmit = handleSubmit(async ({ titleType, ...data }) => {
+    await mutate(data);
   });
-  const x = watch();
 
   const titleType = watch("titleType");
+  if (isPending) return <Loading />;
   return (
     <section>
       <figure className={styles.articleFigure}>
         <img
-          src={article.faviconUrl}
+          src={articleData?.faviconUrl}
           style={{ width: "32px", height: "32px" }}
-          alt={`favicon article ${article.title}`}
+          alt={`favicon article ${articleData?.faviconUrl}`}
         />
-        <figcaption className={styles.articleTitle}>
-          {titleType === "heading" ? article.heading : article.title}
-        </figcaption>
+        <figcaption className={styles.articleTitle}>{articleData?.title}</figcaption>
       </figure>
       <form onSubmit={onSubmit} className={styles.editForm}>
         <fieldset>
           <legend>Modify Article</legend>
           <TitleRadio name="titleType" control={control} />
-          <div className={styles.inputAuthor}>
-            <Input oneLine {...register("author")} error={formState.errors.author?.message} />
-          </div>
+
           <MultiSelectField name="tags" control={control} items={dataTags?.tags} />
           <div className={styles.buttonWrapper}>
             <Button type="submit" size="small">
