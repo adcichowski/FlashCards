@@ -72,7 +72,7 @@ export const blockSecondRate = async (
     next(
       new HttpError(
         400,
-        "can't create second rate for this article, should update the rate"
+        "can't create second rate for this article, should update the ra te"
       )
     );
   }

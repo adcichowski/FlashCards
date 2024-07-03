@@ -21,14 +21,9 @@ const router = Router();
  *       200:
  *         content:
  *           application/json:
- *            schema:
- *              userId:
- *                type: string
- *                format: uuid
- *              token:
- *                type: string
- *            example:
- *             userId: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *             schema:
+ *               items:
+ *                 $ref: '#/components/schemas/Login'
  *       400:
  *         description: Problem with server
  */

@@ -30,52 +30,41 @@ import { checkAuthUser } from "auth/auth-middleware";
 import { setUpTagsFilter } from "./articles-tags/articlesTags-middleware";
 
 const router = Router();
-router.use("/articles", checkAuthUser);
+
+router.use(checkAuthUser);
+
+router.get("/articles", checkAuthUser, setUpTagsFilter, getAllArticles);
 
 /**
  * @openapi
  * /articles:
- *  get:
- *     operationId: getArticle
- *     summary: Get articles
+ *   get:
+ *     summary: Retrieve a list of articles
  *     tags:
  *     - Articles
- *     description: Response article from database
  *     responses:
  *       200:
- *         description: App is up and running
+ *         description: A list of articles
  *         content:
  *           application/json:
- *            example:
- *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
- *             title: 'PostgreSQL'
- *             description: 'The worlds most advanced open source database.'
- *             imageSrc: 'https://www.postgresql.org/media/img/about/press/elephant.png'
- *             url: 'https://www.postgresql.org/'
- *       400:
- *         description: Problem with server
- */
-
-router.get("/articles", setUpTagsFilter, getAllArticles);
-
-/**
- * @openapi
- * /articles:
- *  post:
- *     operationId: createArticle
- *     summary: Create article
- *     tags:
- *     - Articles
- *     description: Create article based on meta tags
- *     responses:
- *       200:
- *         description: Create article
- *         content:
- *           application/json:
- *            example:
- *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
- *       400:
- *         description: Problem with server
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Article'
+ *             examples:
+ *               example1:
+ *                 summary: Example article
+ *                 value:
+ *                   id: '1'
+ *                   title: 'PostgreSQL'
+ *                   description: 'An open-source relational database.'
+ *                   faviconUrl: 'https://www.postgresql.org/media/img/about/press/elephant.png'
+ *                   url: 'https://www.postgresql.org/'
+ *                   tags:
+ *                     - id: 1
+ *                       name: "database"
+ *                     - id: 2
+ *                       name: "open source"
  */
 
 router.get(
@@ -86,22 +75,23 @@ router.get(
 
 /**
  * @openapi
- * /articles:
- *  post:
- *     operationId: createArticle
- *     summary: Create article
- *     tags:
- *     - Articles
- *     description: Create article based on meta tags
+ * /articles/{id}:
+ *   get:
+ *     summary: Retrieve a single article by ID
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The article ID
  *     responses:
  *       200:
- *         description: Create article
+ *         description: A single article
  *         content:
  *           application/json:
- *            example:
- *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
- *       400:
- *         description: Problem with server
+ *             schema:
+ *               $ref: '#/components/schemas/Article'
  */
 
 router.post(

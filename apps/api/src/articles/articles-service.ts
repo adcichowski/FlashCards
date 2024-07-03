@@ -299,6 +299,7 @@ export const editArticle = async ({
     prisma.articles_Tags.deleteMany({
       where: {
         OR: actionPerTag.deleted.map((tagId) => ({ tagId })),
+        articleId,
       },
     }),
     prisma.articles_Tags.createMany({

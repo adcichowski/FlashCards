@@ -35,24 +35,24 @@ export type TypeRegisterSchema = Readonly<
   Yup.InferType<typeof validateRegisterSchema>
 >;
 
-// /**
-//  * @openapi
-//  * components:
-//  *  schemas:
-//  *   Login:
-//  *    type: object
-//  *    required:
-//  *     - email
-//  *     - password
-//  *    properties:
-//  *     email:
-//  *      type: string
-//  *      maximum: 60
-//  *     password:
-//  *      type: string
-//  *      maximum: 60
-//  *      minimum: 12
-//  */
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *   Login:
+ *    type: object
+ *    required:
+ *     - email
+ *     - password
+ *    properties:
+ *     email:
+ *      type: string
+ *      maximum: 60
+ *     password:
+ *      type: string
+ *      maximum: 60
+ *      minimum: 12
+ */
 
 export const validateLoginSchema = Yup.object({
   email: Yup.string()

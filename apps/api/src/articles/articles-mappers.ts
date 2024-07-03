@@ -50,18 +50,3 @@ export const mapperArticles = ({
   );
   return { articles: mappedArticles, ...generatePagination(total) };
 };
-
-type ArticleMapperParamType = {
-  url: string;
-  id: string;
-  title: string;
-  author: string | null;
-  faviconUrl: string | null;
-  createdAt: number | null;
-  Articles_Tags: {
-    Tags: {
-      name: string;
-      id: string;
-    };
-  }[];
-};

@@ -11,39 +11,50 @@ info:
 paths:
   /articles:
     get:
-      operationId: getArticle
-      summary: Get articles
+      summary: Retrieve a list of articles
       tags:
         - Articles
-      description: Response article from database
       responses:
         '200':
-          description: App is up and running
+          description: A list of articles
           content:
             application/json:
-              example:
-                id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
-                title: PostgreSQL
-                description: The worlds most advanced open source database.
-                imageSrc: https://www.postgresql.org/media/img/about/press/elephant.png
-                url: https://www.postgresql.org/
-        '400':
-          description: Problem with server
-    post:
-      operationId: createArticle
-      summary: Create article
-      tags:
-        - Articles
-      description: Create article based on meta tags
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+              examples:
+                example1:
+                  summary: Example article
+                  value:
+                    id: '1'
+                    title: PostgreSQL
+                    description: An open-source relational database.
+                    faviconUrl: >-
+                      https://www.postgresql.org/media/img/about/press/elephant.png
+                    url: https://www.postgresql.org/
+                    tags:
+                      - id: 1
+                        name: database
+                      - id: 2
+                        name: open source
+  /articles/{id}:
+    get:
+      summary: Retrieve a single article by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The article ID
       responses:
         '200':
-          description: Create article
+          description: A single article
           content:
             application/json:
-              example:
-                id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
-        '400':
-          description: Problem with server
+              schema:
+                $ref: '#/components/schemas/Article'
   /articles/{articleId}:
     put:
       operationId: editArticle
@@ -77,13 +88,8 @@ paths:
           content:
             application/json:
               schema:
-                userId:
-                  type: string
-                  format: uuid
-                token:
-                  type: string
-              example:
-                userId: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+                items:
+                  $ref: '#/components/schemas/Login'
         '400':
           description: Problem with server
   /cards:
@@ -178,6 +184,101 @@ components:
                     type: string
                   rate:
                     type: number
+    Tag:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the tag
+        name:
+          type: string
+          description: The name of the tag
+      example:
+        id: 1
+        name: technology
+    Rate:
+      type: object
+      properties:
+        sum:
+          type: number
+          description: The total sum of ratings for the article
+          example: 10
+    ArticleRate:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The ID of the user who rated the article
+          example: '12345'
+        rate:
+          type: number
+          description: The rate given by the user
+          example: 4
+    Article:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - url
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the article
+        title:
+          type: string
+          description: The title of the article
+        description:
+          type: string
+          description: A brief description of the article
+        faviconUrl:
+          type: string
+          description: URL to the image of the article
+        url:
+          type: string
+          description: The URL of the article
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          description: The tags associated with the article
+        rate:
+          $ref: '#/components/schemas/Rate'
+          description: The rating information of the article
+        yourRated:
+          $ref: '#/components/schemas/ArticleRate'
+          description: The user's specific rating of the article
+      example:
+        id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
+        title: PostgreSQL
+        description: The world is most advanced open source database.
+        faviconUrl: https://www.postgresql.org/media/img/about/press/elephant.png
+        url: https://www.postgresql.org/
+        tags:
+          - id: 1
+            name: database
+          - id: 2
+            name: open source
+        rate:
+          sum: 15
+        yourRated:
+          rate: 5
+    Login:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          maximum: 60
+        password:
+          type: string
+          maximum: 60
+          minimum: 12
     CreateCard:
       type: object
       required:
