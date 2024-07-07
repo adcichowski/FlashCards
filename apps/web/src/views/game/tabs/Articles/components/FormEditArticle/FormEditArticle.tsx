@@ -16,20 +16,23 @@ export const FormEditArticle = ({ id }: { id?: string }) => {
   const { mutate, data, isPending } = useEditArticle({ articleId: id });
   const articleData = useGetArticle({ id }).data?.article;
   const { data: dataTags } = useGetTags();
-  const { formState, register, handleSubmit, control, getValues, watch } = useForm({
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+    control,
+  } = useForm({
     resolver: yupResolver(schemaEditArticle),
     values: {
       author: articleData?.author || "",
       tags: articleData?.tags || [],
       title: articleData?.title || "",
-      titleType: "title",
     },
   });
-  const onSubmit = handleSubmit(async ({ titleType, ...data }) => {
+  const onSubmit = handleSubmit(async (data) => {
     await mutate(data);
   });
 
-  const titleType = watch("titleType");
   if (isPending) return <Loading />;
   return (
     <section>
@@ -44,9 +47,8 @@ export const FormEditArticle = ({ id }: { id?: string }) => {
       <form onSubmit={onSubmit} className={styles.editForm}>
         <fieldset>
           <legend>Modify Article</legend>
-          <TitleRadio name="titleType" control={control} />
 
-          <MultiSelectField name="tags" control={control} items={dataTags?.tags} />
+          <MultiSelectField error={errors.tags?.message} name="tags" control={control} items={dataTags?.tags} />
           <div className={styles.buttonWrapper}>
             <Button type="submit" size="small">
               Set Article

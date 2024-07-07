@@ -15,6 +15,7 @@ export const useManageRateArticle = ({
 
   const handleRateArticle = ({ rate }: { rate: number }) => {
     const logicOfRating = yourRated === rate ? 0 : rate;
+    console.log(logicOfRating);
 
     if (rateId) {
       toast.promise(mutateUpdateRate({ articleId, rate: logicOfRating, rateId }), {

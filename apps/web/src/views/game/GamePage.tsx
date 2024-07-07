@@ -6,6 +6,7 @@ import { CardsTab } from "./tabs/Cards/CardsTab";
 import { ArticlesTab } from "./tabs/Articles/ArticlesTab";
 import { ExercisesTab } from "./tabs/Exercises/ExercisesTab";
 import { ClubIcon, HammerIcon, ListTodoIcon, SquareLibraryIcon } from "lucide-react";
+import { ToolsTab } from "./tabs/Tools/ToolsTab";
 const tabs = [
   {
     header: (
@@ -31,7 +32,7 @@ const tabs = [
         <HammerIcon /> Tools
       </div>
     ),
-    content: <ExercisesTab />,
+    content: <ToolsTab />,
     value: "exercises",
   },
 ].map((tab) => ({

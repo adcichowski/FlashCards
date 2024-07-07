@@ -18,6 +18,7 @@ export function MultiSelect<T extends FieldValues>(props: {
   field: ControllerRenderProps<T, Path<T>>;
   fieldState: ControllerFieldState;
   formState: UseFormStateReturn<T>;
+  error: string | undefined;
 }) {
   const { onChange, value } = props.field;
   const [inputValue, setInputValue] = React.useState<string | undefined>("");
@@ -145,14 +146,16 @@ export const MultiSelectField = <T extends FieldValues>({
   name,
   control,
   items,
+  error,
 }: {
   control: Control<T>;
   name: Path<T>;
   items: { name: string; id: string }[] | undefined;
+  error: string | undefined;
 }) => (
   <Controller
     control={control}
-    render={(controllerProps) => <MultiSelect {...controllerProps} items={items} />}
+    render={(controllerProps) => <MultiSelect error={error} {...controllerProps} items={items} />}
     name={name}
   />
 );

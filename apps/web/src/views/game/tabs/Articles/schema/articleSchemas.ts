@@ -9,7 +9,6 @@ export const schemaEditArticle = yup
   .object({
     author: yup.string().optional(),
     title: yup.string().required(),
-    titleType: yup.string().oneOf(["title", "heading"]).required(),
-    tags: yup.array(yup.object({ id: yup.string().required(), name: yup.string().required() }).required()),
+    tags: yup.array(yup.object({ id: yup.string().required(), name: yup.string().required() })),
   })
   .required();

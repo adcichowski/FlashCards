@@ -28,6 +28,7 @@ export function ArticlesTab() {
   return (
     <>
       <SearchByTags />
+
       <Dialog
         manage={{
           open: !!editArticle,
@@ -35,6 +36,11 @@ export function ArticlesTab() {
             setEditArticle(undefined);
           },
         }}
+        children={<FormEditArticle id={editArticle?.id} />}
+        title={editArticle ? "Edit Article" : "Save Article"}
+      />
+
+      <Dialog
         trigger={
           <button className={styles.buttonSaveArticle}>
             <div className={styles.badgeWrapperInsider}>
@@ -42,10 +48,9 @@ export function ArticlesTab() {
             </div>
           </button>
         }
-        children={editArticle ? <FormEditArticle id={editArticle?.id} /> : <FormSaveArticle mutate={mutate} />}
-        title={editArticle ? "Edit Article" : "Save Article"}
+        children={<FormSaveArticle mutate={mutate} />}
+        title={"Save Article"}
       />
-
       <ArticlesTable selectEditArticle={(article: { id: string }) => setEditArticle(article)} />
     </>
   );

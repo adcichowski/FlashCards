@@ -9,14 +9,14 @@ export const Dialog = ({
 }: {
   children: JSX.Element;
   title: string;
-  trigger: JSX.Element;
+  trigger?: JSX.Element;
   manage?: {
     open: boolean;
     onOpenChange: () => void;
   };
 }) => (
   <DialogRadix.Root modal={true} {...manage}>
-    <DialogRadix.Trigger asChild>{trigger}</DialogRadix.Trigger>
+    {trigger && <DialogRadix.Trigger asChild>{trigger}</DialogRadix.Trigger>}
     <DialogRadix.Portal>
       <DialogRadix.Overlay className={styles.overlay} />
       <DialogRadix.Content className={styles.content}>
