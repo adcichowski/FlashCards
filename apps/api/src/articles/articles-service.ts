@@ -1,6 +1,6 @@
 import { prisma } from "../../libs/prisma/constants";
 import { putBoundaryPagination } from "utils/pagination";
-import { mapperArticles } from "./articles-mappers";
+import { mapperGetAllArticles } from "./articles-mappers";
 import { generateFilterByTags } from "./articles-tags/utils/utils";
 import { InferType } from "yup";
 import { editArticleSchema } from "./articles-schema";
@@ -51,7 +51,7 @@ export const getAllArticles = async ({
       where: generateFilterByTags(tags),
     }),
   ]);
-  return mapperArticles({
+  return mapperGetAllArticles({
     articles: articles,
     ratesArticles,
     total: totalArticles,
@@ -111,7 +111,7 @@ export const getVerifiedArticles = async ({
       },
     }),
   ]);
-  return mapperArticles({
+  return mapperGetAllArticles({
     articles: articles,
     ratesArticles,
     total: totalArticles,

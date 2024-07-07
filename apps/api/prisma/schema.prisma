@@ -12,42 +12,16 @@ model Cards {
   question     String?      @db.VarChar(255)
   answer       String?      @db.VarChar(255)
   difficulties difficulties
-  subjectId    String       @db.Uuid
   userId       String       @db.Uuid
   shapeId      String       @db.Uuid
   Shapes       Shapes       @relation(fields: [shapeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_id_fk")
-  Subjects     Subjects     @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_subject_id_fk")
   Users        Users        @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_users_id_fk")
-  Rates        Rates[]
-}
-
-model Rates {
-  rate   Int
-  id     String @id(map: "rate_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId String @db.Uuid
-  cardId String @db.Uuid
-  Cards  Cards  @relation(fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_card_id_fk")
-  Users  Users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rate_users_id_fk")
-}
-
-model Sections {
-  name      String   @db.VarChar(16)
-  id        String   @id(map: "section_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  subjectId String   @db.Uuid
-  Subjects  Subjects @relation(fields: [subjectId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "section_subject_id_fk")
 }
 
 model Shapes {
   id    String  @id(map: "shape_pk") @unique(map: "shape_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   shape Int     @unique(map: "shape_shape_uindex")
   Cards Cards[]
-}
-
-model Subjects {
-  id       String     @id(map: "subject_pk") @unique(map: "subject_subject_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name     String     @db.VarChar(32)
-  Cards    Cards[]
-  Sections Sections[]
 }
 
 model Users {
@@ -58,7 +32,6 @@ model Users {
   role           roles            @default(user)
   Articles_Rates Articles_Rates[]
   Cards          Cards[]
-  Rates          Rates[]
 }
 
 model Articles {
@@ -85,6 +58,7 @@ model Tags {
   id            String          @id(map: "tags_pk") @unique(map: "tags_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String          @unique(map: "tags_name_uindex") @db.VarChar(32)
   Articles_Tags Articles_Tags[]
+  Tool_Tags     Tool_Tags[]
 }
 
 model Articles_Rates {
@@ -94,6 +68,27 @@ model Articles_Rates {
   articleId String   @db.Uuid
   Articles  Articles @relation(fields: [articleId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "article_id_rate_fk")
   Users     Users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_rates_users_id_fk")
+}
+
+model Tool_Tags {
+  id     String @id(map: "tool_tags_pk") @unique(map: "tool_tags_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  toolId String @db.Uuid
+  tagId  String @db.Uuid
+  Tags   Tags   @relation(fields: [tagId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tool_tags_tags_id_fk")
+  Tools  Tools  @relation(fields: [toolId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tool_tags_tools_id_fk")
+}
+
+model Tools {
+  id          String      @id(map: "tools_pk") @unique(map: "tools_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String      @db.VarChar(64)
+  description String?
+  github      String?     @db.VarChar
+  npm         String      @db.VarChar
+  type        tooltype?
+  isVerified  Boolean?    @default(false)
+  url         String?     @db.VarChar
+  icon        String?     @db.VarChar
+  Tool_Tags   Tool_Tags[]
 }
 
 enum difficulties {
@@ -106,4 +101,10 @@ enum roles {
   admin
   moderator
   user
+}
+
+enum tooltype {
+  package
+  plugin
+  program
 }

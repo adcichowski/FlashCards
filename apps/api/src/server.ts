@@ -11,6 +11,7 @@ import { logger } from "./utils/logger";
 import { getEnv } from "./utils/utils";
 import { articlesRouter } from "articles/articles-router";
 import { authRouter } from "auth/auth-router";
+import { toolsRouter } from "tools/tools-router";
 
 export const app = Express();
 
@@ -24,7 +25,14 @@ app.use(
 );
 app.use(CookieParser());
 
-app.use(routerSwagger, authRouter, tagsRouter, articlesRouter, cardRouter);
+app.use(
+  routerSwagger,
+  authRouter,
+  tagsRouter,
+  articlesRouter,
+  cardRouter,
+  toolsRouter
+);
 app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(getEnv("PORT"), () => {

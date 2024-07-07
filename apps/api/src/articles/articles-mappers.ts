@@ -24,7 +24,7 @@ type SumRatePerArticleType = {
   articleId: string;
 }[];
 
-export const mapperArticles = ({
+export const mapperGetAllArticles = ({
   articles,
   ratesArticles,
   total,

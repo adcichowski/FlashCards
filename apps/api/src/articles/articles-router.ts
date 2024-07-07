@@ -6,7 +6,6 @@ import {
   getAllArticles,
   editArticle,
 } from "./articles-controllers";
-import * as yup from "yup";
 import {
   blockSecondRate,
   checkAdminAccess,
@@ -33,7 +32,7 @@ const router = Router();
 
 router.use(checkAuthUser);
 
-router.get("/articles", checkAuthUser, setUpTagsFilter, getAllArticles);
+router.get("/articles", setUpTagsFilter, getAllArticles);
 
 /**
  * @openapi
