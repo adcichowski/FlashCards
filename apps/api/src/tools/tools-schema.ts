@@ -1,13 +1,27 @@
+import { tooltype } from "@prisma/client";
 import * as Yup from "yup";
 export const editToolSchema = Yup.object({
   name: Yup.string().label("Name").required(),
-  github: Yup.string().optional().label("Github"),
-  npm: Yup.string().optional().label("Npm"),
   description: Yup.string().optional().label("Github"),
-  stars: Yup.number().required().label("Stars"),
+}).required();
+
+export const createToolInDB = Yup.object({
+  tags: Yup.array(
+    Yup.object({ id: Yup.string().required(), name: Yup.string().required() })
+  ),
+  type: Yup.mixed<tooltype>()
+    .oneOf(["package", "plugin", "program"])
+    .required(),
+  description: Yup.string().required(),
+  icon: Yup.string().url("Icon should be valid URL"),
+  url: Yup.string().url("Icon should be valid URL").required(),
+  name: Yup.string().required(),
 }).required();
 
 export const addToolSchema = Yup.object({
+  type: Yup.mixed<tooltype>()
+    .oneOf(["package", "plugin", "program"])
+    .required(),
   tags: Yup.array(
     Yup.object({ id: Yup.string().required(), name: Yup.string().required() })
   ),

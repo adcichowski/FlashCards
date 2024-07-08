@@ -16,8 +16,14 @@ type MapperGetAllParams = {
     })[];
   } & {
     id: string;
-    name: string | null;
+    name: string;
     description: string | null;
+    github: string | null;
+    npm: string | null;
+    type: tooltype | null;
+    isVerified: boolean | null;
+    url: string | null;
+    icon: string | null;
   })[];
   total: number;
 };
@@ -27,6 +33,7 @@ export const mapperGetAllTools = ({ tools, total }: MapperGetAllParams) => {
     name: v.name,
     id: v.id,
     description: v.description,
+    url: v.url,
     type: v.type,
     icon: v.icon,
     tags: v.Tool_Tags.map((v) => v.Tags),

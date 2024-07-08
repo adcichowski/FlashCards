@@ -83,7 +83,7 @@ model Tools {
   name        String      @db.VarChar(64)
   description String?
   github      String?     @db.VarChar
-  npm         String      @db.VarChar
+  npm         String?     @db.VarChar
   type        tooltype?
   isVerified  Boolean?    @default(false)
   url         String?     @db.VarChar
