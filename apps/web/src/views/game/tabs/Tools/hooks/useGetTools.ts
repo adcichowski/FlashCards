@@ -5,6 +5,7 @@ import { useGetSelectedTags } from "src/views/game/components/SearchByTags/hooks
 
 export type QueryToolsData = {
   tools: {
+    url: string;
     icon?: string;
     description?: string;
     name: string;

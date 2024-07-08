@@ -45,7 +45,7 @@ const useColumns = ({ selectEditArticle }: { selectEditArticle: (article: { id: 
           )}
 
           <figcaption>
-            <a href={info.row.original.url} className={styles.linkTitle}>
+            <a href={info.row.original.url} target="_blank" rel="noopener noreferrer" className={styles.linkTitle}>
               <span dangerouslySetInnerHTML={{ __html: info.getValue() }} /> <LinkIcon className={styles.linkIcon} />
             </a>
           </figcaption>

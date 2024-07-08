@@ -110,9 +110,9 @@ export function SearchByTags() {
         </div>
       </div>
 
-      {isOpen && (
-        <ul className={clsx(styles.searchList)} {...getMenuProps()}>
-          {items.map((tag, index) => (
+      <ul className={clsx(styles.searchList)} {...getMenuProps()}>
+        {isOpen &&
+          items.map((tag, index) => (
             <li className={styles.searchItem} key={tag.id}>
               <Link
                 className={styles.searchItemButton}
@@ -123,8 +123,7 @@ export function SearchByTags() {
               </Link>
             </li>
           ))}
-        </ul>
-      )}
+      </ul>
     </div>
   );
 }

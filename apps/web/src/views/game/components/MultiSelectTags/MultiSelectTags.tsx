@@ -20,6 +20,7 @@ export function MultiSelect<T extends FieldValues>(props: {
   formState: UseFormStateReturn<T>;
   error: string | undefined;
 }) {
+  const { error } = props;
   const { onChange, value } = props.field;
   const [inputValue, setInputValue] = React.useState<string | undefined>("");
   const items = React.useMemo(() => getFilteredTags(value, inputValue, props.items), [inputValue, props.items, value]);
@@ -138,6 +139,7 @@ export function MultiSelect<T extends FieldValues>(props: {
             </li>
           ))}
       </ul>
+      <p className={styles.errorInfo}>{error || ""}</p>
     </div>
   );
 }

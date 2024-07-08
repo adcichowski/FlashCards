@@ -1,9 +1,10 @@
 .card {
+  position: relative;
   color: rgb(206, 206, 214);
   border: 1px solid white;
   border-radius: 3px;
   padding: 10px;
-  max-width: 450px;
+  max-width: 400px;
   box-shadow:
     0 4px 6px -1px rgb(0 0 0 / 0.1),
     0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -11,16 +12,17 @@
 .cardHeader {
   margin-top: 5px;
   display: flex;
+  gap: 8px;
 }
 .titleWrapper {
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
 }
 .cardType {
   font-size: 1.2rem;
 }
 .cardDescription {
+  font-size: 1.4rem;
   margin-top: 3px;
 }
 .cardType::first-letter {
@@ -32,7 +34,7 @@
 }
 .cardTitle {
   color: rgb(208, 208, 208);
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   font-weight: 500;
 }
 .card > footer {
@@ -42,5 +44,27 @@
   justify-content: flex-start;
 }
 .cardBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
   margin-top: 4px;
+}
+
+.actionIcons {
+  display: flex;
+  gap: 4px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.icon {
+  transition: opacity 0.15s;
+  opacity: 80%;
+  cursor: pointer;
+  width: 16px;
+  height: auto;
+}
+
+.icon:hover {
+  opacity: 100%;
 }
