@@ -10,6 +10,26 @@ const router = Router();
 
 router.use(checkAuthUser);
 
+/**
+ * @openapi
+ * /tools:
+ *   get:
+ *     summary: Get all tools
+ *     tags: [Tools]
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 tools:
+ *                   type: array
+ *                   description: A list of all available tools
+ *                   items:
+ *                     $ref: '#/components/schemas/Tool'
+ */
 router.get("/tools", setUpTagsFilter, getAllTools);
 
 router.post(

@@ -3,7 +3,6 @@ import CookieParser from "cookie-parser";
 import Cors from "cors";
 import Express from "express";
 
-import { cardRouter } from "./cards/cards-router";
 import { routerSwagger } from "./docs/swagger";
 import { tagsRouter } from "./tags/tags-router";
 import { errorHandler } from "./utils/error/errorHandler";
@@ -25,14 +24,7 @@ app.use(
 );
 app.use(CookieParser());
 
-app.use(
-  routerSwagger,
-  authRouter,
-  tagsRouter,
-  articlesRouter,
-  cardRouter,
-  toolsRouter
-);
+app.use(routerSwagger, authRouter, tagsRouter, articlesRouter, toolsRouter);
 app.use(errorHandler);
 app.disable("x-powered-by");
 const server = app.listen(getEnv("PORT"), () => {

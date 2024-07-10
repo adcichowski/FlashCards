@@ -15,7 +15,6 @@ export const getAllTools = async ({
   const [tools, totalTools] = await prisma.$transaction([
     prisma.tools.findMany({
       ...putBoundaryPagination(page),
-
       include: {
         Tool_Tags: {
           include: {

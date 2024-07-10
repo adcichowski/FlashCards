@@ -7,31 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Cards {
-  id           String       @id(map: "card_pk") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  question     String?      @db.VarChar(255)
-  answer       String?      @db.VarChar(255)
-  difficulties difficulties
-  userId       String       @db.Uuid
-  shapeId      String       @db.Uuid
-  Shapes       Shapes       @relation(fields: [shapeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_shape_id_fk")
-  Users        Users        @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "cards_users_id_fk")
-}
-
-model Shapes {
-  id    String  @id(map: "shape_pk") @unique(map: "shape_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  shape Int     @unique(map: "shape_shape_uindex")
-  Cards Cards[]
-}
-
 model Users {
   id             String           @id(map: "users_pk") @unique(map: "users_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   username       String           @unique(map: "users_username_uindex") @db.VarChar(32)
   email          String           @unique(map: "users_email_uindex") @db.VarChar(32)
   password       String           @unique(map: "users_password_uindex") @db.VarChar(60)
   role           roles            @default(user)
+  Articles       Articles[]
   Articles_Rates Articles_Rates[]
-  Cards          Cards[]
 }
 
 model Articles {
@@ -41,7 +24,9 @@ model Articles {
   isVerified     Boolean          @default(false)
   author         String?          @db.VarChar(32)
   faviconUrl     String?          @db.VarChar
-  createdAt      Int?
+  createdAt      DateTime?        @default(now()) @db.Timestamp(6)
+  userId         String           @db.Uuid
+  Users          Users            @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "articles_users_id_fk")
   Articles_Rates Articles_Rates[]
   Articles_Tags  Articles_Tags[]
 }
@@ -82,8 +67,6 @@ model Tools {
   id          String      @id(map: "tools_pk") @unique(map: "tools_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String      @db.VarChar(64)
   description String?
-  github      String?     @db.VarChar
-  npm         String?     @db.VarChar
   type        tooltype?
   isVerified  Boolean?    @default(false)
   url         String?     @db.VarChar
