@@ -2,18 +2,18 @@
 import { validateLoginSchema, validateRegisterSchema } from "server/src/auth/auth-schema";
 import { Form } from "../components/Form";
 import { signIn } from "next-auth/react";
-import { BackgroundGame } from "src/views/game/components/BackgroundGame/BackgroundGame";
+import { BackgroundBoard } from "src/views/board/components/BackgroundBoard/BackgroundBoard";
 
 export function LoginPage() {
   return (
-    <BackgroundGame>
+    <BackgroundBoard>
       <Form
         typeForm="login"
         serverAction={(data) => {
-          signIn("credentials", { ...data, callbackUrl: "/game", redirect: true });
+          signIn("credentials", { ...data, callbackUrl: "/board", redirect: true });
         }}
         yupSchema={validateLoginSchema}
       />
-    </BackgroundGame>
+    </BackgroundBoard>
   );
 }

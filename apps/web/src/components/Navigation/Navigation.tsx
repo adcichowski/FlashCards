@@ -6,11 +6,13 @@ import Link from "next/link";
 import { socialLinks, navigationLinks } from "src/constants/constants";
 import { Button } from "../Button/Button";
 import { Hamburger } from "./Hamburger/Hamburger";
+import { signOut, useSession } from "next-auth/react";
 
 function Navigation() {
-  const isLogin = false;
+  const { status } = useSession();
+
   const handleClickLogOut = useCallback(() => {
-    // dispatch({ type: "logOut" });
+    signOut();
   }, []);
   const [isOpen, setOpen] = useState(false);
   const handleClick = () => setOpen(!isOpen);
@@ -36,8 +38,8 @@ function Navigation() {
         <div className={styles.bodyMenu}>
           <Logo />
           <ul className={styles.menuList}>{renderNavigationLinks}</ul>
-          {isLogin ? (
-            <Button size="normal" type="button" onClick={handleClickLogOut}>
+          {status === "authenticated" ? (
+            <Button size="small" type="button" onClick={handleClickLogOut}>
               Logout
             </Button>
           ) : (
@@ -50,8 +52,8 @@ function Navigation() {
         <div className={styles.hideNav}>
           <Logo />
           <ul className={styles.navList}>{renderNavigationLinks}</ul>
-          {isLogin ? (
-            <Button size="normal" type="button" onClick={handleClickLogOut}>
+          {status === "authenticated" ? (
+            <Button size="small" type="button" onClick={handleClickLogOut}>
               Logout
             </Button>
           ) : (
