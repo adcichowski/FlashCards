@@ -18,8 +18,6 @@ type MapperGetAllParams = {
     id: string;
     name: string;
     description: string | null;
-    github: string | null;
-    npm: string | null;
     type: tooltype | null;
     isVerified: boolean | null;
     url: string | null;

@@ -87,6 +87,7 @@ export const articleUrlReq = Yup.object({
 });
 
 export const editArticleSchema = Yup.object({
+  isVerified: Yup.boolean().optional(),
   author: Yup.string().optional(),
   tags: Yup.array(
     Yup.object({
