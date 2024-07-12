@@ -4,9 +4,6 @@ import { Button } from "src/components/Button/Button";
 import { useEditArticle } from "../../hooks/useEditArticle";
 import { schemaEditArticle } from "../../schema/articleSchemas";
 import styles from "./FormEditArticle.module.scss";
-import { Input } from "src/components/Input/Input";
-import { ArticlePropType } from "../../ArticlesTab";
-import { TitleRadio } from "../TitleRadio/TitleRadio";
 import { MultiSelectField } from "src/views/board/components/MultiSelectTags/MultiSelectTags";
 import { useGetTags } from "src/views/board/components/SearchByTags/hooks/useGetTags";
 import { useGetArticles } from "../../hooks/useGetArticles";
@@ -15,6 +12,7 @@ import { Loading } from "src/components/Loading/Loading";
 export const FormEditArticle = ({ id }: { id?: string }) => {
   const { mutate, data, isPending } = useEditArticle({ articleId: id });
   const articleData = useGetArticle({ id }).data?.article;
+  console.log(articleData, id);
   const { data: dataTags } = useGetTags();
   const {
     formState: { errors },

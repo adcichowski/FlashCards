@@ -7,7 +7,7 @@ export const useGetSelectedTags = () => {
   const tagsFromParams = useSearchParams().get("tags")?.split(",") || [];
   const { data } = useGetTags();
   const selectedTags = useMemo(
-    () => data?.tags.filter((tag) => tagsFromParams.includes(tag?.name.toLowerCase())) || [],
+    () => data?.tags?.filter((tag) => tagsFromParams.includes(tag?.name.toLowerCase())) || [],
     [data, tagsFromParams],
   );
 

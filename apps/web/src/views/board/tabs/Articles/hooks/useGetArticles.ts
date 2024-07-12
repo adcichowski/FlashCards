@@ -18,7 +18,7 @@ export type QueryArticleData = {
       rate: number;
       id: string;
     };
-    createdAt: number;
+    createdAt: Date;
   }[];
   pages: number;
 };

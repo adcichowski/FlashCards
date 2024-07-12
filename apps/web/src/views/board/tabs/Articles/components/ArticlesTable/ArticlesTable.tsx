@@ -1,7 +1,7 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import React from "react";
 import Image from "next/image";
-import { ShieldQuestionIcon, SquarePenIcon } from "lucide-react";
+import { ShieldCheckIcon, ShieldQuestionIcon, SquarePenIcon } from "lucide-react";
 import styles from "./ArticlesTable.module.scss";
 import { useGetArticles } from "../../hooks/useGetArticles";
 import { LinkIcon, ArrowBigUpIcon, ArrowBigDownIcon, CircleXIcon } from "lucide-react";
@@ -14,13 +14,15 @@ import { useDeleteArticle } from "../../hooks/useDeleteArticle";
 import Error from "src/components/Error/Error";
 import { Loading } from "src/components/Loading/Loading";
 import { RowAction } from "src/views/board/RowAction/RowAction";
+import { useArticleVerificationToggle } from "../../hooks/useArticleVerificationToggle";
 type Article = {
   id: string;
+  isVerified?: boolean;
   faviconUrl: string | undefined;
   title: string;
   tags: { id: string; name: string }[];
   author: string | undefined;
-  createdAt: number | undefined;
+  createdAt: Date | undefined;
   rate: {
     sum: number;
   };
@@ -33,6 +35,7 @@ type Article = {
 
 const columnHelper = createColumnHelper<Article>();
 const useColumns = ({ selectEditArticle }: { selectEditArticle: (article: { id: string }) => void }) => {
+  const { mutate: mutateArticleVerificationToggle } = useArticleVerificationToggle();
   const { mutate: mutateDeleteArticle, isPending } = useDeleteArticle();
   const session = useSession();
   const isAdmin = session.data?.user?.role === "admin";
@@ -101,47 +104,63 @@ const useColumns = ({ selectEditArticle }: { selectEditArticle: (article: { id: 
       ? [
           columnHelper.display({
             id: "actions",
-            cell: ({ row }) => (
-              <RowAction
-                trigger="Action"
-                label="Article"
-                items={[
-                  {
-                    name: "edit",
-                    render: (
-                      <button
-                        onClick={() => selectEditArticle({ id: row.original.id })}
-                        className={styles.buttonAction}
-                      >
-                        <SquarePenIcon />
-                        Edit
-                      </button>
-                    ),
-                  },
-                  {
-                    name: "Verify",
-                    render: (
-                      <button className={styles.buttonAction}>
-                        <ShieldQuestionIcon /> Verify
-                      </button>
-                    ),
-                  },
-                  {
-                    name: "Delete",
-                    render: (
-                      <button
-                        aria-disabled={isPending}
-                        disabled={isPending}
-                        onClick={() => mutateDeleteArticle({ articleId: row.original.id })}
-                        className={clsx(styles.buttonAction, styles.buttonDelete)}
-                      >
-                        <CircleXIcon /> Delete
-                      </button>
-                    ),
-                  },
-                ]}
-              />
-            ),
+            cell: ({ row }) => {
+              const { isVerified, id } = row.original;
+              return (
+                <RowAction
+                  trigger="Action"
+                  label="Article"
+                  items={[
+                    {
+                      name: "edit",
+                      render: (
+                        <button onClick={() => selectEditArticle({ id })} className={styles.buttonAction}>
+                          <SquarePenIcon />
+                          Edit
+                        </button>
+                      ),
+                    },
+                    {
+                      name: "Verify",
+                      render: (
+                        <button
+                          onClick={() =>
+                            mutateArticleVerificationToggle({
+                              articleId: id,
+                              isVerified,
+                            })
+                          }
+                          className={clsx(styles.buttonAction, isVerified && styles.verifiedIcon)}
+                        >
+                          {isVerified ? (
+                            <>
+                              <ShieldCheckIcon /> Verified
+                            </>
+                          ) : (
+                            <>
+                              <ShieldQuestionIcon /> Verify
+                            </>
+                          )}
+                        </button>
+                      ),
+                    },
+                    {
+                      name: "Delete",
+                      render: (
+                        <button
+                          aria-disabled={isPending}
+                          disabled={isPending}
+                          onClick={() => mutateDeleteArticle({ articleId: row.original.id })}
+                          className={clsx(styles.buttonAction, styles.buttonDelete)}
+                        >
+                          <CircleXIcon /> Delete
+                        </button>
+                      ),
+                    },
+                  ]}
+                />
+              );
+            },
           }),
         ]
       : []),
@@ -160,7 +179,7 @@ export function ArticlesTable({ selectEditArticle }: { selectEditArticle: (artic
     <>
       <div className={styles.wrapperTable}>
         <section className={styles.sectionTable}>
-          {data?.articles.length ? (
+          {data?.articles?.length ? (
             <table className={styles.table}>
               <thead className={styles.tableHead}>
                 {table.getHeaderGroups().map((headerGroup) => (
