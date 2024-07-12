@@ -22,7 +22,6 @@ export const FormAddTool = ({ mutate }: { mutate: (data: { url: string }) => voi
     resolver: yupResolver(schemaAddTool),
   });
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     await mutate(data);
   });
   return (

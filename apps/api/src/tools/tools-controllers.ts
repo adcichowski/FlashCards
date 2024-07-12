@@ -1,7 +1,7 @@
 import type { Response, Request } from "express";
 import * as serviceTools from "./tools-service";
-import { InferType } from "yup";
-import { addToolSchema, createToolInDB } from "./tools-schema";
+import { InferType, ValidationError } from "yup";
+import { addToolSchema, createToolInDB, editToolSchema } from "./tools-schema";
 import * as cheerio from "cheerio";
 import { getErrorMessage } from "utils/error/errorValidation";
 export const getAllTools = async (_req: Request, res: Response) => {
@@ -40,7 +40,8 @@ export const addTool = async (
       : iconUrl.attr("href"),
     name:
       dom('meta[property="og:site_name"]').attr("content") ||
-      dom('meta[property="og:title"]').attr("content"),
+      dom('meta[property="og:title"]').attr("content") ||
+      dom("title").first().text(),
     url,
     tags: req.body.tags,
     type: req.body.type,
@@ -55,15 +56,22 @@ export const addTool = async (
   }
 };
 
-// export const deleteTool = async (
-//   req: Request<{ toolId: string }>,
-//   res: Response
-// ) => {
-//   try {
-//     await serviceTools.deleteTool(req.params.toolId);
-//     return res.status(200).send({ message: "correct deleted article" });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(400).send({ message: "problem during delete article" });
-//   }
-// };
+export const editTool = async (
+  req: Request<{ toolId: string }>,
+  res: Response
+) => {
+  try {
+    const securedArticle = editToolSchema.validateSync(req.body);
+    await serviceTools.editTool({
+      toolId: req.params.toolId,
+      ...securedArticle,
+    });
+
+    return res.status(200).send({ message: "correct update article" });
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return res.status(400).send({ message: error.message });
+    }
+    return res.status(400).send({ message: "problem during update article" });
+  }
+};

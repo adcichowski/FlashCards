@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
 import { useFetch } from "src/hooks/useFetch";
-import { useGetSelectedTags } from "src/views/board/components/SearchByTags/hooks/useGetSelectedTags";
 
 export type QueryArticleData = {
   article: {

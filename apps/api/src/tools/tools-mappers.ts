@@ -34,6 +34,23 @@ export const mapperGetAllTools = ({ tools, total }: MapperGetAllParams) => {
     url: v.url,
     type: v.type,
     icon: v.icon,
+    isVerified: v.isVerified,
+    tags: v.Tool_Tags.map((v) => v.Tags),
+  }));
+  return { tools: mappedTools, ...generatePagination(total) };
+};
+
+export const mapperGetVerifiedTools = ({
+  tools,
+  total,
+}: MapperGetAllParams) => {
+  const mappedTools = tools.map((v) => ({
+    name: v.name,
+    id: v.id,
+    description: v.description,
+    url: v.url,
+    type: v.type,
+    icon: v.icon,
     tags: v.Tool_Tags.map((v) => v.Tags),
   }));
   return { tools: mappedTools, ...generatePagination(total) };

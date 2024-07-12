@@ -227,6 +227,47 @@ paths:
                     description: A list of all available tools
                     items:
                       $ref: '#/components/schemas/Tool'
+  /tools/{toolId}:
+    put:
+      summary: Edit details for a specific tool
+      tags:
+        - Tools
+      parameters:
+        - in: path
+          name: articleId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+                  description: >-
+                    Array of tag IDs. Empty array removes all tags. New tags
+                    will be added, existing tags will remain.
+      responses:
+        '200':
+          description: Tags successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  article:
+                    $ref: '#/components/schemas/Article'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized - User is not authenticated
+        '404':
+          description: Tool not found
 components:
   securitySchemes:
     bearerAuth:

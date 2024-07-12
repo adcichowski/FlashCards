@@ -1,8 +1,12 @@
 import { tooltype } from "@prisma/client";
 import * as Yup from "yup";
+
 export const editToolSchema = Yup.object({
-  name: Yup.string().label("Name").required(),
-  description: Yup.string().optional().label("Github"),
+  type: Yup.mixed<tooltype>().oneOf(["package", "plugin", "program"]),
+  tags: Yup.array(
+    Yup.object({ id: Yup.string().required(), name: Yup.string().required() })
+  ),
+  isVerified: Yup.boolean().optional(),
 }).required();
 
 /**

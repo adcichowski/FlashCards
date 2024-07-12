@@ -1,8 +1,10 @@
 import { putBoundaryPagination } from "utils/pagination";
 import { prisma } from "../../libs/prisma/constants";
 import { generateFilterByTags } from "./tool-tags/utils";
-import { mapperGetAllTools } from "./tools-mappers";
+import { mapperGetAllTools, mapperGetVerifiedTools } from "./tools-mappers";
 import { tooltype } from "@prisma/client";
+import { InferType } from "yup";
+import { editToolSchema } from "./tools-schema";
 
 export const getAllTools = async ({
   page,
@@ -74,14 +76,14 @@ export const getVerifiedTools = async ({
       },
     }),
   ]);
-  return mapperGetAllTools({
+  return mapperGetVerifiedTools({
     tools,
     total: totalTools,
   });
 };
 
 export const getToolByUrl = async (urlScrappedWeb: string) => {
-  return await prisma.articles.findFirst({
+  return await prisma.tools.findFirst({
     where: {
       url: urlScrappedWeb,
     },
@@ -117,4 +119,58 @@ export const createTool = async ({
       },
     },
   });
+};
+
+export const editTool = async ({
+  toolId,
+  ...editDataTool
+}: InferType<typeof editToolSchema> & { toolId: string }) => {
+  const toolTags = await prisma.tool_Tags.findMany({
+    where: { toolId },
+  });
+
+  const receivedTags = editDataTool.tags?.map((tag) => tag.id) || [];
+  const tagsFromDatabase = toolTags.map((v) => v.tagId);
+  const uniqTags = [...new Set([...receivedTags, ...tagsFromDatabase])];
+
+  const actionPerTag = uniqTags.reduce<{ deleted: string[]; added: string[] }>(
+    (prev, v) => {
+      if (!receivedTags.includes(v) && tagsFromDatabase.includes(v)) {
+        return { ...prev, deleted: [...prev.deleted, v] };
+      }
+      if (receivedTags.includes(v) && !tagsFromDatabase.includes(v)) {
+        return { ...prev, added: [...prev.added, v] };
+      }
+      return prev;
+    },
+    {
+      deleted: [],
+      added: [],
+    }
+  );
+
+  if (editDataTool.tags !== undefined) {
+    await prisma.$transaction([
+      prisma.tool_Tags.deleteMany({
+        where: {
+          OR: actionPerTag.deleted.map((tagId) => ({ tagId })),
+          toolId,
+        },
+      }),
+      prisma.tool_Tags.createMany({
+        data: actionPerTag.added.map((tagId) => ({ toolId, tagId })),
+      }),
+    ]);
+  }
+
+  if (editDataTool.isVerified !== undefined) {
+    await prisma.tools.update({
+      where: {
+        id: toolId,
+      },
+      data: {
+        isVerified: editDataTool.isVerified,
+      },
+    });
+  }
 };

@@ -7,6 +7,7 @@ import styles from "./ToolsTab.module.scss";
 import { Dialog } from "src/components/Dialog/Dialog";
 import { FormAddTool } from "./components/FormAddTool/FormAddTool";
 import { useAddTool } from "./hooks/useAddTool";
+import { FormEditTool } from "./components/FormEditTool/FormEditTool";
 export const ToolsTab = () => {
   const { mutate } = useAddTool();
   return (

@@ -37,6 +37,8 @@
   flex-direction: column;
   background-color: #221f63;
   width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .searchItem {

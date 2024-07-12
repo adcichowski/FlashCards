@@ -11,8 +11,7 @@ export type QueryToolsData = {
     name: string;
     tags: { name: string; id: string }[];
     id: string;
-    github: string;
-    stars: string;
+    type: string;
     title: string;
     createdAt: number;
   }[];

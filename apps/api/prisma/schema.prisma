@@ -68,7 +68,7 @@ model Tools {
   name        String      @db.VarChar(64)
   description String?
   type        tooltype?
-  isVerified  Boolean?    @default(false)
+  isVerified  Boolean     @default(false)
   url         String?     @db.VarChar
   icon        String?     @db.VarChar
   Tool_Tags   Tool_Tags[]

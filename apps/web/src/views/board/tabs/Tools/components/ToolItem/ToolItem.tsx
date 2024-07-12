@@ -1,8 +1,10 @@
-import { LinkIcon, TerminalIcon } from "lucide-react";
+import { LinkIcon, ShieldCheckIcon, ShieldQuestionIcon, TerminalIcon } from "lucide-react";
 import React from "react";
 import Badge from "src/components/Badge/Badge";
 import styles from "./ToolItem.module.scss";
 import { Pencil } from "lucide-react";
+import clsx from "clsx";
+import { useToolVerificationToggle } from "../../hooks/useToolVerificationToggle";
 export const ToolItem = ({
   name,
   tags,
@@ -10,15 +12,21 @@ export const ToolItem = ({
   icon,
   url,
   type,
+  id,
+  isVerified,
+  selectEditTool,
 }: {
   url: string;
   type: string;
-  stars: number;
-  description: string;
+  isVerified?: boolean;
+  description?: string;
   name: string;
-  icon: string;
+  icon?: string;
+  id: string;
+  selectEditTool: (id: string) => void;
   tags: { name: string; id: string }[];
 }) => {
+  const { mutate } = useToolVerificationToggle();
   return (
     <div className={styles.card}>
       <header className={styles.cardHeader}>
@@ -28,23 +36,49 @@ export const ToolItem = ({
           <p className={styles.cardType}>{type}</p>
         </div>
       </header>
-      <p className={styles.cardDescription}>{description}</p>
+      {description && <p className={styles.cardDescription}>{description}</p>}
       <footer>
-        <ul className={styles.cardBadges}>
-          {tags.map((tag) => (
-            <li>
-              <Badge key={tag.id} name={tag.name}>
-                {tag.name}
-              </Badge>
-            </li>
-          ))}
-        </ul>
+        {tags.length && (
+          <ul className={styles.cardBadges}>
+            {tags.map((tag) => (
+              <li key={tag.id}>
+                <Badge key={tag.id} name={tag.name}>
+                  {tag.name}
+                </Badge>
+              </li>
+            ))}
+          </ul>
+        )}
       </footer>
       <div className={styles.actionIcons}>
+        <button
+          onClick={() =>
+            mutate({
+              toolId: id,
+              isVerified,
+            })
+          }
+        >
+          {isVerified ? (
+            <>
+              <ShieldCheckIcon className={clsx(styles.icon, isVerified && styles.verifiedIcon)} />{" "}
+              <span aria-hidden="true" className="sr-only">
+                Verified
+              </span>
+            </>
+          ) : (
+            <>
+              <ShieldQuestionIcon className={clsx(styles.icon)} />{" "}
+              <span aria-hidden="true" className="sr-only">
+                Verify
+              </span>
+            </>
+          )}
+        </button>
         <a href={url} target="_blank" rel="noopener noreferrer">
           <LinkIcon className={styles.icon} />
         </a>
-        <button>
+        <button onClick={() => selectEditTool(id)}>
           <Pencil className={styles.icon} />
         </button>
       </div>

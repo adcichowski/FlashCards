@@ -1,0 +1,30 @@
+.toolFigure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  gap: 20px;
+  font-weight: 400;
+  margin: 30px;
+  padding: 10px;
+}
+
+.toolTitle {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.editForm {
+  max-width: 500px;
+  margin: auto;
+  margin: 30px auto 10px auto;
+}
+
+.editForm fieldset {
+  border: none;
+  text-align: center;
+}
+
+.editForm fieldset > legend {
+  font-size: 2.4rem;
+}

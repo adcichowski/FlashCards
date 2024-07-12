@@ -3,8 +3,10 @@ import { checkAuthUser } from "auth/auth-middleware";
 import { Router } from "express";
 import { addTool, getAllTools } from "./tools-controllers";
 import { reusableValidation } from "utils/reusableValidation";
-import { addToolSchema } from "./tools-schema";
+import { addToolSchema, editToolSchema } from "./tools-schema";
 import { checkToolExist } from "./tools-middleware";
+import { checkAdminAccess } from "articles/articles-middleware";
+import { editTool } from "./tools-service";
 
 const router = Router();
 
@@ -39,4 +41,55 @@ router.post(
   addTool
 );
 
+router.put(
+  "/tools/:toolId",
+  checkAdminAccess,
+  reusableValidation(editToolSchema),
+  editTool
+);
+
+/**
+ * @openapi
+ * /tools/{toolId}:
+ *   put:
+ *     summary: Edit details for a specific tool
+ *     tags: [Tools]
+ *     parameters:
+ *       - in: path
+ *         name: articleId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               tags:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Array of tag IDs. Empty array removes all tags. New tags will be added, existing tags will remain.
+ *     responses:
+ *       200:
+ *         description: Tags successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 article:
+ *                   $ref: '#/components/schemas/Article'
+ *       400:
+ *         description: Invalid request
+ *       404:
+ *         description: Tool not found
+ *       401:
+ *         description: Unauthorized - User is not authenticated
+ *
+ * security:
+ *   - bearerAuth: []
+ */
 export { router as toolsRouter };
