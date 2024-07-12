@@ -6,7 +6,6 @@ import {
   getAllArticles,
   editArticle,
 } from "./articles-controllers";
-import * as yup from "yup";
 import {
   blockSecondRate,
   checkAdminAccess,
@@ -33,7 +32,7 @@ const router = Router();
 
 router.use(checkAuthUser);
 
-router.get("/articles", checkAuthUser, setUpTagsFilter, getAllArticles);
+router.get("/articles", setUpTagsFilter, getAllArticles);
 
 /**
  * @openapi
@@ -78,6 +77,8 @@ router.get(
  * /articles/{id}:
  *   get:
  *     summary: Retrieve a single article by ID
+ *     tags:
+ *     - Articles
  *     parameters:
  *       - name: id
  *         in: path
@@ -136,28 +137,48 @@ router.put(
 /**
  * @openapi
  * /articles/{articleId}:
- *  put:
- *     operationId: editArticle
- *     summary: Edit article
+ *   put:
+ *     summary: Edit tags for a specific article
+ *     tags: [Articles]
  *     parameters:
  *       - in: path
  *         name: articleId
- *         schema:
- *           type: uuid
  *         required: true
- *     tags:
- *     - Articles
- *     description: Edit article field
+ *         schema:
+ *           type: string
+ *         description: The ID of the article to edit tags for
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               tags:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Array of tag IDs. Empty array removes all tags. New tags will be added, existing tags will remain.
  *     responses:
  *       200:
+ *         description: Tags successfully updated
  *         content:
  *           application/json:
- *            example:
- *             id: 'cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3'
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 article:
+ *                   $ref: '#/components/schemas/Article'
  *       400:
- *         description: Problem with server
+ *         description: Invalid request
+ *       404:
+ *         description: Article not found
+ *       401:
+ *         description: Unauthorized - User is not authenticated
+ *
+ * security:
+ *   - bearerAuth: []
  */
-
 router.put(
   "/articles/:articleId/rates/:rateId",
   validationParams(["articleId", "rateId"]),
@@ -180,6 +201,39 @@ router.delete<{ articleId: string }>(
   checkAdminAccess,
   deleteArticle
 );
+/**
+ * @openapi
+ * /articles/{articleId}:
+ *   delete:
+ *     summary: Delete a specific article
+ *     tags: [Articles]
+ *     parameters:
+ *       - in: path
+ *         name: articleId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the article to delete
+ *     responses:
+ *       204:
+ *         description: Article successfully deleted
+ *       404:
+ *         description: Article not found
+ *       403:
+ *         description: Forbidden - User doesn't have permission to delete this article
+ *       401:
+ *         description: Unauthorized - User is not authenticated
+ *
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *
+ * security:
+ *   - bearerAuth: []
+ */
 
 router.delete<{ articleId: string; rateId: string }>(
   "/articles/:articleId/rates/:rateId",

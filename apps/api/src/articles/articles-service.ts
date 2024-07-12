@@ -1,6 +1,9 @@
 import { prisma } from "../../libs/prisma/constants";
 import { putBoundaryPagination } from "utils/pagination";
-import { mapperArticles } from "./articles-mappers";
+import {
+  mapperGetAllArticles,
+  mapperGetVerifiedArticles,
+} from "./articles-mappers";
 import { generateFilterByTags } from "./articles-tags/utils/utils";
 import { InferType } from "yup";
 import { editArticleSchema } from "./articles-schema";
@@ -9,7 +12,6 @@ export const getAllArticles = async ({
   page,
   tags,
 }: {
-  verified?: boolean;
   userId: string;
   page: string | undefined;
   tags: string[] | undefined;
@@ -24,6 +26,7 @@ export const getAllArticles = async ({
     }),
     prisma.articles.findMany({
       ...putBoundaryPagination(page),
+
       include: {
         Articles_Rates: {
           select: {
@@ -45,13 +48,14 @@ export const getAllArticles = async ({
           },
         },
       },
+
       where: generateFilterByTags(tags),
     }),
     prisma.articles.count({
       where: generateFilterByTags(tags),
     }),
   ]);
-  return mapperArticles({
+  return mapperGetAllArticles({
     articles: articles,
     ratesArticles,
     total: totalArticles,
@@ -63,7 +67,6 @@ export const getVerifiedArticles = async ({
   page,
   tags,
 }: {
-  verified?: boolean;
   userId: string;
   page: string | undefined;
   tags: string[] | undefined;
@@ -111,7 +114,7 @@ export const getVerifiedArticles = async ({
       },
     }),
   ]);
-  return mapperArticles({
+  return mapperGetVerifiedArticles({
     articles: articles,
     ratesArticles,
     total: totalArticles,
@@ -123,14 +126,16 @@ export const createArticle = async ({
   url,
   author,
   faviconUrl,
+  userId,
 }: {
   faviconUrl?: string;
   url: string;
   title: string;
+  userId: string;
   author?: string;
 }) => {
   return await prisma.articles.create({
-    data: { title, url, author, faviconUrl },
+    data: { title, url, author, faviconUrl, userId },
   });
 };
 
@@ -295,15 +300,25 @@ export const editArticle = async ({
     }
   );
 
-  await prisma.$transaction([
-    prisma.articles_Tags.deleteMany({
-      where: {
-        OR: actionPerTag.deleted.map((tagId) => ({ tagId })),
-        articleId,
+  if (editDataArticle.tags !== undefined) {
+    await prisma.$transaction([
+      prisma.articles_Tags.deleteMany({
+        where: {
+          OR: actionPerTag.deleted.map((tagId) => ({ tagId })),
+          articleId,
+        },
+      }),
+      prisma.articles_Tags.createMany({
+        data: actionPerTag.added.map((tagId) => ({ articleId, tagId })),
+      }),
+    ]);
+  }
+  if (editDataArticle.isVerified !== undefined) {
+    await prisma.articles.update({
+      where: { id: articleId },
+      data: {
+        isVerified: editDataArticle.isVerified,
       },
-    }),
-    prisma.articles_Tags.createMany({
-      data: actionPerTag.added.map((tagId) => ({ articleId, tagId })),
-    }),
-  ]);
+    });
+  }
 };

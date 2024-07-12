@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigation } from "src/components/Navigation/Navigation";
-import { BackgroundGame } from "src/views/game/components/BackgroundGame/BackgroundGame";
+import { BackgroundGame } from "src/views/board/components/BackgroundBoard/BackgroundGame";
 import styles from "./ContactPage.module.scss";
 import { GithubProfile } from "../components/GithubProfile";
 

@@ -51,7 +51,10 @@ export const createArticle = async (
   };
   try {
     const securedArticle = createArticleSchema.validateSync(generatedArticle);
-    const createdArticle = await serviceArticles.createArticle(securedArticle);
+    const createdArticle = await serviceArticles.createArticle({
+      ...securedArticle,
+      userId: res.locals.user.id,
+    });
     return res.send(createdArticle);
   } catch (error) {
     return res.status(400).send({ message: getErrorMessage(error) });
@@ -77,7 +80,6 @@ export const editArticle = async (
 ) => {
   try {
     const securedArticle = editArticleSchema.validateSync(req.body);
-
     await serviceArticles.editArticle({
       articleId: req.params.articleId,
       ...securedArticle,

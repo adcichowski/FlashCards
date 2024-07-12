@@ -41,6 +41,8 @@ paths:
   /articles/{id}:
     get:
       summary: Retrieve a single article by ID
+      tags:
+        - Articles
       parameters:
         - name: id
           in: path
@@ -58,13 +60,14 @@ paths:
   /articles/{articleId}:
     put:
       operationId: editArticle
-      summary: Edit article
+      summary: Edit tags for a specific article
       parameters:
         - in: path
           name: articleId
           schema:
-            type: uuid
+            type: string
           required: true
+          description: The ID of the article to edit tags for
       tags:
         - Articles
       description: Edit article field
@@ -74,77 +77,180 @@ paths:
             application/json:
               example:
                 id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
-        '400':
-          description: Problem with server
-  /auth:
-    post:
-      operationId: loginTo
-      summary: Get token
-      tags:
-        - Session
-      description: Get new token in login
-      responses:
-        '200':
-          content:
-            application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Login'
+                type: object
+                properties:
+                  article:
+                    $ref: '#/components/schemas/Article'
+          description: Tags successfully updated
         '400':
-          description: Problem with server
-  /cards:
-    get:
-      operationId: getCards
-      summary: Get all cards
-      tags:
-        - Card
-      description: Recive cards from database
-      responses:
-        '200':
-          description: App is up and running
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetCard'
-              example:
-                id: cbbdddf7-ad12-46cf-9e7c-c83ec7231ad3
-                question: What values can we change?
-                answer: >-
-                  We can easily change let and var, but we should use it less
-                  than const
-                rates:
-                  list:
-                    - username: Artak
-                      rate: '4'
-                    - username: Gelis
-                      rate: '2'
-                  overall: 3
-        '400':
-          description: Problem with server
-    post:
-      operationId: createCard
-      tags:
-        - Card
-      description: Create Card
-      summary: Create Card
+          description: Invalid request
+        '401':
+          description: Unauthorized - User is not authenticated
+        '404':
+          description: Article not found
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateCard'
+              type: object
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: string
+                  description: >-
+                    Array of tag IDs. Empty array removes all tags. New tags
+                    will be added, existing tags will remain.
+    delete:
+      summary: Delete a specific article
+      tags:
+        - Articles
+      parameters:
+        - in: path
+          name: articleId
+          required: true
+          schema:
+            type: string
+          description: The ID of the article to delete
+      responses:
+        '204':
+          description: Article successfully deleted
+        '401':
+          description: Unauthorized - User is not authenticated
+        '403':
+          description: Forbidden - User doesn't have permission to delete this article
+        '404':
+          description: Article not found
+  security:
+    '0':
+      bearerAuth: []
+  /auth/:
+    post:
+      summary: Login to get JWT token
+      tags:
+        - Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
       responses:
         '200':
-          description: Successfully create card
+          description: Successful login
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetCard'
-              example:
-                cardId: desbdddf7-ad12-46cf-9e7c-c83ec7231ad3
-        '400':
-          description: Problem with server
+                type: object
+                properties:
+                  userId:
+                    type: uuid
+                  token:
+                    type: string
+                    description: JWT token for authentication
+        '401':
+          description: Invalid credentials
+  /users:
+    post:
+      summary: Login to get JWT token
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT token for authentication
+        '401':
+          description: Invalid credentials
+  /tags:
+    get:
+      summary: Get all tags
+      tags:
+        - Tags
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tags:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+  /tools:
+    get:
+      summary: Get all tools
+      tags:
+        - Tools
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tools:
+                    type: array
+                    description: A list of all available tools
+                    items:
+                      $ref: '#/components/schemas/Tool'
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
+    Tag:
+      type: object
+      description: Represents a tag used for categorizing tools
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the tag
+        name:
+          type: string
+          description: The name of the tag
+      example:
+        id: 123e4567-e89b-12d3-a456-426614174000
+        name: javascript
+      required:
+        - id
+        - name
     GetToken:
       type: object
       properties:
@@ -154,51 +260,6 @@ components:
         token:
           type: string
           format: JWT
-    GetCard:
-      type: object
-      properties:
-        question:
-          type: string
-        answer:
-          type: string
-        shapeId:
-          type: number
-          default: 1
-        createdBy:
-          type: string
-        subject:
-          type: string
-        section:
-          type: string
-        rates:
-          type: object
-          properties:
-            overall:
-              type: number
-            list:
-              type: array
-              items:
-                type: object
-                properties:
-                  username:
-                    type: string
-                  rate:
-                    type: number
-    Tag:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: integer
-          description: The unique identifier of the tag
-        name:
-          type: string
-          description: The name of the tag
-      example:
-        id: 1
-        name: technology
     Rate:
       type: object
       properties:
@@ -258,9 +319,9 @@ components:
         faviconUrl: https://www.postgresql.org/media/img/about/press/elephant.png
         url: https://www.postgresql.org/
         tags:
-          - id: 1
+          - id: 8a8213f9-3dd4-4f1e-a5e4-f59d3229aebe
             name: database
-          - id: 2
+          - id: 34a34fc9-7838-4b0d-afbd-a16b0b748b0e
             name: open source
         rate:
           sum: 15
@@ -279,33 +340,50 @@ components:
           type: string
           maximum: 60
           minimum: 12
-    CreateCard:
+    Tool:
       type: object
-      required:
-        - question
-        - answer
-        - shapeId
-        - userId
-        - subjectId
-        - rate
+      description: Represents a tool with its details
       properties:
-        question:
+        name:
           type: string
-        answer:
+          description: The name of the tool
+        id:
           type: string
-        shapeId:
-          type: number
-          default: 1
-        userId:
-          type: number
-        subjectId:
-          type: number
-        rate:
-          type: object
-          readOnly: true
-          properties:
-            userId:
-              type: number
-            rate:
-              type: number
+          format: uuid
+          description: Unique identifier for the tool
+        description:
+          type: string
+          description: A brief description of the tool
+        url:
+          type: string
+          format: uri
+          description: The URL associated with the tool
+        type:
+          type: string
+          enum:
+            - package
+            - program
+            - plugin
+          description: The type of the tool
+        icon:
+          type: string
+          format: uri
+          description: The URL of the tool's icon
+        tags:
+          type: array
+          description: List of tags associated with the tool
+          items:
+            $ref: '#/components/schemas/Tag'
+      example:
+        name: ReactJS DevTools
+        id: 550e8400-e29b-41d4-a716-446655440000
+        description: A powerful developer tool for debugging React applications
+        url: https://reactjs.org/tutorial/tutorial.html
+        type: plugin
+        icon: https://example.com/icons/react-devtools.png
+        tags:
+          - id: a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+            name: react
+          - id: 85f520d0-193c-4499-a496-7f4f1b93d130
+            name: debugging
 tags: []

@@ -4,21 +4,6 @@ import * as Yup from "yup";
  * @openapi
  * components:
  *   schemas:
- *     Tag:
- *       type: object
- *       required:
- *         - id
- *         - name
- *       properties:
- *         id:
- *           type: integer
- *           description: The unique identifier of the tag
- *         name:
- *           type: string
- *           description: The name of the tag
- *       example:
- *         id: 1
- *         name: "technology"
  *     Rate:
  *       type: object
  *       properties:
@@ -78,9 +63,9 @@ import * as Yup from "yup";
  *         faviconUrl: 'https://www.postgresql.org/media/img/about/press/elephant.png'
  *         url: 'https://www.postgresql.org/'
  *         tags:
- *           - id: 1
+ *           - id: 8a8213f9-3dd4-4f1e-a5e4-f59d3229aebe
  *             name: "database"
- *           - id: 2
+ *           - id: 34a34fc9-7838-4b0d-afbd-a16b0b748b0e
  *             name: "open source"
  *         rate:
  *           sum: 15
@@ -102,6 +87,7 @@ export const articleUrlReq = Yup.object({
 });
 
 export const editArticleSchema = Yup.object({
+  isVerified: Yup.boolean().optional(),
   author: Yup.string().optional(),
   tags: Yup.array(
     Yup.object({

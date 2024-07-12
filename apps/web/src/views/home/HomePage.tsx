@@ -23,8 +23,8 @@ export function HomePage() {
           <h1 className={styles.heroTitle}>FlashCards</h1>
           <p className={styles.heroSubtitle}>Easy way to improve your skill...</p>
 
-          <Archon size="normal" href="game">
-            Click For Play
+          <Archon size="normal" href="board">
+            Go to board
           </Archon>
         </section>
       </header>
