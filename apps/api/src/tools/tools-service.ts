@@ -174,3 +174,32 @@ export const editTool = async ({
     });
   }
 };
+
+export const getToolById = async (toolId: string) => {
+  const tool = await prisma.tools.findFirst({
+    include: {
+      Tool_Tags: {
+        include: {
+          Tags: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
+    },
+    where: {
+      id: toolId,
+    },
+  });
+  if (!tool) return;
+  return {
+    id: tool.id,
+    url: tool.url,
+    name: tool.name,
+    type: tool.type,
+    isVerified: tool.isVerified,
+    tags: tool.Tool_Tags.map((v) => v.Tags),
+  };
+};

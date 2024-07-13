@@ -14,12 +14,19 @@ import { useEditTool } from "../../hooks/useEditTool";
 export const FormEditTool = ({ id }: { id?: string }) => {
   const { data, isLoading } = useGetTags();
   const { mutate, isPending } = useEditTool({ toolId: id });
+  const { data: dataTool } = useGetTool({ id });
+  const toolTypes = optionsTypeTools.map((type) => ({ value: type, name: type }));
   const {
     formState: { errors },
     register,
     handleSubmit,
     control,
   } = useForm({
+    values: {
+      name: dataTool?.tool.name || "",
+      tags: dataTool?.tool.tags || [],
+      type: toolTypes.find((v) => v.name === dataTool?.tool.type),
+    },
     resolver: yupResolver(schemaEditTool),
   });
   const onSubmit = handleSubmit(async (data) => {
@@ -31,7 +38,7 @@ export const FormEditTool = ({ id }: { id?: string }) => {
       <Input {...register("name")} error={errors.name?.message} />
       <MultiSelectField error={errors.tags?.message} name="tags" control={control} items={data?.tags} />
       <SelectForm
-        options={optionsTypeTools.map((type) => ({ value: type, name: type }))}
+        options={toolTypes}
         error={errors.type?.message?.toString()}
         control={control}
         name="type"

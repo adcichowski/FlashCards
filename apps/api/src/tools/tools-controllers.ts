@@ -67,11 +67,25 @@ export const editTool = async (
       ...securedArticle,
     });
 
-    return res.status(200).send({ message: "correct update article" });
+    return res.status(200).send({ message: "correct update tool" });
   } catch (error) {
     if (error instanceof ValidationError) {
       return res.status(400).send({ message: error.message });
     }
-    return res.status(400).send({ message: "problem during update article" });
+    return res.status(400).send({ message: "problem during update tool" });
+  }
+};
+
+export const getToolById = async (
+  req: Request<{ toolId: string }>,
+  res: Response
+) => {
+  try {
+    const tool = await serviceTools.getToolById(req.params.toolId);
+    return res.status(200).send({ tool });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ message: `problem to get ${req.params.toolId} tool` });
   }
 };

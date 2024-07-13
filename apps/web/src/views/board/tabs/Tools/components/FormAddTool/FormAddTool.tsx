@@ -25,7 +25,7 @@ export const FormAddTool = ({ mutate }: { mutate: (data: { url: string }) => voi
     await mutate(data);
   });
   return (
-    <form onSubmit={onSubmit} className={styles.articleForm}>
+    <form onSubmit={onSubmit}>
       <Input {...register("url")} error={errors.url?.message} />
       <MultiSelectField error={errors.tags?.message} name="tags" control={control} items={data?.tags} />
       <SelectForm options={typeOptions} error={errors.type?.message} control={control} name="type" label="Type" />

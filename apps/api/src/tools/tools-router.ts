@@ -1,12 +1,16 @@
 import { setUpTagsFilter } from "articles/articles-tags/articlesTags-middleware";
 import { checkAuthUser } from "auth/auth-middleware";
 import { Router } from "express";
-import { addTool, getAllTools } from "./tools-controllers";
+import {
+  addTool,
+  editTool,
+  getAllTools,
+  getToolById,
+} from "./tools-controllers";
 import { reusableValidation } from "utils/reusableValidation";
 import { addToolSchema, editToolSchema } from "./tools-schema";
 import { checkToolExist } from "./tools-middleware";
 import { checkAdminAccess } from "articles/articles-middleware";
-import { editTool } from "./tools-service";
 
 const router = Router();
 
@@ -41,7 +45,7 @@ router.post(
   addTool
 );
 
-router.put(
+router.put<{ toolId: string }>(
   "/tools/:toolId",
   checkAdminAccess,
   reusableValidation(editToolSchema),
@@ -92,4 +96,11 @@ router.put(
  * security:
  *   - bearerAuth: []
  */
+
+router.get<{ toolId: string }>(
+  "/tools/:toolId",
+  reusableValidation(editToolSchema),
+  getToolById
+);
+
 export { router as toolsRouter };

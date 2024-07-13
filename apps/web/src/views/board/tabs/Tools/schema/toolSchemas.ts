@@ -10,7 +10,10 @@ export const schemaAddTool = yup
 export const optionsTypeTools = ["program", "package", "plugin"];
 export const schemaEditTool = yup
   .object({
-    type: yup.mixed().oneOf(optionsTypeTools),
+    type: yup.object().shape({
+      name: yup.string().required(),
+      value: yup.string().required(),
+    }).optional(),
     name: yup.string().required(),
     tags: yup.array(yup.object({ id: yup.string().required(), name: yup.string().required() })),
   })

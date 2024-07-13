@@ -80,7 +80,7 @@ export const blockSecondRate = async (
 };
 
 export const checkAdminAccess = (
-  _req: Request<{ articleId: string }>,
+  _req: Request,
   res: Response,
   next: NextFunction
 ) => {

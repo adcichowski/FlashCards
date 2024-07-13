@@ -5,6 +5,7 @@ import { useGetSelectedTags } from "src/views/board/components/SearchByTags/hook
 
 export type QueryToolData = {
   tool: {
+    name: string;
     tags: { name: string; id: string }[];
     type: string;
   };
