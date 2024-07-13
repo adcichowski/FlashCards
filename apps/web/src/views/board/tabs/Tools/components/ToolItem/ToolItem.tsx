@@ -5,6 +5,7 @@ import styles from "./ToolItem.module.scss";
 import { Pencil } from "lucide-react";
 import clsx from "clsx";
 import { useToolVerificationToggle } from "../../hooks/useToolVerificationToggle";
+import { useSession } from "next-auth/react";
 export const ToolItem = ({
   name,
   tags,
@@ -26,6 +27,8 @@ export const ToolItem = ({
   selectEditTool: (id: string) => void;
   tags: { name: string; id: string }[];
 }) => {
+  const session = useSession();
+  console.log(session);
   const { mutate } = useToolVerificationToggle();
   return (
     <div className={styles.card}>
@@ -51,36 +54,40 @@ export const ToolItem = ({
         )}
       </footer>
       <div className={styles.actionIcons}>
-        <button
-          onClick={() =>
-            mutate({
-              toolId: id,
-              isVerified,
-            })
-          }
-        >
-          {isVerified ? (
-            <>
-              <ShieldCheckIcon className={clsx(styles.icon, isVerified && styles.verifiedIcon)} />{" "}
-              <span aria-hidden="true" className="sr-only">
-                Verified
-              </span>
-            </>
-          ) : (
-            <>
-              <ShieldQuestionIcon className={clsx(styles.icon)} />{" "}
-              <span aria-hidden="true" className="sr-only">
-                Verify
-              </span>
-            </>
-          )}
-        </button>
+        {session.data?.user.role === "admin" && (
+          <button
+            onClick={() =>
+              mutate({
+                toolId: id,
+                isVerified,
+              })
+            }
+          >
+            {isVerified ? (
+              <>
+                <ShieldCheckIcon className={clsx(styles.icon, isVerified && styles.verifiedIcon)} />{" "}
+                <span aria-hidden="true" className="sr-only">
+                  Verified
+                </span>
+              </>
+            ) : (
+              <>
+                <ShieldQuestionIcon className={clsx(styles.icon)} />{" "}
+                <span aria-hidden="true" className="sr-only">
+                  Verify
+                </span>
+              </>
+            )}
+          </button>
+        )}
         <a href={url} target="_blank" rel="noopener noreferrer">
           <LinkIcon className={styles.icon} />
         </a>
-        <button onClick={() => selectEditTool(id)}>
-          <Pencil className={styles.icon} />
-        </button>
+        {session.data?.user.role === "admin" && (
+          <button onClick={() => selectEditTool(id)}>
+            <Pencil className={styles.icon} />
+          </button>
+        )}
       </div>
     </div>
   );

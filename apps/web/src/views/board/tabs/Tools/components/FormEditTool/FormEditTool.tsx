@@ -25,12 +25,12 @@ export const FormEditTool = ({ id }: { id?: string }) => {
     values: {
       name: dataTool?.tool.name || "",
       tags: dataTool?.tool.tags || [],
-      type: toolTypes.find((v) => v.name === dataTool?.tool.type),
+      type: dataTool ? { value: dataTool?.tool.type, name: dataTool?.tool.type } : null,
     },
     resolver: yupResolver(schemaEditTool),
   });
   const onSubmit = handleSubmit(async (data) => {
-    await mutate(data);
+    await mutate({ name: data.name, tags: data.tags, type: data.type?.value || "package" });
   });
   if (isLoading) return <Loading />;
   return (
