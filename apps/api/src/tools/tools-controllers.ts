@@ -49,8 +49,8 @@ export const addTool = async (
   };
   try {
     const securedTool = createToolInDB.validateSync(generatedTool);
-    const createdArticle = await serviceTools.createTool(securedTool);
-    return res.send(createdArticle);
+    const createdTool = await serviceTools.createTool(securedTool);
+    return res.send(createdTool);
   } catch (error) {
     return res.status(400).send({ message: getErrorMessage(error) });
   }

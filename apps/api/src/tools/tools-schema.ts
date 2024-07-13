@@ -6,6 +6,7 @@ export const editToolSchema = Yup.object({
   tags: Yup.array(
     Yup.object({ id: Yup.string().required(), name: Yup.string().required() })
   ),
+  name: Yup.string(),
   isVerified: Yup.boolean().optional(),
 }).required();
 

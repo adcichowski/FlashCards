@@ -65,12 +65,12 @@ model Tool_Tags {
 
 model Tools {
   id          String      @id(map: "tools_pk") @unique(map: "tools_id_uindex") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String      @db.VarChar(64)
+  name        String      @db.VarChar(255)
   description String?
   type        tooltype?
-  isVerified  Boolean     @default(false)
-  url         String?     @db.VarChar
-  icon        String?     @db.VarChar
+  isVerified  Boolean?    @default(false)
+  url         String?
+  icon        String?
   Tool_Tags   Tool_Tags[]
 }
 

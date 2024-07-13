@@ -112,6 +112,7 @@ export const createTool = async ({
       icon,
       type,
       description,
+      isVerified: false,
       Tool_Tags: {
         createMany: {
           data: tags ? tags.map((v) => ({ tagId: v.id })) : [],
@@ -173,6 +174,15 @@ export const editTool = async ({
       },
     });
   }
+  await prisma.tools.update({
+    where: {
+      id: toolId,
+    },
+    data: {
+      name: editDataTool.name,
+      type: editDataTool.type,
+    },
+  });
 };
 
 export const getToolById = async (toolId: string) => {
